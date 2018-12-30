@@ -23,7 +23,7 @@ public:
     lstAtributos *lst_Atributos;
     tablaSimbolos *tabla;
 
-    nodoModelo(QString nombre, tablaSimbolos *tabla){
+    explicit nodoModelo(QString nombre, tablaSimbolos *tabla){
         this->nombre=nombre;
         this->tabla=tabla;
         this->lst_Atributos=new lstAtributos(this->tabla);
@@ -60,7 +60,13 @@ public:
 
     void ejecutarHijos()
     {
+        if(hayErrores())
+            return;
 
+        for (int i = 0; i < hijos.count(); ++i) {
+            nodoModelo *temp=hijos[i];
+            temp->ejecutar();
+        }
     }
 
 
@@ -73,6 +79,16 @@ public:
             std::cout<<"No se puede ejecutar el nodo"<<nombre.toStdString()<<" porque hay errores en la tabla"<<std::endl;
         }
         return retorno;
+    }
+
+    void imprimirNodos(){
+
+        std::cout<<"Padre: "<<nombre.toStdString()<<std::endl;
+        for (int i = 0; i < hijos.count(); ++i) {
+            nodoModelo *temp=hijos[i];
+            std::cout<<"\t["<<i<<"] val:"<<temp->nombre.toStdString()<<std::endl;
+            temp->imprimirNodos();
+        }
     }
 
 

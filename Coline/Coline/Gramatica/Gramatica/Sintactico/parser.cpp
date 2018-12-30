@@ -71,29 +71,41 @@
 #include <iostream>
 #include <qstring.h>
 #import "Coline/Elementos/Tablas/tablasimbolos.h"
+#include "Coline/Elementos/Global/importar.h"
+#include "Coline/Elementos/Global/nodosimport.h"
 
 
-extern int yylineno; //linea actual donde se encuentra el parser (analisis lexico) lo maneja BISON
+
+extern int nLinea; //linea actual donde se encuentra el parser (analisis lexico) lo maneja BISON
 extern int columna; //columna actual donde se encuentra el parser (analisis lexico) lo maneja BISON
 extern char *yytext; //lexema actual donde esta el parser (analisis lexico) lo maneja BISON
-
+extern void iniciarLineaL(tablaSimbolos *tabla2);
 typedef struct Operador operador;
  
 tablaSimbolos *tabla;
+nodoModelo *raiz;
 
+QString archivo="--";
 
 int contador=0;
 int yyerror(const char* mens){
 //metodo que se llama al haber un error sintactico
 //SE IMPRIME EN CONSOLA EL ERROR
-//std::cout <<mens<<" "<<yytext<<"linea:" <<yylineno <<std::endl;
+
+//std::cout <<mens<<" "<<yytext<<"linea:" <<nLinea <<std::endl;
  
-tabla->tablaError->insertErrorSyntax(QString::fromUtf8(yytext),yylineno,23,QString::fromUtf8(mens));
+tabla->tablaError->insertErrorSyntax(QString::fromUtf8(yytext),nLinea,23,QString::fromUtf8(mens));
+
 return 0;
 }
 
-void setSalida(tablaSimbolos *tabla2) { 
+void iniciarLinea(){
+        iniciarLineaL(tabla);
+}
+
+void setSalida(tablaSimbolos *tabla2,nodoModelo *raizArbol) { 
 tabla=tabla2; 
+raiz=raizArbol;
 }
 
 struct Operador{
@@ -101,9 +113,12 @@ struct Operador{
 QString valor;
 QString operacion;
 };
+struct Nod{
+ nodoModelo *Padre;
+};
 
 
-#line 107 "parser.cpp" /* yacc.c:339  */
+#line 122 "parser.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -138,17 +153,79 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    Nnum = 258,
-    mas = 259,
-    menos = 260,
-    por = 261,
-    id = 262,
-    igual = 263,
-    pcoma = 264,
-    acor = 265,
-    ccor = 266,
-    cad = 267,
-    entero = 268
+    sMas = 258,
+    sMenos = 259,
+    sPor = 260,
+    sDiv = 261,
+    sPot = 262,
+    sMod = 263,
+    sIgualacion = 264,
+    sDiferenciacion = 265,
+    sMenorQue = 266,
+    sMayorQue = 267,
+    sMenorIgualQue = 268,
+    sMayorIgualQue = 269,
+    sAnd = 270,
+    sOr = 271,
+    sNot = 272,
+    sAbreParent = 273,
+    sCierraParent = 274,
+    sAbreLlave = 275,
+    sCierraLlave = 276,
+    sAbreCorchete = 277,
+    sCierraCorchete = 278,
+    sPunto = 279,
+    sComa = 280,
+    sPuntoComa = 281,
+    sArroba = 282,
+    sIgual = 283,
+    sCierraInterrogante = 284,
+    sDosPuntos = 285,
+    tImport = 286,
+    tClase = 287,
+    tExtender = 288,
+    tPadre = 289,
+    tPrincipal = 290,
+    tOverride = 291,
+    tNuevo = 292,
+    tEste = 293,
+    tImprimir = 294,
+    tRetorno = 295,
+    tSi = 296,
+    tSino = 297,
+    tCaso = 298,
+    tDe = 299,
+    tDefecto = 300,
+    tRomper = 301,
+    tMientras = 302,
+    tContinuar = 303,
+    tPara = 304,
+    tHacer = 305,
+    tRepetir = 306,
+    tHasta = 307,
+    tMensaje = 308,
+    tSubCad = 309,
+    tPosCad = 310,
+    tRandom = 311,
+    tTam = 312,
+    tSuper = 313,
+    tNada = 314,
+    tVacio = 315,
+    tNulo = 316,
+    tEntero = 317,
+    tCaracter = 318,
+    tDecimal = 319,
+    tBooleano = 320,
+    tPublico = 321,
+    tPrivado = 322,
+    tProtegido = 323,
+    valBoolean = 324,
+    valId = 325,
+    valNumero = 326,
+    valDecimal = 327,
+    valCaracter = 328,
+    valCadena = 329,
+    MayorQue = 330
   };
 #endif
 
@@ -157,13 +234,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 44 "sintactico.y" /* yacc.c:355  */
+#line 60 "sintactico.y" /* yacc.c:355  */
 
 //se especifican los tipo de valores para los no terminales y lo terminales
 char TEXT [256];
-struct Operador * VAL;
+struct Nod *VAL;
+//extern nodo *NODO;
 
-#line 167 "parser.cpp" /* yacc.c:355  */
+#line 245 "parser.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -171,16 +249,30 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
 
 extern YYSTYPE yylval;
-
+extern YYLTYPE yylloc;
 int yyparse (void);
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 184 "parser.cpp" /* yacc.c:358  */
+#line 276 "parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -361,13 +453,15 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
-         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL \
+             && defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union yyalloc
 {
   yytype_int16 yyss_alloc;
   YYSTYPE yyvs_alloc;
+  YYLTYPE yyls_alloc;
 };
 
 /* The size of the maximum gap between one aligned stack and the next.  */
@@ -376,8 +470,8 @@ union yyalloc
 /* The size of an array large to enough to hold all stacks, each with
    N elements.  */
 # define YYSTACK_BYTES(N) \
-     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE)) \
-      + YYSTACK_GAP_MAXIMUM)
+     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE) + sizeof (YYLTYPE)) \
+      + 2 * YYSTACK_GAP_MAXIMUM)
 
 # define YYCOPY_NEEDED 1
 
@@ -420,23 +514,23 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  9
+#define YYFINAL  10
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   28
+#define YYLAST   606
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  14
+#define YYNTOKENS  76
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  6
+#define YYNNTS  40
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  13
+#define YYNRULES  121
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  25
+#define YYNSTATES  237
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   268
+#define YYMAXUTOK   330
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -471,15 +565,33 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
+      75
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
-       0,    77,    77,    85,    86,    89,    90,    92,    97,   100,
-     104,   108,   113,   116
+       0,   278,   278,   292,   307,   319,   333,   355,   368,   383,
+     410,   435,   447,   460,   473,   486,   499,   515,   532,   543,
+     556,   568,   579,   595,   607,   620,   632,   645,   657,   673,
+     685,   700,   711,   723,   734,   749,   765,   783,   801,   824,
+     839,   852,   869,   882,   899,   915,   929,   944,   956,   973,
+     986,  1044,  1061,  1075,  1091,  1104,  1117,  1129,  1146,  1163,
+    1179,  1197,  1215,  1237,  1250,  1268,  1285,  1307,  1319,  1330,
+    1344,  1357,  1374,  1386,  1398,  1412,  1424,  1436,  1448,  1459,
+    1474,  1490,  1504,  1522,  1537,  1553,  1573,  1590,  1609,  1630,
+    1648,  1664,  1685,  1705,  1721,  1734,  1746,  1763,  1780,  1796,
+    1812,  1829,  1847,  1866,  1887,  1905,  1923,  1941,  1959,  1977,
+    1997,  2015,  2033,  2051,  2067,  2079,  2092,  2104,  2117,  2131,
+    2144,  2157
 };
 #endif
 
@@ -488,9 +600,27 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "Nnum", "mas", "menos", "por", "id",
-  "igual", "pcoma", "acor", "ccor", "cad", "entero", "$accept", "S",
-  "OPERACIONES", "TIPO", "OPERACION", "E", YY_NULLPTR
+  "$end", "error", "$undefined", "sMas", "sMenos", "sPor", "sDiv", "sPot",
+  "sMod", "sIgualacion", "sDiferenciacion", "sMenorQue", "sMayorQue",
+  "sMenorIgualQue", "sMayorIgualQue", "sAnd", "sOr", "sNot", "sAbreParent",
+  "sCierraParent", "sAbreLlave", "sCierraLlave", "sAbreCorchete",
+  "sCierraCorchete", "sPunto", "sComa", "sPuntoComa", "sArroba", "sIgual",
+  "sCierraInterrogante", "sDosPuntos", "tImport", "tClase", "tExtender",
+  "tPadre", "tPrincipal", "tOverride", "tNuevo", "tEste", "tImprimir",
+  "tRetorno", "tSi", "tSino", "tCaso", "tDe", "tDefecto", "tRomper",
+  "tMientras", "tContinuar", "tPara", "tHacer", "tRepetir", "tHasta",
+  "tMensaje", "tSubCad", "tPosCad", "tRandom", "tTam", "tSuper", "tNada",
+  "tVacio", "tNulo", "tEntero", "tCaracter", "tDecimal", "tBooleano",
+  "tPublico", "tPrivado", "tProtegido", "valBoolean", "valId", "valNumero",
+  "valDecimal", "valCaracter", "valCadena", "MayorQue", "$accept", "S",
+  "LST_IMPORT", "IMPORT", "LST_CLASE", "CLASE", "TIPO", "EXTENDER",
+  "LST_PARAMETROS", "PARAMETRO", "LST_VAL", "VISIBILIDAD", "CP_CLASE",
+  "CUERPO_CLASE", "METODO", "MAIN", "CONSTRUCTOR",
+  "DECLARAR_VARIABLE_GLOBAL", "DECLARAR_VARIABLE_SINVISIBI", "VAL",
+  "LST_LLAVES_VAL", "LLAVES_VAL_P", "VAR_ARREGLO", "PAR_CORCHETES_VAL",
+  "LST_CORCHETES_VAL", "ID_VAR_FUNC", "LST_PUNTOSP", "ASIG_VALOR",
+  "LST_CUERPO", "CUERPO", "SUPER", "RETORNO", "ROMPER", "CONTINUAR",
+  "SENTENCIAS", "SI", "SINO_SI", "SINO", "VALOR", "E", YY_NULLPTR
 };
 #endif
 
@@ -500,27 +630,54 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
+     305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
+     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
+     325,   326,   327,   328,   329,   330
 };
 # endif
 
-#define YYPACT_NINF -13
+#define YYPACT_NINF -125
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-13)))
+  (!!((Yystate) == (-125)))
 
-#define YYTABLE_NINF -3
+#define YYTABLE_NINF -16
 
 #define yytable_value_is_error(Yytable_value) \
   0
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-       2,    -5,   -13,   -13,     8,     0,    19,   -13,   -13,   -13,
-     -13,    15,    14,   -13,    14,    16,     5,    14,    14,    14,
-     -13,   -13,    13,    21,   -13
+     100,   -11,   -54,    27,   100,  -125,    13,  -125,    -6,     0,
+    -125,  -125,    13,  -125,    47,    20,  -125,  -125,  -125,    73,
+      61,    30,  -125,   175,    82,    91,    99,  -125,  -125,  -125,
+    -125,  -125,   115,    90,    80,   382,  -125,  -125,  -125,  -125,
+      93,  -125,   175,   113,   129,    80,   127,    85,     1,  -125,
+      85,  -125,  -125,  -125,   394,  -125,   148,    85,    37,  -125,
+     209,  -125,   141,    80,   185,  -125,   152,  -125,   425,  -125,
+     151,    80,   209,   209,   209,   167,  -125,  -125,  -125,    51,
+    -125,  -125,  -125,  -125,   171,   493,  -125,    38,   185,   144,
+     156,  -125,  -125,   565,    80,   159,   176,   172,   173,   182,
+      -9,    85,   186,    18,   189,   -10,  -125,  -125,  -125,  -125,
+    -125,  -125,  -125,   425,  -125,   331,   592,   514,   146,   185,
+    -125,   127,   147,  -125,   209,   209,   209,   209,   209,   209,
+     209,   209,   209,   209,   209,   209,   209,   209,  -125,   191,
+     157,   162,  -125,   203,   127,   205,    79,  -125,   208,   209,
+    -125,  -125,   185,   141,  -125,   233,   244,  -125,  -125,  -125,
+    -125,  -125,   246,  -125,   168,    86,  -125,   170,   331,   331,
+      11,    11,   237,    11,   257,   257,   257,   565,   257,   257,
+     592,   579,   425,  -125,   185,  -125,   185,   127,  -125,   230,
+    -125,   531,    88,  -125,  -125,  -125,   185,   127,   127,   185,
+     127,   255,  -125,   101,   425,   231,   226,   102,   127,   109,
+    -125,  -125,   286,   425,  -125,   127,   127,  -125,   314,   127,
+     127,   211,    29,  -125,  -125,   425,   248,   342,   209,  -125,
+     548,   251,   425,   370,   211,  -125,  -125
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -528,61 +685,247 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     6,     5,     0,     0,     0,     4,     8,     1,
-       3,     0,     0,    13,     0,     0,     0,     0,     0,     0,
-       7,    12,     9,    10,    11
+       0,     0,     0,     0,     0,     5,     3,     8,     0,    18,
+       1,     4,     2,     7,     0,     0,    26,    27,    28,     0,
+      18,     0,    17,     0,     0,     0,     0,    16,    11,    12,
+      14,    13,    15,     0,     0,     0,    30,    33,    34,    31,
+       0,    41,     0,     0,     0,    21,    49,     0,    43,    15,
+       0,     9,    29,    32,     0,     6,     0,     0,     0,    20,
+       0,    50,    40,    21,     0,    42,     0,    10,     0,    22,
+       0,     0,     0,     0,     0,     0,   121,   120,   115,    56,
+     119,   118,   117,   116,   114,     0,    39,     0,    25,     0,
+      95,    46,    44,    96,    21,     0,     0,     0,     0,     0,
+      56,     0,     0,     0,     0,     0,    71,    76,    79,    77,
+      78,    75,    85,     0,    19,    97,   112,     0,     0,    25,
+      53,    60,     0,    54,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    51,     0,
+       0,     0,    24,    15,     0,     0,     0,    81,     0,     0,
+      83,    84,    25,    43,    72,     0,     0,    73,    67,    74,
+      37,    70,     0,   113,    55,     0,    52,    63,   101,   102,
+     100,    99,    98,   103,   104,   105,   106,   108,   107,   109,
+     110,   111,     0,    48,     0,    47,    25,    94,    45,     0,
+      82,     0,     0,    68,    69,    38,    25,    59,    58,    25,
+      65,     0,    23,     0,     0,     0,     0,     0,    62,     0,
+      36,    93,     0,     0,    80,    57,    64,    35,     0,    61,
+      66,    86,     0,    87,    88,     0,     0,     0,     0,    92,
+       0,     0,     0,     0,    90,    89,    91
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -13,   -13,   -13,   -13,    23,   -12
+    -125,  -125,  -125,   268,   269,   124,   130,   254,   -57,   204,
+     -87,     8,   235,   -21,  -125,  -125,  -125,  -125,    83,   -52,
+     197,   143,   -42,   -46,  -124,   -66,  -125,  -125,  -110,  -104,
+    -125,  -125,  -125,  -125,  -125,  -125,    55,    56,   -60,   -48
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-      -1,     4,     5,     6,     7,    15
+      -1,     3,     4,     5,     6,     7,   101,    19,    58,    59,
+     140,    34,    35,    36,    37,    38,    39,    40,   102,    65,
+      90,    91,    48,   120,   121,    84,   123,   104,   105,   106,
+     107,   108,   109,   110,   111,   112,   223,   224,   142,    93
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
      positive, shift that token.  If negative, reduce the rule whose
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_int16 yytable[] =
 {
-      -2,     1,    16,     1,     8,    22,    23,    24,     9,    17,
-      18,    19,     2,     3,     2,     3,    21,    13,    18,    19,
-      17,    18,    19,    12,    14,    20,    11,    19,    10
+      61,   161,   103,   162,    92,    62,    87,     8,    66,   119,
+      86,   160,    85,    60,    52,    69,     9,    20,   128,    63,
+     187,   155,   156,   133,   115,   116,   117,    10,    75,    64,
+      95,    96,   165,    52,    15,   148,    97,   146,    98,   103,
+     197,    47,   122,   200,   157,     2,    64,   103,    99,   225,
+      27,   158,    28,    29,    30,    31,    70,   139,   161,   153,
+     100,   -15,    71,    71,    14,   192,    16,    17,    18,   119,
+     226,    21,   201,    60,   208,   166,   168,   169,   170,   171,
+     172,   173,   174,   175,   176,   177,   178,   179,   180,   181,
+      22,   219,   220,    23,   212,    15,   103,   161,   189,   203,
+      25,   191,    42,   218,    71,   198,    41,   206,   161,   207,
+      43,   184,   209,   184,   161,   227,   103,    44,    41,    53,
+     211,   215,   233,   161,   202,    41,   184,   184,   216,   161,
+      13,     1,     2,    45,   184,   103,    13,    41,   103,    55,
+      27,   166,    28,    29,    30,    31,   103,   103,    56,    60,
+      49,   166,   103,    33,   166,    46,    16,    17,    18,   103,
+      46,   103,   166,    72,    50,    33,   103,   103,    68,    64,
+      94,   113,    33,   166,   166,    57,    73,    74,   183,    88,
+     230,   145,   184,   185,    33,   147,   196,   145,   199,    72,
+      60,   118,    60,    57,   149,   122,    89,    75,   150,   151,
+     152,    57,    73,    74,    27,    88,    28,    29,    30,    31,
+      26,   182,   154,    72,   143,   159,   164,   167,    76,   144,
+      77,   186,    89,    75,    57,    88,    73,    74,    78,    79,
+      80,    81,    82,    83,   190,    27,   193,    28,    29,    30,
+      31,    16,    17,    18,    76,    32,    77,    75,   194,   133,
+     204,   213,   214,   222,    78,    79,    80,    81,    82,    83,
+     124,   125,   126,   127,   128,   129,   228,   195,    76,   133,
+      77,   232,    11,    12,    24,   114,   210,    54,    78,    79,
+      80,    81,    82,    83,    75,   141,    95,    96,   188,   235,
+     236,     0,    97,    75,    98,    95,    96,     0,     0,     0,
+       0,    97,     0,    98,    99,     0,    27,   217,    28,    29,
+      30,    31,     0,    99,     0,    27,   100,    28,    29,    30,
+      31,     0,     0,     0,    75,   100,    95,    96,     0,     0,
+       0,     0,    97,     0,    98,   221,   126,   127,   128,   129,
+       0,     0,     0,   133,    99,     0,    27,     0,    28,    29,
+      30,    31,    75,     0,    95,    96,   100,     0,     0,     0,
+      97,     0,    98,   229,     0,     0,     0,     0,     0,     0,
+       0,     0,    99,     0,    27,     0,    28,    29,    30,    31,
+      75,     0,    95,    96,   100,     0,     0,     0,    97,     0,
+      98,   234,     0,     0,     0,     0,     0,     0,     0,     0,
+      99,     0,    27,    51,    28,    29,    30,    31,    75,     0,
+      95,    96,   100,     0,     0,    67,    97,    26,    98,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    99,    26,
+      27,     0,    28,    29,    30,    31,     0,     0,     0,     0,
+     100,     0,    27,     0,    28,    29,    30,    31,    16,    17,
+      18,     0,    32,     0,    27,     0,    28,    29,    30,    31,
+      16,    17,    18,    75,    32,    95,    96,     0,     0,     0,
+       0,    97,     0,    98,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    99,     0,    27,     0,    28,    29,    30,
+      31,     0,     0,     0,     0,   100,   124,   125,   126,   127,
+     128,   129,   130,   131,   132,   133,   134,   135,   136,   137,
+       0,     0,     0,     0,     0,     0,   138,   124,   125,   126,
+     127,   128,   129,   130,   131,   132,   133,   134,   135,   136,
+     137,     0,     0,   163,   124,   125,   126,   127,   128,   129,
+     130,   131,   132,   133,   134,   135,   136,   137,     0,     0,
+     205,   124,   125,   126,   127,   128,   129,   130,   131,   132,
+     133,   134,   135,   136,   137,     0,     0,   231,   124,   125,
+     126,   127,   128,   129,   130,   131,   132,   133,   134,   135,
+     136,   137,   124,   125,   126,   127,   128,   129,   130,   131,
+     132,   133,   134,   135,   136,   124,   125,   126,   127,   128,
+     129,   130,   131,   132,   133,   134,   135
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-       0,     1,    14,     1,     9,    17,    18,    19,     0,     4,
-       5,     6,    12,    13,    12,    13,    11,     3,     5,     6,
-       4,     5,     6,     8,    10,     9,     7,     6,     5
+      46,   105,    68,   113,    64,    47,    63,    18,    50,    18,
+      62,    21,    60,    22,    35,    57,    70,     9,     7,    18,
+     144,     3,     4,    12,    72,    73,    74,     0,    38,    28,
+      40,    41,   119,    54,    34,    95,    46,    94,    48,   105,
+     164,    33,    24,   167,    26,    32,    28,   113,    58,    20,
+      60,   103,    62,    63,    64,    65,    19,    19,   162,   101,
+      70,    70,    25,    25,    70,   152,    66,    67,    68,    18,
+      41,    24,   182,    22,   198,   121,   124,   125,   126,   127,
+     128,   129,   130,   131,   132,   133,   134,   135,   136,   137,
+      70,   215,   216,    20,   204,    34,   162,   201,    19,   186,
+      70,   149,    20,   213,    25,    19,    23,    19,   212,   196,
+      19,    25,   199,    25,   218,   225,   182,    18,    35,    26,
+      19,    19,   232,   227,   184,    42,    25,    25,    19,   233,
+       6,    31,    32,    18,    25,   201,    12,    54,   204,    26,
+      60,   187,    62,    63,    64,    65,   212,   213,    19,    22,
+      70,   197,   218,    23,   200,    70,    66,    67,    68,   225,
+      70,   227,   208,     4,    34,    35,   232,   233,    20,    28,
+      18,    20,    42,   219,   220,    45,    17,    18,    21,    20,
+     228,    25,    25,    21,    54,    26,    18,    25,    18,     4,
+      22,    24,    22,    63,    18,    24,    37,    38,    26,    26,
+      18,    71,    17,    18,    60,    20,    62,    63,    64,    65,
+      35,    20,    26,     4,    70,    26,    70,    70,    59,    89,
+      61,    18,    37,    38,    94,    20,    17,    18,    69,    70,
+      71,    72,    73,    74,    26,    60,     3,    62,    63,    64,
+      65,    66,    67,    68,    59,    70,    61,    38,     4,    12,
+      20,    20,    26,    42,    69,    70,    71,    72,    73,    74,
+       3,     4,     5,     6,     7,     8,    18,    21,    59,    12,
+      61,    20,     4,     4,    20,    71,    21,    42,    69,    70,
+      71,    72,    73,    74,    38,    88,    40,    41,   145,   234,
+     234,    -1,    46,    38,    48,    40,    41,    -1,    -1,    -1,
+      -1,    46,    -1,    48,    58,    -1,    60,    21,    62,    63,
+      64,    65,    -1,    58,    -1,    60,    70,    62,    63,    64,
+      65,    -1,    -1,    -1,    38,    70,    40,    41,    -1,    -1,
+      -1,    -1,    46,    -1,    48,    21,     5,     6,     7,     8,
+      -1,    -1,    -1,    12,    58,    -1,    60,    -1,    62,    63,
+      64,    65,    38,    -1,    40,    41,    70,    -1,    -1,    -1,
+      46,    -1,    48,    21,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    58,    -1,    60,    -1,    62,    63,    64,    65,
+      38,    -1,    40,    41,    70,    -1,    -1,    -1,    46,    -1,
+      48,    21,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      58,    -1,    60,    21,    62,    63,    64,    65,    38,    -1,
+      40,    41,    70,    -1,    -1,    21,    46,    35,    48,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    58,    35,
+      60,    -1,    62,    63,    64,    65,    -1,    -1,    -1,    -1,
+      70,    -1,    60,    -1,    62,    63,    64,    65,    66,    67,
+      68,    -1,    70,    -1,    60,    -1,    62,    63,    64,    65,
+      66,    67,    68,    38,    70,    40,    41,    -1,    -1,    -1,
+      -1,    46,    -1,    48,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    58,    -1,    60,    -1,    62,    63,    64,
+      65,    -1,    -1,    -1,    -1,    70,     3,     4,     5,     6,
+       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
+      -1,    -1,    -1,    -1,    -1,    -1,    23,     3,     4,     5,
+       6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
+      16,    -1,    -1,    19,     3,     4,     5,     6,     7,     8,
+       9,    10,    11,    12,    13,    14,    15,    16,    -1,    -1,
+      19,     3,     4,     5,     6,     7,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,    -1,    -1,    19,     3,     4,
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,     3,     4,     5,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,     3,     4,     5,     6,     7,
+       8,     9,    10,    11,    12,    13,    14
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     1,    12,    13,    15,    16,    17,    18,     9,     0,
-      18,     7,     8,     3,    10,    19,    19,     4,     5,     6,
-       9,    11,    19,    19,    19
+       0,    31,    32,    77,    78,    79,    80,    81,    18,    70,
+       0,    79,    80,    81,    70,    34,    66,    67,    68,    83,
+      87,    24,    70,    20,    83,    70,    35,    60,    62,    63,
+      64,    65,    70,    82,    87,    88,    89,    90,    91,    92,
+      93,    94,    20,    19,    18,    18,    70,    87,    98,    70,
+      82,    21,    89,    26,    88,    26,    19,    82,    84,    85,
+      22,    99,    98,    18,    28,    95,    98,    21,    20,    98,
+      19,    25,     4,    17,    18,    38,    59,    61,    69,    70,
+      71,    72,    73,    74,   101,   115,    95,    84,    20,    37,
+      96,    97,   114,   115,    18,    40,    41,    46,    48,    58,
+      70,    82,    94,   101,   103,   104,   105,   106,   107,   108,
+     109,   110,   111,    20,    85,   115,   115,   115,    24,    18,
+      99,   100,    24,   102,     3,     4,     5,     6,     7,     8,
+       9,    10,    11,    12,    13,    14,    15,    16,    23,    19,
+      86,    96,   114,    70,    82,    25,    84,    26,   114,    18,
+      26,    26,    18,    98,    26,     3,     4,    26,    95,    26,
+      21,   105,   104,    19,    70,    86,    99,    70,   115,   115,
+     115,   115,   115,   115,   115,   115,   115,   115,   115,   115,
+     115,   115,    20,    21,    25,    21,    18,   100,    97,    19,
+      26,   115,    86,     3,     4,    21,    18,   100,    19,    18,
+     100,   104,   114,    86,    20,    19,    19,    86,   100,    86,
+      21,    19,   104,    20,    26,    19,    19,    21,   104,   100,
+     100,    21,    42,   112,   113,    20,    41,   104,    18,    21,
+     115,    19,    20,   104,    21,   112,   113
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    14,    15,    16,    16,    17,    17,    18,    18,    19,
-      19,    19,    19,    19
+       0,    76,    77,    77,    78,    78,    79,    80,    80,    81,
+      81,    82,    82,    82,    82,    82,    82,    83,    83,    84,
+      84,    84,    85,    86,    86,    86,    87,    87,    87,    88,
+      88,    89,    89,    89,    89,    90,    90,    91,    92,    93,
+      93,    93,    94,    94,    95,    96,    96,    97,    97,    98,
+      98,    99,   100,   100,   101,   101,   101,   101,   101,   101,
+     101,   101,   101,   102,   102,   102,   102,   103,   103,   103,
+     104,   104,   105,   105,   105,   105,   105,   105,   105,   105,
+     106,   107,   107,   108,   109,   110,   111,   111,   111,   112,
+     112,   112,   113,   114,   114,   114,   114,   115,   115,   115,
+     115,   115,   115,   115,   115,   115,   115,   115,   115,   115,
+     115,   115,   115,   115,   115,   115,   115,   115,   115,   115,
+     115,   115
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     1,     1,     5,     2,     3,
-       3,     3,     3,     1
+       0,     2,     2,     1,     2,     1,     7,     2,     1,     6,
+       7,     1,     1,     1,     1,     1,     1,     2,     0,     3,
+       1,     0,     2,     3,     1,     0,     1,     1,     1,     2,
+       1,     1,     2,     1,     1,     9,     8,     6,     7,     4,
+       3,     1,     3,     2,     2,     3,     1,     3,     3,     1,
+       2,     3,     2,     1,     2,     3,     1,     6,     4,     4,
+       2,     7,     5,     2,     5,     3,     6,     2,     3,     3,
+       2,     1,     2,     2,     2,     1,     1,     1,     1,     1,
+       5,     2,     3,     2,     2,     1,     7,     8,     8,     9,
+       8,     9,     4,     5,     3,     1,     1,     2,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     2,     3,     1,     1,     1,     1,     1,     1,
+       1,     1
 };
 
 
@@ -620,6 +963,32 @@ while (0)
 #define YYERRCODE       256
 
 
+/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
+   If N is 0, then set CURRENT to the empty location which ends
+   the previous symbol: RHS[0] (always defined).  */
+
+#ifndef YYLLOC_DEFAULT
+# define YYLLOC_DEFAULT(Current, Rhs, N)                                \
+    do                                                                  \
+      if (N)                                                            \
+        {                                                               \
+          (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;        \
+          (Current).first_column = YYRHSLOC (Rhs, 1).first_column;      \
+          (Current).last_line    = YYRHSLOC (Rhs, N).last_line;         \
+          (Current).last_column  = YYRHSLOC (Rhs, N).last_column;       \
+        }                                                               \
+      else                                                              \
+        {                                                               \
+          (Current).first_line   = (Current).last_line   =              \
+            YYRHSLOC (Rhs, 0).last_line;                                \
+          (Current).first_column = (Current).last_column =              \
+            YYRHSLOC (Rhs, 0).last_column;                              \
+        }                                                               \
+    while (0)
+#endif
+
+#define YYRHSLOC(Rhs, K) ((Rhs)[K])
+
 
 /* Enable debugging if requested.  */
 #if YYDEBUG
@@ -635,9 +1004,48 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
+
+/* YY_LOCATION_PRINT -- Print the location on the stream.
+   This macro was not mandated originally: define only if we know
+   we won't break user code: when these are the locations we know.  */
+
 #ifndef YY_LOCATION_PRINT
-# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+
+/* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
+
+YY_ATTRIBUTE_UNUSED
+static unsigned
+yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
+{
+  unsigned res = 0;
+  int end_col = 0 != yylocp->last_column ? yylocp->last_column - 1 : 0;
+  if (0 <= yylocp->first_line)
+    {
+      res += YYFPRINTF (yyo, "%d", yylocp->first_line);
+      if (0 <= yylocp->first_column)
+        res += YYFPRINTF (yyo, ".%d", yylocp->first_column);
+    }
+  if (0 <= yylocp->last_line)
+    {
+      if (yylocp->first_line < yylocp->last_line)
+        {
+          res += YYFPRINTF (yyo, "-%d", yylocp->last_line);
+          if (0 <= end_col)
+            res += YYFPRINTF (yyo, ".%d", end_col);
+        }
+      else if (0 <= end_col && yylocp->first_column < end_col)
+        res += YYFPRINTF (yyo, "-%d", end_col);
+    }
+  return res;
+ }
+
+#  define YY_LOCATION_PRINT(File, Loc)          \
+  yy_location_print_ (File, &(Loc))
+
+# else
+#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+# endif
 #endif
 
 
@@ -647,7 +1055,7 @@ do {                                                                      \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Type, Value); \
+                  Type, Value, Location); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -658,10 +1066,11 @@ do {                                                                      \
 `----------------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp)
 {
   FILE *yyo = yyoutput;
   YYUSE (yyo);
+  YYUSE (yylocationp);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
@@ -677,12 +1086,14 @@ yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvalue
 `--------------------------------*/
 
 static void
-yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp)
 {
   YYFPRINTF (yyoutput, "%s %s (",
              yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
 
-  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
+  YY_LOCATION_PRINT (yyoutput, *yylocationp);
+  YYFPRINTF (yyoutput, ": ");
+  yy_symbol_value_print (yyoutput, yytype, yyvaluep, yylocationp);
   YYFPRINTF (yyoutput, ")");
 }
 
@@ -715,7 +1126,7 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, int yyrule)
+yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule)
 {
   unsigned long int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -729,7 +1140,7 @@ yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, int yyrule)
       yy_symbol_print (stderr,
                        yystos[yyssp[yyi + 1 - yynrhs]],
                        &(yyvsp[(yyi + 1) - (yynrhs)])
-                                              );
+                       , &(yylsp[(yyi + 1) - (yynrhs)])                       );
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -737,7 +1148,7 @@ yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, int yyrule)
 # define YY_REDUCE_PRINT(Rule)          \
 do {                                    \
   if (yydebug)                          \
-    yy_reduce_print (yyssp, yyvsp, Rule); \
+    yy_reduce_print (yyssp, yyvsp, yylsp, Rule); \
 } while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
@@ -995,9 +1406,10 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocationp)
 {
   YYUSE (yyvaluep);
+  YYUSE (yylocationp);
   if (!yymsg)
     yymsg = "Deleting";
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
@@ -1015,6 +1427,12 @@ int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
+/* Location data for the lookahead symbol.  */
+YYLTYPE yylloc
+# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+  = { 1, 1, 1, 1 }
+# endif
+;
 /* Number of syntax errors so far.  */
 int yynerrs;
 
@@ -1033,6 +1451,7 @@ yyparse (void)
     /* The stacks and their tools:
        'yyss': related to states.
        'yyvs': related to semantic values.
+       'yyls': related to locations.
 
        Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
@@ -1047,6 +1466,14 @@ yyparse (void)
     YYSTYPE *yyvs;
     YYSTYPE *yyvsp;
 
+    /* The location stack.  */
+    YYLTYPE yylsa[YYINITDEPTH];
+    YYLTYPE *yyls;
+    YYLTYPE *yylsp;
+
+    /* The locations where the error started and ended.  */
+    YYLTYPE yyerror_range[3];
+
     YYSIZE_T yystacksize;
 
   int yyn;
@@ -1056,6 +1483,7 @@ yyparse (void)
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
+  YYLTYPE yyloc;
 
 #if YYERROR_VERBOSE
   /* Buffer for error messages, and its allocated size.  */
@@ -1064,7 +1492,7 @@ yyparse (void)
   YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
 #endif
 
-#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
+#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N), yylsp -= (N))
 
   /* The number of symbols on the RHS of the reduced rule.
      Keep to zero when no symbol should be popped.  */
@@ -1072,6 +1500,7 @@ yyparse (void)
 
   yyssp = yyss = yyssa;
   yyvsp = yyvs = yyvsa;
+  yylsp = yyls = yylsa;
   yystacksize = YYINITDEPTH;
 
   YYDPRINTF ((stderr, "Starting parse\n"));
@@ -1080,6 +1509,7 @@ yyparse (void)
   yyerrstatus = 0;
   yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
+  yylsp[0] = yylloc;
   goto yysetstate;
 
 /*------------------------------------------------------------.
@@ -1105,6 +1535,7 @@ yyparse (void)
            memory.  */
         YYSTYPE *yyvs1 = yyvs;
         yytype_int16 *yyss1 = yyss;
+        YYLTYPE *yyls1 = yyls;
 
         /* Each stack pointer address is followed by the size of the
            data in use in that stack, in bytes.  This used to be a
@@ -1113,8 +1544,10 @@ yyparse (void)
         yyoverflow (YY_("memory exhausted"),
                     &yyss1, yysize * sizeof (*yyssp),
                     &yyvs1, yysize * sizeof (*yyvsp),
+                    &yyls1, yysize * sizeof (*yylsp),
                     &yystacksize);
 
+        yyls = yyls1;
         yyss = yyss1;
         yyvs = yyvs1;
       }
@@ -1137,6 +1570,7 @@ yyparse (void)
           goto yyexhaustedlab;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
+        YYSTACK_RELOCATE (yyls_alloc, yyls);
 #  undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
@@ -1146,6 +1580,7 @@ yyparse (void)
 
       yyssp = yyss + yysize - 1;
       yyvsp = yyvs + yysize - 1;
+      yylsp = yyls + yysize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
                   (unsigned long int) yystacksize));
@@ -1223,7 +1658,7 @@ yybackup:
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   *++yyvsp = yylval;
   YY_IGNORE_MAYBE_UNINITIALIZED_END
-
+  *++yylsp = yylloc;
   goto yynewstate;
 
 
@@ -1254,93 +1689,2182 @@ yyreduce:
      GCC warning that YYVAL may be used uninitialized.  */
   yyval = yyvsp[1-yylen];
 
-
+  /* Default location.  */
+  YYLLOC_DEFAULT (yyloc, (yylsp - yylen), yylen);
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
         case 2:
-#line 77 "sintactico.y" /* yacc.c:1646  */
-    {
-        QString cont = QString::number(contador);
-        tabla->salida.append( "operaciones realizadas = "+cont);
-        contador=0;
-}
-#line 1269 "parser.cpp" /* yacc.c:1646  */
+#line 279 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _S *padre=new _S("S",tabla); 
+                        
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                        
+                        raiz->hijos.append(padre);
+                }
+#line 1713 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 85 "sintactico.y" /* yacc.c:1646  */
-    {contador++;}
-#line 1275 "parser.cpp" /* yacc.c:1646  */
+#line 293 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _S *padre=new _S("S",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        raiz->hijos.append(padre);
+                }
+#line 1729 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 86 "sintactico.y" /* yacc.c:1646  */
-    {contador++;}
-#line 1281 "parser.cpp" /* yacc.c:1646  */
+#line 308 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1745 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 5:
+#line 320 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1760 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 6:
+#line 334 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _IMPORT *padre=new _IMPORT("IMPORT",tabla); 
+                        
+                                
+
+                                //asignando atributos  
+
+                                token *tok3=new token(QString::fromStdString((yyvsp[-4].TEXT)),(yylsp[-4]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+ 
+
+                                token *tok5=new token(QString::fromStdString((yyvsp[-2].TEXT)),(yylsp[-2]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok5);
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1783 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 92 "sintactico.y" /* yacc.c:1646  */
-    {
-QString ids = (yyvsp[-3].TEXT);
-tabla->salida.append( ids + "=" + (yyvsp[-1].VAL)->valor + "  \n ultima op = "+ (yyvsp[-1].VAL)->operacion );
+#line 356 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
+                        
 
-}
-#line 1291 "parser.cpp" /* yacc.c:1646  */
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1800 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 97 "sintactico.y" /* yacc.c:1646  */
-    {contador--;}
-#line 1297 "parser.cpp" /* yacc.c:1646  */
+#line 369 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1815 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 100 "sintactico.y" /* yacc.c:1646  */
-    { (yyval.VAL)=new Operador();
-              (yyval.VAL)->valor = QString::number(  (yyvsp[-2].VAL)->valor.toInt() +  (yyvsp[0].VAL)->valor.toInt() );
-              (yyval.VAL)->operacion = "SUMA" ;
-    }
-#line 1306 "parser.cpp" /* yacc.c:1646  */
+#line 384 "sintactico.y" /* yacc.c:1646  */
+    {   
+
+                        //std::cout<<padre->nombre.toStdString()<<std::endl;
+                        //std::cout<<$2<<" linea:"<<@2.first_line<<std::endl;
+
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CLASE *padre=new _CLASE("CLASE",tabla);
+
+                                //asignando atributos  
+
+                                token *tok2=new token(QString::fromStdString((yyvsp[-4].TEXT)),(yylsp[-4]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-3].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+
+
+
+ 
+
+                        (yyval.VAL)->Padre=padre;
+
+                }
+#line 1846 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 104 "sintactico.y" /* yacc.c:1646  */
-    { (yyval.VAL)=new Operador();
-              (yyval.VAL)->valor = QString::number(  (yyvsp[-2].VAL)->valor.toInt() -  (yyvsp[0].VAL)->valor.toInt() );
-              (yyval.VAL)->operacion = "RESTA" ;
-    }
-#line 1315 "parser.cpp" /* yacc.c:1646  */
+#line 411 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CLASE *padre=new _CLASE("CLASE",tabla); 
+                        
+
+                                //asignando atributos  
+
+                                token *tok2=new token(QString::fromStdString((yyvsp[-5].TEXT)),(yylsp[-5]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-3].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1870 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 108 "sintactico.y" /* yacc.c:1646  */
-    { (yyval.VAL)=new Operador();
-              (yyval.VAL)->valor = QString::number(  (yyvsp[-2].VAL)->valor.toInt() *  (yyvsp[0].VAL)->valor.toInt() );
-              (yyval.VAL)->operacion = "MULTIPLICACION" ;
-    }
-#line 1324 "parser.cpp" /* yacc.c:1646  */
+#line 436 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tEntero",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1886 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 113 "sintactico.y" /* yacc.c:1646  */
-    { (yyval.VAL)=new Operador();
-                  (yyval.VAL)= (yyvsp[-1].VAL);
-    }
-#line 1332 "parser.cpp" /* yacc.c:1646  */
+#line 448 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tCaracter",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1903 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 116 "sintactico.y" /* yacc.c:1646  */
-    {  (yyval.VAL)=new Operador();
-            (yyval.VAL)->valor = (yyvsp[0].TEXT);
-        }
-#line 1340 "parser.cpp" /* yacc.c:1646  */
+#line 461 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tBooleano",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1920 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 474 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tDecimal",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1937 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 15:
+#line 487 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1954 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 16:
+#line 500 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _TIPO *padre=new _TIPO("TIPO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tVacio",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1971 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 17:
+#line 516 "sintactico.y" /* yacc.c:1646  */
+    {   
+
+
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
+
+
+                                //atributos  
+                                token *tok2=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 1991 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 18:
+#line 532 "sintactico.y" /* yacc.c:1646  */
+    {
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2003 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 19:
+#line 544 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre; 
+                }
+#line 2020 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 20:
+#line 557 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2035 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 21:
+#line 568 "sintactico.y" /* yacc.c:1646  */
+    {
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
+                        
+                        (yyval.VAL)->Padre=padre;
+                        /*vacio*/
+                }
+#line 2048 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 22:
+#line 580 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _PARAMETRO *padre=new _PARAMETRO("PARAMETRO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2064 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 23:
+#line 596 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2080 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 24:
+#line 608 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2096 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 25:
+#line 620 "sintactico.y" /* yacc.c:1646  */
+    {
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
+                        
+                        (yyval.VAL)->Padre=padre;
+                        /*vacio*/
+                }
+#line 2109 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 26:
+#line 633 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
+                        
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tPublico",tok1);
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2126 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 27:
+#line 646 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tPrivado",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2142 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 28:
+#line 658 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tProtegido",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2158 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 29:
+#line 674 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2174 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 30:
+#line 686 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2189 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 31:
+#line 701 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2204 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 32:
+#line 712 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2220 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 33:
+#line 724 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2235 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 34:
+#line 735 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2250 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 35:
+#line 750 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _METODO *padre=new _METODO("METODO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-8].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-7].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-6].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2270 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 36:
+#line 766 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _METODO *padre=new _METODO("METODO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-7].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-6].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2288 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 37:
+#line 784 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _MAIN *padre=new _MAIN("MAIN",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-5].TEXT)),(yylsp[-5]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tPrincipal",tok1);
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2307 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 38:
+#line 802 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CONSTRUCTOR *padre=new _CONSTRUCTOR("CONSTRUCTOR",tabla); 
+                        
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-6].TEXT)),(yylsp[-6]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2329 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 39:
+#line 825 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-3].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2348 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 40:
+#line 840 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2365 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 41:
+#line 853 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2381 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 42:
+#line 870 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2398 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 43:
+#line 883 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla);
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2414 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 44:
+#line 900 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VAL *padre=new _VAL("VAL",tabla); 
+                        
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2430 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 45:
+#line 916 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2448 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 46:
+#line 930 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2463 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 47:
+#line 945 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
+                        
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2479 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 48:
+#line 957 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
+                        
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2495 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 49:
+#line 974 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2512 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 50:
+#line 987 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2532 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 51:
+#line 1045 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _PAR_CORCHETES_VAL *padre=new _PAR_CORCHETES_VAL("PAR_CORCHETES_VAL",tabla); 
+                        
+
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2550 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 52:
+#line 1062 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2568 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 53:
+#line 1076 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2584 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 54:
+#line 1092 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2601 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 55:
+#line 1105 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+                        
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2618 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 56:
+#line 1118 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2634 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 57:
+#line 1130 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString((yyvsp[-3].TEXT)),(yylsp[-3]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2655 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 58:
+#line 1147 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-3].TEXT)),(yylsp[-3]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2676 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 59:
+#line 1164 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2696 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 60:
+#line 1180 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2718 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 61:
+#line 1198 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString((yyvsp[-4].TEXT)),(yylsp[-4]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2740 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 62:
+#line 1216 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-4].TEXT)),(yylsp[-4]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok1);
+
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2762 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 63:
+#line 1238 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2779 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 64:
+#line 1251 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-3].TEXT)),(yylsp[-3]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2800 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 65:
+#line 1269 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2821 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 66:
+#line 1286 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-4].TEXT)),(yylsp[-4]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2842 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 67:
+#line 1308 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2858 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 68:
+#line 1320 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2873 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 69:
+#line 1331 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2888 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 70:
+#line 1345 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2905 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 71:
+#line 1358 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2921 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 72:
+#line 1375 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2937 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 73:
+#line 1387 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2953 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 74:
+#line 1399 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2969 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 75:
+#line 1413 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 2985 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 76:
+#line 1425 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3000 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 77:
+#line 1437 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+
+                        (yyval.VAL)->Padre=padre; 
+                }
+#line 3016 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 78:
+#line 1449 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3031 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 79:
+#line 1460 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3047 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 80:
+#line 1475 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SUPER *padre=new _SUPER("SUPER",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
+                                
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3064 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 81:
+#line 1491 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
+                         
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tRetorno",tok1);
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3082 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 82:
+#line 1505 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-2].TEXT)),(yylsp[-2]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tRetorno",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3101 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 83:
+#line 1523 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _ROMPER *padre=new _ROMPER("ROMPER",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tRomper",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3117 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 84:
+#line 1538 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _CONTINUAR *padre=new _CONTINUAR("CONTINUAR",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tContinuar",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3133 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 85:
+#line 1554 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3149 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 86:
+#line 1574 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SI *padre=new _SI("SI",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-6].TEXT)),(yylsp[-6]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSi",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3170 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 87:
+#line 1591 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SI *padre=new _SI("SI",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-7].TEXT)),(yylsp[-7]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSi",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-5].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                                
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3193 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 88:
+#line 1610 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SI *padre=new _SI("SI",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-7].TEXT)),(yylsp[-7]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSi",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-5].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3215 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 89:
+#line 1631 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-8].TEXT)),(yylsp[-8]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSino",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-5].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3237 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 90:
+#line 1649 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-7].TEXT)),(yylsp[-7]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSino",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-4].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3257 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 91:
+#line 1665 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-8].TEXT)),(yylsp[-8]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSino",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-5].VAL)->Padre);
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3279 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 92:
+#line 1686 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _SINO *padre=new _SINO("SINO",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-3].TEXT)),(yylsp[-3]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tSino",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3299 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 93:
+#line 1706 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VALOR *padre=new _VALOR("VALOR",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-3].TEXT)),(yylsp[-3]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3319 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 94:
+#line 1722 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VALOR *padre=new _VALOR("VALOR",tabla); 
+                        
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3336 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 95:
+#line 1735 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VALOR *padre=new _VALOR("VALOR",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3352 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 96:
+#line 1747 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _VALOR *padre=new _VALOR("VALOR",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3368 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 97:
+#line 1764 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMenos",tok1);
+
+                                //hijos 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3388 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 98:
+#line 1781 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sPot",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3408 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 99:
+#line 1797 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sDiv",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3428 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 100:
+#line 1813 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sPor",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3449 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 101:
+#line 1830 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMas",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3471 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 102:
+#line 1848 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMenos",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3493 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 103:
+#line 1867 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMod",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3515 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 104:
+#line 1888 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sIgualacion",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3537 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 105:
+#line 1906 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sDiferenciacion",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3559 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 106:
+#line 1924 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMenorQue",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3581 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 107:
+#line 1942 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMenorIgualQue",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3603 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 108:
+#line 1960 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMayorQue",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3625 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 109:
+#line 1978 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sMayorIgualQue",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3647 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 110:
+#line 1998 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sAnd",tok2);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3669 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 111:
+#line 2016 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sOr",tok2);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-2].VAL)->Padre); 
+                                padre->hijos.append((yyvsp[0].VAL)->Padre); 
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3691 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 112:
+#line 2034 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-1].TEXT)),(yylsp[-1]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sNot",tok1);
+
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3711 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 113:
+#line 2052 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[-2].TEXT)),(yylsp[-2]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sAbreParent",tok1);
+
+                                //hijos
+                                padre->hijos.append((yyvsp[-1].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3730 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 114:
+#line 2068 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //hijos
+                                padre->hijos.append((yyvsp[0].VAL)->Padre);  
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3746 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 115:
+#line 2080 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valBoolean",tok1);
+
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3763 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 116:
+#line 2093 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valCadena",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3779 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 117:
+#line 2105 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valCaracter",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3796 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 118:
+#line 2118 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valDecimal",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3813 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 119:
+#line 2132 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valNumero",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3830 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 120:
+#line 2145 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tNulo",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3847 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 121:
+#line 2158 "sintactico.y" /* yacc.c:1646  */
+    {   
+                        //creando el padre
+                        (yyval.VAL)=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString((yyvsp[0].TEXT)),(yylsp[0]).first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tNada",tok1);
+
+                        (yyval.VAL)->Padre=padre;
+                }
+#line 3864 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1344 "parser.cpp" /* yacc.c:1646  */
+#line 3868 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1361,6 +3885,7 @@ tabla->salida.append( ids + "=" + (yyvsp[-1].VAL)->valor + "  \n ultima op = "+ 
   YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
+  *++yylsp = yyloc;
 
   /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
@@ -1425,7 +3950,7 @@ yyerrlab:
 #endif
     }
 
-
+  yyerror_range[1] = yylloc;
 
   if (yyerrstatus == 3)
     {
@@ -1441,7 +3966,7 @@ yyerrlab:
       else
         {
           yydestruct ("Error: discarding",
-                      yytoken, &yylval);
+                      yytoken, &yylval, &yylloc);
           yychar = YYEMPTY;
         }
     }
@@ -1462,6 +3987,7 @@ yyerrorlab:
   if (/*CONSTCOND*/ 0)
      goto yyerrorlab;
 
+  yyerror_range[1] = yylsp[1-yylen];
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
   YYPOPSTACK (yylen);
@@ -1495,9 +4021,9 @@ yyerrlab1:
       if (yyssp == yyss)
         YYABORT;
 
-
+      yyerror_range[1] = *yylsp;
       yydestruct ("Error: popping",
-                  yystos[yystate], yyvsp);
+                  yystos[yystate], yyvsp, yylsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -1507,6 +4033,11 @@ yyerrlab1:
   *++yyvsp = yylval;
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 
+  yyerror_range[2] = yylloc;
+  /* Using YYLLOC is tempting, but would change the location of
+     the lookahead.  YYLOC is available though.  */
+  YYLLOC_DEFAULT (yyloc, yyerror_range, 2);
+  *++yylsp = yyloc;
 
   /* Shift the error token.  */
   YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
@@ -1546,7 +4077,7 @@ yyreturn:
          user semantic actions for why this is necessary.  */
       yytoken = YYTRANSLATE (yychar);
       yydestruct ("Cleanup: discarding lookahead",
-                  yytoken, &yylval);
+                  yytoken, &yylval, &yylloc);
     }
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
@@ -1555,7 +4086,7 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  yystos[*yyssp], yyvsp);
+                  yystos[*yyssp], yyvsp, yylsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
