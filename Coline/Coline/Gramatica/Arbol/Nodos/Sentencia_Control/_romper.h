@@ -2,7 +2,8 @@
 #define _ROMPER_H
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Elementos/Global/nodosimport.h"
+#include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+
 class _ROMPER: public nodoModelo
 {
 public:

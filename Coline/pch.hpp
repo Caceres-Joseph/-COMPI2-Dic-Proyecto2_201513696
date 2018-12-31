@@ -1,5 +1,9 @@
-#ifndef IMPORTAR_H
-#define IMPORTAR_H
+// precompiled headers
+
+// add C includes here
+
+#ifdef __cplusplus
+// add C++ includes here
 
 #include <math.h>
 #include <stdlib.h>
@@ -20,8 +24,4 @@
 #include <QTextStream>
 #include <qmessagebox.h>
 
-#include <iterator>
-#include <map>
-#include "Coline/Elementos/Global/token.h"
-
-#endif // IMPORTAR_H
+#endif // __cplusplus

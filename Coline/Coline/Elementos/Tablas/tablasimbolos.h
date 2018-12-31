@@ -8,6 +8,8 @@
 */
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Elementos/Tablas/tablaerrores.h"
+//#include "Coline/Elementos/Elementos/elementoclase.h"
+class elementoClase;
 /*
 |--------------------------------------------------------------------------
 | CLASE
@@ -19,7 +21,10 @@ public:
     QString salida="";
     tablaErrores *tablaError=new tablaErrores();
 
+    QList<elementoClase*> lstClases;
+
     tablaSimbolos(){
+
     }
 };
 

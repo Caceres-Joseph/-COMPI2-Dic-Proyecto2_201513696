@@ -21,7 +21,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
+CONFIG += precompile_header
+PRECOMPILED_HEADER = pch.hpp
+HEADERS += pch.hpp \
+    Coline/Elementos/Elementos/elementopolimorfo.h \
+    Coline/Elementos/Elementos/elementoparametro.h \
+    Coline/Elementos/Listas/lstpolimorfismo.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -121,7 +126,11 @@ SOURCES += \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorigualque.cpp \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorque.cpp \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorigualque.cpp \
-    Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorque.cpp
+    Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorque.cpp \
+    Coline/Elementos/Elementos/elementoclase.cpp \
+    Coline/Elementos/Elementos/elementopolimorfo.cpp \
+    Coline/Elementos/Elementos/elementoparametro.cpp \
+    Coline/Elementos/Listas/lstpolimorfismo.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \
@@ -222,7 +231,9 @@ HEADERS += \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorigualque.h \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorque.h \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorigualque.h \
-    Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorque.h
+    Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorque.h \
+    Coline/Elementos/Elementos/elementoclase.h \
+    pch.hpp
 
 FORMS += \
         mainwindow.ui

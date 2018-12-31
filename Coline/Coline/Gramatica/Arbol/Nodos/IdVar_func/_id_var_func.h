@@ -2,7 +2,8 @@
 #define _ID_VAR_FUNC_H
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Elementos/Global/nodosimport.h"
+#include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+
 
 class _ID_VAR_FUNC: public nodoModelo
 {

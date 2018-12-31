@@ -3,7 +3,8 @@
 
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Elementos/Global/nodosimport.h"
+#include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+
 class _LST_CLASE: public nodoModelo
 {
 public:

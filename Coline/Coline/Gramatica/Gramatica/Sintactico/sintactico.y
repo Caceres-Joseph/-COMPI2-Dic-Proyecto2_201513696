@@ -280,7 +280,7 @@ S:
                         //creando el padre
                         $$=new Nod(); 
                         _S *padre=new _S("S",tabla); 
-                        
+                        padre->nivel=1;
 
 
                                 //hijos
@@ -294,7 +294,7 @@ S:
                         //creando el padre
                         $$=new Nod(); 
                         _S *padre=new _S("S",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -309,7 +309,7 @@ LST_IMPORT:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
-                        
+                        padre->nivel=1;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -321,7 +321,7 @@ LST_IMPORT:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
-                        
+                        padre->nivel=2;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -335,7 +335,7 @@ IMPORT:
                         //creando el padre
                         $$=new Nod(); 
                         _IMPORT *padre=new _IMPORT("IMPORT",tabla); 
-                        
+                        padre->nivel=1;
                                 
 
                                 //asignando atributos  
@@ -357,7 +357,7 @@ LST_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -370,7 +370,7 @@ LST_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
-                        
+                        padre->nivel=2;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -389,7 +389,7 @@ CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CLASE *padre=new _CLASE("CLASE",tabla);
-
+                        padre->nivel=1;
                                 //asignando atributos  
 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -412,7 +412,7 @@ CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CLASE *padre=new _CLASE("CLASE",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //asignando atributos  
 
@@ -437,7 +437,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=1;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tEntero",tok1);
@@ -449,7 +449,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -462,7 +462,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -475,7 +475,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -488,7 +488,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=5;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -501,7 +501,7 @@ TIPO:
                         //creando el padre
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
-                        
+                        padre->nivel=6;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -519,7 +519,7 @@ EXTENDER:
                         //creando el padre
                         $$=new Nod(); 
                         _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
-
+                        padre->nivel=1;
 
                                 //atributos  
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -533,6 +533,7 @@ EXTENDER:
                         //creando el padre
                         $$=new Nod(); 
                         _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
+                        padre->nivel=2;
 
                         $$->Padre=padre;
                 }
@@ -545,7 +546,7 @@ LST_PARAMETROS:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -558,7 +559,8 @@ LST_PARAMETROS:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -569,7 +571,7 @@ LST_PARAMETROS:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
-                        
+                        padre->nivel=3;
                         $$->Padre=padre;
                         /*vacio*/
                 }
@@ -581,7 +583,7 @@ PARAMETRO:
                         //creando el padre
                         $$=new Nod(); 
                         _PARAMETRO *padre=new _PARAMETRO("PARAMETRO",tabla); 
-                        
+                        padre->nivel=1;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -597,7 +599,7 @@ LST_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
-                        
+                        padre->nivel=1;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($3->Padre);
@@ -609,7 +611,7 @@ LST_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -621,7 +623,7 @@ LST_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
-                        
+                        padre->nivel=3;
                         $$->Padre=padre;
                         /*vacio*/
                 }
@@ -634,7 +636,7 @@ VISIBILIDAD:
                         //creando el padre
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
-                        
+                        padre->nivel=1;
                         
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -647,7 +649,7 @@ VISIBILIDAD:
                         //creando el padre
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
-                        
+                        padre->nivel=2;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tPrivado",tok1);
@@ -659,7 +661,7 @@ VISIBILIDAD:
                         //creando el padre
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
-                        
+                        padre->nivel=3;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tProtegido",tok1);
@@ -675,7 +677,7 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
-                        
+                        padre->nivel=1;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -687,7 +689,7 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
-                        
+                        padre->nivel=2;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -702,7 +704,7 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
-                        
+                        padre->nivel=1;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -713,7 +715,7 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -725,7 +727,8 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
-                        
+                        padre->nivel=3;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -736,7 +739,8 @@ CP_CLASE:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
-                        
+                        padre->nivel=4;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -751,7 +755,7 @@ METODO:
                         //creando el padre
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -767,7 +771,8 @@ METODO:
                         //creando el padre
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -785,7 +790,7 @@ MAIN:
                         //creando el padre
                         $$=new Nod(); 
                         _MAIN *padre=new _MAIN("MAIN",tabla); 
-                        
+                        padre->nivel=1;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tPrincipal",tok1);
@@ -803,7 +808,7 @@ CONSTRUCTOR:
                         //creando el padre
                         $$=new Nod(); 
                         _CONSTRUCTOR *padre=new _CONSTRUCTOR("CONSTRUCTOR",tabla); 
-                        
+                        padre->nivel=1;
                         
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -826,7 +831,8 @@ DECLARAR_VARIABLE_GLOBAL:
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
-                        
+                        padre->nivel=1;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre); 
@@ -841,7 +847,7 @@ DECLARAR_VARIABLE_GLOBAL:
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
-                        
+                        padre->nivel=2;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre); 
@@ -854,7 +860,7 @@ DECLARAR_VARIABLE_GLOBAL:
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -871,7 +877,8 @@ DECLARAR_VARIABLE_SINVISIBI:
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla); 
-                        
+                        padre->nivel=1;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre); 
@@ -884,7 +891,8 @@ DECLARAR_VARIABLE_SINVISIBI:
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla);
-                        
+                        padre->nivel=2;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);  
@@ -901,7 +909,7 @@ VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _VAL *padre=new _VAL("VAL",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre);  
@@ -917,7 +925,7 @@ LST_LLAVES_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -931,7 +939,8 @@ LST_LLAVES_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //hijos
                                 padre->hijos.append($1->Padre); 
 
@@ -946,7 +955,7 @@ LLAVES_VAL_P:
                         //creando el padre
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre);  
@@ -958,7 +967,7 @@ LLAVES_VAL_P:
                         //creando el padre
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre);  
@@ -975,7 +984,7 @@ VAR_ARREGLO:
                         //creando el padre
                         $$=new Nod(); 
                         _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -988,7 +997,7 @@ VAR_ARREGLO:
                         //creando el padre
                         $$=new Nod(); 
                         _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1007,7 +1016,7 @@ LST_CORCHETES:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CORCHETES *padre=new _LST_CORCHETES("LST_CORCHETES",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1020,7 +1029,7 @@ LST_CORCHETES:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CORCHETES *padre=new _LST_CORCHETES("LST_CORCHETES",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1035,7 +1044,7 @@ PAR_CORCHETES_VACIOS:
                         //creando el padre
                         $$=new Nod(); 
                         _PAR_CORCHETES_VACIOS *padre=new _PAR_CORCHETES_VACIOS("PAR_CORCHETES_VACIOS",tabla); 
-                        
+                        padre->nivel=1;
                         $$->Padre=padre;
                 }
         ;
@@ -1046,7 +1055,7 @@ PAR_CORCHETES_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _PAR_CORCHETES_VAL *padre=new _PAR_CORCHETES_VAL("PAR_CORCHETES_VAL",tabla); 
-                        
+                        padre->nivel=1;
 
 
                                 //hijos 
@@ -1063,7 +1072,7 @@ LST_CORCHETES_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1077,7 +1086,7 @@ LST_CORCHETES_VAL:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1093,7 +1102,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1106,7 +1115,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=2;
                         
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1119,7 +1128,8 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=3;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("valId",tok1);
@@ -1131,7 +1141,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1148,7 +1158,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=5;
 
 
                                 //asignando atributos 
@@ -1165,7 +1175,8 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=6;
+
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("valId",tok3);
@@ -1181,7 +1192,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=7;
 
 
                                 //asignando atributos 
@@ -1199,7 +1210,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=8;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1217,7 +1228,7 @@ ID_VAR_FUNC:
                         //creando el padre
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
-                        
+                        padre->nivel=9;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1239,7 +1250,7 @@ LST_PUNTOSP:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1252,7 +1263,7 @@ LST_PUNTOSP:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1270,7 +1281,7 @@ LST_PUNTOSP:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1287,7 +1298,7 @@ LST_PUNTOSP:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1309,7 +1320,8 @@ ASIG_VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
-                        
+                        padre->nivel=1;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);  
@@ -1321,7 +1333,8 @@ ASIG_VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //hijos
                                 padre->hijos.append($1->Padre); 
 
@@ -1332,7 +1345,8 @@ ASIG_VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
-                        
+                        padre->nivel=3;
+
                                 //hijos
                                 padre->hijos.append($1->Padre); 
 
@@ -1346,7 +1360,7 @@ LST_CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1359,7 +1373,7 @@ LST_CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1376,7 +1390,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1388,7 +1402,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1400,7 +1414,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1414,7 +1428,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1426,7 +1440,8 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=5;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1438,7 +1453,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=6;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1450,7 +1465,8 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=7;
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1461,7 +1477,7 @@ CUERPO:
                         //creando el padre
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
-                        
+                        padre->nivel=8;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1476,7 +1492,7 @@ SUPER:
                         //creando el padre
                         $$=new Nod(); 
                         _SUPER *padre=new _SUPER("SUPER",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($3->Padre);
@@ -1492,7 +1508,7 @@ RETORNO:
                         //creando el padre
                         $$=new Nod(); 
                         _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
-                         
+                         padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1506,7 +1522,8 @@ RETORNO:
                         //creando el padre
                         $$=new Nod(); 
                         _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tRetorno",tok1);
@@ -1524,7 +1541,7 @@ ROMPER:
                         //creando el padre
                         $$=new Nod(); 
                         _ROMPER *padre=new _ROMPER("ROMPER",tabla); 
-                        
+                        padre->nivel=1;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tRomper",tok1);
@@ -1539,7 +1556,7 @@ CONTINUAR:
                         //creando el padre
                         $$=new Nod(); 
                         _CONTINUAR *padre=new _CONTINUAR("CONTINUAR",tabla); 
-                        
+                        padre->nivel=1;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tContinuar",tok1);
@@ -1555,7 +1572,7 @@ SENTENCIAS:
                         //creando el padre
                         $$=new Nod(); 
                         _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1575,7 +1592,7 @@ SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1592,6 +1609,7 @@ SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
+                        padre->nivel=2;
                         
 
                                 //asignando atributos 
@@ -1611,7 +1629,7 @@ SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1632,7 +1650,7 @@ SINO_SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1650,7 +1668,8 @@ SINO_SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tSino",tok1);
@@ -1666,7 +1685,7 @@ SINO_SI:
                         //creando el padre
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1687,7 +1706,7 @@ SINO:
                         //creando el padre
                         $$=new Nod(); 
                         _SINO *padre=new _SINO("SINO",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1707,7 +1726,7 @@ VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1723,7 +1742,7 @@ VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
-                        
+                        padre->nivel=2;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre); 
@@ -1736,7 +1755,7 @@ VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
-                        
+                        padre->nivel=3;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1748,7 +1767,7 @@ VALOR:
                         //creando el padre
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1765,7 +1784,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=1;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1782,7 +1801,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=2;
+
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("sPot",tok2);
@@ -1798,7 +1818,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=3;
+
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("sDiv",tok2);
@@ -1814,7 +1835,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=4;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1831,7 +1852,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=5;
 
 
                                 //asignando atributos 
@@ -1849,7 +1870,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=6;
 
 
                                 //asignando atributos 
@@ -1868,7 +1889,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=7;
 
 
                                 //asignando atributos 
@@ -1889,7 +1910,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=8;
 
 
                                 //asignando atributos 
@@ -1907,7 +1928,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=9;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1925,7 +1946,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=10;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1943,7 +1964,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=11;
 
 
                                 //asignando atributos 
@@ -1961,7 +1982,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=12;
 
 
                                 //asignando atributos 
@@ -1979,7 +2000,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=13;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1999,7 +2020,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=14;
 
 
                                 //asignando atributos 
@@ -2017,7 +2038,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=15;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2035,7 +2056,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=16;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("sNot",tok1);
@@ -2053,7 +2075,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=17;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("sAbreParent",tok1);
@@ -2069,7 +2092,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=18;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);  
@@ -2081,7 +2104,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=19;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("valBoolean",tok1);
@@ -2094,7 +2118,8 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=20;
+
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("valCadena",tok1);
@@ -2106,7 +2131,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=21;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2119,7 +2144,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=22;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2133,7 +2158,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=23;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2146,7 +2171,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=24;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2159,7 +2184,7 @@ E:
                         //creando el padre
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
-                        
+                        padre->nivel=25;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
