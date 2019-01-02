@@ -9,6 +9,8 @@ class _TIPO: public nodoModelo
 {
 public:
     _TIPO(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+
+    token *getTipo();
 };
 
 #endif // _TIPO_H

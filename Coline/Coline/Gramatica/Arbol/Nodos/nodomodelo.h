@@ -16,6 +16,8 @@
 | CLASE
 |--------------------------------------------------------------------------
 */
+
+class elementoPolimorfo;
 class nodoModelo
 {
 public:
@@ -84,7 +86,9 @@ public:
     | 3 = continue
     | 4 = errores
     */
+    virtual itemRetorno* ejecutar(elementoEntorno *entor);
 
+    virtual itemRetorno* ejecutarHijos(elementoEntorno *entor);
 
 
     /*
@@ -130,6 +134,8 @@ public:
             temp->imprimirNodos();
         }
     }
+
+    void println(QString mensaje);
 
 
 };

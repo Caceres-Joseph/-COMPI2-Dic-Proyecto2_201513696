@@ -5,7 +5,7 @@
 #import "Coline/Elementos/Tablas/tablasimbolos.h"
 #include "Coline/Gramatica/Gramatica/Sintactico/parser.h"
 //#include "Coline/Gramatica/Gramatica/Lexico/scanner.h"
-
+#include "Coline/Elementos/Objetos/objetoclase.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
 extern int yyrestart( FILE* archivo);//METODO QUE PASA EL ARCHIVO A FLEX
 extern int yyparse(); //METODO QUE INICIA EL ANALISIS SINTACTICO
@@ -52,6 +52,10 @@ public:
 
         //raizArbol->imprimirNodos();
         raizArbol->ejecutar();
+
+        //buscando el main y ejecutando
+        ejecutarPrincipal();
+
         std::cout<<"----- Fin analisis  -----"<<std::endl;
 
 
@@ -62,6 +66,9 @@ public:
 
 
     }
+
+
+    void ejecutarPrincipal();
 };
 
 #endif // ARBOL_COLINE_H

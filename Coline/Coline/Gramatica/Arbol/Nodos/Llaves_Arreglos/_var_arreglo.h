@@ -4,11 +4,15 @@
 
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
-
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_corchetes_val.h"
 class _VAR_ARREGLO: public nodoModelo
 {
 public:
     _VAR_ARREGLO(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+
+    token *getIdentificador();
+
+    QList<int> getDimensiones();
 };
 
 #endif // _VAR_ARREGLO_H

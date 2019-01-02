@@ -3,12 +3,19 @@
 
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+#include "Coline/Gramatica/Arbol/Nodos/Declarar_Variable/_val.h"
 
+
+#include "Coline/Gramatica/Arbol/Nodos/Inicio/_tipo.h"
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_var_arreglo.h"
 
 class _DECLARAR_VARIABLE_SINVISIBI: public nodoModelo
 {
 public:
     _DECLARAR_VARIABLE_SINVISIBI(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+
+    itemRetorno *ejecutar (elementoEntorno *entor)override;
+
 };
 
 #endif // _DECLARAR_VARIABLE_SINVISIBI_H

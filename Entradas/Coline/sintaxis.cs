@@ -1,4 +1,10 @@
 clase hola {
+    publico entero atributo1;
+    publico caracter atributo_cadena = "cadena de inicio";
+
+    publico vacio metodo(entero parametro){
+        este.atributo1 = parametro;
+    }
 
 
     principal(){

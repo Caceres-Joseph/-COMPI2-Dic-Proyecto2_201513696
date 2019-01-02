@@ -12,6 +12,4 @@ void _CLASE::ejecutar(){
     //imprimirNodos();
     ejecutarHijos2(nuevaClase);
     tabla->lstClases.append(nuevaClase);
-
-
 }

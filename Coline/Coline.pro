@@ -26,7 +26,11 @@ PRECOMPILED_HEADER = pch.hpp
 HEADERS += pch.hpp \
     Coline/Elementos/Elementos/elementopolimorfo.h \
     Coline/Elementos/Elementos/elementoparametro.h \
-    Coline/Elementos/Listas/lstpolimorfismo.h
+    Coline/Elementos/Listas/lstpolimorfismo.h \
+    Coline/Elementos/Listas/lstclases.h \
+    Coline/Elementos/Objetos/objetoclase.h \
+    Coline/Elementos/Elementos/elementoentorno.h \
+    Coline/Elementos/Items/itementorno.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -130,7 +134,11 @@ SOURCES += \
     Coline/Elementos/Elementos/elementoclase.cpp \
     Coline/Elementos/Elementos/elementopolimorfo.cpp \
     Coline/Elementos/Elementos/elementoparametro.cpp \
-    Coline/Elementos/Listas/lstpolimorfismo.cpp
+    Coline/Elementos/Listas/lstpolimorfismo.cpp \
+    Coline/Elementos/Listas/lstclases.cpp \
+    Coline/Elementos/Objetos/objetoclase.cpp \
+    Coline/Elementos/Elementos/elementoentorno.cpp \
+    Coline/Elementos/Items/itementorno.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

@@ -14,7 +14,7 @@ class elementoPolimorfo
 public:
 
     token *tipo;
-    std::map<QString,elementoParametro> lstParametros;
+    std::map<QString,elementoParametro*> lstParametros;
     token *nombre;
     itemValor *retorno;
     tablaSimbolos *tabla;
@@ -23,6 +23,8 @@ public:
     int dimension=0;
 
     elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, token *tipo,token *nombre, nodoModelo *LST_CUERPO, int dimension);
+
+    void insertarParametro(token *idParametro,token *tipoParametro, int dimension);
 };
 
 #endif // ELEMENTOPOLIMORFO_H

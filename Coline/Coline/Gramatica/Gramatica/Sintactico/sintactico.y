@@ -825,8 +825,9 @@ CONSTRUCTOR:
 
 
 
-DECLARAR_VARIABLE_GLOBAL:  
-        TIPO  VISIBILIDAD  VAR_ARREGLO  VAL
+DECLARAR_VARIABLE_GLOBAL: 
+        /*
+        VISIBILIDAD TIPO  VAR_ARREGLO  VAL
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -842,7 +843,7 @@ DECLARAR_VARIABLE_GLOBAL:
                                 
                         $$->Padre=padre;
                 }
-        | TIPO  VISIBILIDAD  VAR_ARREGLO  
+        | VISIBILIDAD TIPO  VAR_ARREGLO  
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -855,7 +856,7 @@ DECLARAR_VARIABLE_GLOBAL:
 
                         $$->Padre=padre;
                 }
-        | DECLARAR_VARIABLE_SINVISIBI
+        | */VISIBILIDAD DECLARAR_VARIABLE_SINVISIBI
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -863,10 +864,11 @@ DECLARAR_VARIABLE_GLOBAL:
                         padre->nivel=3;
 
                                 //hijos
-                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($1->Padre);
+                                padre->hijos.append($2->Padre);
 
                         $$->Padre=padre;
-                }
+                } 
         ;
 
 
@@ -992,7 +994,7 @@ VAR_ARREGLO:
 
                         $$->Padre=padre;
                 }
-        |valId  PAR_CORCHETES_VAL
+        |valId  LST_CORCHETES_VAL
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -1068,18 +1070,13 @@ PAR_CORCHETES_VAL:
 
 LST_CORCHETES_VAL:  
         LST_CORCHETES_VAL  PAR_CORCHETES_VAL
-                {   
-                        //creando el padre
-                        $$=new Nod(); 
-                        _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
-                        padre->nivel=1;
-
-                                //hijos
-                                padre->hijos.append($1->Padre);
-                                padre->hijos.append($2->Padre);  
+                {    
+                        
+                        
+                        $1->Padre->hijos.append($2->Padre);  
 
 
-                        $$->Padre=padre;
+                        $$=$1;
                 }
         |PAR_CORCHETES_VAL
                 {   

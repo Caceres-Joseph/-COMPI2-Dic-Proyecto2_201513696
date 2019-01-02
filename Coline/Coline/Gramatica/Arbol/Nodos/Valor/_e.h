@@ -9,6 +9,7 @@ class _E: public nodoModelo
 {
 public:
     _E(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+    itemValor *getValor(elementoEntorno* elemento, token *tipo);
 };
 
 #endif // _E_H

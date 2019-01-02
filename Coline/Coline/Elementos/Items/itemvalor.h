@@ -29,7 +29,7 @@ class itemValor
 {
 public:
     p_modelo *valor;
-
+    QString c3d;
 
     /*
     |--------------------------------------------------------------------------
@@ -50,29 +50,36 @@ public:
     | CONSTRUCTORES
     |----------------
     */
-    itemValor(double valor){
-        p_decimal *ent =new p_decimal(valor);
-        this->valor=ent;
-    }
-
-    itemValor(int valor){
-        p_entero *ent =new p_entero(valor);
-        this->valor=ent;
-    }
-    itemValor(char valor){
-        p_caracter *ent =new p_caracter(valor);
-        this->valor=ent;
-    }
-
-    itemValor(bool valor){
-        p_booleano *ent=new p_booleano(valor);
-        this->valor=ent;
-    }
 
     itemValor(){
         p_nulo *ent=new p_nulo();
         this->valor=ent;
+        this->c3d="\0";
     }
+
+    itemValor(double valor,QString c3d){
+        p_decimal *ent =new p_decimal(valor);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
+
+    itemValor(int valor, QString c3d){
+        p_entero *ent =new p_entero(valor);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
+    itemValor(char valor, QString c3d){
+        p_caracter *ent =new p_caracter(valor);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
+
+    itemValor(bool valor, QString c3d){
+        p_booleano *ent=new p_booleano(valor);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
+
 
 
 

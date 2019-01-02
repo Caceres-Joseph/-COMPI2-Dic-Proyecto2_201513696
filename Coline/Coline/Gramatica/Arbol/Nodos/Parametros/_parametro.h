@@ -4,7 +4,8 @@
 
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
-
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_var_arreglo.h"
+#include "Coline/Gramatica/Arbol/Nodos/Inicio/_tipo.h"
 class _PARAMETRO: public nodoModelo
 {
 public:

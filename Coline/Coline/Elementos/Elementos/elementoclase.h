@@ -18,6 +18,7 @@ public:
     lstPolimorfismo* lstPrincipal;
     lstPolimorfismo* lstMetodo_funcion;
     lstPolimorfismo* lstConstructores;
+    lstPolimorfismo* lstVariablesGlobales;
     lstPolimorfismo* lstConstructoresHeredados;
 
     token *nombreClase;
@@ -41,6 +42,7 @@ public:
         this->lstPrincipal=new lstPolimorfismo(tabla,"principales");
         this->lstMetodo_funcion=new lstPolimorfismo(tabla,"metodos_funciones");
         this->lstConstructores=new lstPolimorfismo(tabla,"constructores");
+        this->lstVariablesGlobales=new lstPolimorfismo(tabla,"globales");
         this->lstConstructoresHeredados=new lstPolimorfismo(tabla,"constructores_heredados");
 
     }
