@@ -14,6 +14,8 @@
 */
 #include "Coline/Elementos/Primitivos/p_modelo.h"
 #include "Coline/Elementos/Primitivos/p_entero.h"
+
+#include "Coline/Elementos/Primitivos/p_cadena.h"
 #include "Coline/Elementos/Primitivos/p_booleano.h"
 #include "Coline/Elementos/Primitivos/p_caracter.h"
 #include "Coline/Elementos/Primitivos/p_decimal.h"
@@ -54,7 +56,7 @@ public:
     itemValor(){
         p_nulo *ent=new p_nulo();
         this->valor=ent;
-        this->c3d="\0";
+        this->c3d="'\\0'";
     }
 
     itemValor(double valor,QString c3d){
@@ -80,7 +82,20 @@ public:
         this->c3d=c3d;
     }
 
+    itemValor(QString valor, QString c3d){
+        p_cadena *ent=new p_cadena(valor);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
 
+    bool isTypeCadena();
+    bool isTypeBooleano();
+    bool isTypeEntero();
+    bool isTypeDecimal();
+    bool isTypeNulo();
+    bool isTypeObjeto();
+    bool isTypeVacio();
+    bool isTypeChar();
 
 
 };

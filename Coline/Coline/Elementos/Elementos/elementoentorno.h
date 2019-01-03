@@ -12,13 +12,16 @@ class elementoEntorno
 {
 public:
 
+    //para el 3d
+    int nivel=0;
+    //
     elementoEntorno *anterior;
     tablaSimbolos *tabla;
     QString nombre;
     objetoClase *este;
 
 
-    std::map<QString,itemEntorno*> lstEntorno;
+    QList<itemEntorno*> lstEntorno;
     void insertarItem(itemEntorno *nuevoEntorno);
 
     elementoEntorno(elementoEntorno *anterior,tablaSimbolos *tabla, QString nombre, objetoClase *este);

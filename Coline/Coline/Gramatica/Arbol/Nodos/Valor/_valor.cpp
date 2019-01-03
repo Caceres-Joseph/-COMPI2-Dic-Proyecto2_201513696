@@ -11,7 +11,7 @@ itemValor * _VALOR::getValor(elementoEntorno *elemento, token *tipo){
 
     }else if(nivel==4){
         _E *nodoE=(_E*)hijos[0];
-        return nodoE->getValor(elemento,tipo);
+        return nodoE->getValor(elemento);
     }
 
     return retorno;

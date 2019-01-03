@@ -30,7 +30,8 @@ HEADERS += pch.hpp \
     Coline/Elementos/Listas/lstclases.h \
     Coline/Elementos/Objetos/objetoclase.h \
     Coline/Elementos/Elementos/elementoentorno.h \
-    Coline/Elementos/Items/itementorno.h
+    Coline/Elementos/Items/itementorno.h \
+    Coline/Elementos/Primitivos/p_cadena.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -138,7 +139,8 @@ SOURCES += \
     Coline/Elementos/Listas/lstclases.cpp \
     Coline/Elementos/Objetos/objetoclase.cpp \
     Coline/Elementos/Elementos/elementoentorno.cpp \
-    Coline/Elementos/Items/itementorno.cpp
+    Coline/Elementos/Items/itementorno.cpp \
+    Coline/Elementos/Primitivos/p_cadena.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

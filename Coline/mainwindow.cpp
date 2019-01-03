@@ -46,5 +46,6 @@ void MainWindow::on_btnAnalizar_clicked()
 {
     arbol_coline *anlz=new arbol_coline();
     anlz->iniciarAnalisis(ui->txtEntrada->toPlainText(),"principal");
+    ui->txtSalida->setText(anlz->getSalida());
 
 }

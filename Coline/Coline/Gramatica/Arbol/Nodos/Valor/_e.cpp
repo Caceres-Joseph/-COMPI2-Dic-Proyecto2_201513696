@@ -1,6 +1,6 @@
 #include "_e.h"
 
-itemValor * _E::getValor(elementoEntorno *elemento, token *tipo){
+itemValor * _E::getValor(elementoEntorno *elemento){
     itemValor *retorno=new itemValor();
 
     if(nivel== 1){
@@ -12,7 +12,8 @@ itemValor * _E::getValor(elementoEntorno *elemento, token *tipo){
     }else if(nivel==4){
 
     }else if(nivel==5){
-
+        suma *ope=new suma(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opSuma(elemento);
     }else if(nivel==6){
 
     }else if(nivel==7){
@@ -43,11 +44,9 @@ itemValor * _E::getValor(elementoEntorno *elemento, token *tipo){
         QString cad19=lst_Atributos->getToken(0)->valLower;
 
         if(cad19=="verdadero"){
-            println("retornando verdadero");
             itemValor *val19=new itemValor(true,"1");
             return val19;
         }else if(cad19=="falso"){
-            println("retornando falso");
             itemValor *val19=new itemValor(false,"0");
             return val19;
         }
@@ -59,13 +58,11 @@ itemValor * _E::getValor(elementoEntorno *elemento, token *tipo){
     }else if(nivel==22){
         QString cad22=lst_Atributos->getToken(0)->valLower;
         itemValor *val22=new itemValor(cad22.toDouble(), cad22);
-        println("devolviendo un decimal");
         return val22;
 
     }else if(nivel==23){
         QString cad23=lst_Atributos->getToken(0)->valLower;
         itemValor *val23=new itemValor(cad23.toInt(), cad23);
-        println("devolviendo un numero");
         return val23;
 
     }else if(nivel==24){
@@ -76,8 +73,6 @@ itemValor * _E::getValor(elementoEntorno *elemento, token *tipo){
 
     }
 
-
-    println("Operando E");
 
     return retorno;
 }

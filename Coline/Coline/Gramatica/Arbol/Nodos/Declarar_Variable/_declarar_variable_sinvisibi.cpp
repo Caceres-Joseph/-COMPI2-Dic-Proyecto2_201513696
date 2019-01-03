@@ -12,6 +12,7 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     _VAR_ARREGLO *nodoVar;
     nodoVar = (_VAR_ARREGLO*)hijos[1];
+
     itemValor *valor=new itemValor();
 
     if(nivel == 1){
@@ -27,6 +28,17 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla);
 
     entor->insertarItem(nuevoItem);
-    println("Variable insertada exitosamente *uto");
+
+
+    if(entor->nombre=="global"){
+        QString t1=tabla->getEtiqueta();
+
+        QString cad1 = t1 + " = H + " + QString::number(entor->lstEntorno.count()-1);
+        tabla->linea(cad1,entor->nivel);
+        tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+    }
+
+
+    println("Variable insertada exitosamente");
     return ret;
 }

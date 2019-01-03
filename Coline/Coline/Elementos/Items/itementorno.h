@@ -7,6 +7,9 @@
 class itemEntorno
 {
 public:
+
+
+    //
     token *tipo;
     token *nombre;
     itemValor *valor;

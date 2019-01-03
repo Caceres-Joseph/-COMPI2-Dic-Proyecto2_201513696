@@ -23,3 +23,9 @@ void arbol_coline::ejecutarPrincipal(){
     }
 
 }
+
+
+
+QString arbol_coline::getSalida(){
+    return tabla->salida;
+}

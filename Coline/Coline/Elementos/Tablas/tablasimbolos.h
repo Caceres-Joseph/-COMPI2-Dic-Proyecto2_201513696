@@ -18,14 +18,22 @@ class elementoClase;
 class tablaSimbolos
 {
 public:
+
+
     QString salida="";
+    int numEtiqueta=0;
     tablaErrores *tablaError=new tablaErrores();
 
     QList<elementoClase*> lstClases;
 
     tablaSimbolos(){
-
     }
+
+    QString getEtiqueta();
+
+    void linea(QString txt, int nivel);
+    void linea(QString txt, int nivel, QString comentario);
+
 };
 
 #endif // TABLASIMBOLOS_H

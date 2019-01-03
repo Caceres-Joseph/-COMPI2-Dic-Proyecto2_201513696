@@ -56,16 +56,20 @@ public:
         //buscando el main y ejecutando
         ejecutarPrincipal();
 
+        //std::cout<<"\n3D:"<<std::endl;
+        //std::cout<<tabla->salida.toStdString()<<std::endl;
         std::cout<<"----- Fin analisis  -----"<<std::endl;
 
 
-
-         QMessageBox msgBox;
-         msgBox.setText("FIN DEL ANALISIS");
-         msgBox.exec();
-
+        if(raizArbol->hayErrores()){
+            QMessageBox msgBox;
+            msgBox.setText("Se detectaron algunos errores :(");
+            msgBox.exec();
+        }
 
     }
+
+    QString getSalida();
 
 
     void ejecutarPrincipal();
