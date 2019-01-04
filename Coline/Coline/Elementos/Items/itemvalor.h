@@ -33,6 +33,10 @@ public:
     p_modelo *valor;
     QString c3d;
 
+    QString c3dV="";
+    QString c3dF="";
+    QString c3dS="";
+
     /*
     |--------------------------------------------------------------------------
     | TIPOS QUE SOPORTA EL LENGUAJE
@@ -56,7 +60,7 @@ public:
     itemValor(){
         p_nulo *ent=new p_nulo();
         this->valor=ent;
-        this->c3d="'\\0'";
+        this->c3d="0";
     }
 
     itemValor(double valor,QString c3d){

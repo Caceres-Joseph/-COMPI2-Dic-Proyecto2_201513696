@@ -3,11 +3,16 @@
 
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Elementos/Global/nodosimport.h"
-class division
+#include "Coline/Gramatica/Arbol/Nodos/Valor/_e.h"
+#include "Coline/Gramatica/Arbol/Nodos/Valor/opmodelo.h"
+
+class division: public opModelo
 {
 public:
-    division();
+
+    division(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbolos *tabla, token *signo);
+    itemValor *opDivision(elementoEntorno *entorno);
+    void println(QString mensaje);
 };
 
 #endif // DIVISION_H

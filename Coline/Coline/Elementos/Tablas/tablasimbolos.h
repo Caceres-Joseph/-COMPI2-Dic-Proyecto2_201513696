@@ -22,6 +22,7 @@ public:
 
     QString salida="";
     int numEtiqueta=0;
+    int numSalto=0;
     tablaErrores *tablaError=new tablaErrores();
 
     QList<elementoClase*> lstClases;
@@ -30,9 +31,13 @@ public:
     }
 
     QString getEtiqueta();
+    QString getSalto();
 
     void linea(QString txt, int nivel);
     void linea(QString txt, int nivel, QString comentario);
+
+    void linea2(QString txt, int nivel);
+    void linea2(QString txt, int nivel, QString comentario);
 
 };
 

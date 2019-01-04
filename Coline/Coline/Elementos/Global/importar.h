@@ -23,5 +23,13 @@
 #include <iterator>
 #include <map>
 #include "Coline/Elementos/Global/token.h"
+/*
+QString _stack="Stack";
+QString _heap="Heap";
+QString _pool="Pool";
+QString _p="P";
+QString _h="H";
+QString _s="S";
+*/
 
 #endif // IMPORTAR_H

@@ -40,6 +40,20 @@ void MainWindow::on_btnAceptar_clicked()
     atribs->insertar("vale",tok);
     atribs->insertar("vale2",tok2);
     atribs->imprimir();
+
+
+    double val= -3-32*11-12/-4%98;
+
+          double  t9 = 0 - 3;
+           double t10 = 32 * 11;
+           double t11 = t9-t10;
+          double  t12 = 4 % 98;
+          double  t13 = 0 - t12;
+          double  t14 = 12 / t13;
+         double   t15 = t11-t14;
+
+         std::cout<<"val:: -> "<<val<<" -> "<<t15<<std::endl;
+
 }
 
 void MainWindow::on_btnAnalizar_clicked()

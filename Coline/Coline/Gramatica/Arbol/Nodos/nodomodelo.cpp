@@ -10,7 +10,7 @@ itemRetorno *nodoModelo::ejecutarHijos(elementoEntorno *entor){
     itemRetorno *ret=new itemRetorno(0);
     for (int i = 0; i < hijos.count(); ++i) {
         nodoModelo *temp=hijos[i];
-        temp->ejecutarHijos(entor);
+        temp->ejecutar(entor);
     }
 
     return ret;

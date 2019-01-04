@@ -36,9 +36,18 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         QString cad1 = t1 + " = H + " + QString::number(entor->lstEntorno.count()-1);
         tabla->linea(cad1,entor->nivel);
         tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+    }else{
+        //indica que es un entorno local
+        QString t1=tabla->getEtiqueta();
+
+        QString cad1 = t1 + " = P + " + QString::number(entor->lstEntorno.count()-1);
+        tabla->linea(cad1,entor->nivel);
+        tabla->linea("Stack["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+
+
     }
 
 
-    println("Variable insertada exitosamente");
+    //println("Variable insertada exitosamente");
     return ret;
 }

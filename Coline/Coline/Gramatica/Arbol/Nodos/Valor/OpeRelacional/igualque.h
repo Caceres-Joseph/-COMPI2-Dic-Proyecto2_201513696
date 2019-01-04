@@ -3,11 +3,14 @@
 
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Elementos/Global/nodosimport.h"
-class IgualQue
+#include "Coline/Gramatica/Arbol/Nodos/Valor/_e.h"
+#include "Coline/Gramatica/Arbol/Nodos/Valor/opmodelo.h"
+class IgualQue: public opModelo
 {
 public:
-    IgualQue();
+    IgualQue(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbolos *tabla, token *signo);
+    itemValor *opIgualacion(elementoEntorno *entorno, QString simbolo);
+    void println(QString mensaje);
 };
 
 #endif // IGUALQUE_H

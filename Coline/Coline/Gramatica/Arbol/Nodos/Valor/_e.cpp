@@ -4,31 +4,51 @@ itemValor * _E::getValor(elementoEntorno *elemento){
     itemValor *retorno=new itemValor();
 
     if(nivel== 1){
-
+        negativo *ope=new negativo(hijos[0],tabla,lst_Atributos->getToken(0));
+        return ope->opNegativo(elemento);
     }else if(nivel==2){
 
     }else if(nivel==3){
+        division *ope=new division(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opDivision(elemento);
 
     }else if(nivel==4){
+        multiplicacion *ope=new multiplicacion(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opMult(elemento);
 
     }else if(nivel==5){
         suma *ope=new suma(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
         return ope->opSuma(elemento);
     }else if(nivel==6){
+        resta *ope=new resta(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opResta(elemento);
 
     }else if(nivel==7){
+        modulo *ope=new modulo(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opModulo(elemento);
 
     }else if(nivel==8){
+        IgualQue *ope=new IgualQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opIgualacion(elemento, "==");
 
     }else if(nivel==9){
+        IgualQue *ope=new IgualQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opIgualacion(elemento, "!=");
 
     }else if(nivel==10){
+        MayorQue *ope=new MayorQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opMayorQue(elemento, "<");
 
     }else if(nivel==11){
+        MayorQue *ope=new MayorQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opMayorQue(elemento, "<=");
 
     }else if(nivel==12){
-
+        MayorQue *ope=new MayorQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opMayorQue(elemento, ">");
     }else if(nivel==13){
+        MayorQue *ope=new MayorQue(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opMayorQue(elemento, ">=");
 
     }else if(nivel==14){
 
@@ -37,7 +57,8 @@ itemValor * _E::getValor(elementoEntorno *elemento){
     }else if(nivel==16){
 
     }else if(nivel==17){
-
+        itemValor *val1=((_E*)hijos[0])->getValor(elemento);
+        return val1;
     }else if(nivel==18){
 
     }else if(nivel==19){

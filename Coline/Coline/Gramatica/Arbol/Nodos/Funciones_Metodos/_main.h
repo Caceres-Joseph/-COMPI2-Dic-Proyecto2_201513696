@@ -11,6 +11,7 @@ public:
     _MAIN(QString nombre, tablaSimbolos *tabla);
 
      void ejecutarHijos2(elementoClase *simbolo)override;
+     itemRetorno *ejecutar (elementoEntorno *entor)override;
 };
 
 #endif // _MAIN_H
