@@ -12,6 +12,11 @@ class elementoEntorno
 {
 public:
 
+    //chapus
+    QString etqFalso="";
+    QString etqVerdadero="";
+    QString etqSalida="";
+
     //para el 3d
     int nivel=0;
     //

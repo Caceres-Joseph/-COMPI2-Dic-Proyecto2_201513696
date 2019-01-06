@@ -5,53 +5,56 @@ And::And(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbolos *tabla, token *sign
 }
 
 itemValor *And::opAnd(elementoEntorno *entorno, QString simbolo){
-
     itemValor *retorno=new itemValor();
+
+    /*
+     * ------------
+     * VALOR 1
+     * ------------
+    */
     itemValor *val1=hijo1->getValor(entorno);
+    if (!(val1->isTypeBooleano()||val1->isTypeDecimal()||val1->isTypeEntero()))
+    {
+        tabla->tablaError->insertErrorSemantic("No se pueden operar ["+simbolo+"] " + val1->valor->tipo+" con [rel]", signo);
+    }
+    if(val1->c3dS == ""){
+        tabla->tablaError->insertErrorSemantic("Sólo se puede aplicar OR de esta forma -> opRelacional [OR] opRelacional",signo);
+
+    }
+
+    //tabla->linea("goto "+val1->c3dF, entorno->nivel);
+    tabla->linea2(val1->c3dV+":", entorno->nivel);
+    entorno->etqVerdadero="";
+    entorno->etqSalida=val1->c3dS;
+    entorno->etqFalso=val1->c3dF;
+
+    /*
+     * ------------
+     * VALOR 2
+     * ------------
+    */
     itemValor *val2=hijo2->getValor(entorno);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Booleano
-    |--------------------------------------------------------------------------
-    */
-    if ((
-             val1->isTypeBooleano()||
-             val1->isTypeDecimal()||
-             val1->isTypeEntero()
-         )&& (
-            val2->isTypeBooleano()||
-            val2->isTypeDecimal()||
-            val2->isTypeEntero()
-         ))
+    if (!(val2->isTypeBooleano()||val2->isTypeDecimal()||val2->isTypeEntero()))
     {
-
-        QString temp=tabla->getEtiqueta();
-        QString etqVerdad=tabla->getSalto();
-        QString etqFalso=tabla->getSalto();
-        QString etSalida=tabla->getSalto();
-
-
-        tabla->linea("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad, entorno->nivel);
-        tabla->linea2(etqFalso+":",entorno->nivel);
-        tabla->linea(temp+" = 0", entorno->nivel);
-        tabla->linea("goto "+etSalida, entorno->nivel);
-        tabla->linea2(etqVerdad+":",entorno->nivel);
-        tabla->linea(temp+" = 1", entorno->nivel);
-        tabla->linea2(etSalida+":",entorno->nivel);
-
-        retorno=new itemValor(1,temp);
+        tabla->tablaError->insertErrorSemantic("No se pueden operar ["+simbolo+"] [rel] con " + val2->valor->tipo, signo);
+    }
+    if(val2->c3dS == ""){
+        tabla->tablaError->insertErrorSemantic("Sólo se puede aplicar OR de esta forma -> opRelacional [OR] opRelacional",signo);
 
     }
 
 
-    /*
-     * Else
-    */
-    else
-    {
-        tabla->tablaError->insertErrorSemantic("No se pueden operar ["+simbolo+"] " + val1->valor->tipo + " con " + val2->valor->tipo, signo);
-    }
+
+    retorno=new itemValor(false,"0");
+    retorno->c3dF=val2->c3dF;
+    retorno->c3dV=val2->c3dV;
+    retorno->c3dS=val2->c3dS;
+
+
+
+    entorno->etqVerdadero="";
+    entorno->etqSalida="";
+    entorno->etqFalso="";
 
     return retorno;
 }

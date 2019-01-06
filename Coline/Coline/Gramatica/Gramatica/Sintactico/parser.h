@@ -45,21 +45,21 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    sMas = 258,
-    sMenos = 259,
-    sPor = 260,
-    sDiv = 261,
-    sPot = 262,
-    sMod = 263,
-    sIgualacion = 264,
-    sDiferenciacion = 265,
-    sMenorQue = 266,
-    sMayorQue = 267,
-    sMenorIgualQue = 268,
-    sMayorIgualQue = 269,
-    sAnd = 270,
-    sOr = 271,
-    sNot = 272,
+    sOr = 258,
+    sAnd = 259,
+    sNot = 260,
+    sMayorQue = 261,
+    sMenorQue = 262,
+    sMayorIgualQue = 263,
+    sMenorIgualQue = 264,
+    sIgualacion = 265,
+    sDiferenciacion = 266,
+    sMas = 267,
+    sMenos = 268,
+    sPor = 269,
+    sDiv = 270,
+    sMod = 271,
+    sPot = 272,
     sAbreParent = 273,
     sCierraParent = 274,
     sAbreLlave = 275,
@@ -116,8 +116,7 @@ extern int yydebug;
     valNumero = 326,
     valDecimal = 327,
     valCaracter = 328,
-    valCadena = 329,
-    MayorQue = 330
+    valCadena = 329
   };
 #endif
 
@@ -133,7 +132,7 @@ char TEXT [256];
 struct Nod *VAL;
 //extern nodo *NODO;
 
-#line 137 "parser.h" /* yacc.c:1909  */
+#line 136 "parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

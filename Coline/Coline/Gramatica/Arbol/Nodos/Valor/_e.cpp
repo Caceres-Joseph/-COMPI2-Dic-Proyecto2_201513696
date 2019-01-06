@@ -51,10 +51,16 @@ itemValor * _E::getValor(elementoEntorno *elemento){
         return ope->opMayorQue(elemento, ">=");
 
     }else if(nivel==14){
+        And *ope=new And(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opAnd(elemento, "&&");
 
     }else if(nivel==15){
+        Or *ope=new Or(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opOr(elemento, "||");
 
     }else if(nivel==16){
+        Not *ope=new Not(hijos[0],tabla,lst_Atributos->getToken(0));
+        return ope->opNot(elemento, "!");
 
     }else if(nivel==17){
         itemValor *val1=((_E*)hijos[0])->getValor(elemento);

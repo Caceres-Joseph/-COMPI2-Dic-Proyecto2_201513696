@@ -54,3 +54,50 @@ void tablaSimbolos::linea2(QString txt, int nivel, QString comentario){
     retorno += "\t//"+comentario;
     this->salida.append(retorno);
 }
+
+
+QString tablaSimbolos::getLinea(QString txt, int nivel){
+
+    QString retorno="\n";
+    for (int i = 0; i < nivel; ++i) {
+        retorno+="\t";
+    }
+
+    retorno+=txt+";";
+    return retorno;
+
+}
+QString tablaSimbolos::getLinea(QString txt, int nivel, QString comentario){
+
+    QString retorno="\n";
+    for (int i = 0; i < nivel; ++i) {
+        retorno+="\t";
+    }
+
+    retorno+=txt+";";
+    retorno += "\t//"+comentario;
+    return retorno;
+}
+
+QString tablaSimbolos::getLinea2(QString txt, int nivel){
+
+    QString retorno="\n";
+    for (int i = 0; i < nivel; ++i) {
+        retorno+="\t";
+    }
+
+    retorno+=txt;
+    return retorno;
+
+}
+QString tablaSimbolos::getLinea2(QString txt, int nivel, QString comentario){
+
+    QString retorno="\n";
+    for (int i = 0; i < nivel; ++i) {
+        retorno+="\t";
+    }
+
+    retorno+=txt;
+    retorno += "\t//"+comentario;
+    return retorno;
+}

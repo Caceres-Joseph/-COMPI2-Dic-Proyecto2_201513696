@@ -39,6 +39,13 @@ public:
     void linea2(QString txt, int nivel);
     void linea2(QString txt, int nivel, QString comentario);
 
+
+    QString getLinea(QString txt, int nivel);
+    QString getLinea(QString txt, int nivel, QString comentario);
+
+    QString getLinea2(QString txt, int nivel);
+    QString getLinea2(QString txt, int nivel, QString comentario);
+
 };
 
 #endif // TABLASIMBOLOS_H

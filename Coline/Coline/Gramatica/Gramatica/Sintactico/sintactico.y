@@ -69,21 +69,24 @@ struct Nod *VAL;
         | Terminales
         =============================
         */ 
+%token<TEXT>  sOr
+%token<TEXT>  sAnd
+%token<TEXT>  sNot
+
+%token<TEXT>  sMayorQue
+%token<TEXT>  sMenorQue
+%token<TEXT>  sMayorIgualQue
+%token<TEXT>  sMenorIgualQue
+%token<TEXT>  sIgualacion
+%token<TEXT>  sDiferenciacion
+
 %token<TEXT>  sMas
 %token<TEXT>  sMenos
 %token<TEXT>  sPor
 %token<TEXT>  sDiv
-%token<TEXT>  sPot
 %token<TEXT>  sMod
-%token<TEXT>  sIgualacion
-%token<TEXT>  sDiferenciacion
-%token<TEXT>  sMenorQue
-%token<TEXT>  sMayorQue
-%token<TEXT>  sMenorIgualQue
-%token<TEXT>  sMayorIgualQue
-%token<TEXT>  sAnd
-%token<TEXT>  sOr
-%token<TEXT>  sNot
+%token<TEXT>  sPot
+
 %token<TEXT>  sAbreParent
 %token<TEXT>  sCierraParent
 %token<TEXT>  sAbreLlave
@@ -265,11 +268,17 @@ struct Nod *VAL;
 
 %left sOr 
 %left sAnd
-%left sNot 
-%left MayorQue sMenorQue sMayorIgualQue sMenorIgualQue sIgualacion sDiferenciacion 
+%left sNot
+
+%left sMayorQue sMenorQue sMayorIgualQue sMenorIgualQue sIgualacion sDiferenciacion
+
+
 %left sMas sMenos
 %left sPor sDiv  sMod 
 %left sPot  
+
+%start S
+
 %%
 
 
@@ -1718,7 +1727,7 @@ SINO:
 
  
 VALOR:  
-        tNuevo  valId  sAbreParent  LST_VAL  sCierraParent  
+       /* tNuevo  valId  sAbreParent  LST_VAL  sCierraParent  
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -1759,7 +1768,8 @@ VALOR:
 
                         $$->Padre=padre;
                 }
-        | E
+        |*/ 
+        E
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -2010,8 +2020,6 @@ E:
 
                         $$->Padre=padre;
                 }
- 
-        
         | E  sAnd  E
                 {   
                         //creando el padre
@@ -2030,6 +2038,8 @@ E:
 
                         $$->Padre=padre;
                 }
+ 
+        
         | E  sOr  E
                 {   
                         //creando el padre

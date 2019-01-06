@@ -28,22 +28,46 @@ itemValor *MayorQue::opMayorQue(elementoEntorno *entorno, QString simbolo){
          ))
     {
 
-        QString temp=tabla->getEtiqueta();
-        QString etqVerdad=tabla->getSalto();
-        QString etqFalso=tabla->getSalto();
-        QString etSalida=tabla->getSalto();
+        QString etqVerdad;
+        QString etqFalso;
+        QString etSalida;
+
+        if(entorno->etqVerdadero!=""){
+            etqVerdad=entorno->etqVerdadero;
+        }else{
+            etqVerdad=tabla->getSalto();
+        }
+
+        if(entorno->etqFalso!=""){
+            etqFalso=entorno->etqFalso;
+        }else{
+            etqFalso=tabla->getSalto();
+        }
+
+        if(entorno->etqSalida!=""){
+            etSalida=entorno->etqSalida;
+        }else{
+            etSalida=tabla->getSalto();
+        }
 
 
-        tabla->linea("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad, entorno->nivel);
-        tabla->linea2(etqFalso+":",entorno->nivel);
+
+        /*tabla->linea2(etqFalso+":",entorno->nivel);
+         * tabla->linea("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad, entorno->nivel);
         tabla->linea(temp+" = 0", entorno->nivel);
         tabla->linea("goto "+etSalida, entorno->nivel);
         tabla->linea2(etqVerdad+":",entorno->nivel);
         tabla->linea(temp+" = 1", entorno->nivel);
         tabla->linea2(etSalida+":",entorno->nivel);
+        */
 
-        retorno=new itemValor(1,temp);
 
+        tabla->linea2("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad+";",entorno->nivel);
+        tabla->linea("goto "+etqFalso, entorno->nivel);
+        retorno=new itemValor(false,"0");
+        retorno->c3dF=etqFalso;
+        retorno->c3dV=etqVerdad;
+        retorno->c3dS=etSalida;
     }
 
 

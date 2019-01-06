@@ -15,6 +15,22 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     itemValor *valor=new itemValor();
 
+    QString t1=tabla->getEtiqueta();
+    QString direc="";
+    QString asign="";
+    if(entor->nombre=="global"){
+
+        direc = t1 + " = H + " + QString::number(entor->lstEntorno.count());
+        asign="Heap["+t1+"] = ";
+        //tabla->linea(cad1,entor->nivel);
+        //tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+    }else{
+        direc = t1 + " = P + " + QString::number(entor->lstEntorno.count());
+        asign="Stack["+t1+"] = ";
+    }
+
+    tabla->linea(direc,entor->nivel);
+
     if(nivel == 1){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
@@ -30,22 +46,21 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     entor->insertarItem(nuevoItem);
 
 
-    if(entor->nombre=="global"){
-        QString t1=tabla->getEtiqueta();
 
-        QString cad1 = t1 + " = H + " + QString::number(entor->lstEntorno.count()-1);
-        tabla->linea(cad1,entor->nivel);
-        tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+    if (valor->c3dV != ""){
+
+        //tabla->linea2(valor->c3d,entor->nivel);
+
+        tabla->linea2(valor->c3dF+":",entor->nivel);
+        tabla->linea(asign+"0",entor->nivel,tokId->val);
+        tabla->linea("goto "+valor->c3dS, entor->nivel);
+        tabla->linea2(valor->c3dV+":",entor->nivel);
+        tabla->linea(asign+"1",entor->nivel,tokId->val);
+        tabla->linea2(valor->c3dS+":",entor->nivel);
     }else{
-        //indica que es un entorno local
-        QString t1=tabla->getEtiqueta();
-
-        QString cad1 = t1 + " = P + " + QString::number(entor->lstEntorno.count()-1);
-        tabla->linea(cad1,entor->nivel);
-        tabla->linea("Stack["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
-
-
+        tabla->linea(asign+valor->c3d,entor->nivel,tokId->val);
     }
+
 
 
     //println("Variable insertada exitosamente");

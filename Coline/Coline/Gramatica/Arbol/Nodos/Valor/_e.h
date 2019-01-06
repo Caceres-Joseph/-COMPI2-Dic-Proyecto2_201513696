@@ -14,6 +14,11 @@
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/igualque.h"
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorque.h"
 
+
+#include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/and.h"
+#include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/or.h"
+#include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/not.h"
+
 class _E: public nodoModelo
 {
 public:
