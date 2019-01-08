@@ -55,10 +55,12 @@ void _SI::cond1(itemValor *valor, elementoEntorno *entor)
 {
 
     tabla->linea2(valor->c3dF+":",entor->nivel);
+    //la parte falsa
     tabla->linea("goto "+valor->c3dS, entor->nivel);
     tabla->linea2(valor->c3dV+":",entor->nivel);
     //la parte verdadera
     hijos[1]->ejecutarHijos(entor);
+    tabla->limpiarAmbito(entor);
     tabla->linea2(valor->c3dS+":",entor->nivel);
 
 }
@@ -74,6 +76,7 @@ void _SI::cond2(itemValor *valor, elementoEntorno *entor)
     tabla->linea2(valor->c3dV+":",entor->nivel);
     //la parte verdadera
     hijos[1]->ejecutarHijos(entor);
+    tabla->limpiarAmbito(entor);
     tabla->linea2(valor->c3dS+":",entor->nivel);
 }
 
@@ -88,6 +91,7 @@ void _SI::cond3(itemValor *valor, elementoEntorno *entor)
     tabla->linea2(valor->c3dV+":",entor->nivel);
     //la parte verdadera
     hijos[1]->ejecutarHijos(entor);
+    tabla->limpiarAmbito(entor);
     tabla->linea2(valor->c3dS+":",entor->nivel);
 }
 

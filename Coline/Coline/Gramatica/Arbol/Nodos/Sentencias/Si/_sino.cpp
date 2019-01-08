@@ -15,6 +15,7 @@ itemRetorno* _SINO::ejecutar(elementoEntorno *entor){
 
     hijos[0]->ejecutarHijos(entornoSi);
 
+    tabla->limpiarAmbito(entornoSi);
     return ret;
 }
 

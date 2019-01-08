@@ -27,14 +27,16 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     QString t1=tabla->getEtiqueta();
     QString direc="";
     QString asign="";
+
+    int posAbsoluta=entor->tamEntornoAbsoluto();
     if(entor->nombre=="global"){
 
-        direc = t1 + " = H + " + QString::number(entor->lstEntorno.count());
+        direc = t1 + " = H + " + QString::number(posAbsoluta);
         asign="Heap["+t1+"] = ";
         //tabla->linea(cad1,entor->nivel);
         //tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
     }else{
-        direc = t1 + " = P + " + QString::number(entor->lstEntorno.count());
+        direc = t1 + " = P + " + QString::number(posAbsoluta);
         asign="Stack["+t1+"] = ";
     }
 
@@ -72,7 +74,7 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     valor->c3dV="";
     valor->c3dS="";
 
-    itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla, entor->lstEntorno.count(), esGlobal);
+    itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla, posAbsoluta, esGlobal);
     entor->insertarItem(nuevoItem);
 
 

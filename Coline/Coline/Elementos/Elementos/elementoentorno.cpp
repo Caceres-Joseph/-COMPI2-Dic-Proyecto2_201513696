@@ -57,11 +57,22 @@ itemEntorno *elementoEntorno::getValId(token *idVal){
     return retorno;
 }
 
-int elementoEntorno::posVar()
+int elementoEntorno::tamEntornoAbsoluto()
 {
-
+    int cantidad= lstEntorno.count();
+    if(nombre=="global"){
+        return cantidad;
+    }else{
+        return posVar2(0);
+    }
 }
 
 int elementoEntorno::posVar2(int num){
+
+    int cantidad=num+lstEntorno.count();
+    while(this->anterior!=NULL){
+        return this->anterior->posVar2(cantidad);
+    }
+    return cantidad;
 
 }

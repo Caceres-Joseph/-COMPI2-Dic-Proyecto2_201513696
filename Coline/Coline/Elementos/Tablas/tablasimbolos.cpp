@@ -1,4 +1,19 @@
 #include "tablasimbolos.h"
+#include "Coline/Elementos/Elementos/elementoentorno.h"
+
+void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
+    linea("$$_SGB("+inicio+", "+tam+")",nivel);
+}
+
+void tablaSimbolos::limpiarAmbito(elementoEntorno *entor){
+
+    comentarioLinea("Limpiando ambito",entor->nivel);
+    QString tempInicio=getEtiqueta();
+    linea(tempInicio+" = P + " + QString::number(entor->tamEntornoAbsoluto()-entor->lstEntorno.count()),entor->nivel);
+    sgb(tempInicio,QString::number(entor->lstEntorno.count()),entor->nivel);
+
+}
+
 
 void tablaSimbolos::comentarioLinea(QString txt, int nivel){
 

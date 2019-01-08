@@ -1,0 +1,26 @@
+clase main{
+ 
+    publico entero g1=33;
+    principal(){   
+        entero val1=10;
+
+         Si (1 == 0) {
+             entero val1=1; 
+            Si (1 == 0) {
+                entero val1=1;
+                entero val2=1;
+            }    
+
+        } sino Si(1==1){
+             entero val1=1;
+            imprimir(val1);
+        } sino Si(1==2){
+             entero val1=1;
+            imprimir(val1);
+        } sino{
+             entero val1=1;
+            imprimir(val1);
+        }
+
+    } 
+}

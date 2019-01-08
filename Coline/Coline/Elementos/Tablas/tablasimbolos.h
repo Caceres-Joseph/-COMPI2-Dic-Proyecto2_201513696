@@ -10,6 +10,7 @@
 #include "Coline/Elementos/Tablas/tablaerrores.h"
 //#include "Coline/Elementos/Elementos/elementoclase.h"
 class elementoClase;
+class elementoEntorno;
 /*
 |--------------------------------------------------------------------------
 | CLASE
@@ -47,6 +48,9 @@ public:
 
     QString getLinea2(QString txt, int nivel);
     QString getLinea2(QString txt, int nivel, QString comentario);
+
+    void limpiarAmbito(elementoEntorno *entor);
+    void sgb(QString inicio,QString tam, int nivel);
 
 };
 
