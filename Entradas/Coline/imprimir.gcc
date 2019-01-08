@@ -125,7 +125,7 @@ void principal(){
 		printf(%d, 4);
 			//-- Limpiando ambito --
 		t29 = P + 7;
-		$$_SGB(t29, 0);
+		$$_SGC(t29, 0);
 		goto L26;
 		L24:
 			//-- Imprimiendo --
@@ -133,7 +133,7 @@ void principal(){
 		printf(%d, 3);
 			//-- Limpiando ambito --
 		t30 = P + 7;
-		$$_SGB(t30, 0);
+		$$_SGC(t30, 0);
 		L26:
 		goto L23;
 		L21:
@@ -142,7 +142,7 @@ void principal(){
 		printf(%d, 2);
 			//-- Limpiando ambito --
 		t31 = P + 7;
-		$$_SGB(t31, 0);
+		$$_SGC(t31, 0);
 		L23:
 		goto L20;
 		L18:
@@ -151,6 +151,6 @@ void principal(){
 		printf(%d, 1);
 			//-- Limpiando ambito --
 		t32 = P + 7;
-		$$_SGB(t32, 0);
+		$$_SGC(t32, 0);
 		L20:
 }
