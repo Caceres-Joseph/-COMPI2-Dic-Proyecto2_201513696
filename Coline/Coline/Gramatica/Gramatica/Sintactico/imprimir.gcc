@@ -1,0 +1,156 @@
+
+	//-- Declarando variable --
+t0 = H + 0;
+Heap[t0] = 33;	//g1
+
+principal();
+void principal(){
+		//-- Declarando variable --
+	t1 = 1 * 5;
+	t2 = 3 + t1;
+	t3 = P + 1;
+	Stack[t3] = t2;	//val1
+		//-- Declarando variable --
+	if(5 < 6) goto L0;
+	goto L1;
+	L1:
+	if(9 != 11) goto L0;
+	goto L3;
+	t4 = P + 2;
+	L3:
+	Stack[t4] = 0;	//val2
+	goto L2;
+	L0:
+	Stack[t4] = 1;	//val2
+	L2:
+		//-- Declarando variable --
+	if(9 != 11) goto L4;
+	goto L5;
+	L4:
+	t5 = 1 + 2;
+	if(3 == t5) goto L7;
+	goto L5;
+	t6 = P + 3;
+	L5:
+	Stack[t6] = 0;	//val3
+	goto L6;
+	L7:
+	Stack[t6] = 1;	//val3
+	L6:
+		//-- Declarando variable --
+	if(9 != 11) goto L8;
+	goto L9;
+	L8:
+	t7 = 1 + 2;
+	if(3 == t7) goto L11;
+	goto L9;
+	L9:
+	if(5 < 6) goto L11;
+	goto L12;
+	t8 = P + 4;
+	L12:
+	Stack[t8] = 0;	//val4
+	goto L10;
+	L11:
+	Stack[t8] = 1;	//val4
+	L10:
+		//-- Declarando variable --
+	if(9 > 11) goto L13;
+	goto L14;
+	L13:
+	if(3 < 5) goto L16;
+	goto L14;
+	L14:
+	if(5 < 6) goto L16;
+	goto L17;
+	t9 = P + 5;
+	L16:
+	Stack[t9] = 0;	//val5
+	goto L15;
+	L17:
+	Stack[t9] = 1;	//val5
+	L15:
+		//-- Declarando variable --
+	t10 = Pool[0];
+	Pool[t10] = 116;
+	t11 = t10 + 1;
+	Pool[0] = t11;
+	t12 = P + 6;
+	Stack[t12] = t10;	//val6
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t13 = P + 1;
+	t14 = Stack[t13];
+	printf(%d, t14);
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t15 = P + 6;
+	t16 = Stack[t15];
+	t17 = Pool[t16];
+	printf(%c, t17);
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t18 = H + 0;
+	t19 = Heap[t18];
+	printf(%d, t19);
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t20 = Pool[0];
+	Pool[t20] = 112;
+	t21 = t20 + 1;
+	Pool[0] = t21;
+	t22 = Pool[t20];
+	printf(%c, t22);
+		//-- si --
+	t23 = H + 0;
+	t24 = Heap[t23];
+	if(t24 == 0) goto L18;
+	goto L19;
+		L19:
+		//-- sino si --
+	t25 = H + 0;
+	t26 = Heap[t25];
+	if(t26 == 1) goto L21;
+	goto L22;
+		L22:
+		//-- sino si --
+	t27 = H + 0;
+	t28 = Heap[t27];
+	if(t28 == 2) goto L24;
+	goto L25;
+		L25:
+		//-- sino --
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 4);
+			//-- Limpiando ambito --
+		t29 = P + 7;
+		$$_SGC(t29, 0);
+		goto L26;
+		L24:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 3);
+			//-- Limpiando ambito --
+		t30 = P + 7;
+		$$_SGC(t30, 0);
+		L26:
+		goto L23;
+		L21:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 2);
+			//-- Limpiando ambito --
+		t31 = P + 7;
+		$$_SGC(t31, 0);
+		L23:
+		goto L20;
+		L18:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 1);
+			//-- Limpiando ambito --
+		t32 = P + 7;
+		$$_SGC(t32, 0);
+		L20:
+}
