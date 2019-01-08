@@ -15,10 +15,12 @@ public:
     itemValor *valor;
     QList<int> dimension;
     tablaSimbolos *tabla;
+    int pos=-1;
+    bool esGlobal=false;
 
 
 
-    itemEntorno(token *nombre,token *tipo, itemValor *valor, QList<int> dimension, tablaSimbolos *tabla);
+    itemEntorno(token *nombre,token *tipo, itemValor *valor, QList<int> dimension, tablaSimbolos *tabla, int pos, bool esGlobal);
 };
 
 #endif // ITEMENTORNO_H

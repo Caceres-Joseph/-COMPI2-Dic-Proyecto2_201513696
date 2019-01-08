@@ -16,6 +16,7 @@ public:
 
     itemRetorno *ejecutar (elementoEntorno *entor)override;
 
+
 };
 
 #endif // _DECLARAR_VARIABLE_SINVISIBI_H

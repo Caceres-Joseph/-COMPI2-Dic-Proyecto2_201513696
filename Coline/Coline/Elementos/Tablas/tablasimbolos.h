@@ -36,6 +36,8 @@ public:
     void linea(QString txt, int nivel);
     void linea(QString txt, int nivel, QString comentario);
 
+    void comentarioLinea(QString txt, int nivel);
+
     void linea2(QString txt, int nivel);
     void linea2(QString txt, int nivel, QString comentario);
 

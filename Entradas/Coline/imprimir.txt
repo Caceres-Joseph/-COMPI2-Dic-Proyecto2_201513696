@@ -1,0 +1,30 @@
+clase main{
+ 
+    publico entero g1=33;
+    principal(){  
+         entero   val1 = 3+1*5;
+         booleano val2 = 5<6 || 9!=11; 
+         booleano val3 = 9!=11 && 3==(1+2); 
+         booleano val4 = 5<6 || 9!=11 && 3==(1+2); 
+         booleano val5 = !(5<6 || 9>11 && 3<5);  
+         char     val6='t';
+
+
+         imprimir(val1);
+         imprimir(val6);
+         imprimir(g1);
+
+         imprimir('p');
+
+         Si (g1 == 0) {
+            imprimir(1);
+        } sino Si(g1==1){
+            imprimir(2);
+        } sino Si(g1==2){
+            imprimir(3);
+        } sino{
+            imprimir(4);
+        }
+
+    } 
+}

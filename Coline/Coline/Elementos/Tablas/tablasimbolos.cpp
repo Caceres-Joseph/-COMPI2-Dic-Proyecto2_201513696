@@ -1,5 +1,18 @@
 #include "tablasimbolos.h"
 
+void tablaSimbolos::comentarioLinea(QString txt, int nivel){
+
+    QString retorno="\n";
+    for (int i = 0; i < nivel+1; ++i) {
+        retorno+="\t";
+    }
+
+    retorno+="//-- "+txt+" --";
+    this->salida.append(retorno);
+
+}
+
+
 QString tablaSimbolos::getEtiqueta(){
     return "t"+QString::number(numEtiqueta++);
 }

@@ -66,7 +66,9 @@ itemValor * _E::getValor(elementoEntorno *elemento){
         itemValor *val1=((_E*)hijos[0])->getValor(elemento);
         return val1;
     }else if(nivel==18){
-
+        //ID_VAR_FUNC
+        _ID_VAR_FUNC *nodoId=(_ID_VAR_FUNC*)hijos[0];
+        return nodoId->getValor(elemento);
     }else if(nivel==19){
         QString cad19=lst_Atributos->getToken(0)->valLower;
 
@@ -80,7 +82,40 @@ itemValor * _E::getValor(elementoEntorno *elemento){
 
     }else if(nivel==20){
 
-    }else if(nivel==21){
+    }else if(nivel==21)
+    //valCaracter
+    {
+        QString cad22=lst_Atributos->getToken(0)->valLower;
+        if(cad22.count()<3){
+            tabla->tablaError->insertErrorSemantic("El caracter está vacio",lst_Atributos->getToken(0));
+            return new itemValor;
+        }
+        cad22=cad22.replace("'","");
+        QByteArray inBytes=cad22.toUtf8();
+        const char *cStrData=inBytes.constData();
+
+        /*
+         * C3d
+        */
+
+        QString tempP=tabla->getEtiqueta();
+        //buscando la ultima posición libre
+        QString cadP=tempP+" = "+"Pool[0]";
+        QString tempP2=tabla->getEtiqueta();
+        QString cadP2=tempP2+" = "+tempP+" + 1";
+
+
+        //actualizo el puntero
+        tabla->linea(cadP,elemento->nivel);
+        tabla->linea("Pool["+tempP+"] = "+QString::number((int)cStrData[0]), elemento->nivel);
+        tabla->linea(cadP2,elemento->nivel);
+        tabla->linea("Pool[0] = "+tempP2,elemento->nivel);
+
+
+
+        itemValor *val22=new itemValor(cStrData[0],tempP);
+        return val22;
+
 
     }else if(nivel==22){
         QString cad22=lst_Atributos->getToken(0)->valLower;

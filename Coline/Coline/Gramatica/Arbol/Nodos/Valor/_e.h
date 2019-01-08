@@ -19,6 +19,8 @@
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/or.h"
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/not.h"
 
+#include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func.h"
+
 class _E: public nodoModelo
 {
 public:

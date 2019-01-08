@@ -1428,7 +1428,6 @@ CUERPO:
                         $$->Padre=padre;
                 }
 
-        //| FUNCIONES_NATIVAS  sPuntoComa
         | SENTENCIAS
                 {   
                         //creando el padre
@@ -1490,7 +1489,62 @@ CUERPO:
 
                         $$->Padre=padre;
                 } 
+        | FUNCIONES_NATIVAS  sPuntoComa
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        padre->nivel=9;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
         ;
+
+FUNCIONES_NATIVAS: 
+        IMPRIMIR
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
+                        padre->nivel=1;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                } 
+        ;
+
+
+IMPRIMIR:
+        tImprimir sAbreParent VALOR sCierraParent 
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _IMPRIMIR *padre=new _IMPRIMIR("IMPRIMIR",tabla); 
+                        padre->nivel=1;
+
+                                //hijos
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+        |tImprimir sAbreParent  sCierraParent
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _IMPRIMIR *padre=new _IMPRIMIR("IMPRIMIR",tabla); 
+                        padre->nivel=2;
+
+                                //hijos 
+
+                        $$->Padre=padre;
+                }
+        ;
+
 
 SUPER:  
         tSuper  sAbreParent  LST_VAL  sCierraParent  sPuntoComa

@@ -31,7 +31,8 @@ HEADERS += pch.hpp \
     Coline/Elementos/Objetos/objetoclase.h \
     Coline/Elementos/Elementos/elementoentorno.h \
     Coline/Elementos/Items/itementorno.h \
-    Coline/Elementos/Primitivos/p_cadena.h
+    Coline/Elementos/Primitivos/p_cadena.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -140,7 +141,8 @@ SOURCES += \
     Coline/Elementos/Objetos/objetoclase.cpp \
     Coline/Elementos/Elementos/elementoentorno.cpp \
     Coline/Elementos/Items/itementorno.cpp \
-    Coline/Elementos/Primitivos/p_cadena.cpp
+    Coline/Elementos/Primitivos/p_cadena.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

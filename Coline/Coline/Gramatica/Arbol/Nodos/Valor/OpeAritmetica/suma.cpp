@@ -5,7 +5,6 @@ suma::suma(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbolos *tabla, token *si
 
 itemValor *suma::opSuma(elementoEntorno *entorno){
 
-    println("operando suma");
     itemValor *retorno=new itemValor();
     itemValor *val1=hijo1->getValor(entorno);
     itemValor *val2=hijo2->getValor(entorno);

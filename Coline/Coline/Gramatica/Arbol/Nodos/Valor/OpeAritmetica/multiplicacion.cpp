@@ -6,7 +6,6 @@ multiplicacion::multiplicacion(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbol
 
 itemValor *multiplicacion::opMult(elementoEntorno *entorno){
 
-    println("Operando multiplicación");
     itemValor *retorno=new itemValor();
     itemValor *val1=hijo1->getValor(entorno);
     itemValor *val2=hijo2->getValor(entorno);

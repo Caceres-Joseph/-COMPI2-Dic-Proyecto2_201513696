@@ -30,6 +30,10 @@ public:
     void insertarItem(itemEntorno *nuevoEntorno);
 
     elementoEntorno(elementoEntorno *anterior,tablaSimbolos *tabla, QString nombre, objetoClase *este);
+
+    itemEntorno *getValId(token *idVal);
+    int posVar();
+    int posVar2(int num);
 };
 
 #endif // ELEMENTOENTORNO_H

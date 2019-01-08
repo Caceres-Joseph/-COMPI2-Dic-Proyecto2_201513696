@@ -2,13 +2,13 @@
 #define _ID_VAR_FUNC_H
 
 #include "Coline/Elementos/Global/importar.h"
-#include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+#include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func_padre.h"
 
 
-class _ID_VAR_FUNC: public nodoModelo
+class _ID_VAR_FUNC: public _ID_VAR_FUNC_PADRE
 {
 public:
-    _ID_VAR_FUNC(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+    _ID_VAR_FUNC(QString nombre, tablaSimbolos *tabla): _ID_VAR_FUNC_PADRE(nombre,tabla) {}
 };
 
 #endif // _ID_VAR_FUNC_H

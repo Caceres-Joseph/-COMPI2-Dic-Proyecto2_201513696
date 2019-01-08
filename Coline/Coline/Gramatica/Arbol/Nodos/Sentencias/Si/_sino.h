@@ -9,6 +9,7 @@ class _SINO: public nodoModelo
 {
 public:
     _SINO(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+    itemRetorno *ejecutar (elementoEntorno *entor)override;
 };
 
 #endif // _SINO_H

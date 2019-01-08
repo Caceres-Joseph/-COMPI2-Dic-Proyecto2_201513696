@@ -3,6 +3,7 @@
 
 
 itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
+    tabla->comentarioLinea("Declarando variable",entor->nivel);
     itemRetorno* ret=new itemRetorno(0);
 
 
@@ -14,6 +15,14 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     nodoVar = (_VAR_ARREGLO*)hijos[1];
 
     itemValor *valor=new itemValor();
+
+    if(nivel == 1){
+        _VAL *nodoVal=(_VAL*)hijos[2];
+        valor=nodoVal->getValor(entor,nodoTipo->getTipo());
+    }
+
+    // --Los tengo que almacenar en string poool *uto
+
 
     QString t1=tabla->getEtiqueta();
     QString direc="";
@@ -31,19 +40,16 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     tabla->linea(direc,entor->nivel);
 
-    if(nivel == 1){
-        _VAL *nodoVal=(_VAL*)hijos[2];
-        valor=nodoVal->getValor(entor,nodoTipo->getTipo());
-    }
 
     token *tokId=nodoVar->getIdentificador();
     token *tokTipo=nodoTipo->getTipo();
     QList<int> dimen=nodoVar->getDimensiones();
 
+    bool esGlobal=false;
+    if(entor->nombre=="global"){
+        esGlobal=true;
+    }
 
-    itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla);
-
-    entor->insertarItem(nuevoItem);
 
 
 
@@ -61,6 +67,13 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         tabla->linea(asign+valor->c3d,entor->nivel,tokId->val);
     }
 
+
+    valor->c3dF="";
+    valor->c3dV="";
+    valor->c3dS="";
+
+    itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla, entor->lstEntorno.count(), esGlobal);
+    entor->insertarItem(nuevoItem);
 
 
     //println("Variable insertada exitosamente");

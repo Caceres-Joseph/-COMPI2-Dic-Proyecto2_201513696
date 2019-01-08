@@ -33,3 +33,35 @@ void elementoEntorno::insertarItem(itemEntorno *nuevoEntorno)
     lstEntorno.append(nuevoEntorno);
 
 }
+
+
+itemEntorno *elementoEntorno::getValId(token *idVal){
+    QList<int> list;
+    itemEntorno *retorno=new itemEntorno(new token(),new token(),new itemValor(),list,tabla,0,false);
+
+    for (int i = 0; i < this->lstEntorno.count(); ++i) {
+       itemEntorno *elem=lstEntorno[i];
+       if(elem->nombre->valLower==idVal->valLower){
+            return elem;
+       }
+    }
+
+    while (this->anterior!=NULL){
+        return this->anterior->getValId(idVal);
+    }
+
+
+
+    tabla->tablaError->insertErrorSemantic("La variable: "+idVal->val+" no se enecuentra en el ambito actual",idVal);
+
+    return retorno;
+}
+
+int elementoEntorno::posVar()
+{
+
+}
+
+int elementoEntorno::posVar2(int num){
+
+}
