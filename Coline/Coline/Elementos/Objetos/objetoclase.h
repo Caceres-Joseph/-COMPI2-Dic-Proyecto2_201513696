@@ -18,13 +18,10 @@ public:
     objetoClase(elementoClase *cuerpoClase, tablaSimbolos *tabla);
 
     void ejecutarGlobales();
-
-    /*void ejecutarConstructor(token *nombre, int dimension, lstValores *prametros)
-    {
-
-    }*/
-
     void ejecutarPrincipal();
+    void ejecutarMetodos();
+
+    itemValor *getMetodo(token *nombre, QList<itemValor*> params);
 };
 
 #endif // OBJETOCLASE_H

@@ -1,0 +1,14 @@
+clase main{
+  
+    principal(){   
+        
+        entero resultado=sumar(4,5);
+        imprimir(resultado); //salida:9
+        imprimir(sumar(sumar(1,2),3)); //salida: 6
+        
+    }  
+    entero sumar(entero val1, entero val2){
+        
+        retornar val1+val2;
+    } 
+}

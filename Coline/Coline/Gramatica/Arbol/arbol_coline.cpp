@@ -17,7 +17,7 @@ void arbol_coline::ejecutarPrincipal(){
             objetoClase *objClase=new objetoClase(temp,tabla);
             objClase->ejecutarGlobales();
             objClase->ejecutarPrincipal();
-
+            objClase->ejecutarMetodos();
 
         }
     }

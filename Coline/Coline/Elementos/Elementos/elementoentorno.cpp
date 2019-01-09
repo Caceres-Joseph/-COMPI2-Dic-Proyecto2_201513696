@@ -63,6 +63,8 @@ int elementoEntorno::tamEntornoAbsoluto()
     if(nombre=="global"){
         return cantidad;
     }else{
+        //le resto uno , pero no se poque :/
+        //ya no le voy a restar uno,jejeje
         return posVar2(0);
     }
 }
@@ -70,6 +72,9 @@ int elementoEntorno::tamEntornoAbsoluto()
 int elementoEntorno::posVar2(int num){
 
     int cantidad=num+lstEntorno.count();
+    if(nombre=="global"){
+        return num+1;
+    }
     while(this->anterior!=NULL){
         return this->anterior->posVar2(cantidad);
     }

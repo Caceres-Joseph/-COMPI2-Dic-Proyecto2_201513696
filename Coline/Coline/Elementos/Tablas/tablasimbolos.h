@@ -52,6 +52,14 @@ public:
     void limpiarAmbito(elementoEntorno *entor);
     void sgb(QString inicio,QString tam, int nivel);
 
+
+
+    /*
+     * Chapuses :(
+    */
+
+    QString Salida3d="";
+
 };
 
 #endif // TABLASIMBOLOS_H

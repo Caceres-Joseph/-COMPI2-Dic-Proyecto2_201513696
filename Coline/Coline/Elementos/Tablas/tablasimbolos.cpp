@@ -2,7 +2,7 @@
 #include "Coline/Elementos/Elementos/elementoentorno.h"
 
 void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
-    linea("$$_SGB("+inicio+", "+tam+")",nivel);
+    linea("$$_SGC("+inicio+", "+tam+")",nivel);
 }
 
 void tablaSimbolos::limpiarAmbito(elementoEntorno *entor){
@@ -116,7 +116,6 @@ QString tablaSimbolos::getLinea2(QString txt, int nivel){
 
     retorno+=txt;
     return retorno;
-
 }
 QString tablaSimbolos::getLinea2(QString txt, int nivel, QString comentario){
 

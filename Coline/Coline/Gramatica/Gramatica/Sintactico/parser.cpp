@@ -579,16 +579,16 @@ static const yytype_uint16 yyrline[] =
 {
        0,   287,   287,   301,   316,   328,   342,   364,   377,   392,
      419,   444,   456,   469,   482,   495,   508,   524,   541,   553,
-     566,   579,   590,   606,   618,   631,   643,   656,   668,   684,
-     696,   711,   722,   734,   746,   762,   778,   797,   815,   868,
-     886,   900,   918,   993,  1006,  1064,  1081,  1090,  1106,  1119,
-    1132,  1145,  1162,  1179,  1196,  1214,  1232,  1254,  1267,  1285,
-    1302,  1324,  1337,  1349,  1364,  1377,  1394,  1406,  1418,  1431,
-    1443,  1456,  1468,  1480,  1492,  1507,  1523,  1535,  1550,  1566,
-    1580,  1599,  1614,  1630,  1650,  1667,  1687,  1708,  1726,  1743,
-    1764,  1826,  1843,  1860,  1877,  1894,  1911,  1929,  1948,  1969,
-    1987,  2005,  2023,  2041,  2059,  2077,  2097,  2115,  2134,  2151,
-    2163,  2177,  2190,  2203,  2217,  2230,  2243
+     566,   579,   590,   606,   613,   626,   638,   651,   663,   679,
+     691,   706,   717,   729,   741,   757,   773,   792,   810,   863,
+     881,   895,   913,   988,  1001,  1059,  1076,  1085,  1101,  1114,
+    1127,  1140,  1157,  1174,  1191,  1209,  1227,  1249,  1262,  1280,
+    1297,  1319,  1332,  1344,  1359,  1372,  1389,  1401,  1413,  1426,
+    1438,  1451,  1463,  1475,  1487,  1502,  1518,  1530,  1545,  1561,
+    1575,  1594,  1609,  1625,  1645,  1662,  1682,  1703,  1721,  1738,
+    1759,  1821,  1838,  1855,  1872,  1889,  1906,  1924,  1943,  1964,
+    1982,  2000,  2018,  2036,  2054,  2072,  2092,  2110,  2129,  2146,
+    2158,  2172,  2185,  2198,  2212,  2225,  2238
 };
 #endif
 
@@ -2056,21 +2056,16 @@ yyreduce:
   case 23:
 #line 607 "sintactico.y" /* yacc.c:1646  */
     {   
-                        //creando el padre
-                        (yyval.VAL)=new Nod(); 
-                        _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
-                        padre->nivel=1;
-                                //hijos
-                                padre->hijos.append((yyvsp[-2].VAL)->Padre);
-                                padre->hijos.append((yyvsp[0].VAL)->Padre);
+                        
+                        (yyvsp[-2].VAL)->Padre->hijos.append((yyvsp[0].VAL)->Padre);
 
-                        (yyval.VAL)->Padre=padre;
+                        (yyval.VAL)->Padre=(yyvsp[-2].VAL)->Padre;
                 }
-#line 2070 "parser.cpp" /* yacc.c:1646  */
+#line 2065 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 619 "sintactico.y" /* yacc.c:1646  */
+#line 614 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2082,11 +2077,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2086 "parser.cpp" /* yacc.c:1646  */
+#line 2081 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 631 "sintactico.y" /* yacc.c:1646  */
+#line 626 "sintactico.y" /* yacc.c:1646  */
     {
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2095,11 +2090,11 @@ yyreduce:
                         (yyval.VAL)->Padre=padre;
                         /*vacio*/
                 }
-#line 2099 "parser.cpp" /* yacc.c:1646  */
+#line 2094 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 644 "sintactico.y" /* yacc.c:1646  */
+#line 639 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2112,11 +2107,11 @@ yyreduce:
                                 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2116 "parser.cpp" /* yacc.c:1646  */
+#line 2111 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 657 "sintactico.y" /* yacc.c:1646  */
+#line 652 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2128,11 +2123,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2132 "parser.cpp" /* yacc.c:1646  */
+#line 2127 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 669 "sintactico.y" /* yacc.c:1646  */
+#line 664 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2144,11 +2139,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2148 "parser.cpp" /* yacc.c:1646  */
+#line 2143 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 685 "sintactico.y" /* yacc.c:1646  */
+#line 680 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2160,11 +2155,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2164 "parser.cpp" /* yacc.c:1646  */
+#line 2159 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 697 "sintactico.y" /* yacc.c:1646  */
+#line 692 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2175,11 +2170,11 @@ yyreduce:
                                 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2179 "parser.cpp" /* yacc.c:1646  */
+#line 2174 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 712 "sintactico.y" /* yacc.c:1646  */
+#line 707 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2190,11 +2185,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2194 "parser.cpp" /* yacc.c:1646  */
+#line 2189 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 723 "sintactico.y" /* yacc.c:1646  */
+#line 718 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2206,11 +2201,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2210 "parser.cpp" /* yacc.c:1646  */
+#line 2205 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 735 "sintactico.y" /* yacc.c:1646  */
+#line 730 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2222,11 +2217,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2226 "parser.cpp" /* yacc.c:1646  */
+#line 2221 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 747 "sintactico.y" /* yacc.c:1646  */
+#line 742 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2238,11 +2233,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2242 "parser.cpp" /* yacc.c:1646  */
+#line 2237 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 763 "sintactico.y" /* yacc.c:1646  */
+#line 758 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2258,11 +2253,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2262 "parser.cpp" /* yacc.c:1646  */
+#line 2257 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 779 "sintactico.y" /* yacc.c:1646  */
+#line 774 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2277,11 +2272,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2281 "parser.cpp" /* yacc.c:1646  */
+#line 2276 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 798 "sintactico.y" /* yacc.c:1646  */
+#line 793 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2296,11 +2291,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2300 "parser.cpp" /* yacc.c:1646  */
+#line 2295 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 816 "sintactico.y" /* yacc.c:1646  */
+#line 811 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2318,11 +2313,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2322 "parser.cpp" /* yacc.c:1646  */
+#line 2317 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 869 "sintactico.y" /* yacc.c:1646  */
+#line 864 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2335,11 +2330,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2339 "parser.cpp" /* yacc.c:1646  */
+#line 2334 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 887 "sintactico.y" /* yacc.c:1646  */
+#line 882 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2353,11 +2348,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2357 "parser.cpp" /* yacc.c:1646  */
+#line 2352 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 901 "sintactico.y" /* yacc.c:1646  */
+#line 896 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2370,11 +2365,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2374 "parser.cpp" /* yacc.c:1646  */
+#line 2369 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 919 "sintactico.y" /* yacc.c:1646  */
+#line 914 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2386,11 +2381,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2390 "parser.cpp" /* yacc.c:1646  */
+#line 2385 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 994 "sintactico.y" /* yacc.c:1646  */
+#line 989 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2403,11 +2398,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2407 "parser.cpp" /* yacc.c:1646  */
+#line 2402 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 1007 "sintactico.y" /* yacc.c:1646  */
+#line 1002 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2423,11 +2418,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2427 "parser.cpp" /* yacc.c:1646  */
+#line 2422 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 1065 "sintactico.y" /* yacc.c:1646  */
+#line 1060 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2441,11 +2436,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2445 "parser.cpp" /* yacc.c:1646  */
+#line 2440 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 1082 "sintactico.y" /* yacc.c:1646  */
+#line 1077 "sintactico.y" /* yacc.c:1646  */
     {    
                         
                         
@@ -2454,11 +2449,11 @@ yyreduce:
 
                         (yyval.VAL)=(yyvsp[-1].VAL);
                 }
-#line 2458 "parser.cpp" /* yacc.c:1646  */
+#line 2453 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 1091 "sintactico.y" /* yacc.c:1646  */
+#line 1086 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2470,11 +2465,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2474 "parser.cpp" /* yacc.c:1646  */
+#line 2469 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 1107 "sintactico.y" /* yacc.c:1646  */
+#line 1102 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2487,11 +2482,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2491 "parser.cpp" /* yacc.c:1646  */
+#line 2486 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 1120 "sintactico.y" /* yacc.c:1646  */
+#line 1115 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2504,11 +2499,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2508 "parser.cpp" /* yacc.c:1646  */
+#line 2503 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 1133 "sintactico.y" /* yacc.c:1646  */
+#line 1128 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2521,11 +2516,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2525 "parser.cpp" /* yacc.c:1646  */
+#line 2520 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 1146 "sintactico.y" /* yacc.c:1646  */
+#line 1141 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2542,11 +2537,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2546 "parser.cpp" /* yacc.c:1646  */
+#line 2541 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 1163 "sintactico.y" /* yacc.c:1646  */
+#line 1158 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2563,11 +2558,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2567 "parser.cpp" /* yacc.c:1646  */
+#line 2562 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 1180 "sintactico.y" /* yacc.c:1646  */
+#line 1175 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2584,11 +2579,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2588 "parser.cpp" /* yacc.c:1646  */
+#line 2583 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 1197 "sintactico.y" /* yacc.c:1646  */
+#line 1192 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2606,11 +2601,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2610 "parser.cpp" /* yacc.c:1646  */
+#line 2605 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 1215 "sintactico.y" /* yacc.c:1646  */
+#line 1210 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2628,11 +2623,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2632 "parser.cpp" /* yacc.c:1646  */
+#line 2627 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 1233 "sintactico.y" /* yacc.c:1646  */
+#line 1228 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2650,11 +2645,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2654 "parser.cpp" /* yacc.c:1646  */
+#line 2649 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 1255 "sintactico.y" /* yacc.c:1646  */
+#line 1250 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2667,11 +2662,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2671 "parser.cpp" /* yacc.c:1646  */
+#line 2666 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 1268 "sintactico.y" /* yacc.c:1646  */
+#line 1263 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2688,11 +2683,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2692 "parser.cpp" /* yacc.c:1646  */
+#line 2687 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 1286 "sintactico.y" /* yacc.c:1646  */
+#line 1281 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2709,11 +2704,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2713 "parser.cpp" /* yacc.c:1646  */
+#line 2708 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 1303 "sintactico.y" /* yacc.c:1646  */
+#line 1298 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2730,11 +2725,11 @@ yyreduce:
                                 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2734 "parser.cpp" /* yacc.c:1646  */
+#line 2729 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 1325 "sintactico.y" /* yacc.c:1646  */
+#line 1320 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2747,11 +2742,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2751 "parser.cpp" /* yacc.c:1646  */
+#line 2746 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 1338 "sintactico.y" /* yacc.c:1646  */
+#line 1333 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2763,11 +2758,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2767 "parser.cpp" /* yacc.c:1646  */
+#line 2762 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 1350 "sintactico.y" /* yacc.c:1646  */
+#line 1345 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2779,11 +2774,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2783 "parser.cpp" /* yacc.c:1646  */
+#line 2778 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 1365 "sintactico.y" /* yacc.c:1646  */
+#line 1360 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2796,11 +2791,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2800 "parser.cpp" /* yacc.c:1646  */
+#line 2795 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 1378 "sintactico.y" /* yacc.c:1646  */
+#line 1373 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2812,11 +2807,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2816 "parser.cpp" /* yacc.c:1646  */
+#line 2811 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 1395 "sintactico.y" /* yacc.c:1646  */
+#line 1390 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2828,11 +2823,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2832 "parser.cpp" /* yacc.c:1646  */
+#line 2827 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 1407 "sintactico.y" /* yacc.c:1646  */
+#line 1402 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2844,11 +2839,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2848 "parser.cpp" /* yacc.c:1646  */
+#line 2843 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 1419 "sintactico.y" /* yacc.c:1646  */
+#line 1414 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2860,11 +2855,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2864 "parser.cpp" /* yacc.c:1646  */
+#line 2859 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 1432 "sintactico.y" /* yacc.c:1646  */
+#line 1427 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2876,11 +2871,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2880 "parser.cpp" /* yacc.c:1646  */
+#line 2875 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 1444 "sintactico.y" /* yacc.c:1646  */
+#line 1439 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2892,11 +2887,11 @@ yyreduce:
                                 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2896 "parser.cpp" /* yacc.c:1646  */
+#line 2891 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 1457 "sintactico.y" /* yacc.c:1646  */
+#line 1452 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2908,11 +2903,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre; 
                 }
-#line 2912 "parser.cpp" /* yacc.c:1646  */
+#line 2907 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 1469 "sintactico.y" /* yacc.c:1646  */
+#line 1464 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2924,11 +2919,11 @@ yyreduce:
                                 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2928 "parser.cpp" /* yacc.c:1646  */
+#line 2923 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 1481 "sintactico.y" /* yacc.c:1646  */
+#line 1476 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2940,11 +2935,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2944 "parser.cpp" /* yacc.c:1646  */
+#line 2939 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 1493 "sintactico.y" /* yacc.c:1646  */
+#line 1488 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2956,11 +2951,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2960 "parser.cpp" /* yacc.c:1646  */
+#line 2955 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 1508 "sintactico.y" /* yacc.c:1646  */
+#line 1503 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2972,11 +2967,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2976 "parser.cpp" /* yacc.c:1646  */
+#line 2971 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 1524 "sintactico.y" /* yacc.c:1646  */
+#line 1519 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -2988,11 +2983,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 2992 "parser.cpp" /* yacc.c:1646  */
+#line 2987 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 1536 "sintactico.y" /* yacc.c:1646  */
+#line 1531 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3003,11 +2998,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3007 "parser.cpp" /* yacc.c:1646  */
+#line 3002 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 1551 "sintactico.y" /* yacc.c:1646  */
+#line 1546 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3020,11 +3015,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3024 "parser.cpp" /* yacc.c:1646  */
+#line 3019 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 1567 "sintactico.y" /* yacc.c:1646  */
+#line 1562 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3038,11 +3033,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3042 "parser.cpp" /* yacc.c:1646  */
+#line 3037 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 1581 "sintactico.y" /* yacc.c:1646  */
+#line 1576 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3058,11 +3053,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3062 "parser.cpp" /* yacc.c:1646  */
+#line 3057 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 1600 "sintactico.y" /* yacc.c:1646  */
+#line 1595 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3074,11 +3069,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3078 "parser.cpp" /* yacc.c:1646  */
+#line 3073 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 1615 "sintactico.y" /* yacc.c:1646  */
+#line 1610 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3090,11 +3085,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3094 "parser.cpp" /* yacc.c:1646  */
+#line 3089 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 1631 "sintactico.y" /* yacc.c:1646  */
+#line 1626 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3106,11 +3101,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3110 "parser.cpp" /* yacc.c:1646  */
+#line 3105 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 1651 "sintactico.y" /* yacc.c:1646  */
+#line 1646 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3127,11 +3122,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3131 "parser.cpp" /* yacc.c:1646  */
+#line 3126 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 1668 "sintactico.y" /* yacc.c:1646  */
+#line 1663 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3151,11 +3146,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3155 "parser.cpp" /* yacc.c:1646  */
+#line 3150 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 1688 "sintactico.y" /* yacc.c:1646  */
+#line 1683 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3173,11 +3168,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3177 "parser.cpp" /* yacc.c:1646  */
+#line 3172 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 1709 "sintactico.y" /* yacc.c:1646  */
+#line 1704 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3195,11 +3190,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3199 "parser.cpp" /* yacc.c:1646  */
+#line 3194 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 1727 "sintactico.y" /* yacc.c:1646  */
+#line 1722 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3216,11 +3211,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3220 "parser.cpp" /* yacc.c:1646  */
+#line 3215 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 1744 "sintactico.y" /* yacc.c:1646  */
+#line 1739 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3238,11 +3233,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3242 "parser.cpp" /* yacc.c:1646  */
+#line 3237 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 1765 "sintactico.y" /* yacc.c:1646  */
+#line 1760 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3258,11 +3253,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3262 "parser.cpp" /* yacc.c:1646  */
+#line 3257 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 1827 "sintactico.y" /* yacc.c:1646  */
+#line 1822 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3274,11 +3269,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3278 "parser.cpp" /* yacc.c:1646  */
+#line 3273 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 1844 "sintactico.y" /* yacc.c:1646  */
+#line 1839 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3294,11 +3289,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3298 "parser.cpp" /* yacc.c:1646  */
+#line 3293 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 1861 "sintactico.y" /* yacc.c:1646  */
+#line 1856 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3315,11 +3310,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3319 "parser.cpp" /* yacc.c:1646  */
+#line 3314 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 1878 "sintactico.y" /* yacc.c:1646  */
+#line 1873 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3336,11 +3331,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3340 "parser.cpp" /* yacc.c:1646  */
+#line 3335 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 1895 "sintactico.y" /* yacc.c:1646  */
+#line 1890 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3357,11 +3352,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3361 "parser.cpp" /* yacc.c:1646  */
+#line 3356 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 1912 "sintactico.y" /* yacc.c:1646  */
+#line 1907 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3379,11 +3374,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3383 "parser.cpp" /* yacc.c:1646  */
+#line 3378 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 1930 "sintactico.y" /* yacc.c:1646  */
+#line 1925 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3401,11 +3396,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3405 "parser.cpp" /* yacc.c:1646  */
+#line 3400 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 1949 "sintactico.y" /* yacc.c:1646  */
+#line 1944 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3423,11 +3418,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3427 "parser.cpp" /* yacc.c:1646  */
+#line 3422 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 1970 "sintactico.y" /* yacc.c:1646  */
+#line 1965 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3445,11 +3440,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3449 "parser.cpp" /* yacc.c:1646  */
+#line 3444 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 1988 "sintactico.y" /* yacc.c:1646  */
+#line 1983 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3467,11 +3462,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3471 "parser.cpp" /* yacc.c:1646  */
+#line 3466 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 2006 "sintactico.y" /* yacc.c:1646  */
+#line 2001 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3489,11 +3484,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3493 "parser.cpp" /* yacc.c:1646  */
+#line 3488 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 2024 "sintactico.y" /* yacc.c:1646  */
+#line 2019 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3511,11 +3506,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3515 "parser.cpp" /* yacc.c:1646  */
+#line 3510 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 2042 "sintactico.y" /* yacc.c:1646  */
+#line 2037 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3533,11 +3528,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3537 "parser.cpp" /* yacc.c:1646  */
+#line 3532 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 2060 "sintactico.y" /* yacc.c:1646  */
+#line 2055 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3555,11 +3550,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3559 "parser.cpp" /* yacc.c:1646  */
+#line 3554 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 2078 "sintactico.y" /* yacc.c:1646  */
+#line 2073 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3577,11 +3572,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3581 "parser.cpp" /* yacc.c:1646  */
+#line 3576 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 2098 "sintactico.y" /* yacc.c:1646  */
+#line 2093 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3599,11 +3594,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3603 "parser.cpp" /* yacc.c:1646  */
+#line 3598 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 2116 "sintactico.y" /* yacc.c:1646  */
+#line 2111 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3620,11 +3615,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3624 "parser.cpp" /* yacc.c:1646  */
+#line 3619 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 2135 "sintactico.y" /* yacc.c:1646  */
+#line 2130 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3640,11 +3635,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3644 "parser.cpp" /* yacc.c:1646  */
+#line 3639 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 2152 "sintactico.y" /* yacc.c:1646  */
+#line 2147 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3656,11 +3651,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3660 "parser.cpp" /* yacc.c:1646  */
+#line 3655 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 2164 "sintactico.y" /* yacc.c:1646  */
+#line 2159 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3674,11 +3669,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3678 "parser.cpp" /* yacc.c:1646  */
+#line 3673 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 2178 "sintactico.y" /* yacc.c:1646  */
+#line 2173 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3691,11 +3686,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3695 "parser.cpp" /* yacc.c:1646  */
+#line 3690 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 2191 "sintactico.y" /* yacc.c:1646  */
+#line 2186 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3708,11 +3703,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3712 "parser.cpp" /* yacc.c:1646  */
+#line 3707 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 2204 "sintactico.y" /* yacc.c:1646  */
+#line 2199 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3725,11 +3720,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3729 "parser.cpp" /* yacc.c:1646  */
+#line 3724 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 2218 "sintactico.y" /* yacc.c:1646  */
+#line 2213 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3742,11 +3737,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3746 "parser.cpp" /* yacc.c:1646  */
+#line 3741 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 2231 "sintactico.y" /* yacc.c:1646  */
+#line 2226 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3759,11 +3754,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3763 "parser.cpp" /* yacc.c:1646  */
+#line 3758 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 2244 "sintactico.y" /* yacc.c:1646  */
+#line 2239 "sintactico.y" /* yacc.c:1646  */
     {   
                         //creando el padre
                         (yyval.VAL)=new Nod(); 
@@ -3776,11 +3771,11 @@ yyreduce:
 
                         (yyval.VAL)->Padre=padre;
                 }
-#line 3780 "parser.cpp" /* yacc.c:1646  */
+#line 3775 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 3784 "parser.cpp" /* yacc.c:1646  */
+#line 3779 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

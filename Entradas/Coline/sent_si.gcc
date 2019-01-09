@@ -101,4 +101,56 @@ void principal(){
 	Pool[0] = t21;
 	t22 = Pool[t20];
 	printf(%c, t22);
+		//-- si --
+	t23 = H + 0;
+	t24 = Heap[t23];
+	if(t24 == 0) goto L18;
+	goto L19;
+		L19:
+		//-- sino si --
+	t25 = H + 0;
+	t26 = Heap[t25];
+	if(t26 == 1) goto L21;
+	goto L22;
+		L22:
+		//-- sino si --
+	t27 = H + 0;
+	t28 = Heap[t27];
+	if(t28 == 2) goto L24;
+	goto L25;
+		L25:
+		//-- sino --
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 4);
+			//-- Limpiando ambito --
+		t29 = P + 7;
+		$$_SGC(t29, 0);
+		goto L26;
+		L24:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 3);
+			//-- Limpiando ambito --
+		t30 = P + 7;
+		$$_SGC(t30, 0);
+		L26:
+		goto L23;
+		L21:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 2);
+			//-- Limpiando ambito --
+		t31 = P + 7;
+		$$_SGC(t31, 0);
+		L23:
+		goto L20;
+		L18:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		printf(%d, 1);
+			//-- Limpiando ambito --
+		t32 = P + 7;
+		$$_SGC(t32, 0);
+		L20:
 }

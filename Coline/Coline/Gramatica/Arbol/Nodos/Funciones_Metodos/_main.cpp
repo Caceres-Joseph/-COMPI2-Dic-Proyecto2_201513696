@@ -9,7 +9,7 @@ void _MAIN::ejecutarHijos2(elementoClase *simbolo){
     token *tipo=new token("vacio");
     token *nombre2=lst_Atributos->getToken(0);
 
-    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,this,0);
+    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,this,0, simbolo->nombreClase->valLower);
 
     simbolo->lstPrincipal->listaPolimorfa.append(eleme);
 }

@@ -1,0 +1,51 @@
+
+
+principal();
+void principal(){
+		//-- Llamado a funcion --
+	t0 = 10 + 11;
+	t1 = P + 1;	//pivote
+	t2 = t1 + 1;
+	Stack[t2] = t0;	//param:entero
+	t3 = P + 1;	//pivote
+	t4 = t3 + 2;
+	Stack[t4] = 88;	//param:entero
+	P = P + 1;
+	main_sumar_entero0_entero0();
+	P = P - 1;
+		//-- Llamado a funcion --
+	t5 = P + 1;	//pivote
+	t6 = t5 + 1;
+	Stack[t6] = 99;	//param:entero
+	P = P + 1;
+	main_sumar_entero0();
+	P = P - 1;
+}
+
+main_sumar_entero0_entero0();
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t7 = P + 1;
+	t8 = Stack[t7];
+	t9 = P + 2;
+	t10 = Stack[t9];
+	t11 = t8 + t10;
+	printf(%d, t11);
+L0:
+		//-- Limpiando ambito --
+	t12 = P + 1;
+	$$_SGC(t12, 2);
+}
+
+main_sumar_entero0();
+		//-- Imprimiendo --
+	printf(%c, 10);
+	t13 = P + 1;
+	t14 = Stack[t13];
+	t15 = t14 + 1;
+	printf(%d, t15);
+L1:
+		//-- Limpiando ambito --
+	t16 = P + 1;
+	$$_SGC(t16, 1);
+}

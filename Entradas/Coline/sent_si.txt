@@ -14,6 +14,17 @@ clase main{
          imprimir(val6);
          imprimir(g1);
 
-         imprimir('p'); 
+         imprimir('p');
+
+         Si (g1 == 0) {
+            imprimir(1);
+        } sino Si(g1==1){
+            imprimir(2);
+        } sino Si(g1==2){
+            imprimir(3);
+        } sino{
+            imprimir(4);
+        }
+
     } 
 }

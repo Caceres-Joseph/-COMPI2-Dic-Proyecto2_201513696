@@ -1,0 +1,21 @@
+clase main{
+  
+    principal(){   
+        
+        sumar(10+11,88);
+        sumar(99);
+    } 
+ 
+ 
+
+    vacio sumar(entero val1, entero val2){
+        
+        imprimir(val1+val2);
+    }
+
+    vacio sumar(entero val1){
+
+        imprimir(val1+1);
+    }
+
+}

@@ -30,6 +30,13 @@
 class itemValor
 {
 public:
+
+    QList<itemValor*> dimensiones;
+    /*
+    |----------------
+    | 3D
+    |----------------
+    */
     p_modelo *valor;
     QString c3d;
 

@@ -605,15 +605,10 @@ PARAMETRO:
 LST_VAL:  
         LST_VAL sComa VALOR
                 {   
-                        //creando el padre
-                        $$=new Nod(); 
-                        _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
-                        padre->nivel=1;
-                                //hijos
-                                padre->hijos.append($1->Padre);
-                                padre->hijos.append($3->Padre);
+                        
+                        $1->Padre->hijos.append($3->Padre);
 
-                        $$->Padre=padre;
+                        $$->Padre=$1->Padre;
                 }
         |VALOR
                 {   

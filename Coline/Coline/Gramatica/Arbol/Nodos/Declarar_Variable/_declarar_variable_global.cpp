@@ -8,7 +8,7 @@ void _DECLARAR_VARIABLE_GLOBAL::ejecutarHijos2(elementoClase *simbolo){
     token *nombre2=new token("val");
     int dimensiones=0;
 
-    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,hijos[1],dimensiones);
+    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,hijos[1],dimensiones, simbolo->nombreClase->valLower);
 
     simbolo->lstVariablesGlobales->listaPolimorfa.append(eleme);
 

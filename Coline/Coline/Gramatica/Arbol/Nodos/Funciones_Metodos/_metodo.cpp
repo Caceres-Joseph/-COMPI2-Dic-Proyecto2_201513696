@@ -23,7 +23,7 @@ void _METODO::ejecutarHijos2(elementoClase *simbolo){
     token *nombre2=nodoVar->getIdentificador();
     int dimensiones=nodoVar->getDimensiones().count();
 
-    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,cuerpo,dimensiones);
+    elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,cuerpo,dimensiones, simbolo->nombreClase->valLower);
 
     cargarPolimorfismoHijos(eleme);
     simbolo->lstMetodo_funcion->listaPolimorfa.append(eleme);

@@ -13,10 +13,16 @@ void objetoClase::ejecutarGlobales(){
 
     //this->cuerpoClase->lstVariablesGlobales->ejecutar();
     this->cuerpoClase->lstVariablesGlobales->ejecutar(this->este);
-
-
 }
 
 void objetoClase::ejecutarPrincipal(){
     this->cuerpoClase->lstPrincipal->ejecutar(this->este);
+}
+
+void objetoClase::ejecutarMetodos(){
+    this->cuerpoClase->lstMetodo_funcion->ejecutarMetodo(this->este);
+}
+
+itemValor * objetoClase::getMetodo(token* nombre, QList<itemValor *> params){
+    return this->cuerpoClase->lstMetodo_funcion->getMetodo(nombre,params);
 }

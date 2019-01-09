@@ -95,7 +95,7 @@ Char '[^']*'
 "nuevo"             { strcpy(yylval.TEXT, yytext); return tNuevo; }
 "este"              { strcpy(yylval.TEXT, yytext); return tEste; }
 "imprimir"          { strcpy(yylval.TEXT, yytext); return tImprimir; }
-"retorno"           { strcpy(yylval.TEXT, yytext); return tRetorno; }
+"retornar"          { strcpy(yylval.TEXT, yytext); return tRetorno; }
 "si"                { strcpy(yylval.TEXT, yytext); return tSi; }
 "sino"              { strcpy(yylval.TEXT, yytext); return tSino; }
 "caso"              { strcpy(yylval.TEXT, yytext); return tCaso; }

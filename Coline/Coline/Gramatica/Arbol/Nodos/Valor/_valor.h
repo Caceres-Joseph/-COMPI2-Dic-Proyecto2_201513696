@@ -12,6 +12,8 @@ public:
 
     itemValor *getValor(elementoEntorno* elemento, token *tipo);
 
+    itemValor *getValorT(elementoEntorno *entor, token *tipo);
+
 };
 
 #endif // _VALOR_H

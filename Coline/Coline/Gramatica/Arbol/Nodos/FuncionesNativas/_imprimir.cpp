@@ -13,7 +13,7 @@ itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
     {
 
         _VALOR *nodoVal=(_VALOR*)hijos[0];
-        itemValor *val=nodoVal->getValor(entor,new token());
+        itemValor *val=nodoVal->getValorT(entor,new token());
 
         if(val->isTypeBooleano()||val->isTypeEntero()){
             tabla->linea("printf(%d, "+val->c3d+")",entor->nivel);

@@ -21,10 +21,18 @@ public:
     nodoModelo *LST_CUERPO;
     token *visibilidad;
     int dimension=0;
+    QString nombreClase="";
 
-    elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, token *tipo,token *nombre, nodoModelo *LST_CUERPO, int dimension);
+    elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, token *tipo,token *nombre, nodoModelo *LST_CUERPO, int dimension, QString nombreClase);
 
     void insertarParametro(token *idParametro,token *tipoParametro, int dimension);
+    void ejecutar(elementoEntorno *entor);
+    void cargarParametros(elementoEntorno *entor);
+
+    QString cadParams();
+
+    itemValor *getValor(QString tipo);
+    bool comprobarParams(QList<itemValor*> params, token *nombre);
 };
 
 #endif // ELEMENTOPOLIMORFO_H
