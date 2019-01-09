@@ -1,0 +1,42 @@
+
+	//-- Inicializando punteros --
+P = 0;
+H = 1;
+S = 1;
+
+principal();
+void principal(){
+		//-- Llamado a funcion --
+	P = P + 1;
+	main_while();
+	P = P - 1;
+}
+
+main_while();
+		//-- Declarando variable --
+	t0 = P + 1;
+	Stack[t0] = 0;	//val1
+		//-- Mientras --
+	L1:
+	t1 = P + 1;
+	t2 = Stack[t1];
+	if(t2 < 10) goto L2;
+	goto L3;
+		L3:
+		goto L4;
+		L2:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		t3 = P + 1;
+		t4 = Stack[t3];
+		printf(%d, t4);
+			//-- Asignando valor --
+		t5 = P + 1;
+		t6 = P + 1;
+		t7 = Stack[t6];
+		t8 = t7 + 1;
+		Stack[t5] = t8;
+		goto L1;
+		L4:
+L0:
+}

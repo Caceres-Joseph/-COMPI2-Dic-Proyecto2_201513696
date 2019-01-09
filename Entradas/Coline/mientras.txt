@@ -1,0 +1,18 @@
+clase main{
+  
+    principal(){   
+        while();
+    } 
+
+    vacio while(){
+
+        entero val1=0;
+        mientras(val1<10){
+            
+            imprimir(val1); 
+            val1++;  
+        }  
+    }
+  
+
+}

@@ -1634,11 +1634,42 @@ SENTENCIAS:
 
                         $$->Padre=padre;
                 }
+         | WHILE
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
+                        padre->nivel=1;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
         //| CASO
-        //| WHILE
         //| FOR
         //| DOWHILE
         //| REPETIR
+        ;
+
+WHILE:
+        tMientras sAbreParent  E  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _WHILE *padre=new _WHILE("WHILE",tabla); 
+                        padre->nivel=1;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tMientras",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($6->Padre);  
+
+                        $$->Padre=padre;
+                }
         ;
 
 SI:  

@@ -1,0 +1,15 @@
+clase main{
+  
+    principal(){   
+        
+        entero val1[2];
+        
+    } 
+ 
+  
+    vacio sumar(entero val1){
+
+        imprimir(val1+1);
+    }
+
+}

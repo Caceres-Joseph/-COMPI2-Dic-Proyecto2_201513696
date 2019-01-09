@@ -9,6 +9,8 @@ class _ID_VAR_FUNC: public _ID_VAR_FUNC_PADRE
 {
 public:
     _ID_VAR_FUNC(QString nombre, tablaSimbolos *tabla): _ID_VAR_FUNC_PADRE(nombre,tabla) {}
+
+    itemValor * getDestino(elementoEntorno *entorno);
 };
 
 #endif // _ID_VAR_FUNC_H

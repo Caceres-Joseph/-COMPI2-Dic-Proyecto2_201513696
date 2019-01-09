@@ -5,6 +5,10 @@ token * _VAR_ARREGLO::getIdentificador(){
 }
 
 QList<int> _VAR_ARREGLO::getDimensiones(){
+
+    int val2=3+4;
+    int val[val2];
+
     QList<int> retorno;
     if(nivel==1){
         //se envia una lista vacia

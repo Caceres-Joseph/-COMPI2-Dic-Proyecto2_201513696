@@ -20,6 +20,13 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
     }
+    QList<int> dimen=nodoVar->getDimensiones();
+
+    //revisando si no es un arreglo
+    if(dimen.count()>1){
+        cargarArreglo(dimen,valor);
+        return ret;
+    }
 
     // --Los tengo que almacenar en string poool *uto
 
@@ -45,7 +52,6 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     token *tokId=nodoVar->getIdentificador();
     token *tokTipo=nodoTipo->getTipo();
-    QList<int> dimen=nodoVar->getDimensiones();
 
     bool esGlobal=false;
     if(entor->nombre=="global"){
@@ -80,4 +86,9 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     //println("Variable insertada exitosamente");
     return ret;
+}
+
+
+void _DECLARAR_VARIABLE_SINVISIBI::cargarArreglo(QList<int> dimen, itemValor *valor){
+    println("Cargando un arreglo");
 }

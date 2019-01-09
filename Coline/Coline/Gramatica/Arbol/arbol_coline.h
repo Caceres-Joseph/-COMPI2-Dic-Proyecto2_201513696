@@ -23,6 +23,10 @@ public:
 
     arbol_coline(){
         this->tabla=new tablaSimbolos();
+        this->tabla->comentarioLinea("Inicializando punteros",0);
+        this->tabla->linea("P = 0",0);
+        this->tabla->linea("H = 1",0);
+        this->tabla->linea("S = 1",0);
         this->raizArbol=new nodoModelo("raiz",this->tabla);
 
     }
