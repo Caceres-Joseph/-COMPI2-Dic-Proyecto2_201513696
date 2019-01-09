@@ -1,0 +1,46 @@
+
+	//-- Inicializando punteros --
+P = 0;
+H = 1;
+S = 1;
+
+principal();
+void principal(){
+		//-- Declarando variable --
+	t0 = P + 1;
+	Stack[t0] = 0;	//val1
+		//-- Mientras --
+	L1:
+	t1 = P + 1;
+	t2 = Stack[t1];
+	if(t2 < 10) goto L2;
+	goto L3;
+		L3:
+		goto L4;
+		L2:
+			//-- si --
+		t3 = P + 1;
+		t4 = Stack[t3];
+		if(t4 == 5) goto L5;
+		goto L6;
+			L6:
+			goto L7;
+			L5:
+				//-- Retorno --
+			goto L0;
+			L7:
+			//-- Imprimiendo --
+		printf(%c, 10);
+		t5 = P + 1;
+		t6 = Stack[t5];
+		printf(%d, t6);
+			//-- Asignando valor --
+		t7 = P + 1;
+		t8 = P + 1;
+		t9 = Stack[t8];
+		t10 = t9 + 1;
+		Stack[t7] = t10;
+		goto L1;
+		L4:
+L0:
+}
