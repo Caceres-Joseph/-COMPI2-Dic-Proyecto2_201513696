@@ -1,0 +1,17 @@
+clase main{
+
+    entero ackermann(entero m, entero n) {
+        Si (m == 0) {
+            retornar (n + 1);
+        } sino Si (m > 0 && n == 0) {
+            retornar ackermann(m - 1, 1);
+        } sino {
+            retornar ackermann(m - 1, ackermann(m, n - 1));
+        }
+    }
+
+    principal(){ 
+        imprimir(ackermann(3,9));
+    }
+
+}
