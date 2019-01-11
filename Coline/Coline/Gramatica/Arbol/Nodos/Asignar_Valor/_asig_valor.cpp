@@ -26,7 +26,6 @@ itemRetorno* _ASIG_VALOR::ejecutar(elementoEntorno *entor){
 
         tabla->linea(nuevoTemp+" = "+val2->c3d+" - 1",entor->nivel);
         valor->c3d=nuevoTemp;
-
     }
 
     tabla->linea(destino->c3d+" = "+valor->c3d,entor->nivel);

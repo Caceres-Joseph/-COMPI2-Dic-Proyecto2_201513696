@@ -20,13 +20,8 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
     }
-    QList<int> dimen=nodoVar->getDimensiones();
+    QList<itemValor*> dimen=nodoVar->getDimensiones(entor);
 
-    //revisando si no es un arreglo
-    if(dimen.count()>1){
-        cargarArreglo(dimen,valor);
-        return ret;
-    }
 
     // --Los tengo que almacenar en string poool *uto
 
@@ -60,6 +55,11 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
 
 
+    //revisando si no es un arreglo
+    if(dimen.count()>0){
+        cargarArreglo(asign,tokId,tokTipo,dimen,valor, entor, esGlobal);
+        return ret;
+    }
 
     if (valor->c3dV != ""){
 
@@ -89,6 +89,79 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 }
 
 
-void _DECLARAR_VARIABLE_SINVISIBI::cargarArreglo(QList<int> dimen, itemValor *valor){
-    println("Cargando un arreglo");
+void _DECLARAR_VARIABLE_SINVISIBI::cargarArreglo(QString asign,
+                                                 token* tokId,
+                                                 token*tipo,
+                                                 QList<itemValor *> dimen,
+                                                 itemValor *valor,
+                                                 elementoEntorno*entor,
+                                                 bool esGlobal){
+    /*
+    if(valor->isTypeNulo()){
+        tabla->linea(asign+"0",entor->nivel,tokId->val);
+    }
+    */
+
+    //asignando la posición libre del heap a stack
+    tabla->linea(asign+"H",entor->nivel,tokId->val);
+    tabla->comentarioLinea("Size of array",entor->nivel);
+    QString anterior="1";
+    for (int i = 0; i < dimen.count(); ++i) {
+       itemValor *elem =dimen[i];
+
+       tabla->linea("Heap[H] = "+elem->c3d,entor->nivel);
+       QString etqDim=tabla->getEtiqueta();
+       tabla->linea(etqDim+" = Heap[H]",entor->nivel);
+       QString result=tabla->getEtiqueta();
+       tabla->linea(result+" = "+anterior+" * "+etqDim,entor->nivel);
+       tabla->incrementarHeap(entor);
+       anterior=result;
+    }
+
+    /*
+
+    //hay que colocarlo en heap
+    tabla->linea("Heap[H] = "+anterior, entor->nivel);
+    //copiando size
+    QString etqSize=tabla->getEtiqueta();
+    tabla->linea(etqSize+" = Heap[H]",entor->nivel);
+    //se incrementa el puntero de heap
+    tabla->incrementarHeap(entor);
+    */
+    tabla->linea("Heap[0] = H",entor->nivel,"aux donde inicia arreglo");
+
+    tabla->comentarioLinea("Colocando parametros", entor->nivel);
+
+    tabla->func_colocarParam(anterior,1,entor);
+
+    tabla->func_llamarFunc("func_iniciarArreglo",entor);
+
+    valor->c3dF="";
+    valor->c3dV="";
+    valor->c3dS="";
+
+
+
+    if(valor->dimensiones.count()!=0)
+    //viene una lista de valores
+    {
+        tabla->comentarioLinea("Asignano valores a los arreglos", entor->nivel);
+        for (int i = 0; i < valor->dimensiones.count(); ++i) {
+            itemValor *item=valor->dimensiones[i];
+            QString etqT1=tabla->getEtiqueta();
+            tabla->linea(etqT1+" = Heap[0]",entor->nivel);
+            QString etqT2=tabla->getEtiqueta();
+            tabla->linea(etqT2+" = "+etqT1+" + "+QString::number(i), entor->nivel);
+            tabla->linea("Heap["+etqT2+"] = "+item->c3d,entor->nivel);
+        }
+    }
+
+
+    //asignando el tipo
+    valor->valor->tipo=tipo->valLower;
+    int posAbsoluta=entor->tamEntornoAbsoluto();
+    itemEntorno *nuevoItem =new itemEntorno(tokId,tipo,valor,dimen,tabla, posAbsoluta, esGlobal);
+    entor->insertarItem(nuevoItem);
+
+
 }

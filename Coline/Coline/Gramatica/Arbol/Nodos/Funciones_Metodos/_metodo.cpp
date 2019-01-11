@@ -3,25 +3,37 @@
 
 void _METODO::ejecutarHijos2(elementoClase *simbolo){
 
-    token *visibilidad=new token("publico");
+
 
     _TIPO *nodoTipo;
-    _VAR_ARREGLO *nodoVar;
+
+    int dimensiones=0;
     nodoModelo * cuerpo;
     if(nivel==1){
         nodoTipo=(_TIPO*)hijos[1];
-        nodoVar=(_VAR_ARREGLO*)hijos[2];
-        cuerpo=hijos[4];
-    }else{
+        cuerpo=hijos[3];
+    }else if(nivel==2){
         nodoTipo=(_TIPO*)hijos[0];
-        nodoVar=(_VAR_ARREGLO*)hijos[1];
+        cuerpo=hijos[2];
+    }else if(nivel==3){
+        _LST_CORCHETES *nodoCor=(_LST_CORCHETES*)hijos[2];
+        dimensiones=nodoCor->getDimensiones();
+        nodoTipo=(_TIPO*)hijos[1];
+        cuerpo=hijos[4];
+    }else if(nivel==4){
+        _LST_CORCHETES *nodoCor=(_LST_CORCHETES*)hijos[1];
+        dimensiones=nodoCor->getDimensiones();
+        nodoTipo=(_TIPO*)hijos[0];
         cuerpo=hijos[3];
     }
 
 
+    token *visibilidad=new token("publico");
+    token *nombre2=lst_Atributos->getToken(0);
     token *tipo=nodoTipo->getTipo();
-    token *nombre2=nodoVar->getIdentificador();
-    int dimensiones=nodoVar->getDimensiones().count();
+
+    //int dimensiones=nodoVar->getDimensiones().count();
+
 
     elementoPolimorfo *eleme=new elementoPolimorfo(visibilidad,tabla,tipo,nombre2,cuerpo,dimensiones, simbolo->nombreClase->valLower);
 

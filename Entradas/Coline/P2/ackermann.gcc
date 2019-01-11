@@ -20,10 +20,13 @@ void principal(){
 	t4 = Stack[P];	//retorno
 	P = P - 1;
 	printf(%d, t4);
+		//-- Imprimiendo --
+	printf(%c, 10);
+	printf(%d, 12);
 L0:
 }
 
-main_ackermann_entero0_entero0();
+void main_ackermann_entero0_entero0(){
 		//-- si --
 	t5 = P + 1;
 	t6 = Stack[t5];

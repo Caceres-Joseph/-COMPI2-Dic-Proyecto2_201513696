@@ -15,7 +15,7 @@ public:
     _DECLARAR_VARIABLE_SINVISIBI(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
 
     itemRetorno *ejecutar (elementoEntorno *entor)override;
-    void cargarArreglo(QList<int> dimen, itemValor *valor);
+    void cargarArreglo(QString asign, token *tokId, token *tipo, QList<itemValor*> dimen, itemValor *valor, elementoEntorno *entor, bool esGlobal);
 };
 
 #endif // _DECLARAR_VARIABLE_SINVISIBI_H

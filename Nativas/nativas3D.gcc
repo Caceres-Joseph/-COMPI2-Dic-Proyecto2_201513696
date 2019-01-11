@@ -1,0 +1,103 @@
+ 
+/*
+    +---------------------------------
+    | INICIALIZAR ARREGLOS
+    +--------------------------------- 
+    | param1 = tamaño
+*/
+
+void func_iniciarArreglo(){
+		//-- Declarando variable --
+	t2 = P + 2;
+	Stack[t2] = 0;	//i
+		//-- Mientras --
+	L2:
+	t3 = P + 2;
+	t4 = Stack[t3];
+	t5 = P + 1;
+	t6 = Stack[t5];
+	if(t4 < t6) goto L3;
+	goto L4;
+		L4:
+		goto L5;
+		L3:
+			//-- Reservando espacio --
+        Heap[H]=0;
+        H = H +1;  //incrementando el puntero de heap
+
+			//-- Asignando valor --
+		t9 = P + 2;
+		t10 = P + 2;
+		t11 = Stack[t10];
+		t12 = t11 + 1;
+		Stack[t9] = t12;
+		goto L2;
+		L5:
+L1:
+}
+
+
+/*
+    +---------------------------------
+    | POTENCIA
+    +---------------------------------
+    | param1 = base 
+    | param2 = exponente
+    | retorno= resultado
+*/
+
+void func_potencia(){
+		//-- Declarando variable --
+	t24 = P + 3;
+	Stack[t24] = 1;	//restultado
+		//-- si --
+	t25 = P + 2;
+	t26 = Stack[t25];
+	if(t26 == 0) goto L2;
+	goto L3;
+		L3:
+		goto L4;
+		L2:
+			//-- Retorno --
+		t27 = P + 3;
+		t28 = Stack[t27];
+		Stack[P] = t28;
+		goto L1;
+		L4:
+		//-- Para --
+			//-- Declarando variable --
+		t29 = P + 4;
+		Stack[t29] = 0;	//i
+	L5:
+		t30 = P + 4;
+		t31 = Stack[t30];
+		t32 = P + 2;
+		t33 = Stack[t32];
+		if(t31 < t33) goto L6;
+		goto L7;
+		L7:
+		goto L8;
+		L6:
+			//-- Asignando valor --
+		t34 = P + 3;
+		t35 = P + 3;
+		t36 = Stack[t35];
+		t37 = P + 1;
+		t38 = Stack[t37];
+		t39 = t36 * t38;
+		Stack[t34] = t39;
+			//-- Asignando valor --
+		t40 = P + 4;
+		t41 = P + 4;
+		t42 = Stack[t41];
+		t43 = t42 + 1;
+		Stack[t40] = t43;
+		goto L5;
+		L8:
+		//-- Retorno --
+	t44 = P + 3;
+	t45 = Stack[t44];
+	Stack[P] = t45;
+	goto L1;
+L1:
+}

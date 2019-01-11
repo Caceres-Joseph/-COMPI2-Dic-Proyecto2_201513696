@@ -36,7 +36,7 @@ void elementoEntorno::insertarItem(itemEntorno *nuevoEntorno)
 
 
 itemEntorno *elementoEntorno::getValId(token *idVal){
-    QList<int> list;
+    QList<itemValor*> list;
     itemEntorno *retorno=new itemEntorno(new token(),new token(),new itemValor(),list,tabla,0,false);
 
     for (int i = 0; i < this->lstEntorno.count(); ++i) {

@@ -41,7 +41,7 @@ void elementoPolimorfo::ejecutar(elementoEntorno *entor){
 
 
     tabla->linea2("",entor->nivel);
-    tabla->linea(nombreClase+"_"+nombre->valLower+cadParams()+"()",entor->nivel);
+    tabla->linea2("void "+nombreClase+"_"+nombre->valLower+cadParams()+"(){",entor->nivel);
     LST_CUERPO->ejecutarHijos(metodo);
     //imprimirNodos();
     tabla->linea2(tabla->Salida3d+":",entor->nivel);
@@ -63,8 +63,8 @@ void elementoPolimorfo::cargarParametros(elementoEntorno *entor){
         elementoParametro* value = it->second;
 
         int posAbsoluta=entor->tamEntornoAbsoluto();
-        QList<int> lista;
-        lista.append(1);
+        QList<itemValor*> lista;
+        lista.append(new itemValor());
         itemEntorno *nuevoItem =new itemEntorno(new token(key),value->tipo,getValor(value->tipo->valLower),lista,tabla, posAbsoluta, false);
 
 

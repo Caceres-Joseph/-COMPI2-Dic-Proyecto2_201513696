@@ -31,6 +31,14 @@ public:
     tablaSimbolos(){
     }
 
+
+    void incrementarHeap(elementoEntorno *entor);
+    void incrementarPool(elementoEntorno *entor);
+
+    void func_colocarParam(QString valor,int numParam, elementoEntorno *entor);
+    QString func_llamarFuncRetorno(QString nombre,elementoEntorno *entor);
+    void func_llamarFunc(QString nombre, elementoEntorno *entor);
+
     QString getEtiqueta();
     QString getSalto();
 

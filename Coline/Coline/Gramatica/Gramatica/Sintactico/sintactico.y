@@ -127,7 +127,7 @@ struct Nod *VAL;
 %token<TEXT>  tSubCad
 %token<TEXT>  tPosCad
 %token<TEXT>  tRandom
-%token<TEXT>  tTam
+//%token<TEXT>  tTam
 %token<TEXT>  tSuper
 %token<TEXT>  tNada
 %token<TEXT>  tVacio
@@ -276,6 +276,8 @@ struct Nod *VAL;
 %left sMas sMenos
 %left sPor sDiv  sMod 
 %left sPot  
+ 
+
 
 %start S
 
@@ -754,34 +756,83 @@ CP_CLASE:
 
 
 METODO:  
-        VISIBILIDAD  TIPO  VAR_ARREGLO  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
+        VISIBILIDAD  TIPO    valId  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
                 {   
                         //creando el padre
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=1;
 
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
-                                padre->hijos.append($3->Padre);
+                                //padre->hijos.append($3->Padre);
                                 padre->hijos.append($5->Padre);
                                 padre->hijos.append($8->Padre);
 
                         $$->Padre=padre;
                 }
-        | TIPO  VAR_ARREGLO  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
+        | TIPO    valId  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
                 {   
                         //creando el padre
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=2;
 
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok2);
+
+                                //hijos
+                                padre->hijos.append($1->Padre);
+                                //padre->hijos.append($2->Padre);
+                                padre->hijos.append($4->Padre);
+                                padre->hijos.append($7->Padre); 
+
+                        $$->Padre=padre;
+                }
+        |VISIBILIDAD  TIPO  LST_CORCHETES  valId  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _METODO *padre=new _METODO("METODO",tabla); 
+                        padre->nivel=3;
+ 
+                                //asignando atributos 
+                                token *tok4=new token(QString::fromStdString($4),@4.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok4);
+
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
-                                padre->hijos.append($4->Padre);
-                                padre->hijos.append($7->Padre); 
+                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($6->Padre);
+                                padre->hijos.append($9->Padre);
+
+
+                        $$->Padre=padre;
+                }
+        | TIPO  LST_CORCHETES  valId  sAbreParent  LST_PARAMETROS  sCierraParent  sAbreLlave  LST_CUERPO  sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _METODO *padre=new _METODO("METODO",tabla); 
+                        padre->nivel=4;
+
+                                //asignando atributos 
+                                token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("valId",tok3);
+
+                                //hijos
+                                padre->hijos.append($1->Padre);
+                                padre->hijos.append($2->Padre); 
+                                padre->hijos.append($5->Padre);
+                                padre->hijos.append($8->Padre);
 
                         $$->Padre=padre;
                 }
@@ -925,38 +976,25 @@ VAL:
         ;
 
 
-LST_LLAVES_VAL:  
-        LST_LLAVES_VAL sComa LLAVES_VAL_P
+LST_LLAVES_VAL:
+        sAbreLlave LLAVES_VAL_P sCierraLlave
                 {   
                         //creando el padre
                         $$=new Nod(); 
                         _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
                         padre->nivel=1;
 
-                                //hijos
-                                padre->hijos.append($1->Padre); 
-                                padre->hijos.append($3->Padre); 
-
+                                //hijos 
+                                padre->hijos.append($2->Padre);  
 
                         $$->Padre=padre;
                 }
-        |LLAVES_VAL_P
-                {   
-                        //creando el padre
-                        $$=new Nod(); 
-                        _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
-                        padre->nivel=2;
 
-                                //hijos
-                                padre->hijos.append($1->Padre); 
-
-                        $$->Padre=padre;
-                }
         ;
 
 
 LLAVES_VAL_P:  
-        sAbreLlave  LST_LLAVES_VAL  sCierraLlave
+        LLAVES_VAL_P sComa  E 
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -964,11 +1002,12 @@ LLAVES_VAL_P:
                         padre->nivel=1;
 
                                 //hijos 
-                                padre->hijos.append($2->Padre);  
+                                padre->hijos.append($1->Padre);
+                                padre->hijos.append($3->Padre);  
 
                         $$->Padre=padre;
                 }
-        |sAbreLlave  LST_VAL  sCierraLlave
+        | LLAVES_VAL_P sComa LST_LLAVES_VAL
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -976,7 +1015,32 @@ LLAVES_VAL_P:
                         padre->nivel=2;
 
                                 //hijos 
-                                padre->hijos.append($2->Padre);  
+                                padre->hijos.append($1->Padre);
+                                padre->hijos.append($3->Padre);  
+
+                        $$->Padre=padre;
+                }
+        | E
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
+                        padre->nivel=3;
+
+                                //hijos 
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
+        | LST_LLAVES_VAL
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
+                        padre->nivel=4;
+
+                                //hijos 
+                                padre->hijos.append($1->Padre); 
 
                         $$->Padre=padre;
                 }
@@ -1019,16 +1083,10 @@ VAR_ARREGLO:
 LST_CORCHETES:  
         LST_CORCHETES PAR_CORCHETES_VACIOS
                 {   
-                        //creando el padre
-                        $$=new Nod(); 
-                        _LST_CORCHETES *padre=new _LST_CORCHETES("LST_CORCHETES",tabla); 
-                        padre->nivel=1;
+                        $1->Padre->hijos.append($2->Padre);  
 
-                                //hijos
-                                padre->hijos.append($1->Padre);
-                                padre->hijos.append($2->Padre);  
-                                
-                        $$->Padre=padre;
+
+                        $$=$1;
                 }
         |PAR_CORCHETES_VACIOS
                 {   
@@ -1041,7 +1099,7 @@ LST_CORCHETES:
                                 padre->hijos.append($1->Padre); 
 
                         $$->Padre=padre;
-                }
+                } 
         ;
 
 PAR_CORCHETES_VACIOS:  
@@ -1646,10 +1704,63 @@ SENTENCIAS:
 
                         $$->Padre=padre;
                 }
+        | FOR
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
+                        padre->nivel=1;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
         //| CASO
-        //| FOR
         //| DOWHILE
         //| REPETIR
+        ;
+
+FOR: 
+        tPara  sAbreParent DECLARAR_VARIABLE_SINVISIBI sPuntoComa E sPuntoComa ASIG_VALOR sCierraParent sAbreLlave  LST_CUERPO  sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _FOR *padre=new _FOR("FOR",tabla); 
+                        padre->nivel=1;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tPara",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($5->Padre);
+                                padre->hijos.append($7->Padre);
+                                padre->hijos.append($10->Padre);  
+
+                        $$->Padre=padre;
+                } 
+        | tPara sAbreParent ASIG_VALOR sPuntoComa E sPuntoComa ASIG_VALOR sCierraParent sAbreLlave  LST_CUERPO  sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _FOR *padre=new _FOR("FOR",tabla); 
+                        padre->nivel=2;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tPara",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($5->Padre);
+                                padre->hijos.append($7->Padre);
+                                padre->hijos.append($10->Padre);  
+
+                        $$->Padre=padre;
+                }
+        
         ;
 
 WHILE:
@@ -1836,7 +1947,9 @@ VALOR:
 
                         $$->Padre=padre;
                 }
-        | LST_LLAVES_VAL  
+        | */
+
+        LST_LLAVES_VAL  
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -1848,8 +1961,7 @@ VALOR:
 
                         $$->Padre=padre;
                 }
-        |*/ 
-        E
+        | E
                 {   
                         //creando el padre
                         $$=new Nod(); 

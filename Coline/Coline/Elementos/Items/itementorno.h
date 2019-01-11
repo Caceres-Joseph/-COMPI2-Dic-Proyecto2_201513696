@@ -13,14 +13,14 @@ public:
     token *tipo;
     token *nombre;
     itemValor *valor;
-    QList<int> dimension;
+    QList<itemValor*> dimension;
     tablaSimbolos *tabla;
     int pos=-1;
     bool esGlobal=false;
 
 
 
-    itemEntorno(token *nombre,token *tipo, itemValor *valor, QList<int> dimension, tablaSimbolos *tabla, int pos, bool esGlobal);
+    itemEntorno(token *nombre, token *tipo, itemValor *valor, QList<itemValor *> dimension, tablaSimbolos *tabla, int pos, bool esGlobal);
 };
 
 #endif // ITEMENTORNO_H

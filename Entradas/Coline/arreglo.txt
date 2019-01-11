@@ -1,15 +1,19 @@
+ 
+
 clase main{
   
-    principal(){   
+    principal(){  
+        entero ind1=2;
+        entero ind2=3;
+        entero ind3=2;
+
+        entero arr1[ind1][ind2][ind3]={{{1,2},{3,4},{5,6}},{{7,8},{9,10},{11,12}}};
         
-        entero val1[2];
+        entero temp=arr1[0][1][0]; //3
+
+        imprimir(temp);
+
         
     } 
- 
   
-    vacio sumar(entero val1){
-
-        imprimir(val1+1);
-    }
-
 }

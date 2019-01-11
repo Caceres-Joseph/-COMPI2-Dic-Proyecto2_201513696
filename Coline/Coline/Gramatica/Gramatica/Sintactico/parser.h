@@ -99,24 +99,23 @@ extern int yydebug;
     tSubCad = 309,
     tPosCad = 310,
     tRandom = 311,
-    tTam = 312,
-    tSuper = 313,
-    tNada = 314,
-    tVacio = 315,
-    tNulo = 316,
-    tEntero = 317,
-    tCaracter = 318,
-    tDecimal = 319,
-    tBooleano = 320,
-    tPublico = 321,
-    tPrivado = 322,
-    tProtegido = 323,
-    valBoolean = 324,
-    valId = 325,
-    valNumero = 326,
-    valDecimal = 327,
-    valCaracter = 328,
-    valCadena = 329
+    tSuper = 312,
+    tNada = 313,
+    tVacio = 314,
+    tNulo = 315,
+    tEntero = 316,
+    tCaracter = 317,
+    tDecimal = 318,
+    tBooleano = 319,
+    tPublico = 320,
+    tPrivado = 321,
+    tProtegido = 322,
+    valBoolean = 323,
+    valId = 324,
+    valNumero = 325,
+    valDecimal = 326,
+    valCaracter = 327,
+    valCadena = 328
   };
 #endif
 
@@ -132,7 +131,7 @@ char TEXT [256];
 struct Nod *VAL;
 //extern nodo *NODO;
 
-#line 136 "parser.h" /* yacc.c:1909  */
+#line 135 "parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

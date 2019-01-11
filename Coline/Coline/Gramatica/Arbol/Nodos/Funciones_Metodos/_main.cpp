@@ -21,6 +21,8 @@ void _MAIN::ejecutarHijos2(elementoClase *simbolo){
 itemRetorno* _MAIN::ejecutar(elementoEntorno *entor){
     itemRetorno* ret=new itemRetorno(0);
 
+    tabla->Salida3d=tabla->getSalto();
+
     elementoEntorno *principal=new elementoEntorno(entor,tabla,"principal",entor->este);
     principal->nivel++;
     tabla->linea2("",entor->nivel);
@@ -28,6 +30,10 @@ itemRetorno* _MAIN::ejecutar(elementoEntorno *entor){
     tabla->linea2("void principal(){",entor->nivel);
     ejecutarHijos(principal);
     //imprimirNodos();
+    tabla->linea2(tabla->Salida3d+":",entor->nivel);
+    tabla->Salida3d="";
     tabla->linea2("}", entor->nivel);
+
+
     return ret;
 }

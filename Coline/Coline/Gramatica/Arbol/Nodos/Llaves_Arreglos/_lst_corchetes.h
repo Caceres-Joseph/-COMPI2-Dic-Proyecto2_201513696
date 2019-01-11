@@ -9,6 +9,7 @@ class _LST_CORCHETES: public nodoModelo
 {
 public:
     _LST_CORCHETES(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+    int getDimensiones();
 };
 
 #endif // _LST_CORCHETES_H

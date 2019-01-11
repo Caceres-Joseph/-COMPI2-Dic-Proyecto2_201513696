@@ -10,6 +10,7 @@
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeAritmetica/division.h"
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeAritmetica/modulo.h"
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeAritmetica/negativo.h"
+#include "Coline/Gramatica/Arbol/Nodos/Valor/OpeAritmetica/potencia.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/igualque.h"
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/mayorque.h"
@@ -26,6 +27,7 @@ class _E: public nodoModelo
 public:
     _E(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
     itemValor *getValor(elementoEntorno* elemento);
+    itemValor *getValorT(elementoEntorno *entor);
 };
 
 #endif // _E_H

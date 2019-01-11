@@ -1,0 +1,36 @@
+
+clase main{
+  
+    principal(){ 
+         entero r1=potencia(2.0,3);
+         entero r2=potencia(3.0,4);
+         entero r3=potencia(20.0,0);
+
+
+        imprimir(r1);//8
+        imprimir(r2);//81
+        imprimir(r3);//1
+         
+         
+    } 
+ 
+
+    entero potencia(decimal base, entero exponente){
+        entero restultado=1;
+
+        si(exponente==0){ 
+            retornar restultado;
+        }
+
+
+        para(entero i=0 ; i < exponente ; i++){
+            restultado=restultado*base;
+            
+        }
+
+        retornar restultado;
+    }
+ 
+  
+
+}

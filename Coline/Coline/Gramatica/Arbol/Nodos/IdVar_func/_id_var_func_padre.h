@@ -14,6 +14,10 @@ public:
     itemValor * cargarMetodo(elementoEntorno *entor);
     void ejecutarMetodo(elementoEntorno *entor);
     itemValor *ejecutarMetodoRetorno(elementoEntorno *entor);
+
+    itemValor * getDireccionVar(token *idVar, elementoEntorno *entorno);
+
+    QString getIndiceMapeado(QList<itemValor*>lstValores,QString direcArreglo, elementoEntorno *entor);
 };
 
 #endif // _ID_VAR_FUNC_PADRE_H

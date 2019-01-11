@@ -128,3 +128,41 @@ QString tablaSimbolos::getLinea2(QString txt, int nivel, QString comentario){
     retorno += "\t//"+comentario;
     return retorno;
 }
+
+
+void tablaSimbolos::func_colocarParam(QString valor, int numParam, elementoEntorno *entor){
+    QString param=QString::number(numParam);
+    QString tam=QString::number(entor->tamEntornoAbsoluto());
+    QString pivote=getEtiqueta();
+    QString pos=getEtiqueta();
+
+    this->linea(pivote+" = P + "+tam, entor->nivel);
+    this->linea(pos+" = "+pivote+" + "+param, entor->nivel);
+    this->linea("Stack["+pos+"] = "+valor, entor->nivel);
+
+}
+
+QString tablaSimbolos::func_llamarFuncRetorno(QString nombre, elementoEntorno *entor){
+    QString retorno=getEtiqueta();
+    QString tam=QString::number(entor->tamEntornoAbsoluto());
+    linea("P = P + "+tam, entor->nivel);
+    linea(nombre+"()", entor->nivel);
+    linea(retorno+" = Stack[P]", entor->nivel, "retorno");
+    linea("P = P - "+tam, entor->nivel);
+    return retorno;
+}
+
+void  tablaSimbolos::func_llamarFunc(QString nombre, elementoEntorno *entor){
+    QString tam=QString::number(entor->tamEntornoAbsoluto());
+    linea("P = P + "+tam, entor->nivel);
+    linea(nombre+"()", entor->nivel);
+    linea("P = P - "+tam, entor->nivel);
+}
+
+
+void tablaSimbolos::incrementarHeap(elementoEntorno *entor){
+    linea("H = H + 1", entor->nivel);
+}
+void tablaSimbolos::incrementarPool(elementoEntorno *entor){
+    linea("S = S + 1", entor->nivel);
+}

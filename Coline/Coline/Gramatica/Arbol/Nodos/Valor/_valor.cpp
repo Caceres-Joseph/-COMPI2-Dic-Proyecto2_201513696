@@ -8,6 +8,8 @@ itemValor * _VALOR::getValor(elementoEntorno *elemento, token *tipo){
     }else if(nivel ==2){
 
     }else if(nivel==3){
+        _LST_LLAVES_VAL *nodoLlaves=(_LST_LLAVES_VAL*)hijos[0];
+        retorno->dimensiones=nodoLlaves->getLstValores(elemento);
 
     }else if(nivel==4){
         _E *nodoE=(_E*)hijos[0];

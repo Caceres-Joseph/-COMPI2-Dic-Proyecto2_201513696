@@ -1,0 +1,50 @@
+
+clase main{
+  
+    principal(){ 
+         entero r1=potencia(2.0,3);
+         entero r2=potencia(3.0,4);
+         entero r3=potencia(20.0,0);
+
+
+        imprimir(r1);//8
+        imprimir(r2);//81
+        imprimir(r3);//1
+         
+         
+    } 
+ 
+   vacio inicializarArreglo(entero inicio, entero tam){
+
+        entero i=0;
+        mientras(i<tam){
+
+            imprimir(i);
+
+            i++;
+        }
+    }
+
+    entero func_potencia(decimal base, entero exponente){
+        entero restultado=1;
+
+        si(exponente==0){ 
+            retornar restultado;
+        }
+
+
+        para(entero i=0 ; i < exponente ; i++){
+            restultado=restultado*base;
+            
+        }
+
+        retornar restultado;
+    }
+ 
+
+    entero multipli(entero num1, entero num2){ 
+        retornar num1*num;
+    }
+  
+
+}

@@ -5,6 +5,7 @@
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
 #include "Coline/Gramatica/Arbol/Nodos/Inicio/_tipo.h"
 #include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_var_arreglo.h"
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_corchetes.h"
 class _METODO: public nodoModelo
 {
 public:

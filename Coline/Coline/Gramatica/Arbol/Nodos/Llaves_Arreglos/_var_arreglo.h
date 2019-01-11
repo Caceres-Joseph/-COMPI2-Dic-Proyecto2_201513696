@@ -12,7 +12,7 @@ public:
 
     token *getIdentificador();
 
-    QList<int> getDimensiones();
+    QList<itemValor*> getDimensiones(elementoEntorno *entor);
 };
 
 #endif // _VAR_ARREGLO_H

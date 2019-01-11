@@ -1,6 +1,68 @@
 #include "_id_var_func_padre.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/Parametros/_lst_val.h"
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_corchetes_val.h"
+
+itemValor *_ID_VAR_FUNC_PADRE::getDireccionVar(token *idVar, elementoEntorno *entorno){
+
+    //tengo que buscar la variable en el entorno *uto
+    itemEntorno *val=entorno->getValId(idVar);
+    itemValor *valor=val->valor;
+    QString pos=tabla->getEtiqueta();
+    QString puntero="P";
+    QString temp= tabla->getEtiqueta();
+
+    QString stack="Stack";
+    if(val->esGlobal){
+        stack="Heap";
+        puntero="H";
+    }
+
+
+    tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
+    stack+="["+pos+"]";
+    tabla->linea(temp+" = "+ stack,entorno->nivel);
+    valor->c3d=temp;
+
+    return valor;
+}
+
+QString _ID_VAR_FUNC_PADRE::getIndiceMapeado(QList<itemValor *> lstValores, QString direcArreglo, elementoEntorno *entorno){
+
+    tabla->comentarioLinea("Mapeando indice",entorno->nivel);
+
+    QString etqAnterior = "1";
+    for (int i = 0; i < lstValores.count(); ++i) {
+        itemValor *elem=lstValores[i];
+
+
+        if(i==0){
+            etqAnterior=elem->c3d;
+        }else{
+
+            QString etqSize=tabla->getEtiqueta();
+            QString etqDir=tabla->getEtiqueta();
+            QString etqDir2=tabla->getEtiqueta();
+
+            //buscando la dimension
+            tabla->linea(etqDir+" = Heap["+direcArreglo+"]",entorno->nivel);
+            tabla->linea(etqDir2+" = "+etqDir+ " + "+QString::number(i),entorno->nivel);
+            tabla->linea(etqSize+" = Heap["+etqDir+"]", entorno->nivel);
+
+            //operando
+            QString etqT1=tabla->getEtiqueta();
+            QString etqT2=tabla->getEtiqueta();
+            tabla->linea(etqT1+" = "+etqAnterior+" * "+etqSize,entorno->nivel);
+            tabla->linea(etqT2+" = "+etqT1+" + "+elem->c3d,entorno->nivel);
+
+            etqAnterior=etqT2;
+        }
+
+
+    }
+
+    return etqAnterior;
+}
 
 itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
 
@@ -16,6 +78,7 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
     }else if(nivel == 3)
     // valId
     {
+        /*
         //tengo que buscar la variable en el entorno *uto
         itemEntorno *val=entorno->getValId(lst_Atributos->getToken(0));
         itemValor *valor=val->valor;
@@ -28,12 +91,12 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
             stack="Heap";
             puntero="H";
         }
-
-
         tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
         stack+="["+pos+"]";
         tabla->linea(temp+" = "+ stack,entorno->nivel);
-        valor->c3d=temp;
+        valor->c3d=temp;*/
+
+        itemValor *valor=getDireccionVar(lst_Atributos->getToken(0),entorno);
         return valor;
 
     }else if(nivel == 4)
@@ -52,6 +115,23 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
     // valId  LST_CORCHETES_VAL
     {
 
+        itemValor *valor=getDireccionVar(lst_Atributos->getToken(0),entorno);
+        _LST_CORCHETES_VAL *nodoVal=(_LST_CORCHETES_VAL*)hijos[0];
+        QList<itemValor*>lstValores=  nodoVal->getLstValores(entorno);
+        QString direcArreglo = valor->c3d;
+
+        //calculando indice real
+        QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entorno);
+        tabla->comentarioLinea("Get item from index", entorno->nivel);
+
+        QString etqValor=tabla->getEtiqueta();
+        tabla->linea(etqValor+" = Heap["+indiceReal+"]",entorno->nivel);
+        valor->c3d=etqValor;
+        valor->c3dF="";
+        valor->c3dS="";
+        valor->c3dV="";
+
+        return valor;
     }else if(nivel == 8)
     // tEste  sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL
     {

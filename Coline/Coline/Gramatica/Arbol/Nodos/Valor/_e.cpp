@@ -7,7 +7,8 @@ itemValor * _E::getValor(elementoEntorno *elemento){
         negativo *ope=new negativo(hijos[0],tabla,lst_Atributos->getToken(0));
         return ope->opNegativo(elemento);
     }else if(nivel==2){
-
+        potencia *ope=new potencia(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
+        return ope->opPot(elemento);
     }else if(nivel==3){
         division *ope=new division(hijos[0],hijos[1],tabla,lst_Atributos->getToken(0));
         return ope->opDivision(elemento);
@@ -137,4 +138,28 @@ itemValor * _E::getValor(elementoEntorno *elemento){
 
 
     return retorno;
+}
+
+
+itemValor * _E::getValorT(elementoEntorno *entor){
+    itemValor *valor= getValor(entor);
+    if(valor->c3dV!=""){
+        QString temp=tabla->getEtiqueta();
+
+
+        tabla->linea2(valor->c3dF+":",entor->nivel);
+        tabla->linea(temp+" = 0",entor->nivel);
+        tabla->linea("goto "+valor->c3dS, entor->nivel);
+        tabla->linea2(valor->c3dV+":",entor->nivel);
+        tabla->linea(temp+" = 1",entor->nivel);
+        tabla->linea2(valor->c3dS+":",entor->nivel);
+
+        valor->c3d=temp;
+        valor->c3dF="";
+        valor->c3dS="";
+        valor->c3dV="";
+        return valor;
+    }else{
+        return valor;
+    }
 }

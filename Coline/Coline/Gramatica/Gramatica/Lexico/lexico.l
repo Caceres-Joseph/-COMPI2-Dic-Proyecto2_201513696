@@ -113,7 +113,7 @@ Char '[^']*'
 "poscad"            { strcpy(yylval.TEXT, yytext); return tPosCad; }
 "random"            { strcpy(yylval.TEXT, yytext); return tRandom; }
 
-"tam"               { strcpy(yylval.TEXT, yytext); return tTam; }
+ /* "tam"               { strcpy(yylval.TEXT, yytext); return tTam; }*/
 "super"             { strcpy(yylval.TEXT, yytext); return tSuper; }
 
 

@@ -1,0 +1,28 @@
+
+clase main{
+  
+    principal(){ 
+        
+        para(entero cuenta=0;cuenta<=10;cuenta++){
+            imprimir(cuenta);
+        }
+
+
+        entero i=0;
+        para(i=0;i<=10;i++){
+            imprimir(i);
+        }
+
+        inicializarArreglo(2,10); 
+        imprimir();
+    } 
+
+   vacio inicializarArreglo(entero inicio, entero tam){
+
+        para(entero i=0 ; i<tam ; i++){
+            entero n=inicio+i;
+            imprimir(n);
+        }
+    }
+  
+}
