@@ -37,17 +37,17 @@ QString _ID_VAR_FUNC_PADRE::getIndiceMapeado(QList<itemValor *> lstValores, QStr
 
 
         if(i==0){
+
             etqAnterior=elem->c3d;
+
         }else{
 
-            QString etqSize=tabla->getEtiqueta();
-            QString etqDir=tabla->getEtiqueta();
             QString etqDir2=tabla->getEtiqueta();
+            QString etqSize=tabla->getEtiqueta();
 
             //buscando la dimension
-            tabla->linea(etqDir+" = Heap["+direcArreglo+"]",entorno->nivel);
-            tabla->linea(etqDir2+" = "+etqDir+ " + "+QString::number(i),entorno->nivel);
-            tabla->linea(etqSize+" = Heap["+etqDir+"]", entorno->nivel);
+            tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(i),entorno->nivel);
+            tabla->linea(etqSize+" = Heap["+etqDir2+"]", entorno->nivel);
 
             //operando
             QString etqT1=tabla->getEtiqueta();
@@ -124,8 +124,15 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
         QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entorno);
         tabla->comentarioLinea("Get item from index", entorno->nivel);
 
+
+        QString etqDir2=tabla->getEtiqueta();
+        QString etqInd=tabla->getEtiqueta();
+
+        //buscando la dimension
+        tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(lstValores.count()),entorno->nivel);
+        tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entorno->nivel);
         QString etqValor=tabla->getEtiqueta();
-        tabla->linea(etqValor+" = Heap["+indiceReal+"]",entorno->nivel);
+        tabla->linea(etqValor+" = Heap["+etqInd+"]",entorno->nivel);
         valor->c3d=etqValor;
         valor->c3dF="";
         valor->c3dS="";
