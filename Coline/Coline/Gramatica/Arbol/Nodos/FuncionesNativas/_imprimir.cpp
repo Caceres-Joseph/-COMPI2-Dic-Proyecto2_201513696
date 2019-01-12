@@ -23,9 +23,28 @@ itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
         else if(val->isTypeCadena()){
 
         }else if(val->isTypeChar()){
-            QString temp= tabla->getEtiqueta();
-            tabla->linea(temp+" = Pool["+val->c3d+"]", entor->nivel);
-            tabla->linea("printf(%c, "+temp+")",entor->nivel);
+
+
+
+            //verificando si es un arreglo de chars
+
+            if(val->dimensiones.count()>0){
+
+                if(val->dimen==0)
+                //es una cadena desde string pool
+                {
+                    tabla->linea("$$_outStr("+val->c3d+")", entor->nivel);
+                }else
+                //cadena desde heap
+                {
+                    tabla->func_colocarParam(val->c3d,1,entor);
+                    tabla->func_llamarFunc("func_imprimirArray",entor);
+                }
+            }else{
+                QString temp= tabla->getEtiqueta();
+                tabla->linea(temp+" = Pool["+val->c3d+"]", entor->nivel);
+                tabla->linea("printf(%c, "+temp+")",entor->nivel);
+            }
         }else if(val->isTypeNulo()){
 
         }else
@@ -37,7 +56,7 @@ itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
     }else if(nivel==2)
     //tImprimir sAbreParent  sCierraParent
     {
-
+      //tabla->linea("printf(%c, 10)",entor->nivel);
     }
 
     return ret;

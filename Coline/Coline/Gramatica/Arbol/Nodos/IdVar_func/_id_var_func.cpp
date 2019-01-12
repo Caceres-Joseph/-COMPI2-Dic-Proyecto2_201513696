@@ -1,5 +1,7 @@
 #include "_id_var_func.h"
 
+#include "Coline/Gramatica/Arbol/Nodos/Parametros/_lst_val.h"
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_corchetes_val.h"
 itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
 
     itemValor *retorno=new itemValor();
@@ -32,6 +34,7 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
         stack+="["+pos+"]";
 
         itemValor *vale=new itemValor();
+        vale->valor=valor->valor;
         vale->c3d=stack;
         return vale;
 
@@ -50,6 +53,49 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
     }else if(nivel == 7)
     // valId  LST_CORCHETES_VAL
     {
+
+        //tengo que buscar la variable en el entorno *
+        itemEntorno *val=entorno->getValId(lst_Atributos->getToken(0));
+        itemValor *valor=val->valor;
+        QString pos=tabla->getEtiqueta();
+        QString puntero="P";
+
+
+        QString stack="Stack";
+        if(val->esGlobal){
+            stack="Heap";
+            puntero="H";
+        }
+
+
+        tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
+        QString direcArreglo=tabla->getEtiqueta();
+        stack+="["+pos+"]";
+        tabla->linea(direcArreglo + " = "+stack, entorno->nivel);
+
+        //posicion donde inicia el arreglo etqDir2
+        //ahora hay que mapear
+        _LST_CORCHETES_VAL *nodoVal=(_LST_CORCHETES_VAL*)hijos[0];
+        QList<itemValor*>lstValores=  nodoVal->getLstValores(entorno);
+
+        //calculando indice real
+        QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entorno);
+
+
+
+        tabla->comentarioLinea("Get item from index", entorno->nivel);
+        QString etqDir2=tabla->getEtiqueta();
+        QString etqInd=tabla->getEtiqueta();
+
+        //buscando la dimension
+        tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(lstValores.count()),entorno->nivel);
+        tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entorno->nivel);
+
+
+        itemValor *vale=new itemValor();
+        vale->c3d="Heap["+etqInd+"]";
+        vale->valor=valor->valor;
+        return vale;
 
     }else if(nivel == 8)
     // tEste  sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL

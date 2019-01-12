@@ -58,7 +58,7 @@ QString lstPolimorfismo::cadParams(QList<itemValor *> params){
     QString retorno="";
     for (int i = 0; i < params.count(); ++i) {
         itemValor *elem=params[i];
-        retorno+="_"+elem->valor->tipo+QString::number(elem->dimensiones.count());
+        retorno+="_"+elem->valor->tipo+QString::number(elem->dimen);
     }
     return retorno;
 }

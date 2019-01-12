@@ -29,6 +29,8 @@
 #include "Coline/Gramatica/Arbol/Nodos/Funciones_Metodos/_sobrescritura.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_imprimir.h"
+#include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_concatenar.h"
+#include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_cadena.h"
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func_padre.h"

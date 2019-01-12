@@ -27,6 +27,9 @@ public:
         this->tabla->linea("P = 0",0);
         this->tabla->linea("H = 1",0);
         this->tabla->linea("S = 1",0);
+        this->tabla->linea("Pool[0]=0",0, "Caracter nulo");
+        this->tabla->linea("Heap[0]=0",0);
+
         this->raizArbol=new nodoModelo("raiz",this->tabla);
 
     }

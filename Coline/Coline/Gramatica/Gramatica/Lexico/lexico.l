@@ -95,6 +95,8 @@ Char '[^']*'
 "nuevo"             { strcpy(yylval.TEXT, yytext); return tNuevo; }
 "este"              { strcpy(yylval.TEXT, yytext); return tEste; }
 "imprimir"          { strcpy(yylval.TEXT, yytext); return tImprimir; }
+"concatenar"        { strcpy(yylval.TEXT, yytext); return tConcatenar; }  
+"convertiracadena"  { strcpy(yylval.TEXT, yytext); return tConvertirCadena; }  
 "retornar"          { strcpy(yylval.TEXT, yytext); return tRetorno; }
 "si"                { strcpy(yylval.TEXT, yytext); return tSi; }
 "sino"              { strcpy(yylval.TEXT, yytext); return tSino; }

@@ -45,6 +45,63 @@ clase main{
     entero multipli(entero num1, entero num2){ 
         retornar num1*num;
     }
+
+
+   vacio func_cargarCadena(entero arr1[10],caracter ptrCadena[10]){
+
+       entero i=0;
+       mientras(ptrCadena[i] != 0){
+            arr1[i]=ptrCadena[i];
+            i++;
+       }
+ 
+    }
+
+    
+    void concatenar2(caracter destino[200], caracter  valor){
+
+
+        entero i=0;
+        mientras(destino[i] != '\0' ){
+            i++;
+        }
+
+        
+
+        entero j=0;
+        mientras(valor  != '\0'){
+             caracter  temp=valor;
+            destino[i+j]=temp;
+            j++;
+        } 
+    }
+
+    void concatenar(caracter destino[200], caracter valor[200]){
+
+
+        entero i=0;
+        mientras(destino[i] != '\0' ){
+            i++;
+        }
+
+        
+
+        entero j=0;
+        mientras(valor[j] != '\0'){
+            destino[i+j]=valor[j];
+            j++;
+        } 
+    }
+  
+    void println(caracter cad[200]){
+
+        entero i=0;
+        mientras(cad[i] != '\0' ){
+            imprimir(cad[i]);
+            i++;
+        }
+
+    }
   
 
 }

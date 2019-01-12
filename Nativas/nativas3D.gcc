@@ -1,6 +1,332 @@
  
 /*
     +---------------------------------
+    | IMPRIMIR
+    +---------------------------------
+    | param1 = puntero donde inicia el arreglo de char destino
+    | param2 = puntero donde inicia el String en pool
+    
+*/
+
+void func_imprimirArray(){
+		//-- Declarando variable --
+	t39 = P + 2;
+	Stack[t39] = 0;	//i
+		//-- Mientras --
+	L2:
+	t40 = P + 1;
+	t41 = Stack[t40];
+	t42 = P + 2;
+	t43 = Stack[t42];
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t44 = t41 + 1;
+	t45 = t44 + t43;
+	t46 = Heap[t45];
+	Pool[S] = 0;
+	t47 = S;
+	S = S + 1;
+	t48 = Pool[t46];	//Valor de pool
+	t49 = Pool[t47];	//Valor de pool
+	if(t48 != t49) goto L3;
+	goto L4;
+		L4:
+		goto L5;
+		L3:
+			//-- Imprimiendo --
+		t50 = P + 1;
+		t51 = Stack[t50];
+		t52 = P + 2;
+		t53 = Stack[t52];
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t54 = t51 + 1;
+		t55 = t54 + t53;
+		t56 = Heap[t55];
+		t57 = Pool[t56];
+		printf(%c, t57);
+			//-- Asignando valor --
+		t58 = P + 2;
+		t59 = P + 2;
+		t60 = Stack[t59];
+		t61 = t60 + 1;
+		Stack[t58] = t61;
+		goto L2;
+		L5:
+L1:
+}
+
+
+/*
+    +---------------------------------
+    | CONCATENAR CHAR 2
+    +---------------------------------
+    | param1 = puntero donde inicia el arreglo de char destino
+    | param2 = puntero donde inicia el String en pool
+    
+*/
+
+void func_concatenarArrayString(){
+		//-- Declarando variable --
+	t54 = P + 3;
+	Stack[t54] = 0;	//i
+		//-- Mientras --
+	L7:
+	t55 = P + 1;
+	t56 = Stack[t55];
+	t57 = P + 3;
+	t58 = Stack[t57];
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t59 = t56 + 1;
+	t60 = t59 + t58;
+	t61 = Heap[t60];
+	Pool[S] = 0;
+	t62 = S;
+	S = S + 1;
+	t63 = Pool[t61];	//Valor de pool
+	t64 = Pool[t62];	//Valor de pool
+	if(t63 != t64) goto L8;
+	goto L9;
+		L9:
+		goto L10;
+		L8:
+			//-- Asignando valor --
+		t65 = P + 3;
+		t66 = P + 3;
+		t67 = Stack[t66];
+		t68 = t67 + 1;
+		Stack[t65] = t68;
+		goto L7;
+		L10:
+		//-- Declarando variable --
+	t69 = P + 4;
+	Stack[t69] = 0;	//j
+		//-- Mientras --
+	L11:
+	t70 = P + 2;
+	t71 = Stack[t70];
+	Pool[S] = 0;
+	t72 = S;
+	S = S + 1;
+
+        // --traer el valor de J
+		t1 = P + 4;
+		t2 = Stack[t1];
+        t3= t2+t71;
+
+	t73 = Pool[t3];	//Valor de pool
+	t74 = Pool[t72];	//Valor de pool
+	if(t73 != t74) goto L12;
+	goto L13;
+		L13:
+		goto L14;
+		L12:
+			//-- Declarando variable --
+		t75 = P + 2;
+		t76 = Stack[t75];
+            // --traer el valor de J
+            t5 = P + 4;
+            t6 = Stack[t5];
+            t7= t6+t76;
+
+		t77 = P + 5;
+		Stack[t77] = t7;	//temp
+			//-- Asignando valor --
+		t78 = P + 1;
+		t79 = Stack[t78];
+		t80 = P + 3;
+		t81 = Stack[t80];
+		t82 = P + 4;
+		t83 = Stack[t82];
+		t84 = t81 + t83;
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t85 = t79 + 1;
+		t86 = t85 + t84;
+		t87 = P + 5;
+		t88 = Stack[t87];
+		Heap[t86] = t88;
+			//-- Asignando valor --
+		t89 = P + 4;
+		t90 = P + 4;
+		t91 = Stack[t90];
+		t92 = t91 + 1;
+		Stack[t89] = t92;
+		goto L11;
+		L14:
+L6:
+}
+
+
+/*
+    +---------------------------------
+    | CONCATENAR CHAR
+    +---------------------------------
+    | param1 = puntero donde inicia el arreglo de char destino
+    | param2 = puntero donde inicia el arreglo de char contenido
+    
+*/
+
+void func_concatenarArrayArray(){
+		//-- Declarando variable --
+	t55 = P + 3;
+	Stack[t55] = 0;	//i
+		//-- Mientras --
+	L7:
+	t56 = P + 1;
+	t57 = Stack[t56];
+	t58 = P + 3;
+	t59 = Stack[t58];
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t60 = t57 + 1;
+	t61 = t60 + t59;
+	t62 = Heap[t61];
+	Pool[S] = 0;
+	t63 = S;
+	S = S + 1;
+	t64 = Pool[t62];	//Valor de pool
+	t65 = Pool[t63];	//Valor de pool
+	if(t64 != t65) goto L8;
+	goto L9;
+		L9:
+		goto L10;
+		L8:
+			//-- Asignando valor --
+		t66 = P + 3;
+		t67 = P + 3;
+		t68 = Stack[t67];
+		t69 = t68 + 1;
+		Stack[t66] = t69;
+		goto L7;
+		L10:
+		//-- Declarando variable --
+	t70 = P + 4;
+	Stack[t70] = 0;	//j
+		//-- Mientras --
+	L11:
+	t71 = P + 2;
+	t72 = Stack[t71];
+	t73 = P + 4;
+	t74 = Stack[t73];
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t75 = t72 + 1;
+	t76 = t75 + t74;
+	t77 = Heap[t76];
+	Pool[S] = 0;
+	t78 = S;
+	S = S + 1;
+	t79 = Pool[t77];	//Valor de pool
+	t80 = Pool[t78];	//Valor de pool
+	if(t79 != t80) goto L12;
+	goto L13;
+		L13:
+		goto L14;
+		L12:
+			//-- Asignando valor --
+		t81 = P + 1;
+		t82 = Stack[t81];
+		t83 = P + 3;
+		t84 = Stack[t83];
+		t85 = P + 4;
+		t86 = Stack[t85];
+		t87 = t84 + t86;
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t88 = t82 + 1;
+		t89 = t88 + t87;
+		t90 = P + 2;
+		t91 = Stack[t90];
+		t92 = P + 4;
+		t93 = Stack[t92];
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t94 = t91 + 1;
+		t95 = t94 + t93;
+		t96 = Heap[t95];
+		Heap[t89] = t96;
+			//-- Asignando valor --
+		t97 = P + 4;
+		t98 = P + 4;
+		t99 = Stack[t98];
+		t100 = t99 + 1;
+		Stack[t97] = t100;
+		goto L11;
+		L14:
+L6:
+}
+
+
+/*
+    +---------------------------------
+    | CARGAR CADENA EN CHAR[EXP]
+    +---------------------------------
+    | param1 = puntero donde inicia el arreglo de char 
+    | param2 = puntero donde inicia la cadena en pool
+    
+*/
+void func_cargarCadena(){
+    
+		//-- Declarando variable --
+	t0 = P + 3;
+	Stack[t0] = 0;	//i
+		//-- Mientras --
+	L2:
+	t1 = P + 2;
+	t2 = Stack[t1]; //el parametro
+
+	t3 = P + 3;
+	t4 = Stack[t3]; // valor de i
+		//-- Mapeando indice --
+		//-- Get item from index --
+	//t5 = t2 + 1;
+	t6 = t2 + t4;
+	t7 = Pool[t6];
+
+	if(t7 != 0) goto L3;
+	goto L4;
+		L4:
+		goto L5;
+		L3:
+			//-- Declarando variable --
+		t8 = P + 2;
+		t9 = Stack[t8]; // parametro
+		t10 = P + 3;
+		t11 = Stack[t10]; // i
+			//-- Mapeando indice --
+			//-- Get item from index --
+		//t12 = t9 + 1;
+		t13 = t9 + t11; //direccion de pool
+		//t14 = Pool[t13];
+		t15 = P + 4;
+		Stack[t15] = t13;	//valor
+			//-- Asignando valor --
+		t16 = P + 1;
+		t17 = Stack[t16];
+		t18 = P + 3;
+		t19 = Stack[t18];
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t20 = t17 + 1;
+		t21 = t20 + t19;
+		t22 = P + 4;
+		t23 = Stack[t22];
+		Heap[t21] = t23;
+			//-- Asignando valor --
+		t24 = P + 3;
+		t25 = P + 3;
+		t26 = Stack[t25];
+		t27 = t26 + 1;
+		Stack[t24] = t27;
+		goto L2;
+		L5:
+L1:
+}
+
+/*
+    +---------------------------------
     | INICIALIZAR ARREGLOS
     +--------------------------------- 
     | param1 = tamaño

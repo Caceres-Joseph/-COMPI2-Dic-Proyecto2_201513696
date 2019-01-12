@@ -133,12 +133,18 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
         tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entorno->nivel);
         QString etqValor=tabla->getEtiqueta();
         tabla->linea(etqValor+" = Heap["+etqInd+"]",entorno->nivel);
-        valor->c3d=etqValor;
-        valor->c3dF="";
-        valor->c3dS="";
-        valor->c3dV="";
 
-        return valor;
+
+        itemValor *valT=new itemValor();
+        valT->c3d=etqValor;
+        valT->c3dF="";
+        valT->c3dS="";
+        valT->c3dV="";
+        valT->valor=valor->valor;
+        valT->dimen=0;
+
+
+        return valT;
     }else if(nivel == 8)
     // tEste  sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL
     {

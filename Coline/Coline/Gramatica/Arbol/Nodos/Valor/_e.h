@@ -21,6 +21,7 @@
 #include "Coline/Gramatica/Arbol/Nodos/Valor/OpeLogico/not.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func.h"
+#include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_cadena.h"
 
 class _E: public nodoModelo
 {

@@ -81,12 +81,70 @@ itemValor * _E::getValor(elementoEntorno *elemento){
             return val19;
         }
 
-    }else if(nivel==20){
+    }else if(nivel==20)
+    //val Cadena
+    {
+        QString cadena=lst_Atributos->getToken(0)->val.replace("\"","");
+
+        QString etqInicioCad=tabla->getEtiqueta();
+        itemValor* retorno=new itemValor('a',etqInicioCad);
+
+        tabla->linea(etqInicioCad + " = S", elemento->nivel, "Inicio de la cadena");
+
+        QByteArray inBytes=cadena.toUtf8();
+        const char *cStrData=inBytes.constData();
+
+        int indice =0;
+        while(cStrData[indice] != '\0'){
+            char elem=cStrData[indice];
+            int ascci=(int)elem;
+            if(ascci==92)
+            //es una diagonal invertida
+            {
+                QString val1=QChar(cStrData[indice+1]);
+                if(val1=="n")
+                //salto de linea
+                {
+                    ascci=10;
+                    indice++;
+                }else if(val1=="0")
+                //caracter nulo
+                {
+                    ascci=0;
+                    indice++;
+                }else if(val1=="t")
+                //caracter nulo
+                {
+                    ascci=9;
+                    indice++;
+                }else if(val1=="\"")
+                //comilla
+                {
+                    ascci=34;
+                    indice++;
+                }
+            }
+            QString charInt=QString::number(ascci);
+
+            itemValor *itemTemp=new itemValor(elem,charInt);
+            retorno->dimensiones.append(itemTemp);
+
+            tabla->linea("Pool[S] = "+charInt, elemento->nivel);
+            tabla->incrementarPool(elemento);
+            indice++;
+        }
+
+
+        //caracter nulo
+        tabla->linea("Pool[S] = 0", elemento->nivel, "Caracter nulo");
+        tabla->incrementarPool(elemento);
+
+        return retorno;
 
     }else if(nivel==21)
     //valCaracter
     {
-        QString cad22=lst_Atributos->getToken(0)->valLower;
+        QString cad22=lst_Atributos->getToken(0)->val;
         if(cad22.count()<3){
             tabla->tablaError->insertErrorSemantic("El caracter está vacio",lst_Atributos->getToken(0));
             return new itemValor;
@@ -95,26 +153,45 @@ itemValor * _E::getValor(elementoEntorno *elemento){
         QByteArray inBytes=cad22.toUtf8();
         const char *cStrData=inBytes.constData();
 
+        int ascci=(int)cStrData[0];
+
+        if(ascci==92)
+        //es una diagonal invertida
+        {
+            QString val1=QChar(cStrData[1]);
+            if(val1=="n")
+            //salto de linea
+            {
+                ascci=10;
+            }else if(val1=="0")
+            //caracter nulo
+            {
+                ascci=0;
+            }else if(val1=="t")
+            //caracter nulo
+            {
+                ascci=9;
+            }else if(val1=="\"")
+            //comilla
+            {
+                ascci=34;
+            }
+        }
+
         /*
          * C3d
         */
 
-        QString tempP=tabla->getEtiqueta();
         //buscando la ultima posición libre
-        QString cadP=tempP+" = "+"Pool[0]";
-        QString tempP2=tabla->getEtiqueta();
-        QString cadP2=tempP2+" = "+tempP+" + 1";
+        QString retorno=tabla->getEtiqueta();
 
 
         //actualizo el puntero
-        tabla->linea(cadP,elemento->nivel);
-        tabla->linea("Pool["+tempP+"] = "+QString::number((int)cStrData[0]), elemento->nivel);
-        tabla->linea(cadP2,elemento->nivel);
-        tabla->linea("Pool[0] = "+tempP2,elemento->nivel);
+        tabla->linea("Pool[S] = "+QString::number(ascci), elemento->nivel);
+        tabla->linea(retorno+" = S",elemento->nivel);
+        tabla->incrementarPool(elemento);
 
-
-
-        itemValor *val22=new itemValor(cStrData[0],tempP);
+        itemValor *val22=new itemValor(cStrData[0],retorno);
         return val22;
 
 
@@ -134,6 +211,13 @@ itemValor * _E::getValor(elementoEntorno *elemento){
 
     }else if(nivel==26){
 
+        //hay que guardarlo en string pool
+        QString etqInicioCad=tabla->getEtiqueta();
+        itemValor* ret=new itemValor('a',etqInicioCad);
+        _CONVERTIR_CADENA *nodoConver=(_CONVERTIR_CADENA*)hijos[0];
+        itemValor *itemVal=nodoConver->getValor(elemento);
+        ret->c3d=itemVal->c3d;
+        return ret;
     }
 
 

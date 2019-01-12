@@ -32,7 +32,9 @@ HEADERS += pch.hpp \
     Coline/Elementos/Elementos/elementoentorno.h \
     Coline/Elementos/Items/itementorno.h \
     Coline/Elementos/Primitivos/p_cadena.h \
-    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.h
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_concatenar.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_cadena.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -142,7 +144,9 @@ SOURCES += \
     Coline/Elementos/Elementos/elementoentorno.cpp \
     Coline/Elementos/Items/itementorno.cpp \
     Coline/Elementos/Primitivos/p_cadena.cpp \
-    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.cpp
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_concatenar.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_cadena.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

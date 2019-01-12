@@ -130,7 +130,7 @@ bool elementoPolimorfo::comprobarParams(QList<itemValor *> params, token *nombre
         elementoParametro* value = it->second;
         itemValor* val=params[i];
 
-        if(!((val->valor->tipo==value->tipo->valLower)&&(val->dimensiones.count()==value->dimensiones))){
+        if(!((val->valor->tipo==value->tipo->valLower)&&(val->dimen==value->dimensiones))){
             return false;
         }
         it++;

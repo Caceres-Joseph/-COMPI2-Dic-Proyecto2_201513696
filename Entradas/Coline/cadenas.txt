@@ -1,0 +1,18 @@
+ 
+
+clase main{
+
+    principal(){  
+        caracter cadena[20] = "Nombre:";
+        caracter cadena2[10]= "Jose";
+        
+        concatenar(cadena,cadena2);
+        concatenar(cadena," :)");
+ 
+        imprimir("Inicio");
+        imprimir(cadena);
+        imprimir();
+    }
+   
+     
+}

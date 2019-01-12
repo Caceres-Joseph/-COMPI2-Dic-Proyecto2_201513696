@@ -32,6 +32,7 @@ class itemValor
 public:
 
     QList<itemValor*> dimensiones;
+    int dimen=0;
     /*
     |----------------
     | 3D

@@ -110,6 +110,8 @@ struct Nod *VAL;
 %token<TEXT>  tNuevo
 %token<TEXT>  tEste
 %token<TEXT>  tImprimir
+%token<TEXT>  tConcatenar  
+%token<TEXT>  tConvertirCadena  
 %token<TEXT>  tRetorno
 %token<TEXT>  tSi
 %token<TEXT>  tSino
@@ -210,6 +212,8 @@ struct Nod *VAL;
 %type<VAL> FOR 
 %type<VAL> FUNCIONES_NATIVAS 
 %type<VAL> IMPRIMIR 
+%type<VAL> CONCATENAR 
+%type<VAL> CONVERTIR_CADENA 
 %type<VAL> MENSAJE 
 %type<VAL> OPE_TIPO 
 
@@ -1569,8 +1573,75 @@ FUNCIONES_NATIVAS:
 
                         $$->Padre=padre;
                 } 
+        | CONCATENAR
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
+                        padre->nivel=2;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }  
+
+                /*
+        | CONVERTIR_CADENA
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
+                        padre->nivel=1;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                } 
+                */
         ;
 
+
+CONVERTIR_CADENA:
+        tConvertirCadena sAbreParent E sCierraParent 
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CONVERTIR_CADENA *padre=new _CONVERTIR_CADENA("CONVERTIR_CADENA",tabla); 
+                        padre->nivel=1;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tConvertirCadena",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+
+        ;
+
+CONCATENAR:
+        tConcatenar sAbreParent LST_VAL sCierraParent 
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CONCATENAR *padre=new _CONCATENAR("CONCATENAR",tabla); 
+                        padre->nivel=1;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tConcatenar",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+
+        ;
 
 IMPRIMIR:
         tImprimir sAbreParent VALOR sCierraParent 
@@ -2391,6 +2462,19 @@ E:
 
                         $$->Padre=padre;
                 }
+        | CONVERTIR_CADENA
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        padre->nivel=26;
+
+                                //hijos
+                                padre->hijos.append($1->Padre);  
+
+                        $$->Padre=padre;
+                }  
+
         //| SI_SIMPLIFICADO
         //| OPE_ARITME
         //| OPE_TIPO
