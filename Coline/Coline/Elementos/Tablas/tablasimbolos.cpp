@@ -1,5 +1,6 @@
 #include "tablasimbolos.h"
 #include "Coline/Elementos/Elementos/elementoentorno.h"
+#include "Coline/Elementos/Elementos/elementoclase.h"
 
 void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
     linea("$$_SGC("+inicio+", "+tam+")",nivel);
@@ -165,4 +166,19 @@ void tablaSimbolos::incrementarHeap(elementoEntorno *entor){
 }
 void tablaSimbolos::incrementarPool(elementoEntorno *entor){
     linea("S = S + 1", entor->nivel);
+}
+
+
+elementoClase *tablaSimbolos::getClase(token *nombre){
+
+
+    for (int i = 0; i < lstClases.count(); ++i) {
+        elementoClase * elem= lstClases[i];
+        if(elem->nombreClase->valLower==nombre->valLower){
+            return elem;
+        }
+    }
+
+    this->tablaError->insertErrorSemantic("No se encuentra la clase:"+nombre->val, nombre);
+    return NULL;
 }

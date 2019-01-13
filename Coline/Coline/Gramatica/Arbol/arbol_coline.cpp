@@ -15,8 +15,30 @@ void arbol_coline::ejecutarPrincipal(){
             //elementoPolimorfo prin=temp->lstPrincipal->listaPolimorfa[0];
 
             objetoClase *objClase=new objetoClase(temp,tabla);
-            objClase->ejecutarGlobales();
+            //objClase->ejecutarGlobales(0);
             objClase->ejecutarPrincipal();
+            objClase->ejecutarConstructores();
+            objClase->ejecutarMetodos();
+
+        }
+    }
+
+}
+
+
+
+void arbol_coline::ejecutarDemasMetodos(){
+
+
+    //recorro todas las clases en busca del main
+
+
+    for (int i = 0; i < tabla->lstClases.count(); ++i) {
+        elementoClase *temp=tabla->lstClases[i];
+        if(temp->lstPrincipal->listaPolimorfa.count()==0){
+            //elementoPolimorfo prin=temp->lstPrincipal->listaPolimorfa[0];
+            objetoClase *objClase=new objetoClase(temp,tabla);
+            objClase->ejecutarConstructores();
             objClase->ejecutarMetodos();
 
         }

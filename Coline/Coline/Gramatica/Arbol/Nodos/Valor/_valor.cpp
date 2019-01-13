@@ -1,10 +1,79 @@
 #include "_valor.h"
 
+void _VALOR::ejecutarConstructor(elementoEntorno *entor, QString este, objetoClase *clase){
+
+
+    tabla->comentarioLinea("Llamado al constructor",entor->nivel);
+
+    _LST_VAL *nodoVals=(_LST_VAL*)hijos[0];
+    QList<itemValor*> lstValores= nodoVals->getLstValores(entor);
+
+
+    token *nombre=lst_Atributos->getToken(0);
+    itemValor *val=clase->getConstructor(nombre, lstValores);
+
+    QString cadParams=clase->cuerpoClase->lstConstructores->cadParams(lstValores);
+
+    //Colocando el this
+    tabla->func_colocarParam(este,1,entor);
+
+
+    //Cargando parámetros
+    for (int i = 0; i < lstValores.count(); ++i) {
+        itemValor *val=lstValores[i];
+        tabla->func_colocarParam(val->c3d,i+2,entor);
+    }
+
+    tabla->func_llamarFunc(clase->cuerpoClase->nombreClase->valLower+"_"+nombre->valLower+cadParams, entor);
+
+}
+
+itemValor * _VALOR::getObjeto(elementoEntorno *entor){
+    itemValor *retorno=new itemValor();
+
+    //nombre del objeto
+    token *idObjeto= lst_Atributos->getToken(0);
+    //buscando el objeto si existe
+    elementoClase *tempClase=tabla->getClase(idObjeto);
+    if(tempClase==NULL)
+        return retorno;
+
+
+    //creamos el nuevo metodo
+    objetoClase *objClase=new objetoClase(tempClase,tabla);
+
+
+
+    /*-------------------------
+     * Cargando las variables globales
+    */
+
+    //guardo la primera posicion
+    QString etqRetorno= tabla->getEtiqueta();
+
+    QString este=tabla->getEtiqueta();
+    tabla->comentarioLinea("Cargando los atributos del objeto", entor->nivel);
+    tabla->linea(etqRetorno+" = H", entor->nivel, "Pos inicial del objeto");
+    tabla->linea(este+ " = H", entor->nivel, "This");
+    objClase->ejecutarGlobales(entor);
+
+
+    /*-------------------------
+     * Ejecutando constructor
+    */
+    ejecutarConstructor(entor,este, objClase);
+
+
+    retorno = new itemValor(objClase,etqRetorno);
+    return retorno;
+}
+
+
 itemValor * _VALOR::getValor(elementoEntorno *elemento, token *tipo){
     itemValor *retorno=new itemValor();
 
     if(nivel==1){
-
+        return getObjeto(elemento);
     }else if(nivel ==2){
 
     }else if(nivel==3){

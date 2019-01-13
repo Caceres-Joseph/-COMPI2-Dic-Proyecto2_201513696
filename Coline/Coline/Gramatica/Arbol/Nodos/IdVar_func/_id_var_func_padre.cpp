@@ -75,6 +75,30 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
     // tEste  sPunto  valId
     {
 
+        QString etqDir=tabla->getEtiqueta();
+        tabla->linea(etqDir+" = P + 1", entorno->nivel, "Posicion del this");
+        QString valThis=tabla->getEtiqueta();
+        tabla->linea(valThis+" = Stack["+etqDir+"]", entorno->nivel, "Val this");
+
+        //tengo que buscar la variable en el entorno global, si y solo si
+        itemEntorno *val=entorno->getValIdGlobal(lst_Atributos->getToken(0));
+
+
+        QString pos=tabla->getEtiqueta();
+        tabla->linea(pos+" = "+valThis+" + "+QString::number(val->pos), entorno->nivel);
+        QString etqValor=tabla->getEtiqueta();
+
+        tabla->linea(etqValor+" = Heap["+pos+"]", entorno->nivel);
+
+
+        itemValor *vale=new itemValor();
+        vale->valor=val->valor->valor;
+        vale->dimensiones=val->valor->dimensiones;
+        vale->dimen=val->valor->dimen;
+        vale->c3d=etqValor;
+        return vale;
+
+
     }else if(nivel == 3)
     // valId
     {
@@ -257,7 +281,7 @@ itemValor *_ID_VAR_FUNC_PADRE::cargarMetodo(elementoEntorno *entor){
         QString pivote=tabla->getEtiqueta();
         tabla->linea(pivote+" = P + "+tamAmbito, entor->nivel,"pivote");
         QString direc=tabla->getEtiqueta();
-        tabla->linea(direc+" = "+pivote +" + "+QString::number(i+1),entor->nivel);
+        tabla->linea(direc+" = "+pivote +" + "+QString::number(i+2),entor->nivel);
         tabla->linea("Stack["+direc+"] = "+val->c3d,entor->nivel,"param:"+val->valor->tipo);
     }
 

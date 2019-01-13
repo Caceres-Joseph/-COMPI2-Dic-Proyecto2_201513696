@@ -14,7 +14,11 @@ class elementoPolimorfo
 public:
 
     token *tipo;
-    std::map<QString,elementoParametro*> lstParametros;
+    //std::map<QString,elementoParametro*> lstParametros;
+    //
+    QList<elementoParametro*> lstParametros;
+    QList<QString> lstNombres;
+
     token *nombre;
     itemValor *retorno;
     tablaSimbolos *tabla;

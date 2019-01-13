@@ -884,9 +884,8 @@ CONSTRUCTOR:
 
 
 
-DECLARAR_VARIABLE_GLOBAL: 
-        /*
-        VISIBILIDAD TIPO  VAR_ARREGLO  VAL
+DECLARAR_VARIABLE_GLOBAL:  
+        VISIBILIDAD DECLARAR_VARIABLE_SINVISIBI
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -894,37 +893,20 @@ DECLARAR_VARIABLE_GLOBAL:
                         padre->nivel=1;
 
                                 //hijos
-                                padre->hijos.append($1->Padre);
-                                padre->hijos.append($2->Padre); 
-                                padre->hijos.append($3->Padre);
-                                padre->hijos.append($4->Padre); 
+                                //padre->hijos.append($1->Padre);
+                                padre->hijos.append($2->Padre);
 
-                                
                         $$->Padre=padre;
-                }
-        | VISIBILIDAD TIPO  VAR_ARREGLO  
+                } 
+        | DECLARAR_VARIABLE_SINVISIBI
                 {   
                         //creando el padre
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
                         padre->nivel=2;
-                                //hijos
-                                padre->hijos.append($1->Padre);
-                                padre->hijos.append($2->Padre); 
-                                padre->hijos.append($3->Padre); 
-
-                        $$->Padre=padre;
-                }
-        | */VISIBILIDAD DECLARAR_VARIABLE_SINVISIBI
-                {   
-                        //creando el padre
-                        $$=new Nod(); 
-                        _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
-                        padre->nivel=3;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
-                                padre->hijos.append($2->Padre);
 
                         $$->Padre=padre;
                 } 
@@ -1989,7 +1971,7 @@ SINO:
 
  
 VALOR:  
-       /* tNuevo  valId  sAbreParent  LST_VAL  sCierraParent  
+       tNuevo  valId  sAbreParent  LST_VAL  sCierraParent  
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -2005,6 +1987,8 @@ VALOR:
 
                         $$->Padre=padre;
                 }
+/* 
+
         | tNuevo  TIPO  LST_CORCHETES_VAL
                 {   
                         //creando el padre
@@ -2018,9 +2002,8 @@ VALOR:
 
                         $$->Padre=padre;
                 }
-        | */
-
-        LST_LLAVES_VAL  
+*/
+        | LST_LLAVES_VAL  
                 {   
                         //creando el padre
                         $$=new Nod(); 

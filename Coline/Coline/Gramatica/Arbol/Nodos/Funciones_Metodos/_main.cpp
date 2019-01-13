@@ -26,13 +26,13 @@ itemRetorno* _MAIN::ejecutar(elementoEntorno *entor){
     elementoEntorno *principal=new elementoEntorno(entor,tabla,"principal",entor->este);
     principal->nivel++;
     tabla->linea2("",entor->nivel);
-    tabla->linea("principal()",entor->nivel);
+    tabla->linea("principal()",0);
     tabla->linea2("void principal(){",entor->nivel);
     ejecutarHijos(principal);
     //imprimirNodos();
     tabla->linea2(tabla->Salida3d+":",entor->nivel);
     tabla->Salida3d="";
-    tabla->linea2("}", entor->nivel);
+    tabla->linea2("}", 0);
 
 
     return ret;

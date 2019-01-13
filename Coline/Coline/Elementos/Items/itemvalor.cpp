@@ -46,8 +46,10 @@ bool itemValor::isTypeNulo(){
 
 }
 bool itemValor::isTypeObjeto(){
+    if(valor->tipo=="objeto"){
+        return true;
+    }
     return false;
-
 }
 bool itemValor::isTypeVacio(){
     return false;

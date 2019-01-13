@@ -1,0 +1,53 @@
+ 
+
+
+clase nodo{
+    publico entero valor= 11+43; 
+    publico entero valor2; 
+    publico caracter mensaje[20]="global";
+
+    nodo(entero valor, entero valor2, caracter mensaje[20]){
+        imprimir("---- Constructor del nodo ----");
+        imprimir(este.mensaje); 
+        
+        imprimir(este.valor);
+
+        este.mensaje=mensaje;
+        este.valor=valor;
+        este.valor2=valor2;
+
+        imprimir(este.valor);
+        imprimir(este.mensaje); 
+
+    }
+
+    publico vacio getValor(){
+        
+        retornar 11; 
+    }
+
+}
+
+
+clase main{ 
+
+
+    principal(){  
+        entero val1=234;
+        caracter mensaje1[20]= "Fin nodo1";
+        caracter mensaje2[20]= "Fin nodo2"; 
+        caracter mensaje3[20]= "Fin nodo3"; 
+
+        nodo nuevoNodo =nuevo nodo(44, 54, mensaje1);
+        nodo nuevoNodo1=nuevo nodo(99, 08, mensaje2);
+        nodo nuevoNodo3=nuevo nodo(67, 75, mensaje3);
+            
+        
+        imprimir();
+
+    }
+ 
+ 
+    
+}
+ 

@@ -12,6 +12,9 @@ class _DECLARAR_VARIABLE_GLOBAL: public nodoModelo
 public:
     _DECLARAR_VARIABLE_GLOBAL(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
     void ejecutarHijos2(elementoClase *simbolo)override;
+    //itemRetorno *ejecutar (elementoEntorno *entor)override;
+
+    itemRetorno * cargarVariables(elementoEntorno *entor);
 };
 
 #endif // _DECLARAR_VARIABLE_GLOBAL_H

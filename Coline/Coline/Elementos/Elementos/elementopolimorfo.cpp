@@ -15,14 +15,19 @@ elementoPolimorfo::elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, t
 void elementoPolimorfo::insertarParametro(token *idParametro, token *tipoParametro, int dimension){
     elementoParametro *param=new elementoParametro(tipoParametro,dimension);
 
-    std::map<QString,elementoParametro*>::iterator it =lstParametros.find(idParametro->valLower);
-    if(it!=lstParametros.end()){
-        //ya hay una variable con el mismo nombre *uto
-        tabla->tablaError->insertErrorSemantic("Ya existe un parametro con el nombre: "+idParametro->val,idParametro);
-    }else{
-        //se puede insertar libremente
-        lstParametros.insert(std::pair<QString, elementoParametro*>(idParametro->valLower,param));
+    for (int i = 0; i < lstParametros.count(); ++i) {
+        elementoParametro * elem= lstParametros[i];
+        QString nombre=lstNombres[i];
+        if(nombre==idParametro->valLower){
+            tabla->tablaError->insertErrorSemantic("Ya existe un parametro con el nombre: "+idParametro->val,idParametro);
+            return;
+        }
     }
+
+    lstParametros.append(param);
+    lstNombres.append(idParametro->valLower);
+
+
 }
 
 void elementoPolimorfo::ejecutar(elementoEntorno *entor){
@@ -54,37 +59,40 @@ void elementoPolimorfo::ejecutar(elementoEntorno *entor){
 
 void elementoPolimorfo::cargarParametros(elementoEntorno *entor){
 
-    std::map<QString, elementoParametro*>::iterator it = lstParametros.begin();
 
-    int pos=1;
-    while (it != lstParametros.end())
-    {
-        QString key = it->first;
-        elementoParametro* value = it->second;
+    for (int i = 0; i < lstParametros.count(); ++i) {
+        elementoParametro * value= lstParametros[i];
+        QString key=lstNombres[i];
 
         int posAbsoluta=entor->tamEntornoAbsoluto();
         QList<itemValor*> lista;
         lista.append(new itemValor());
-        itemEntorno *nuevoItem =new itemEntorno(new token(key),value->tipo,getValor(value->tipo->valLower),lista,tabla, posAbsoluta, false);
 
 
+        itemValor *tempVal= getValor(value->tipo->valLower);
 
+        //cargando con arreglos temporales
+        for (int j = 0; j < value->dimensiones; ++j) {
+            itemValor *tempVal2=new itemValor(1,"1");
+            tempVal->dimensiones.append(tempVal2);
+        }
+
+        tempVal->dimen=value->dimensiones;
+        itemEntorno *nuevoItem =new itemEntorno(new token(key),value->tipo,tempVal,lista,tabla, posAbsoluta, false);
         entor->insertarItem(nuevoItem);
-
-        // Increment the Iterator to point to next entry
-        it++;
     }
+
 }
 
 QString elementoPolimorfo::cadParams(){
     QString retorno="";
-    std::map<QString, elementoParametro*>::iterator it = lstParametros.begin();
-    while (it != lstParametros.end())
-    {
-        elementoParametro* value = it->second;
+
+    for (int i = 0; i < lstParametros.count(); ++i) {
+        elementoParametro * value= lstParametros[i];
         retorno+="_"+value->tipo->valLower+QString::number(value->dimensiones);
-        it++;
+
     }
+
     return retorno;
 }
 
@@ -119,22 +127,17 @@ itemValor *elementoPolimorfo::getValor(QString tipo){
 
 bool elementoPolimorfo::comprobarParams(QList<itemValor *> params, token *nombre){
 
-    if(params.count()!=lstParametros.size()){
+    if(params.count()!= lstParametros.count()){
         return false;
     }
 
-    std::map<QString, elementoParametro*>::iterator it = lstParametros.begin();
-    int i=0;
-    while (it != lstParametros.end())
-    {
-        elementoParametro* value = it->second;
+    for (int i = 0; i < lstParametros.count(); ++i) {
+        elementoParametro * value= lstParametros[i];
         itemValor* val=params[i];
 
         if(!((val->valor->tipo==value->tipo->valLower)&&(val->dimen==value->dimensiones))){
             return false;
         }
-        it++;
-        i++;
     }
 
     return true;

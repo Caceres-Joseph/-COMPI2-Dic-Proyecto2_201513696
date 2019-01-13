@@ -20,6 +20,8 @@
 #include "Coline/Elementos/Primitivos/p_caracter.h"
 #include "Coline/Elementos/Primitivos/p_decimal.h"
 #include "Coline/Elementos/Primitivos/p_nulo.h"
+#include "Coline/Elementos/Primitivos/p_objeto.h"
+//#include "Coline/Elementos/Objetos/objetoclase.h"
 
 
 /*
@@ -99,6 +101,13 @@ public:
         this->valor=ent;
         this->c3d=c3d;
     }
+
+    itemValor(objetoClase *objeto, QString c3d){
+        p_objeto *ent=new p_objeto(objeto);
+        this->valor=ent;
+        this->c3d=c3d;
+    }
+
 
     bool isTypeCadena();
     bool isTypeBooleano();

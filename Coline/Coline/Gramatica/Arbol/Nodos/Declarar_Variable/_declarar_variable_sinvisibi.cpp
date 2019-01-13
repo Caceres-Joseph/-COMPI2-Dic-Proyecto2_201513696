@@ -2,6 +2,55 @@
 
 
 
+void _DECLARAR_VARIABLE_SINVISIBI::cargarGlobales(elementoEntorno *entor){
+
+    _TIPO *nodoTipo;
+    nodoTipo = (_TIPO*)hijos[0];
+
+    _VAR_ARREGLO *nodoVar;
+    nodoVar = (_VAR_ARREGLO*)hijos[1];
+
+    itemValor *valor=new itemValor();
+
+    if(nivel == 1){
+        _VAL *nodoVal=(_VAL*)hijos[2];
+        //valor=nodoVal->getValor(entor,nodoTipo->getTipo());
+    }
+
+    elementoEntorno *entornoInservible=new elementoEntorno(NULL,tabla,"global",entor->este);
+    entornoInservible->nivel=5;
+    //tabla->comentarioLinea("Codigo inservible:"+entor->nombre,entornoInservible->nivel);
+    QList<itemValor*> dimen=nodoVar->getDimensiones(entornoInservible);
+
+    token *tokId=nodoVar->getIdentificador();
+    token *tokTipo=nodoTipo->getTipo();
+
+
+    /*-------------------------
+     * Asignando el tipo
+    */
+    valor->c3dF="";
+    valor->c3dV="";
+    valor->c3dS="";
+
+    valor->valor->tipo=tokTipo->valLower;
+    valor->dimen=dimen.count();
+
+
+
+    //cargando con arreglos temporales
+    for (int j = 0; j < dimen.count(); ++j) {
+        itemValor *tempVal2=new itemValor(1,"1");
+        valor->dimensiones.append(tempVal2);
+    }
+
+    int posAbsoluta=entor->tamEntornoAbsoluto();
+    itemEntorno *nuevoItem =new itemEntorno(tokId,tokTipo,valor,dimen,tabla, posAbsoluta,true);
+    entor->insertarItem(nuevoItem);
+
+}
+
+
 itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     tabla->comentarioLinea("Declarando variable",entor->nivel);
     itemRetorno* ret=new itemRetorno(0);
@@ -31,18 +80,18 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     QString asign="";
 
     int posAbsoluta=entor->tamEntornoAbsoluto();
-    if(entor->nombre=="global"){
+    if(entor->nombre=="global1"){
 
-        direc = t1 + " = H + " + QString::number(posAbsoluta);
+        direc = t1 + " = H";
         asign="Heap["+t1+"] = ";
-        //tabla->linea(cad1,entor->nivel);
-        //tabla->linea("Heap["+t1+"] = "+valor->c3d,entor->nivel,tokId->val);
+
+        tabla->linea(direc,entor->nivel, "Direc");
+        tabla->incrementarHeap(entor);
     }else{
         direc = t1 + " = P + " + QString::number(posAbsoluta);
         asign="Stack["+t1+"] = ";
+        tabla->linea(direc,entor->nivel, "Direc");
     }
-
-    tabla->linea(direc,entor->nivel);
 
 
     token *tokId=nodoVar->getIdentificador();
@@ -158,9 +207,6 @@ void _DECLARAR_VARIABLE_SINVISIBI::cargarArreglo(QString asign,
             tabla->linea("Heap["+etqT2+"] = "+item->c3d,entor->nivel);
         }
     }
-
-
-
 
 }
 

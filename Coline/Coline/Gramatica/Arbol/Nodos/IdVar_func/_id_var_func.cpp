@@ -12,6 +12,24 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
     }else if(nivel == 2)
     // tEste  sPunto  valId
     {
+        QString etqDir=tabla->getEtiqueta();
+        tabla->linea(etqDir+" = P + 1", entorno->nivel, "Posicion del this");
+        QString valThis=tabla->getEtiqueta();
+        tabla->linea(valThis+" = Stack["+etqDir+"]", entorno->nivel, "Val this");
+
+        //tengo que buscar la variable en el entorno global, si y solo si
+        itemEntorno *val=entorno->getValIdGlobal(lst_Atributos->getToken(0));
+
+
+        QString pos=tabla->getEtiqueta();
+        tabla->linea(pos+" = "+valThis+" + "+QString::number(val->pos), entorno->nivel);
+
+        QString stack="Heap["+pos+"]";
+
+        itemValor *vale=new itemValor();
+        vale->valor=val->valor->valor;
+        vale->c3d=stack;
+        return vale;
 
     }else if(nivel == 3)
     // valId

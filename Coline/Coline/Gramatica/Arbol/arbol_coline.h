@@ -63,6 +63,10 @@ public:
         //buscando el main y ejecutando
         ejecutarPrincipal();
 
+        //escribiendo los metodos de las otras clases
+        ejecutarDemasMetodos();
+
+
         //std::cout<<"\n3D:"<<std::endl;
         //std::cout<<tabla->salida.toStdString()<<std::endl;
         std::cout<<"----- Fin analisis  -----"<<std::endl;
@@ -80,6 +84,8 @@ public:
 
 
     void ejecutarPrincipal();
+
+    void ejecutarDemasMetodos();
 };
 
 #endif // ARBOL_COLINE_H

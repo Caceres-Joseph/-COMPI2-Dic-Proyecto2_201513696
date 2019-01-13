@@ -32,6 +32,7 @@ public:
     elementoEntorno(elementoEntorno *anterior,tablaSimbolos *tabla, QString nombre, objetoClase *este);
 
     itemEntorno *getValId(token *idVal);
+    itemEntorno *getValIdGlobal(token *idVal);
     int tamEntornoAbsoluto();
     int posVar2(int num);
 };

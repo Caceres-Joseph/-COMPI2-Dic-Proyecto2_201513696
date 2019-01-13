@@ -61,6 +61,7 @@ public:
     void sgb(QString inicio,QString tam, int nivel);
 
 
+    elementoClase *getClase(token *nombre);
 
     /*
      * Chapuses :(

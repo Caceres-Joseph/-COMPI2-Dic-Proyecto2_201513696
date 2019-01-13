@@ -49,11 +49,26 @@ itemEntorno *elementoEntorno::getValId(token *idVal){
     while (this->anterior!=NULL){
         return this->anterior->getValId(idVal);
     }
-
-
-
     tabla->tablaError->insertErrorSemantic("La variable: "+idVal->val+" no se enecuentra en el ambito actual",idVal);
 
+    return retorno;
+}
+
+
+itemEntorno *elementoEntorno::getValIdGlobal(token *idVal){
+    QList<itemValor*> list;
+
+    itemEntorno *retorno=new itemEntorno(new token(),new token(),new itemValor(),list,tabla,0,false);
+
+    if(nombre=="global"){
+        return getValId(idVal);
+    }else{
+        if(anterior!=NULL){
+            return anterior->getValIdGlobal(idVal);
+        }
+    }
+
+    tabla->tablaError->insertErrorSemantic("La variable: "+idVal->val+" no se enecuentra en el ambito global",idVal);
     return retorno;
 }
 
@@ -73,7 +88,7 @@ int elementoEntorno::posVar2(int num){
 
     int cantidad=num+lstEntorno.count();
     if(nombre=="global"){
-        return num+1;
+        return num+2;
     }
     while(this->anterior!=NULL){
         return this->anterior->posVar2(cantidad);

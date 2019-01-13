@@ -17,6 +17,9 @@ public:
     itemRetorno *ejecutar (elementoEntorno *entor)override;
     void cargarArreglo(QString asign, token *tokId, token *tipo, QList<itemValor*> dimen, itemValor *valor, elementoEntorno *entor, bool esGlobal);
     void cargarCadena(QString asign, token *tokId, token *tipo, QList<itemValor*> dimen, itemValor *valor, elementoEntorno *entor, bool esGlobal);
+
+    void cargarGlobales(elementoEntorno *entor);
+
 };
 
 #endif // _DECLARAR_VARIABLE_SINVISIBI_H
