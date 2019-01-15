@@ -28,8 +28,7 @@ Cadena \"[^\"]*\"
 Char '[^']*'
 %x comment foo
 
-%%
-   int line_num = 1;
+%% 
         int comment_caller;
 
 "/*"         {
@@ -120,7 +119,8 @@ Char '[^']*'
 
 
 "nada"              { strcpy(yylval.TEXT, yytext); return tNada; }
-"vacio"             { strcpy(yylval.TEXT, yytext); return tVacio; } 
+"vacio"             { strcpy(yylval.TEXT, yytext); return tVacio; }
+"nulo"              { strcpy(yylval.TEXT, yytext); return tNulo; }
 
 "entero"            { strcpy(yylval.TEXT, yytext); return tEntero; }
 "caracter"          { strcpy(yylval.TEXT, yytext); return tCaracter; }
@@ -168,7 +168,7 @@ Char '[^']*'
 
 <comment>[^*\n]*        /* eat anything that's not a '*' */
 <comment>"*"+[^*/\n]*   /* eat up '*'s not followed by '/'s */
-<comment>\n             ++line_num;
+<comment>\n             ++nLinea;
 <comment>"*"+"/"        BEGIN(comment_caller);
 
 %%

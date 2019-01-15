@@ -18,4 +18,9 @@ bison -o parser.cpp --defines=parser.h sintactico.y
 
  nodo1.val1=87;
 
+ ---entradas de teclado ---
+ --ciclos y sentencias de selecccion --
+ --- imports 
+ -- listas cola
+
  
