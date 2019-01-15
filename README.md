@@ -15,3 +15,7 @@ bison -o parser.cpp --defines=parser.h sintactico.y
  Heredar
  Super
  concatenar(destino,"hola #d",33)
+
+ nodo1.val1=87;
+
+ 

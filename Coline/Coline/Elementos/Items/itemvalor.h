@@ -119,6 +119,9 @@ public:
     bool isTypeChar();
 
 
+    itemValor *convertirATipo(token *tipo);
+
+
 };
 
 #endif // ITEMVALOR_H

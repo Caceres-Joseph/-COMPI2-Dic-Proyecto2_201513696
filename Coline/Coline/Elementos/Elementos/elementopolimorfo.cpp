@@ -1,5 +1,6 @@
 #include "elementopolimorfo.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
+#include "Coline/Elementos/Objetos/objetoclase.h"
 elementoPolimorfo::elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, token *tipo, token *nombre, nodoModelo *LST_CUERPO, int dimension, QString nombreClase)
 {
     this->dimension=dimension;
@@ -77,6 +78,21 @@ void elementoPolimorfo::cargarParametros(elementoEntorno *entor){
             tempVal->dimensiones.append(tempVal2);
         }
 
+
+        //validando si es de tipo objeto para cargar el objeto en valor
+        itemValor *tempTipo=new itemValor();
+        itemValor *tipoRes=tempTipo->convertirATipo(value->tipo);
+
+        if(tipoRes->isTypeObjeto()){
+            //es de tipo objeto, hay que buscar la clase para cargarla en el valor
+            elementoClase* elemClase= tabla->getClase(value->tipo);
+
+            objetoClase *nuevoObjto=new objetoClase(elemClase,tabla);
+            tempTipo=new itemValor(nuevoObjto,"--");
+            tempVal->valor=tempTipo->valor;
+        }
+
+
         tempVal->dimen=value->dimensiones;
         itemEntorno *nuevoItem =new itemEntorno(new token(key),value->tipo,tempVal,lista,tabla, posAbsoluta, false);
         entor->insertarItem(nuevoItem);
@@ -89,7 +105,21 @@ QString elementoPolimorfo::cadParams(){
 
     for (int i = 0; i < lstParametros.count(); ++i) {
         elementoParametro * value= lstParametros[i];
-        retorno+="_"+value->tipo->valLower+QString::number(value->dimensiones);
+
+        itemValor *t1=new itemValor();
+        itemValor *t2=t1->convertirATipo(value->tipo);
+
+
+        QString tipo="";
+        if(t2->isTypeObjeto() || t2->isTypeNulo()){
+
+            tipo="objeto";
+        }else{
+            tipo=value->tipo->valLower;
+        }
+
+
+        retorno+="_"+tipo+QString::number(value->dimensiones);
 
     }
 
@@ -135,7 +165,21 @@ bool elementoPolimorfo::comprobarParams(QList<itemValor *> params, token *nombre
         elementoParametro * value= lstParametros[i];
         itemValor* val=params[i];
 
-        if(!((val->valor->tipo==value->tipo->valLower)&&(val->dimen==value->dimensiones))){
+        QString tipo="";
+        itemValor *t3=new itemValor();
+        itemValor *t4=t3->convertirATipo(new token(val->valor->tipo));
+        if(t4->isTypeObjeto()||t4->isTypeNulo()){
+            tipo="objeto";
+        }else{
+            tipo=val->valor->tipo;
+        }
+
+        QString tipo2="";
+        itemValor *t1=new itemValor();
+        itemValor *t2=t1->convertirATipo(value->tipo);
+        tipo2=t2->valor->tipo;
+
+        if(!((tipo==tipo2)&&(val->dimen==value->dimensiones))){
             return false;
         }
     }

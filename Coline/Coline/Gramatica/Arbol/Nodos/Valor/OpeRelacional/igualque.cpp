@@ -15,20 +15,27 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
     | Booleano
     |--------------------------------------------------------------------------
     */
+    itemValor *it1=new itemValor();
+    itemValor *it2=it1->convertirATipo(new token(val1->valor->tipo));
+
+
+    itemValor *it4=it1->convertirATipo(new token(val2->valor->tipo));
+
+
     if ((
-             val1->isTypeBooleano()||
-             val1->isTypeChar()||
-             val1->isTypeDecimal()||
-             val1->isTypeEntero()||
-             val1->isTypeNulo()||
-             val1->isTypeObjeto()
+             it2->isTypeBooleano()||
+             it2->isTypeChar()||
+             it2->isTypeDecimal()||
+             it2->isTypeEntero()||
+             it2->isTypeNulo()||
+             it2->isTypeObjeto()
          )&& (
-            val2->isTypeBooleano()||
-            val2->isTypeChar()||
-            val2->isTypeDecimal()||
-            val2->isTypeEntero()||
-            val2->isTypeNulo()||
-            val2->isTypeObjeto()
+            it4->isTypeBooleano()||
+            it4->isTypeChar()||
+            it4->isTypeDecimal()||
+            it4->isTypeEntero()||
+            it4->isTypeNulo()||
+            it4->isTypeObjeto()
          ))
     {
 
@@ -69,15 +76,6 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
             etSalida=tabla->getSalto();
         }
 
-        /*
-         * tabla->linea("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad, entorno->nivel);
-        tabla->linea2(etqFalso+":",entorno->nivel);
-        tabla->linea(temp+" = 0", entorno->nivel);
-        tabla->linea("goto "+etSalida, entorno->nivel);
-        tabla->linea2(etqVerdad+":",entorno->nivel);
-        tabla->linea(temp+" = 1", entorno->nivel);
-        tabla->linea2(etSalida+":",entorno->nivel);
-        */
 
 
         tabla->linea2("if("+val1->c3d+" "+simbolo+" "+val2->c3d+ ") goto "+etqVerdad+";",entorno->nivel);
@@ -87,7 +85,6 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
         retorno->c3dF=etqFalso;
         retorno->c3dV=etqVerdad;
         retorno->c3dS=etSalida;
-
     }
 
 
@@ -96,7 +93,7 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
     */
     else
     {
-        tabla->tablaError->insertErrorSemantic("No se pueden operar ["+simbolo+"] " + val1->valor->tipo + " con " + val2->valor->tipo, signo);
+        tabla->tablaError->insertErrorSemantic("No se pueden operar - ["+simbolo+"] " + val1->valor->tipo + " con " + val2->valor->tipo, signo);
     }
 
     return retorno;

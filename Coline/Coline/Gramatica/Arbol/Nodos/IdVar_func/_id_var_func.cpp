@@ -8,6 +8,14 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
     if(nivel==1)
     // ID_VAR_FUNC  LST_PUNTOSP
     {
+        _ID_VAR_FUNC *nodoFunc= (_ID_VAR_FUNC*)hijos[0];
+        itemValor *tempPos=nodoFunc->getValor(entorno);
+
+
+        _LST_PUNTOSP *nodoPuntos=(_LST_PUNTOSP*)hijos[1];
+        itemValor *tempRet= nodoPuntos->getDestino(entorno,tempPos);
+
+        return tempRet;
 
     }else if(nivel == 2)
     // tEste  sPunto  valId
@@ -28,6 +36,8 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
 
         itemValor *vale=new itemValor();
         vale->valor=val->valor->valor;
+        vale->dimen=val->valor->dimen;
+        vale->dimensiones=val->valor->dimensiones;
         vale->c3d=stack;
         return vale;
 
@@ -43,16 +53,31 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
 
         QString stack="Stack";
         if(val->esGlobal){
+
+            QString etqDir=tabla->getEtiqueta();
+            tabla->linea(etqDir+" = P + 1", entorno->nivel, "Posicion del this");
+            QString valThis=tabla->getEtiqueta();
+            tabla->linea(valThis+" = Stack["+etqDir+"]", entorno->nivel, "Val this");
+
+            //tengo que buscar la variable en el entorno global, si y solo si
+            itemEntorno *val1=entorno->getValIdGlobal(lst_Atributos->getToken(0));
+
+
+            tabla->linea(pos+" = "+valThis+" + "+QString::number(val1->pos), entorno->nivel);
+
             stack="Heap";
-            puntero="H";
+        }else{
+
+            tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
+
         }
 
-
-        tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
         stack+="["+pos+"]";
 
         itemValor *vale=new itemValor();
         vale->valor=valor->valor;
+        vale->dimen=valor->dimen;
+        vale->dimensiones=valor->dimensiones;
         vale->c3d=stack;
         return vale;
 

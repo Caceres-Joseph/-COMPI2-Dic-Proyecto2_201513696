@@ -51,3 +51,230 @@ clase main{
     
 }
  
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+  
+clase nodo2{
+    publico entero val1;
+    nodo2(entero val1){
+        este.val1=val1;
+    }
+}
+
+clase nodo{ 
+    publico nodo2 nod;
+    publico entero valor=843;
+    publico caracter arr1[10]="Nodo..";
+    publico nodo anterior;
+    nodo(entero valor, caracter arr1[10], nodo anterior){
+        este.valor=valor;
+        este.arr1=arr1;
+        nod=nuevo nodo2(69);
+        este.anterior=anterior;
+
+
+        si(anterior!=nada){
+            imprimir("-- anterior--");
+            imprimir(anterior.valor);
+        }
+
+
+
+    }
+}
+
+
+clase main{ 
+    principal(){    
+        caracter cadena1[10]="- nodo1 -";
+        caracter cadena2[10]="- nodo2 -";
+
+        nodo nodo1 =nuevo nodo(88, cadena1, nada);
+        nodo nodo2 =nuevo nodo(43, cadena2, nodo1);
+
+
+        imprimir(nodo1.arr1);
+        imprimir(nodo1.valor);
+        imprimir(nodo1.nod.val1);
+        imprimir(nodo2.arr1);
+        imprimir(nodo2.valor);
+
+        imprimir();
+
+    }
+    
+}
+ 
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+  
+clase nodo{
+    
+    publico entero val;
+    publico nodo siguiente;
+    nodo(nodo siguiente, entero val){
+        este.siguiente = siguiente;
+        este.val       = val; 
+
+        si(este.siguiente==nada){
+            imprimir("Nulo");
+        }sino{
+            imprimir("Contenido");
+        }
+    }
+
+    vacio imprimirValores(){
+        imprimir("--Imprimiendo--");
+        imprimir(val);
+    }
+}
+ 
+
+
+clase main{ 
+    principal(){    
+
+        nodo nodo1 =nuevo nodo(nada,42); 
+        nodo nodo2 =nuevo nodo(nodo1,55); 
+         
+
+        imprimirArreglos(nodo2);
+
+        imprimir();
+
+    }
+
+   vacio imprimirArreglos(nodo nod1){
+        nod1.imprimirValores();
+ 
+        si(nod1.siguiente!=nada){
+            imprimirArreglos(nod1.siguiente);
+        }
+
+    }
+ 
+    
+}
+ 
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+  
+
+ clase Nodo {
+    privado entero valor;
+    privado Nodo siguiente;
+    Nodo(){
+        este.valor = 0;
+        este.siguiente = nada;
+    }
+      
+    Nodo getSiguiente() {
+        retornar siguiente;
+    }
+
+    vacio setSiguiente(Nodo siguiente){
+        este.siguiente=siguiente;
+    }
+ 
+}
+
+clase main {
+
+
+    principal(){
+        Nodo n1=getNodo(78);
+        Nodo n2=getNodo(23);
+
+        n2.setSiguiente(n1);
+
+        Nodo n3=n2.getSiguiente();
+ 
+        imprimir(n3.valor);
+
+
+        imprimir();
+    }
+
+    Nodo getNodo(Entero val){
+        Nodo retorno=nuevo Nodo();
+        retorno.valor=val;
+        retornar retorno;
+    }
+ 
+}
+
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+  
+
+
+ clase Nodo {
+    publico entero valor;
+    publico Nodo siguiente;
+    Nodo(){
+        este.valor = 0;
+        este.siguiente = nada;
+    }
+       
+}
+
+ clase Lista { 
+    publico Nodo inicio; 
+
+    Lista() {
+        inicio = nada; 
+    }
+
+    publico booleano esVacia() {
+        retornar inicio == nada;
+    }
+ 
+    publico vacio agregarAlFinal() {
+        
+        imprimir(esVacia());
+
+
+    }
+ 
+}
+
+
+
+clase main{
+
+    principal(){
+        Lista lista = nuevo Lista();
+
+        lista.agregarAlFinal(); 
+
+
+        imprimir();
+
+
+    }
+
+}

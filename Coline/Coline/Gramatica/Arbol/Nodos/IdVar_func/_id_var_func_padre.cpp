@@ -7,24 +7,43 @@ itemValor *_ID_VAR_FUNC_PADRE::getDireccionVar(token *idVar, elementoEntorno *en
 
     //tengo que buscar la variable en el entorno *uto
     itemEntorno *val=entorno->getValId(idVar);
-    itemValor *valor=val->valor;
+    itemValor *val1=val->valor;
     QString pos=tabla->getEtiqueta();
     QString puntero="P";
     QString temp= tabla->getEtiqueta();
 
     QString stack="Stack";
     if(val->esGlobal){
+
+        QString etqDir=tabla->getEtiqueta();
+        tabla->linea(etqDir+" = P + 1", entorno->nivel, "Posicion del this");
+        QString valThis=tabla->getEtiqueta();
+        tabla->linea(valThis+" = Stack["+etqDir+"]", entorno->nivel, "Val this");
+
+        //tengo que buscar la variable en el entorno global, si y solo si
+        itemEntorno *tempEntor=entorno->getValIdGlobal(idVar);
+        val1=tempEntor->valor;
+
+
+        tabla->linea(pos+" = "+valThis+" + "+QString::number(tempEntor->pos), entorno->nivel);
+
         stack="Heap";
-        puntero="H";
+    }else{
+
+        tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
     }
 
 
-    tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
     stack+="["+pos+"]";
-    tabla->linea(temp+" = "+ stack,entorno->nivel);
-    valor->c3d=temp;
+    tabla->linea(temp+" = "+ stack,entorno->nivel, "Obteniendo el valor");
 
-    return valor;
+    itemValor *vale=new itemValor();
+    vale->valor=val1->valor;
+    vale->dimen=val1->dimen;
+    vale->dimensiones=val1->dimensiones;
+    vale->c3d=temp;
+
+    return vale;
 }
 
 QString _ID_VAR_FUNC_PADRE::getIndiceMapeado(QList<itemValor *> lstValores, QString direcArreglo, elementoEntorno *entorno){
@@ -70,7 +89,14 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
     if(nivel==1)
     // ID_VAR_FUNC  LST_PUNTOSP
     {
+        _ID_VAR_FUNC *nodoFunc= (_ID_VAR_FUNC*)hijos[0];
+        itemValor *tempPos=nodoFunc->getValor(entorno);
 
+
+        _LST_PUNTOSP *nodoPuntos=(_LST_PUNTOSP*)hijos[1];
+        itemValor *tempRet= nodoPuntos->getValor(entorno,tempPos);
+
+        return tempRet;
     }else if(nivel == 2)
     // tEste  sPunto  valId
     {
@@ -193,6 +219,14 @@ itemRetorno* _ID_VAR_FUNC_PADRE::ejecutar(elementoEntorno *entor){
     // ID_VAR_FUNC  LST_PUNTOSP
     {
 
+        _ID_VAR_FUNC *nodoFunc= (_ID_VAR_FUNC*)hijos[0];
+        itemValor *tempPos=nodoFunc->getValor(entor);
+
+
+        _LST_PUNTOSP *nodoPuntos=(_LST_PUNTOSP*)hijos[1];
+        nodoPuntos->ejecutarSent(entor,tempPos);
+
+        return retorno;
     }else if(nivel == 2)
     // tEste  sPunto  valId
     {
@@ -274,6 +308,20 @@ itemValor *_ID_VAR_FUNC_PADRE::cargarMetodo(elementoEntorno *entor){
 
 
     QString tamAmbito=QString::number(entor->tamEntornoAbsoluto());
+    //colocando el this
+    QString etqThis=tabla->getEtiqueta();
+    tabla->linea(etqThis+" = P + " + tamAmbito, entor->nivel);
+    QString etqThis2=tabla->getEtiqueta();
+    tabla->linea(etqThis2+" = "+etqThis+ " + 1", entor->nivel, "This");
+
+
+    QString eqtEste=tabla->getEtiqueta();
+    tabla->linea(eqtEste+" = P + 1", entor->nivel);
+    QString etqEste2=tabla->getEtiqueta();
+    tabla->linea(etqEste2+" = Stack["+eqtEste+"]", entor->nivel, "Este");
+
+    tabla->linea("Stack["+etqThis2+"] = "+etqEste2,entor->nivel, "Asignando el this");
+
 
     //Cargando parámetros
     for (int i = 0; i < lstValores.count(); ++i) {

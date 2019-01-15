@@ -36,6 +36,35 @@ void _DECLARAR_VARIABLE_SINVISIBI::cargarGlobales(elementoEntorno *entor){
     valor->valor->tipo=tokTipo->valLower;
     valor->dimen=dimen.count();
 
+    //validando si es de tipo objeto para cargar el objeto en valor
+    itemValor *tempTipo=new itemValor();
+    itemValor *tipoRes=tempTipo->convertirATipo(tokTipo);
+
+    if(tipoRes->isTypeObjeto()){
+
+        //hay que verificar si este es el tipo
+
+
+
+
+        //es de tipo objeto, hay que buscar la clase para cargarla en el valor
+        elementoClase* elemClase= tabla->getClase(tokTipo);
+
+        if(elemClase->nombreClase->valLower==entor->este->cuerpoClase->nombreClase->valLower){
+
+            tempTipo=new itemValor(entor->este,"--");
+            valor->valor=tempTipo->valor;
+        }else{
+            objetoClase *nuevoObjto=new objetoClase(elemClase,tabla);
+            tempTipo=new itemValor(nuevoObjto,"--");
+            valor->valor=tempTipo->valor;
+
+        }
+
+    }
+
+
+
 
 
     //cargando con arreglos temporales
@@ -65,10 +94,40 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     itemValor *valor=new itemValor();
 
+    token *tokId=nodoVar->getIdentificador();
+    token *tokTipo=nodoTipo->getTipo();
+
+
     if(nivel == 1){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
     }
+
+
+    /*-------------------------
+     * Parche para cargar el objeto
+    */
+
+    itemValor *it1=new itemValor();
+    itemValor *it2=it1->convertirATipo(tokTipo);
+    if(it2->isTypeObjeto()){
+        //tengo que cargar en valor la clase con el objeto
+
+        //buscando el objeto si existe
+        elementoClase *tempClase=tabla->getClase(tokTipo);
+        if(tempClase==NULL){
+            tabla->tablaError->insertErrorSemantic("El objeto :"+tokTipo->valLower+" no existe", tokTipo);
+            return ret;
+        }
+
+        //creamos el nuevo metodo
+        objetoClase *objClase=new objetoClase(tempClase,tabla);
+        itemValor *vale=new itemValor(objClase,"t");
+        valor->valor=vale->valor;
+
+    }
+
+
     QList<itemValor*> dimen=nodoVar->getDimensiones(entor);
 
 
@@ -94,8 +153,6 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     }
 
 
-    token *tokId=nodoVar->getIdentificador();
-    token *tokTipo=nodoTipo->getTipo();
 
     bool esGlobal=false;
     if(entor->nombre=="global"){

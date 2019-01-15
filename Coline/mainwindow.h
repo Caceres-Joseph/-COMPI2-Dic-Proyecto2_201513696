@@ -16,7 +16,9 @@
 #include "Coline/Gramatica/Gramatica/Sintactico/parser.h"
 #include "Coline/Gramatica/Arbol/arbol_coline.h"
 #include "Coline/Elementos/Listas/lstatributos.h"
-
+#include <QDirModel>
+#include "Gui/lsttabclase.h"
+#include <QInputDialog>
 namespace Ui {
 class MainWindow;
 }
@@ -26,13 +28,24 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    tablaSimbolos *tabla;
+    lstTabClase *lstTabs;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+
+
+    //MENU
+    void menuInicializar();
+    void accNuevo();
+
 
 private slots:
     void on_btnAceptar_clicked();
 
     void on_btnAnalizar_clicked();
+
+    void on_menuNuevo_triggered();
 
 private:
     Ui::MainWindow *ui;

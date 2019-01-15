@@ -6,79 +6,181 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1148</width>
-    <height>598</height>
+    <width>1259</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Coline - 201513696</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextEdit" name="txtEntrada">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>611</width>
-      <height>481</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnAceptar">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>500</y>
-      <width>83</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Aceptar</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnAnalizar">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>500</y>
-      <width>83</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Analizar</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="txtSalida">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>10</y>
-      <width>441</width>
-      <height>531</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Nimbus Mono L</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="tabStopWidth">
-     <number>30</number>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QPushButton" name="btnAnalizar">
+       <property name="text">
+        <string>Analizar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAceptar">
+       <property name="text">
+        <string>Aceptar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnDepurar">
+       <property name="text">
+        <string>Depurar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnContinuar">
+       <property name="text">
+        <string>Continuar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnSiguiente">
+       <property name="text">
+        <string>Siguiente</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnSaltar">
+       <property name="text">
+        <string>Saltar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAutomatico">
+       <property name="text">
+        <string>Automatico</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnExportar">
+       <property name="text">
+        <string>Exportar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAux1">
+       <property name="text">
+        <string>--</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAux2">
+       <property name="text">
+        <string>--</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="splitter_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QSplitter" name="splitter_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QTabWidget" name="tabColine">
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+       <widget class="QTabWidget" name="tab3d">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="widget">
+         <attribute name="title">
+          <string>C3D</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QTextEdit" name="txtSalida">
+            <property name="font">
+             <font>
+              <family>Nimbus Mono L</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="tabStopWidth">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Modulos</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTextEdit" name="txtEntrada">
+            <property name="font">
+             <font>
+              <family>Nimbus Mono L</family>
+             </font>
+            </property>
+            <property name="tabStopWidth">
+             <number>32</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tbSalida">
+        <attribute name="title">
+         <string>Salida</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QTextEdit" name="textEdit"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tbErrores">
+        <attribute name="title">
+         <string>Errores</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QTableView" name="tableView"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>Tabla de Simbolos</string>
+        </attribute>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1148</width>
+     <width>1259</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFIle">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="menuNuevo"/>
+   </widget>
+   <addaction name="menuFIle"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -89,6 +191,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="menuNuevo">
+   <property name="text">
+    <string>Nueva Pestaña</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

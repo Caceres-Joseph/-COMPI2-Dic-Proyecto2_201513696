@@ -1,4 +1,29 @@
 #include "itemvalor.h"
+#include "Coline/Elementos/Objetos/objetoclase.h"
+itemValor* itemValor::convertirATipo(token *tipo){
+    if(tipo->valLower=="caracter"){
+        return new itemValor('a',"a");
+    }else if(tipo->valLower=="booleano"){
+        return new itemValor(false, "1");
+    }else if(tipo->valLower=="entero"){
+        return new itemValor(2,"1");
+    }else if(tipo->valLower=="decimal"){
+        return new itemValor(2.4,"1");
+    }
+    //para manejar el nulo como objeto
+    /*else if(tipo->valLower=="nulo"){
+        return new itemValor();
+    }
+    */
+    else{
+        itemValor *vale=new itemValor();
+        vale->valor->tipo="objeto";
+        vale->c3d="0";
+
+        return vale;
+    }
+}
+
 
 bool itemValor::isTypeChar(){
     if(valor->tipo=="caracter"){

@@ -11,6 +11,8 @@ public:
 
     Not(nodoModelo *hijo1, tablaSimbolos *tabla, token *signo);
     itemValor *opNot(elementoEntorno *entorno, QString simbolo);
+
+    itemValor *operarCondicion2(itemValor *valor, elementoEntorno *entor);
     void println(QString mensaje);
 };
 

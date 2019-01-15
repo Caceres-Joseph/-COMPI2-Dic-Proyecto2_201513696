@@ -120,8 +120,7 @@ Char '[^']*'
 
 
 "nada"              { strcpy(yylval.TEXT, yytext); return tNada; }
-"vacio"             { strcpy(yylval.TEXT, yytext); return tVacio; }
-"nulo"              { strcpy(yylval.TEXT, yytext); return tNulo; }
+"vacio"             { strcpy(yylval.TEXT, yytext); return tVacio; } 
 
 "entero"            { strcpy(yylval.TEXT, yytext); return tEntero; }
 "caracter"          { strcpy(yylval.TEXT, yytext); return tCaracter; }

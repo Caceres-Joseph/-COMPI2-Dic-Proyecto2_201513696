@@ -4,7 +4,7 @@
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Gramatica/Arbol/Nodos/nodomodelo.h"
 #include "Coline/Elementos/Objetos/objetoclase.h"
-
+#include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_lst_puntosp.h"
 class _ID_VAR_FUNC_PADRE: public nodoModelo
 {
 public:

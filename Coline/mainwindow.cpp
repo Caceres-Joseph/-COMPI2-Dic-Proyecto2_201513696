@@ -6,6 +6,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    ui->txtEntrada->setLineWrapMode(QTextEdit::NoWrap);
+    ui->txtSalida->setLineWrapMode(QTextEdit::NoWrap);
+
+
+    //creando una tabla de simbolo
+    tabla=new tablaSimbolos();
+    lstTabs=new lstTabClase(ui->tabColine,tabla);
+    //colocando una tab por defecto
+    lstTabs->insertarTab("Inicio");
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -61,5 +74,28 @@ void MainWindow::on_btnAnalizar_clicked()
     arbol_coline *anlz=new arbol_coline();
     anlz->iniciarAnalisis(ui->txtEntrada->toPlainText(),"principal");
     ui->txtSalida->setText(anlz->getSalida());
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| ACCIONES MENU
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+
+
+
+void MainWindow::on_menuNuevo_triggered()
+{
+    bool ok;
+    // Ask for birth date as a string.
+    QString text = QInputDialog::getText(0, "Coline",
+                                         "Nombre de la nuea pestaña:", QLineEdit::Normal,
+                                         "", &ok);
+    if(ok){
+        lstTabs->insertarTab(text);
+    }
 
 }

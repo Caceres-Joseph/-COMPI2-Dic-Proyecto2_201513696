@@ -124,6 +124,11 @@ itemValor * _E::getValor(elementoEntorno *elemento){
                     indice++;
                 }
             }
+
+            if(ascci<0){
+                ascci=126;
+            }
+
             QString charInt=QString::number(ascci);
 
             itemValor *itemTemp=new itemValor(elem,charInt);
@@ -178,6 +183,9 @@ itemValor * _E::getValor(elementoEntorno *elemento){
             }
         }
 
+        if(ascci<0){
+            ascci=126;
+        }
         /*
          * C3d
         */
@@ -207,17 +215,18 @@ itemValor * _E::getValor(elementoEntorno *elemento){
 
     }else if(nivel==24){
 
+        //retornando nulo
+        return new itemValor();
     }else if(nivel==25){
+        //retornando un nulo
+        return new itemValor();
 
     }else if(nivel==26){
 
-        //hay que guardarlo en string pool
-        QString etqInicioCad=tabla->getEtiqueta();
-        itemValor* ret=new itemValor('a',etqInicioCad);
+
         _CONVERTIR_CADENA *nodoConver=(_CONVERTIR_CADENA*)hijos[0];
         itemValor *itemVal=nodoConver->getValor(elemento);
-        ret->c3d=itemVal->c3d;
-        return ret;
+        return itemVal;
     }
 
 
