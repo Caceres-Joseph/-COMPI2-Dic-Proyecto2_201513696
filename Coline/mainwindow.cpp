@@ -19,6 +19,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+    //Creando el editor para la salida del codigo 3D
+    QWidget *tbPestnia=new QWidget(ui->tab3d);
+
+    CodeEditor* txtEditor=new CodeEditor();
+    Highlighter *highlighter;
+    highlighter = new Highlighter(txtEditor->document());
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(txtEditor);
+    tbPestnia->setLayout(layout);
+    //se agrega al elemento gráfico
+    ui->tab3d->addTab(tbPestnia, "Salida 3D");
+    tabla->editorSalida=txtEditor;
+
+    dlgColine=new DebugColine();
+    dlgColine->tabla=tabla;
+    tabla->dlgColine=dlgColine;
+
+
 }
 
 MainWindow::~MainWindow()
@@ -28,50 +47,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnAceptar_clicked()
 {
-    QString data= ui->txtEntrada->toPlainText();
-
-    token *tok=new token(data,0,1,"jejee");
-    token *tok2=new token("prueba",11,12,"archivo");
-
-    itemAtributo *atri =new itemAtributo(tok,"valores");
-    //std::cout<<atri->tok->valLower.toStdString()<<std::endl;
-
-    //p_entero *valor =new p_entero(3);
-    //std::cout<<valor->tipo.toStdString()<<std::endl;
-
-    //itemValor *val=new itemValor(33);
-    //std::cout<<val->valor->tipo.toStdString()<<std::endl;
-
-    //itemRetorno *ret=new itemRetorno(1);
-    //std::cout<<ret->isNormal()<<std::endl;
-
-
-    tablaSimbolos *tabla=new tablaSimbolos();
-    lstAtributos *atribs=new lstAtributos(tabla);
-
-
-    atribs->insertar("vale",tok);
-    atribs->insertar("vale2",tok2);
-    atribs->imprimir();
-
-
-    double val= -3-32*11-12/-4%98;
-
-          double  t9 = 0 - 3;
-           double t10 = 32 * 11;
-           double t11 = t9-t10;
-          double  t12 = 4 % 98;
-          double  t13 = 0 - t12;
-          double  t14 = 12 / t13;
-         double   t15 = t11-t14;
-
-         std::cout<<"val:: -> "<<val<<" -> "<<t15<<std::endl;
-
+    lstTabs->traducir();
 }
 
 void MainWindow::on_btnAnalizar_clicked()
 {
-    arbol_coline *anlz=new arbol_coline();
+    arbol_coline *anlz=new arbol_coline(tabla);
     anlz->iniciarAnalisis(ui->txtEntrada->toPlainText(),"principal");
     ui->txtSalida->setText(anlz->getSalida());
 
@@ -98,4 +79,9 @@ void MainWindow::on_menuNuevo_triggered()
         lstTabs->insertarTab(text);
     }
 
+}
+
+void MainWindow::on_btnAux1_clicked()
+{
+    std::terminate();
 }

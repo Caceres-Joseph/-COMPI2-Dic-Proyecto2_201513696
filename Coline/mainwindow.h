@@ -19,6 +19,8 @@
 #include <QDirModel>
 #include "Gui/lsttabclase.h"
 #include <QInputDialog>
+
+#include "debugcoline.h"
 namespace Ui {
 class MainWindow;
 }
@@ -29,6 +31,7 @@ class MainWindow : public QMainWindow
 
 public:
     tablaSimbolos *tabla;
+    DebugColine *dlgColine;
     lstTabClase *lstTabs;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -46,6 +49,8 @@ private slots:
     void on_btnAnalizar_clicked();
 
     void on_menuNuevo_triggered();
+
+    void on_btnAux1_clicked();
 
 private:
     Ui::MainWindow *ui;

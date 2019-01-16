@@ -39,7 +39,8 @@ HEADERS += pch.hpp \
     Gui/nodotabclase.h \
     Gui/lsttabclase.h \
     Gui/codeeditor.h \
-    Gui/highlighter.h
+    Gui/highlighter.h \
+    debugcoline.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -156,7 +157,8 @@ SOURCES += \
     Gui/nodotabclase.cpp \
     Gui/lsttabclase.cpp \
     Gui/codeeditor.cpp \
-    Gui/highlighter.cpp
+    Gui/highlighter.cpp \
+    debugcoline.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \
@@ -262,4 +264,5 @@ HEADERS += \
     pch.hpp
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    debugcoline.ui

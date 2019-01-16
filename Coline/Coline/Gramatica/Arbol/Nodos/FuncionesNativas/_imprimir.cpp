@@ -1,12 +1,17 @@
 #include "_imprimir.h"
 
 
-
 itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
     itemRetorno* ret=new itemRetorno(0);
+    tabla->debugerColine(entor);
+
+    /*
+    QMessageBox msgBox;
+    msgBox.setText("Se detectaron algunos errores :(");
+    msgBox.exec();
+    */
 
     tabla->comentarioLinea("Imprimiendo", entor->nivel);
-    tabla->linea("printf(%c, 10)",entor->nivel);
 
     if(nivel==1)
     //tImprimir sAbreParent VALOR sCierraParent
@@ -59,5 +64,6 @@ itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
       //tabla->linea("printf(%c, 10)",entor->nivel);
     }
 
+    tabla->linea("printf(%c, 10)",entor->nivel);
     return ret;
 }

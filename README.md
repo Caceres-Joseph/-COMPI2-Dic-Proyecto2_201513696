@@ -23,4 +23,4 @@ bison -o parser.cpp --defines=parser.h sintactico.y
  --- imports 
  -- listas cola
 
- 
+ -- Igualar un arreglo global a uno local cadenas

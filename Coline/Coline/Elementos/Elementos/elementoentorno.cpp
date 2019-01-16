@@ -96,3 +96,60 @@ int elementoEntorno::posVar2(int num){
     return cantidad;
 
 }
+
+
+int elementoEntorno::cargarTablaColine(QTableWidget *tablaSimb, int indice){
+
+
+    if(anterior!=NULL){
+        indice = anterior->cargarTablaColine(tablaSimb,indice);
+    }
+
+    for (int i = 0; i < lstEntorno.count(); ++i) {
+        itemEntorno* elem=lstEntorno[i];
+
+        tablaSimb->setRowCount(indice+1);
+
+        /*
+        QTableWidgetItem *tab0=new QTableWidgetItem(QString::number(indice));
+        tablaSimb->setItem(indice,0,tab0);
+*/
+
+        QTableWidgetItem *tab1=new QTableWidgetItem(elem->nombre->val);
+        tablaSimb->setItem(indice,0,tab1);
+
+
+        QTableWidgetItem *tab2=new QTableWidgetItem(elem->tipo->valLower);
+        tablaSimb->setItem(indice,1,tab2);
+
+
+        QTableWidgetItem *tab7=new QTableWidgetItem(elem->valor->valor->tipo);
+        tablaSimb->setItem(indice,2,tab7);
+
+
+        QTableWidgetItem *tab3=new QTableWidgetItem(QString::number(elem->valor->dimen));
+        tablaSimb->setItem(indice,3,tab3);
+
+
+        QTableWidgetItem *tab4=new QTableWidgetItem(QString::number(elem->pos));
+        tablaSimb->setItem(indice,4,tab4);
+
+
+        QTableWidgetItem *tab5=new QTableWidgetItem(QString::number(elem->esGlobal));
+        tablaSimb->setItem(indice,5,tab5);
+
+
+        QTableWidgetItem *tab6=new QTableWidgetItem(nombre);
+        tablaSimb->setItem(indice,6,tab6);
+
+
+
+
+
+        indice=indice+1;
+    }
+
+    return indice;
+
+
+}

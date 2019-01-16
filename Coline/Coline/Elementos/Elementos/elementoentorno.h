@@ -6,6 +6,8 @@
 #include "Coline/Elementos/Tablas/tablasimbolos.h"
 //#include "Coline/Elementos/Objetos/objetoclase.h"
 #include "Coline/Elementos/Items/itementorno.h"
+#include <QTableWidget>
+
 class objetoClase;
 
 class elementoEntorno
@@ -35,6 +37,8 @@ public:
     itemEntorno *getValIdGlobal(token *idVal);
     int tamEntornoAbsoluto();
     int posVar2(int num);
+
+    int cargarTablaColine(QTableWidget *tablaSimb, int indice);
 };
 
 #endif // ELEMENTOENTORNO_H

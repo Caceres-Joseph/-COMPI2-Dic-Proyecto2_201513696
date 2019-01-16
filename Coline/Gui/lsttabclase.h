@@ -16,6 +16,8 @@ public:
 
     void insertarTab(QString nombre);
     bool yaExisteTab(QString nombre);
+
+    void traducir();
 };
 
 #endif // LSTTABCLASE_H

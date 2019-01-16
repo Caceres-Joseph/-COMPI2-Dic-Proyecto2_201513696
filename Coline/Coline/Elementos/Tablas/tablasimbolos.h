@@ -9,6 +9,9 @@
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Elementos/Tablas/tablaerrores.h"
 //#include "Coline/Elementos/Elementos/elementoclase.h"
+#include "Gui/codeeditor.h"
+//#include "debugcoline.h"
+class DebugColine;
 class elementoClase;
 class elementoEntorno;
 /*
@@ -16,12 +19,14 @@ class elementoEntorno;
 | CLASE
 |--------------------------------------------------------------------------
 */
+
 class tablaSimbolos
 {
 public:
 
-
-    QString salida="";
+    DebugColine *dlgColine;
+    CodeEditor* editorSalida;
+    //QString salida="";
     int numEtiqueta=0;
     int numSalto=0;
     tablaErrores *tablaError=new tablaErrores();
@@ -69,6 +74,13 @@ public:
 
     QString Salida3d="";
 
+    void nuevaLinea(QString txt);
+
+    /*
+     * Debuger
+    */
+
+    void debugerColine(elementoEntorno *entor);
 };
 
 #endif // TABLASIMBOLOS_H

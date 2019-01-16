@@ -1,7 +1,9 @@
 #include "tablasimbolos.h"
 #include "Coline/Elementos/Elementos/elementoentorno.h"
 #include "Coline/Elementos/Elementos/elementoclase.h"
-
+#include <QStandardItemModel>
+#include "ui_debugcoline.h"
+#include "debugcoline.h"
 void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
     linea("$$_SGC("+inicio+", "+tam+")",nivel);
 }
@@ -24,7 +26,7 @@ void tablaSimbolos::comentarioLinea(QString txt, int nivel){
     }
 
     retorno+="//-- "+txt+" --";
-    this->salida.append(retorno);
+    nuevaLinea(retorno);
 
 }
 
@@ -46,7 +48,7 @@ void tablaSimbolos::linea(QString txt, int nivel){
     }
 
     retorno+=txt+";";
-    this->salida.append(retorno);
+    nuevaLinea(retorno);
 
 }
 void tablaSimbolos::linea(QString txt, int nivel, QString comentario){
@@ -58,7 +60,7 @@ void tablaSimbolos::linea(QString txt, int nivel, QString comentario){
 
     retorno+=txt+";";
     retorno += "\t//"+comentario;
-    this->salida.append(retorno);
+    nuevaLinea(retorno);
 }
 
 void tablaSimbolos::linea2(QString txt, int nivel){
@@ -69,7 +71,7 @@ void tablaSimbolos::linea2(QString txt, int nivel){
     }
 
     retorno+=txt;
-    this->salida.append(retorno);
+    nuevaLinea(retorno);
 
 }
 void tablaSimbolos::linea2(QString txt, int nivel, QString comentario){
@@ -81,7 +83,7 @@ void tablaSimbolos::linea2(QString txt, int nivel, QString comentario){
 
     retorno+=txt;
     retorno += "\t//"+comentario;
-    this->salida.append(retorno);
+    nuevaLinea(retorno);
 }
 
 
@@ -182,3 +184,79 @@ elementoClase *tablaSimbolos::getClase(token *nombre){
     this->tablaError->insertErrorSemantic("No se encuentra la clase:"+nombre->val, nombre);
     return NULL;
 }
+
+
+void tablaSimbolos::nuevaLinea(QString txt){
+    this->editorSalida->moveCursor (QTextCursor::End);
+    this->editorSalida->insertPlainText (txt);
+    this->editorSalida->moveCursor (QTextCursor::End);
+}
+
+void tablaSimbolos::debugerColine(elementoEntorno *entor){
+/*
+    QStandardItemModel model;
+    model.index(1,1,model.index(0,0));
+
+    QStringList horizontalHeader;
+    QStringList verticalHeader;
+
+    horizontalHeader.append("SPH");
+    horizontalHeader.append("CYL");
+    horizontalHeader.append("AXIS");
+    horizontalHeader.append("A.D.D");
+
+    verticalHeader.append("R");
+    verticalHeader.append("L");
+
+    model.setHorizontalHeaderLabels(horizontalHeader);
+    model.setVerticalHeaderLabels(verticalHeader);
+
+
+
+     QStandardItem *item00 = new QStandardItem(QString("0"));
+    model.setItem(0, 0, item00);
+
+     QStandardItem *item01 = new QStandardItem(QString("0"));
+    model.setItem(0, 1, item01);
+
+     QStandardItem *item02 = new QStandardItem(QString("0"));
+    model.setItem(0, 2, item02);
+
+     QStandardItem *item03 = new QStandardItem(QString("0"));
+    model.setItem(0, 3, item03);
+    */
+/*
+    QTableWidget *tabla1=new QTableWidget();
+    tabla1->setModel(&model);
+    dlgColine->ui->tableWidget=tabla1;
+*/
+    //dlgColine->ui->tableWidget->setModel(&model);
+    //dlgColine->ui->tableWidget->resizeColumnToContents();
+
+    /*
+    dlgColine->ui->tableWidget->setItem(1,0,tab);
+    */
+
+    /*
+    dlgColine->ui->tableWidget->setRowCount(0);
+    QTableWidgetItem *tab=new QTableWidgetItem("Nuevo323");
+    dlgColine->ui->tableWidget->setItem(1,0,tab);
+    dlgColine->ui->tableWidget->setRowCount(2);
+*/
+
+    //enviando la tabla de simbolos
+    dlgColine->ui->tableWidget->setRowCount(0);
+    entor->cargarTablaColine(dlgColine->ui->tableWidget, 0);
+
+
+
+    //Enviando la salida
+    dlgColine->ui->txtSalida->setText(editorSalida->toPlainText());
+    dlgColine->exec();
+
+}
+
+
+
+
+

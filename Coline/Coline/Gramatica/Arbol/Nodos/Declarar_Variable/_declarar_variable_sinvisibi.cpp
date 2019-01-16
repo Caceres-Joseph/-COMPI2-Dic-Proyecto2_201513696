@@ -163,6 +163,8 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     //revisando si no es un arreglo
     if(dimen.count()>0){
+
+
         if(valor->isTypeChar())
         //arreglo de caracteres
         {
@@ -170,6 +172,17 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         }else{
             cargarArreglo(asign,tokId,tokTipo,dimen,valor, entor, esGlobal);
         }
+
+
+        if(valor->dimensiones.count()==0){
+            itemValor *t1=new itemValor(2,"1");
+            valor->dimensiones.append(t1);
+        }
+        /*
+        itemValor *t1=new itemValor(2,"1");
+        valor->dimensiones.append(t1);
+        */
+
         return ret;
     }
 

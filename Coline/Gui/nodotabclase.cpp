@@ -31,3 +31,27 @@ nodoTabClase::nodoTabClase(QString nombre, tablaSimbolos *tabla, QTabWidget *pad
 QWidget * nodoTabClase::getPestania(){
     return tbPestnia;
 }
+
+
+void nodoTabClase::ejecutar(){
+
+
+
+    //std::thread first (&nodoTabClase::ejecutarArbol, this);
+    //first.join();
+
+
+    ejecutarArbol();
+}
+
+void nodoTabClase::ejecutarArbol(){
+
+    arbol_coline *anlz=new arbol_coline(tabla);
+    std::cout<<"iniciando hilo"<<std::endl;
+   // std::thread first (anlz->iniciarAnalisis,"txtEditor->toPlainText()","principal");
+
+    anlz->iniciarAnalisis(txtEditor->toPlainText(),"principal");
+}
+
+
+

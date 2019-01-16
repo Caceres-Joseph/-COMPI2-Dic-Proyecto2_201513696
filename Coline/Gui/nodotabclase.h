@@ -3,8 +3,11 @@
 
 #include "Coline/Elementos/Global/importar.h"
 #include "Coline/Elementos/Tablas/tablasimbolos.h"
+
+#include "Coline/Gramatica/Arbol/arbol_coline.h"
 #include <QHBoxLayout>
 
+#include <thread>         // std::thread
 #include "Gui/codeeditor.h"
 #include "Gui/highlighter.h"
 
@@ -21,6 +24,11 @@ public:
     nodoTabClase(QString nombre,tablaSimbolos *tabla, QTabWidget *padre);
 
     QWidget *getPestania();
+    void  ejecutar();
+
+    void ejecutarArbol();
+
+
 
 
 };

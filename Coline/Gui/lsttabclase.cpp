@@ -23,4 +23,10 @@ bool lstTabClase::yaExisteTab(QString nombre){
     return false;
 }
 
+void lstTabClase::traducir(){
+    int indice = tabClases->currentIndex();
+    nodoTabClase *nodoSelect= listaTabs[indice];
+    nodoSelect->ejecutar();
+}
+
 

@@ -15,7 +15,7 @@ void arbol_coline::ejecutarPrincipal(){
             //elementoPolimorfo prin=temp->lstPrincipal->listaPolimorfa[0];
 
             objetoClase *objClase=new objetoClase(temp,tabla);
-            //objClase->ejecutarGlobales(0);
+            objClase->ejecutarGlobales(objClase->este);
             objClase->ejecutarPrincipal();
             objClase->ejecutarConstructores();
             objClase->ejecutarMetodos();
@@ -49,5 +49,6 @@ void arbol_coline::ejecutarDemasMetodos(){
 
 
 QString arbol_coline::getSalida(){
-    return tabla->salida;
+    //return tabla->salida;
+    return "";
 }
