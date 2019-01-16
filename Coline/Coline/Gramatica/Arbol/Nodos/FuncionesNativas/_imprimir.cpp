@@ -3,8 +3,10 @@
 
 itemRetorno* _IMPRIMIR::ejecutar(elementoEntorno *entor){
     itemRetorno* ret=new itemRetorno(0);
-    tabla->debugerColine(entor);
 
+
+
+    //validandoDebug(entor,lst_Atributos->getToken(0));
     /*
     QMessageBox msgBox;
     msgBox.setText("Se detectaron algunos errores :(");

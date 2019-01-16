@@ -37,32 +37,32 @@
       </widget>
       <widget class="QPushButton" name="btnContinuar">
        <property name="text">
-        <string>Continuar</string>
+        <string>Automatico</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnSiguiente">
        <property name="text">
-        <string>Siguiente</string>
+        <string>Siguiente Punto</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnSaltar">
        <property name="text">
-        <string>Saltar</string>
+        <string>--</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnAutomatico">
        <property name="text">
-        <string>Automatico</string>
+        <string>--</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnExportar">
        <property name="text">
-        <string>Exportar</string>
+        <string>--</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnAux1">
+      <widget class="QPushButton" name="btnResetDbg">
        <property name="text">
-        <string>--</string>
+        <string> Reset Debg</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnAux2">

@@ -23,6 +23,8 @@ public:
 
     arbol_coline(tablaSimbolos *tabla){
         //this->tabla=new tablaSimbolos();
+        tabla->resetearValores();
+
         this->tabla=tabla;
         this->tabla->comentarioLinea("Inicializando punteros",0);
         this->tabla->linea("P = 0",0);

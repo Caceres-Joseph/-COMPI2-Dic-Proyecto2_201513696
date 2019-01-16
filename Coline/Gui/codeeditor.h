@@ -24,7 +24,7 @@ public:
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
-
+    void pintarLinea(int numero);
 protected:
     void resizeEvent(QResizeEvent *event) override;
 

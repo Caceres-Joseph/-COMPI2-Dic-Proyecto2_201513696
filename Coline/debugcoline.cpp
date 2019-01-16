@@ -7,9 +7,25 @@ DebugColine::DebugColine(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+  CodeEditor * txtEditor=new CodeEditor();
+
+
+
 }
 
 DebugColine::~DebugColine()
 {
     delete ui;
+}
+
+void DebugColine::on_btnCancelar_clicked()
+{
+    tabla->modoDebuger=false;
+    this->close();
+}
+
+void DebugColine::on_btnSiguiente_clicked()
+{
+    this->close();
 }

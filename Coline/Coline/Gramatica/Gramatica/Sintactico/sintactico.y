@@ -296,6 +296,7 @@ S:
                         $$=new Nod(); 
                         _S *padre=new _S("S",tabla); 
                         padre->nivel=1;
+                         padre->nLinea=-1;
 
 
                                 //hijos
@@ -310,6 +311,7 @@ S:
                         $$=new Nod(); 
                         _S *padre=new _S("S",tabla); 
                         padre->nivel=2;
+                         padre->nLinea=-1;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -325,6 +327,7 @@ LST_IMPORT:
                         $$=new Nod(); 
                         _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -337,6 +340,7 @@ LST_IMPORT:
                         $$=new Nod(); 
                         _LST_IMPORT *padre=new _LST_IMPORT("LST_IMPORT",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -351,6 +355,7 @@ IMPORT:
                         $$=new Nod(); 
                         _IMPORT *padre=new _IMPORT("IMPORT",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 
 
                                 //asignando atributos  
@@ -373,6 +378,7 @@ LST_CLASE:
                         $$=new Nod(); 
                         _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -386,6 +392,7 @@ LST_CLASE:
                         $$=new Nod(); 
                         _LST_CLASE *padre=new _LST_CLASE("LST_CLASE",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -405,6 +412,7 @@ CLASE:
                         $$=new Nod(); 
                         _CLASE *padre=new _CLASE("CLASE",tabla);
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //asignando atributos  
 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -428,6 +436,7 @@ CLASE:
                         $$=new Nod(); 
                         _CLASE *padre=new _CLASE("CLASE",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos  
 
@@ -453,6 +462,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tEntero",tok1);
@@ -465,6 +475,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -478,6 +489,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -491,6 +503,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -504,6 +517,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=5;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -517,6 +531,7 @@ TIPO:
                         $$=new Nod(); 
                         _TIPO *padre=new _TIPO("TIPO",tabla); 
                         padre->nivel=6;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -535,6 +550,7 @@ EXTENDER:
                         $$=new Nod(); 
                         _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //atributos  
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -549,6 +565,7 @@ EXTENDER:
                         $$=new Nod(); 
                         _EXTENDER *padre=new _EXTENDER("EXTENDER",tabla);
                         padre->nivel=2;
+                        padre->nLinea=-1;
 
                         $$->Padre=padre;
                 }
@@ -562,6 +579,7 @@ LST_PARAMETROS:
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -575,6 +593,7 @@ LST_PARAMETROS:
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -587,6 +606,7 @@ LST_PARAMETROS:
                         $$=new Nod(); 
                         _LST_PARAMETROS *padre=new _LST_PARAMETROS("LST_PARAMETROS",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=-1;
                         $$->Padre=padre;
                         /*vacio*/
                 }
@@ -599,6 +619,7 @@ PARAMETRO:
                         $$=new Nod(); 
                         _PARAMETRO *padre=new _PARAMETRO("PARAMETRO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -622,6 +643,7 @@ LST_VAL:
                         $$=new Nod(); 
                         _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -634,6 +656,7 @@ LST_VAL:
                         $$=new Nod(); 
                         _LST_VAL *padre=new _LST_VAL("LST_VAL",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=-1;
                         $$->Padre=padre;
                         /*vacio*/
                 }
@@ -647,6 +670,7 @@ VISIBILIDAD:
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                         
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -660,6 +684,7 @@ VISIBILIDAD:
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tPrivado",tok1);
@@ -672,6 +697,7 @@ VISIBILIDAD:
                         $$=new Nod(); 
                         _VISIBILIDAD *padre=new _VISIBILIDAD("VISIBILIDAD",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tProtegido",tok1);
@@ -688,6 +714,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);
@@ -700,6 +727,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CP_CLASE *padre=new _CP_CLASE("CP_CLASE",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -715,6 +743,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
 
@@ -726,6 +755,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -738,6 +768,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -750,6 +781,7 @@ CP_CLASE:
                         $$=new Nod(); 
                         _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -766,6 +798,7 @@ METODO:
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -787,6 +820,7 @@ METODO:
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -806,6 +840,7 @@ METODO:
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
  
                                 //asignando atributos 
                                 token *tok4=new token(QString::fromStdString($4),@4.first_line,3,archivo);
@@ -827,6 +862,7 @@ METODO:
                         $$=new Nod(); 
                         _METODO *padre=new _METODO("METODO",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -850,6 +886,7 @@ MAIN:
                         $$=new Nod(); 
                         _MAIN *padre=new _MAIN("MAIN",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tPrincipal",tok1);
@@ -868,6 +905,7 @@ CONSTRUCTOR:
                         $$=new Nod(); 
                         _CONSTRUCTOR *padre=new _CONSTRUCTOR("CONSTRUCTOR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                         
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -891,6 +929,7 @@ DECLARAR_VARIABLE_GLOBAL:
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 //padre->hijos.append($1->Padre);
@@ -904,6 +943,7 @@ DECLARAR_VARIABLE_GLOBAL:
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_GLOBAL *padre=new _DECLARAR_VARIABLE_GLOBAL("DECLARAR_VARIABLE_GLOBAL",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -921,6 +961,7 @@ DECLARAR_VARIABLE_SINVISIBI:
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -935,6 +976,7 @@ DECLARAR_VARIABLE_SINVISIBI:
                         $$=new Nod(); 
                         _DECLARAR_VARIABLE_SINVISIBI *padre=new _DECLARAR_VARIABLE_SINVISIBI("DECLARAR_VARIABLE_SINVISIBI",tabla);
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -953,6 +995,7 @@ VAL:
                         $$=new Nod(); 
                         _VAL *padre=new _VAL("VAL",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre);  
@@ -969,6 +1012,7 @@ LST_LLAVES_VAL:
                         $$=new Nod(); 
                         _LST_LLAVES_VAL *padre=new _LST_LLAVES_VAL("LST_LLAVES_VAL",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre);  
@@ -986,6 +1030,7 @@ LLAVES_VAL_P:
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($1->Padre);
@@ -999,6 +1044,7 @@ LLAVES_VAL_P:
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($1->Padre);
@@ -1012,6 +1058,7 @@ LLAVES_VAL_P:
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($1->Padre); 
@@ -1024,6 +1071,7 @@ LLAVES_VAL_P:
                         $$=new Nod(); 
                         _LLAVES_VAL_P *padre=new _LLAVES_VAL_P("LLAVES_VAL_P",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($1->Padre); 
@@ -1041,6 +1089,7 @@ VAR_ARREGLO:
                         $$=new Nod(); 
                         _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1054,6 +1103,7 @@ VAR_ARREGLO:
                         $$=new Nod(); 
                         _VAR_ARREGLO *padre=new _VAR_ARREGLO("VAR_ARREGLO",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1080,6 +1130,7 @@ LST_CORCHETES:
                         $$=new Nod(); 
                         _LST_CORCHETES *padre=new _LST_CORCHETES("LST_CORCHETES",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1095,6 +1146,7 @@ PAR_CORCHETES_VACIOS:
                         $$=new Nod(); 
                         _PAR_CORCHETES_VACIOS *padre=new _PAR_CORCHETES_VACIOS("PAR_CORCHETES_VACIOS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                         $$->Padre=padre;
                 }
         ;
@@ -1106,6 +1158,7 @@ PAR_CORCHETES_VAL:
                         $$=new Nod(); 
                         _PAR_CORCHETES_VAL *padre=new _PAR_CORCHETES_VAL("PAR_CORCHETES_VAL",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
 
                                 //hijos 
@@ -1132,6 +1185,7 @@ LST_CORCHETES_VAL:
                         $$=new Nod(); 
                         _LST_CORCHETES_VAL *padre=new _LST_CORCHETES_VAL("LST_CORCHETES_VAL",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1148,6 +1202,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1161,6 +1216,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                         
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1174,6 +1230,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1187,6 +1244,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1204,6 +1262,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=5;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -1221,6 +1280,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=6;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1238,6 +1298,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=7;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -1256,6 +1317,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=8;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok3=new token(QString::fromStdString($3),@3.first_line,3,archivo);
@@ -1274,6 +1336,7 @@ ID_VAR_FUNC:
                         $$=new Nod(); 
                         _ID_VAR_FUNC *padre=new _ID_VAR_FUNC("ID_VAR_FUNC",tabla); 
                         padre->nivel=9;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1296,6 +1359,7 @@ LST_PUNTOSP:
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1309,6 +1373,7 @@ LST_PUNTOSP:
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1327,6 +1392,7 @@ LST_PUNTOSP:
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1344,6 +1410,7 @@ LST_PUNTOSP:
                         $$=new Nod(); 
                         _LST_PUNTOSP *padre=new _LST_PUNTOSP("LST_PUNTOSP",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1366,6 +1433,7 @@ ASIG_VALOR:
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1379,6 +1447,7 @@ ASIG_VALOR:
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1391,6 +1460,7 @@ ASIG_VALOR:
                         $$=new Nod(); 
                         _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1406,7 +1476,9 @@ LST_CUERPO:
                         $$=new Nod(); 
                         _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
                         padre->nivel=1;
-
+                        padre->nLinea=nLinea;
+                        padre->nLinea2=nLinea; 
+ 
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 padre->hijos.append($2->Padre);  
@@ -1419,6 +1491,10 @@ LST_CUERPO:
                         $$=new Nod(); 
                         _LST_CUERPO *padre=new _LST_CUERPO("LST_CUERPO",tabla); 
                         padre->nivel=2;
+
+                        padre->nLinea=nLinea;
+                        padre->nLinea2=nLinea; 
+ 
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1436,6 +1512,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1448,6 +1525,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1460,6 +1538,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1473,6 +1552,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1485,6 +1565,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=5;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1498,6 +1579,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=6;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1510,6 +1592,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=7;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
@@ -1522,6 +1605,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=8;
+                        padre->nLinea=nLinea;
                                 //hijos
                                 padre->hijos.append($1->Padre);
                                 
@@ -1534,6 +1618,7 @@ CUERPO:
                         $$=new Nod(); 
                         _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
                         padre->nivel=9;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1549,6 +1634,7 @@ FUNCIONES_NATIVAS:
                         $$=new Nod(); 
                         _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1561,6 +1647,7 @@ FUNCIONES_NATIVAS:
                         $$=new Nod(); 
                         _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1575,6 +1662,7 @@ FUNCIONES_NATIVAS:
                         $$=new Nod(); 
                         _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1592,6 +1680,7 @@ CONVERTIR_CADENA:
                         $$=new Nod(); 
                         _CONVERTIR_CADENA *padre=new _CONVERTIR_CADENA("CONVERTIR_CADENA",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1612,6 +1701,7 @@ CONCATENAR:
                         $$=new Nod(); 
                         _CONCATENAR *padre=new _CONCATENAR("CONCATENAR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1632,6 +1722,11 @@ IMPRIMIR:
                         $$=new Nod(); 
                         _IMPRIMIR *padre=new _IMPRIMIR("IMPRIMIR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tImprimir",tok1);
 
                                 //hijos
                                 padre->hijos.append($3->Padre); 
@@ -1644,6 +1739,11 @@ IMPRIMIR:
                         $$=new Nod(); 
                         _IMPRIMIR *padre=new _IMPRIMIR("IMPRIMIR",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tImprimir",tok1);
 
                                 //hijos 
 
@@ -1659,6 +1759,7 @@ SUPER:
                         $$=new Nod(); 
                         _SUPER *padre=new _SUPER("SUPER",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($3->Padre);
@@ -1675,6 +1776,7 @@ RETORNO:
                         $$=new Nod(); 
                         _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
                          padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1689,6 +1791,7 @@ RETORNO:
                         $$=new Nod(); 
                         _RETORNO *padre=new _RETORNO("RETORNO",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1708,6 +1811,7 @@ ROMPER:
                         $$=new Nod(); 
                         _ROMPER *padre=new _ROMPER("ROMPER",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tRomper",tok1);
@@ -1723,6 +1827,7 @@ CONTINUAR:
                         $$=new Nod(); 
                         _CONTINUAR *padre=new _CONTINUAR("CONTINUAR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("tContinuar",tok1);
@@ -1739,6 +1844,7 @@ SENTENCIAS:
                         $$=new Nod(); 
                         _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1751,6 +1857,7 @@ SENTENCIAS:
                         $$=new Nod(); 
                         _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1763,6 +1870,7 @@ SENTENCIAS:
                         $$=new Nod(); 
                         _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -1781,6 +1889,7 @@ FOR:
                         $$=new Nod(); 
                         _FOR *padre=new _FOR("FOR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1800,6 +1909,7 @@ FOR:
                         $$=new Nod(); 
                         _FOR *padre=new _FOR("FOR",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1823,6 +1933,7 @@ WHILE:
                         $$=new Nod(); 
                         _WHILE *padre=new _WHILE("WHILE",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1843,6 +1954,7 @@ SI:
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1860,6 +1972,7 @@ SI:
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
                         
 
                                 //asignando atributos 
@@ -1880,6 +1993,7 @@ SI:
                         $$=new Nod(); 
                         _SI *padre=new _SI("SI",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1901,6 +2015,7 @@ SINO_SI:
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1919,6 +2034,7 @@ SINO_SI:
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1936,6 +2052,7 @@ SINO_SI:
                         $$=new Nod(); 
                         _SINO_SI *padre=new _SINO_SI("SINO_SI",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1957,6 +2074,7 @@ SINO:
                         $$=new Nod(); 
                         _SINO *padre=new _SINO("SINO",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -1977,6 +2095,7 @@ VALOR:
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -1995,6 +2114,7 @@ VALOR:
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //hijos 
                                 padre->hijos.append($2->Padre); 
@@ -2009,6 +2129,7 @@ VALOR:
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -2021,6 +2142,7 @@ VALOR:
                         $$=new Nod(); 
                         _VALOR *padre=new _VALOR("VALOR",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre); 
@@ -2038,6 +2160,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=1;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2055,6 +2178,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=2;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2072,6 +2196,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=3;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2089,6 +2214,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=4;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2106,6 +2232,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=5;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2124,6 +2251,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=6;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2143,6 +2271,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=7;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2164,6 +2293,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=8;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2182,6 +2312,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=9;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2218,6 +2349,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=11;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2236,6 +2368,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=12;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2254,6 +2387,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=13;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2272,6 +2406,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=14;
+                        padre->nLinea=nLinea;
 
 
                                 //asignando atributos 
@@ -2292,6 +2427,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=15;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
@@ -2310,6 +2446,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=16;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2329,6 +2466,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=17;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2346,6 +2484,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=18;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);  
@@ -2358,6 +2497,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=19;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2385,6 +2525,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=21;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2398,6 +2539,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=22;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2412,6 +2554,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=23;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2425,6 +2568,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=24;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2438,6 +2582,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=25;
+                        padre->nLinea=nLinea;
 
                                 //asignando atributos 
                                 token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
@@ -2451,6 +2596,7 @@ E:
                         $$=new Nod(); 
                         _E *padre=new _E("E",tabla); 
                         padre->nivel=26;
+                        padre->nLinea=nLinea;
 
                                 //hijos
                                 padre->hijos.append($1->Padre);  

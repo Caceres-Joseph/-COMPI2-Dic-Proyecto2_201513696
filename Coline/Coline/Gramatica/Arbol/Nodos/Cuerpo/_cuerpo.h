@@ -8,6 +8,8 @@ class _CUERPO: public nodoModelo
 {
 public:
     _CUERPO(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+
+    itemRetorno *ejecutar (elementoEntorno *entor)override;
 };
 
 #endif // _CUERPO_H

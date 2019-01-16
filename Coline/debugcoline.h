@@ -17,6 +17,9 @@ public:
     tablaSimbolos *tabla;
 
     Ui::DebugColine *ui;
+private slots:
+    void on_btnCancelar_clicked();
+    void on_btnSiguiente_clicked();
 };
 
 #endif // DEBUGCOLINE_H

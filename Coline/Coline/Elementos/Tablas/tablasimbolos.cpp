@@ -191,7 +191,7 @@ void tablaSimbolos::nuevaLinea(QString txt){
     this->editorSalida->insertPlainText (txt);
     this->editorSalida->moveCursor (QTextCursor::End);
 }
-
+#import <QThread>
 void tablaSimbolos::debugerColine(elementoEntorno *entor){
 /*
     QStandardItemModel model;
@@ -257,6 +257,37 @@ void tablaSimbolos::debugerColine(elementoEntorno *entor){
 }
 
 
+void tablaSimbolos::resetearValores()
+{
+    numEtiqueta=0;
+    numSalto=0;
+    tablaError=new tablaErrores();
+    lstClases.clear();
+    Salida3d="";
+
+    //modoDebuger=false;
+    lineaDebuger=0;
+    editorSalida->clear();
+
+}
 
 
 
+void tablaSimbolos::dbg_pasoPaso(){
+    modoDebuger=true;
+    numModo=0;
+}
+
+void tablaSimbolos::dbg_automatico(){
+    modoDebuger=true;
+    numModo=1;
+}
+
+void tablaSimbolos::dbg_instruccion(){
+    modoDebuger=true;
+    numModo=2;
+}
+void tablaSimbolos::dbg_reset(){
+    modoDebuger=false;
+    numModo=0;
+}

@@ -46,6 +46,7 @@ void nodoTabClase::ejecutar(){
 
 void nodoTabClase::ejecutarArbol(){
 
+    tabla->editorEntrada=txtEditor;
     arbol_coline *anlz=new arbol_coline(tabla);
     std::cout<<"iniciando hilo"<<std::endl;
    // std::thread first (anlz->iniciarAnalisis,"txtEditor->toPlainText()","principal");

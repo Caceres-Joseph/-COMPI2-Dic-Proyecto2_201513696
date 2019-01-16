@@ -52,6 +52,14 @@ private slots:
 
     void on_btnAux1_clicked();
 
+    void on_btnDepurar_clicked();
+
+    void on_btnResetDbg_clicked();
+
+    void on_btnContinuar_clicked();
+
+    void on_btnSiguiente_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

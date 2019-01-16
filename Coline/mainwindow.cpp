@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tabla->dlgColine=dlgColine;
 
 
+
 }
 
 MainWindow::~MainWindow()
@@ -84,4 +85,27 @@ void MainWindow::on_menuNuevo_triggered()
 void MainWindow::on_btnAux1_clicked()
 {
     std::terminate();
+}
+
+void MainWindow::on_btnDepurar_clicked()
+{
+
+    tabla->dbg_pasoPaso();
+
+
+}
+
+void MainWindow::on_btnResetDbg_clicked()
+{
+    tabla->dbg_reset();
+}
+
+void MainWindow::on_btnContinuar_clicked()
+{
+    tabla->dbg_automatico();
+}
+
+void MainWindow::on_btnSiguiente_clicked()
+{
+    tabla->dbg_instruccion();
 }

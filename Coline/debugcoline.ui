@@ -19,9 +19,9 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="btnSiguiente">
          <property name="text">
-          <string>Siguiente Linea</string>
+          <string>Siguiente Paso</string>
          </property>
         </widget>
        </item>
@@ -33,14 +33,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="btnCancelar">
          <property name="text">
           <string>Cancelar</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="btnContinuar">
          <property name="text">
           <string>--</string>
          </property>

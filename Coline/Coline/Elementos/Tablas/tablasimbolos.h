@@ -26,6 +26,7 @@ public:
 
     DebugColine *dlgColine;
     CodeEditor* editorSalida;
+    CodeEditor* editorEntrada;
     //QString salida="";
     int numEtiqueta=0;
     int numSalto=0;
@@ -81,6 +82,21 @@ public:
     */
 
     void debugerColine(elementoEntorno *entor);
+    bool modoDebuger=false;
+    int lineaDebuger=0;
+
+    //0 paso  a paso
+    //1 automatico
+    //2 punto a punto
+    int numModo=0;
+
+    void resetearValores();
+
+    void dbg_pasoPaso();
+    void dbg_automatico();
+    void dbg_instruccion();
+    void dbg_reset();
+
 };
 
 #endif // TABLASIMBOLOS_H

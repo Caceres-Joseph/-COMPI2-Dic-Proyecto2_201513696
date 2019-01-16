@@ -65,7 +65,19 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
 }
 
 
+void CodeEditor::pintarLinea(int numero){
 
+    QTextCursor cursor = textCursor();
+
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, numero-1);
+    cursor.select(QTextCursor::LineUnderCursor);
+
+
+    setTextCursor(cursor);
+
+
+}
 void CodeEditor::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
@@ -83,8 +95,10 @@ void CodeEditor::highlightCurrentLine()
 
     }
 
+
     setExtraSelections(extraSelections);
 }
+
 
 
 

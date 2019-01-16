@@ -26,6 +26,8 @@ public:
     lstAtributos *lst_Atributos;
     tablaSimbolos *tabla;
     int nivel=-1;
+    int nLinea=0;
+    int nLinea2=0;
 
     explicit nodoModelo(QString nombre, tablaSimbolos *tabla){
         this->nombre=nombre;
@@ -138,6 +140,15 @@ public:
     void println(QString mensaje);
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Para el depurador
+    |--------------------------------------------------------------------------
+    |
+    */
+
+
+    void validandoDebug(elementoEntorno *entor, int linea);
 };
 
 #endif // NODOMODELO_H

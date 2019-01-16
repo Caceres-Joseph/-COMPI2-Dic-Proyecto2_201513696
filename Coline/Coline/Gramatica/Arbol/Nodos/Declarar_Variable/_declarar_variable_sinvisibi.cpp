@@ -81,6 +81,9 @@ void _DECLARAR_VARIABLE_SINVISIBI::cargarGlobales(elementoEntorno *entor){
 
 
 itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
+
+    validandoDebug(entor,nLinea);
+
     tabla->comentarioLinea("Declarando variable",entor->nivel);
     itemRetorno* ret=new itemRetorno(0);
 
