@@ -247,7 +247,7 @@ clase main {
 
     Lista() {
         inicio = nada;
-        imprimir() ;
+        imprimir() 
     }
 
     publico booleano esVacia() {

@@ -8,8 +8,33 @@ DebugColine::DebugColine(QWidget *parent) :
     ui->setupUi(this);
 
 
-  CodeEditor * txtEditor=new CodeEditor();
 
+/*
+ * Cargando el editor de salida
+*/
+/*
+
+  QWidget *tbPestnia=new QWidget(ui->tabSalida);
+  txtEditor=new CodeEditor();
+
+  Highlighter *highlighter;
+
+  highlighter = new Highlighter(txtEditor->document());
+
+
+
+
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->addWidget(txtEditor);
+
+  txtEditor->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+  tbPestnia->setLayout(layout);
+
+
+  //se agrega al elemento gráfico
+  ui->tabSalida->addTab(tbPestnia, "Salida 3D");
+  */
 
 
 }

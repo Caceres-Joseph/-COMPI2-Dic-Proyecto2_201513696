@@ -16,6 +16,7 @@ public:
     ~DebugColine();
     tablaSimbolos *tabla;
 
+    //CodeEditor * txtEditor;
     Ui::DebugColine *ui;
 private slots:
     void on_btnCancelar_clicked();
