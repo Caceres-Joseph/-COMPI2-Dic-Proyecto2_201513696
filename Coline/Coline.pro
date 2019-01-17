@@ -40,7 +40,10 @@ HEADERS += pch.hpp \
     Gui/lsttabclase.h \
     Gui/codeeditor.h \
     Gui/highlighter.h \
-    debugcoline.h
+    debugcoline.h \
+    Gramatica/parser1.h \
+    Gramatica/scanner1.h \
+    Gramatica/arbol_3d.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -158,40 +161,42 @@ SOURCES += \
     Gui/lsttabclase.cpp \
     Gui/codeeditor.cpp \
     Gui/highlighter.cpp \
-    Gramatica/Estructuras/TablaSimbolos/tablatemporales.h \
-    Gramatica/Estructuras/Memoria/memoria.h \
-    Gramatica/Estructuras/Etiquetas/tablaetiquetas.h \
-    Gramatica/Arbol/Abstraccion/astlist.h \
-    Gramatica/Arbol/Abstraccion/nodoast.h \
-    Gramatica/Estructuras/Metodos/metodo.h \
-    Gramatica/Estructuras/Metodos/tablademetodos.h \
-    Gramatica/Arbol/Nodos/Instrucciones/Etiqueta/etiqueta.h \
-    Gramatica/Entorno/entorno3d.h \
-    Gramatica/Arbol/Nodos/Instrucciones/outStr/outstr.h \
-    Gramatica/Arbol/Nodos/Expresiones/expexecutor.h \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoHeap/accesoheap.h \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoPool/accesopool.h \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoStack/accesostack.h \
-    Gramatica/Arbol/Nodos/Expresiones/Aritmetico/aritmetica.h \
-    Gramatica/Arbol/Nodos/Expresiones/Entero/entero.h \
-    Gramatica/Arbol/Nodos/Expresiones/Flotante/flotante.h \
-    Gramatica/Arbol/Nodos/Expresiones/Identificador/identificador.h \
-    Gramatica/Arbol/Nodos/Expresiones/Relacional/relacional.h \
-    Gramatica/Arbol/Nodos/Expresiones/getBool/getbool.h \
-    Gramatica/Arbol/Nodos/Expresiones/getNum/getnum.h \
-    Gramatica/Arbol/Nodos/Expresiones/inStr/instr.h \
-    Gramatica/Arbol/Nodos/Expresiones/inNum/innum.h \
-    Gramatica/Arbol/Nodos/Instrucciones/Llamada/llamada.h \
-    Gramatica/Arbol/Nodos/Instrucciones/No_Condicional/nocondicional.h \
-    Gramatica/Arbol/Nodos/Instrucciones/Imprimir/imprimirfun.h \
-    Gramatica/Arbol/Nodos/Instrucciones/DeclaracionMetodo/declaracionmetodo.h \
-    Gramatica/Arbol/Nodos/Instrucciones/Condicional/condicional.h \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionStack/asignacionstack.h \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionPool/asignacionpool.h \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionHeap/asignacionheap.h \
-    Gramatica/Arbol/Nodos/Instrucciones/Asignacion/asignacion.h \
-    Gramatica/inclusionnodos.h \
-    debugcoline.cpp
+    Gramatica/Estructuras/TablaSimbolos/tablatemporales.cpp \
+    Gramatica/Estructuras/Memoria/memoria.cpp \
+    Gramatica/Estructuras/Etiquetas/tablaetiquetas.cpp \
+    Gramatica/Arbol/Abstraccion/astlist.cpp \
+    Gramatica/Arbol/Abstraccion/nodoast.cpp \
+    Gramatica/Estructuras/Metodos/metodo.cpp \
+    Gramatica/Estructuras/Metodos/tablademetodos.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/Etiqueta/etiqueta.cpp \
+    Gramatica/Entorno/entorno3d.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/outStr/outstr.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/expexecutor.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoHeap/accesoheap.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoPool/accesopool.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoStack/accesostack.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/Aritmetico/aritmetica.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/Entero/entero.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/Flotante/flotante.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/Identificador/identificador.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/Relacional/relacional.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/getBool/getbool.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/getNum/getnum.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/inStr/instr.cpp \
+    Gramatica/Arbol/Nodos/Expresiones/inNum/innum.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/Llamada/llamada.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/No_Condicional/nocondicional.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/Imprimir/imprimirfun.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/DeclaracionMetodo/declaracionmetodo.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/Condicional/condicional.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionStack/asignacionstack.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionPool/asignacionpool.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionHeap/asignacionheap.cpp \
+    Gramatica/Arbol/Nodos/Instrucciones/Asignacion/asignacion.cpp \
+    debugcoline.cpp \
+    Gramatica/parser1.cpp \
+    Gramatica/scanner1.cpp \
+    Gramatica/arbol_3d.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \
@@ -294,38 +299,39 @@ HEADERS += \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorigualque.h \
     Coline/Gramatica/Arbol/Nodos/Valor/OpeRelacional/menorque.h \
     Coline/Elementos/Elementos/elementoclase.h \
-    Gramatica/Estructuras/TablaSimbolos/tablatemporales.cpp \
-    Gramatica/Estructuras/Memoria/memoria.cpp \
-    Gramatica/Estructuras/Etiquetas/tablaetiquetas.cpp \
-    Gramatica/Arbol/Abstraccion/astlist.cpp \
-    Gramatica/Arbol/Abstraccion/nodoast.cpp \
-    Gramatica/Estructuras/Metodos/metodo.cpp \
-    Gramatica/Estructuras/Metodos/tablademetodos.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/Etiqueta/etiqueta.cpp \
-    Gramatica/Entorno/entorno3d.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/outStr/outstr.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/expexecutor.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoHeap/accesoheap.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoPool/accesopool.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/AccesoStack/accesostack.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/Aritmetico/aritmetica.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/Entero/entero.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/Flotante/flotante.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/Identificador/identificador.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/Relacional/relacional.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/getBool/getbool.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/getNum/getnum.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/inStr/instr.cpp \
-    Gramatica/Arbol/Nodos/Expresiones/inNum/innum.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/Llamada/llamada.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/No_Condicional/nocondicional.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/Imprimir/imprimirfun.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/DeclaracionMetodo/declaracionmetodo.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/Condicional/condicional.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionStack/asignacionstack.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionPool/asignacionpool.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/AsignacionHeap/asignacionheap.cpp \
-    Gramatica/Arbol/Nodos/Instrucciones/Asignacion/asignacion.cpp \
+    Gramatica/Estructuras/TablaSimbolos/tablatemporales.h \
+    Gramatica/Estructuras/Memoria/memoria.h \
+    Gramatica/Estructuras/Etiquetas/tablaetiquetas.h \
+    Gramatica/Arbol/Abstraccion/astlist.h \
+    Gramatica/Arbol/Abstraccion/nodoast.h \
+    Gramatica/Estructuras/Metodos/metodo.h \
+    Gramatica/Estructuras/Metodos/tablademetodos.h \
+    Gramatica/Arbol/Nodos/Instrucciones/Etiqueta/etiqueta.h \
+    Gramatica/Entorno/entorno3d.h \
+    Gramatica/Arbol/Nodos/Instrucciones/outStr/outstr.h \
+    Gramatica/Arbol/Nodos/Expresiones/expexecutor.h \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoHeap/accesoheap.h \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoPool/accesopool.h \
+    Gramatica/Arbol/Nodos/Expresiones/AccesoStack/accesostack.h \
+    Gramatica/Arbol/Nodos/Expresiones/Aritmetico/aritmetica.h \
+    Gramatica/Arbol/Nodos/Expresiones/Entero/entero.h \
+    Gramatica/Arbol/Nodos/Expresiones/Flotante/flotante.h \
+    Gramatica/Arbol/Nodos/Expresiones/Identificador/identificador.h \
+    Gramatica/Arbol/Nodos/Expresiones/Relacional/relacional.h \
+    Gramatica/Arbol/Nodos/Expresiones/getBool/getbool.h \
+    Gramatica/Arbol/Nodos/Expresiones/getNum/getnum.h \
+    Gramatica/Arbol/Nodos/Expresiones/inStr/instr.h \
+    Gramatica/Arbol/Nodos/Expresiones/inNum/innum.h \
+    Gramatica/Arbol/Nodos/Instrucciones/Llamada/llamada.h \
+    Gramatica/Arbol/Nodos/Instrucciones/No_Condicional/nocondicional.h \
+    Gramatica/Arbol/Nodos/Instrucciones/Imprimir/imprimirfun.h \
+    Gramatica/Arbol/Nodos/Instrucciones/DeclaracionMetodo/declaracionmetodo.h \
+    Gramatica/Arbol/Nodos/Instrucciones/Condicional/condicional.h \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionStack/asignacionstack.h \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionPool/asignacionpool.h \
+    Gramatica/Arbol/Nodos/Instrucciones/AsignacionHeap/asignacionheap.h \
+    Gramatica/Arbol/Nodos/Instrucciones/Asignacion/asignacion.h \
+    Gramatica/inclusionnodos.h \
     pch.hpp
 
 FORMS += \
