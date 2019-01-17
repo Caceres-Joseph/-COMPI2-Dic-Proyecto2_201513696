@@ -1,0 +1,30 @@
+#ifndef INCLUSIONNODOS_H
+#define INCLUSIONNODOS_H
+// INCLUYENDO LAS INSTRUCCIONES
+#include "Arbol/Nodos/Instrucciones/Asignacion/asignacion.h"
+#include "Arbol/Nodos/Instrucciones/Condicional/condicional.h"
+#include "Arbol/Nodos/Instrucciones/DeclaracionMetodo/declaracionmetodo.h"
+#include "Arbol/Nodos/Instrucciones/Etiqueta/etiqueta.h"
+#include "Arbol/Nodos/Instrucciones/No_Condicional/nocondicional.h"
+#include "Arbol/Nodos/Instrucciones/AsignacionStack/asignacionstack.h"
+#include "Arbol/Nodos/Instrucciones/AsignacionHeap/asignacionheap.h"
+#include "Arbol/Nodos/Instrucciones/AsignacionPool/asignacionpool.h"
+#include "Arbol/Nodos/Instrucciones/Llamada/llamada.h"
+#include "Arbol/Nodos/Instrucciones/Imprimir/imprimirfun.h"
+#include "Estructuras/Metodos/metodo.h"
+#include "Arbol/Nodos/Instrucciones/outStr/outstr.h"
+// INCLUYENDO LAS EXPRESIONES
+#include "Arbol/Nodos/Expresiones/AccesoHeap/accesoheap.h"
+#include "Arbol/Nodos/Expresiones/AccesoPool/accesopool.h"
+#include "Arbol/Nodos/Expresiones/AccesoStack/accesostack.h"
+#include "Arbol/Nodos/Expresiones/Aritmetico/aritmetica.h"
+#include "Arbol/Nodos/Expresiones/Entero/entero.h"
+#include "Arbol/Nodos/Expresiones/Flotante/flotante.h"
+#include "Arbol/Nodos/Expresiones/Identificador/identificador.h"
+#include "Arbol/Nodos/Expresiones/Relacional/relacional.h"
+#include "Gramatica/Arbol/Abstraccion/astlist.h"
+#include "Arbol/Nodos/Expresiones/getNum/getnum.h"
+#include "Arbol/Nodos/Expresiones/getBool/getbool.h"
+#include "Arbol/Nodos/Expresiones/inStr/instr.h"
+#include "Arbol/Nodos/Expresiones/inNum/innum.h"
+#endif // INCLUSIONNODOS_H
