@@ -8,7 +8,7 @@ class Entero : public NodoAST
 {
 public:
     int valor; //VALOR QUE SE VA A USAR
-    Entero(int linea, int columna, std::string archivo, int valor); //CONSTRUCTOR
+    Entero(int linea, int columna, std::string archivo,tablaSimbolos *tabla, int valor); //CONSTRUCTOR
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

@@ -76,3 +76,31 @@ void TablaTemporales::actualizaTemporal(std::string id, double valor)
 }
 
 
+void TablaTemporales::llenarTabla(QTableWidget *tablaSimb){
+
+    //limpiando la tabla
+    tablaSimb->setRowCount(0);
+    // show content:
+    int indice=0;
+    // Create a map iterator and point to beginning of map
+    std::map<std::string, double>::iterator it = tabla.begin();
+    while (it != tabla.end())
+    {
+
+        std::string clavet = it->first;
+        QString clave = QString::fromUtf8(clavet.c_str());
+        double  valor= it->second;
+
+        tablaSimb->setRowCount(indice+1);
+
+        QTableWidgetItem *tab1=new QTableWidgetItem(clave);
+        tablaSimb->setItem(indice,0,tab1);
+
+        QTableWidgetItem *tab2=new QTableWidgetItem(QString::number(valor));
+        tablaSimb->setItem(indice,1,tab2);
+
+        it++;
+        indice++;
+    }
+
+}

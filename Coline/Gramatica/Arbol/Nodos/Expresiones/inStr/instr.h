@@ -9,7 +9,7 @@ class InStr:public NodoAST
 {
 public:
     NodoAST *puntero;
-    InStr(int linea, int columna, std::string archivo, NodoAST *puntero);
+    InStr(int linea, int columna, std::string archivo, tablaSimbolos*tabla, NodoAST *puntero);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

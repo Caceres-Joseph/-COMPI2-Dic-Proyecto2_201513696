@@ -21,6 +21,9 @@
 #include <QInputDialog>
 
 #include "debugcoline.h"
+#include "debug3d.h"
+#include "Gramatica/arbol_3d.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -32,6 +35,7 @@ class MainWindow : public QMainWindow
 public:
     tablaSimbolos *tabla;
     DebugColine *dlgColine;
+    debug3d *dlg3D;
     lstTabClase *lstTabs;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -41,6 +45,8 @@ public:
     //MENU
     void menuInicializar();
     void accNuevo();
+
+    void prueba(char val1[15]);
 
 
 private slots:
@@ -59,6 +65,10 @@ private slots:
     void on_btnContinuar_clicked();
 
     void on_btnSiguiente_clicked();
+
+    void on_btnSaltar_clicked();
+
+    void on_btnAux2_clicked();
 
 private:
     Ui::MainWindow *ui;

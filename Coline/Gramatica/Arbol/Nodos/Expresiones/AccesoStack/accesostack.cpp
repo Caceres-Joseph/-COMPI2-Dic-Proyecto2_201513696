@@ -1,9 +1,10 @@
 #include "accesostack.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-AccesoStack::AccesoStack(int linea, int columna, std::string archivo, NodoAST *valor):NodoAST (linea, columna, archivo)
+AccesoStack::AccesoStack(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor):NodoAST (linea, columna, archivo, tabla)
 {
     this->valor = valor;
     this->type = "ACCESO_STACK";
+
 }
 
 double AccesoStack::getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)

@@ -9,7 +9,7 @@ class Condicional:public NodoAST
 public:
     std::string etiquetaVerdadera;
     NodoAST *Expresion;
-    Condicional(int linea, int columna, std::string archivo, NodoAST *Expresion, std::string etiquetaVerdadero);
+    Condicional(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *Expresion, std::string etiquetaVerdadero);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

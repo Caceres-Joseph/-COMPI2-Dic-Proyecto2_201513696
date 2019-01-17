@@ -4,6 +4,12 @@
 #include <QStandardItemModel>
 #include "ui_debugcoline.h"
 #include "debugcoline.h"
+
+
+#include "Gramatica/Entorno/entorno3d.h"
+#include "Gramatica/Estructuras/TablaSimbolos/tablatemporales.h"
+
+
 void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
     linea("$$_SGC("+inicio+", "+tam+")",nivel);
 }
@@ -191,68 +197,68 @@ void tablaSimbolos::nuevaLinea(QString txt){
     this->editorSalida->insertPlainText (txt);
     this->editorSalida->moveCursor (QTextCursor::End);
 }
-#import <QThread>
+
+void tablaSimbolos::setTextConsola(QString texto){
+
+    this->txtSalidaConsola->moveCursor (QTextCursor::End);
+    this->txtSalidaConsola->insertPlainText (texto);
+    this->txtSalidaConsola->moveCursor (QTextCursor::End);
+}
+
+
+
 void tablaSimbolos::debugerColine(elementoEntorno *entor){
-/*
-    QStandardItemModel model;
-    model.index(1,1,model.index(0,0));
-
-    QStringList horizontalHeader;
-    QStringList verticalHeader;
-
-    horizontalHeader.append("SPH");
-    horizontalHeader.append("CYL");
-    horizontalHeader.append("AXIS");
-    horizontalHeader.append("A.D.D");
-
-    verticalHeader.append("R");
-    verticalHeader.append("L");
-
-    model.setHorizontalHeaderLabels(horizontalHeader);
-    model.setVerticalHeaderLabels(verticalHeader);
-
-
-
-     QStandardItem *item00 = new QStandardItem(QString("0"));
-    model.setItem(0, 0, item00);
-
-     QStandardItem *item01 = new QStandardItem(QString("0"));
-    model.setItem(0, 1, item01);
-
-     QStandardItem *item02 = new QStandardItem(QString("0"));
-    model.setItem(0, 2, item02);
-
-     QStandardItem *item03 = new QStandardItem(QString("0"));
-    model.setItem(0, 3, item03);
-    */
-/*
-    QTableWidget *tabla1=new QTableWidget();
-    tabla1->setModel(&model);
-    dlgColine->ui->tableWidget=tabla1;
-*/
-    //dlgColine->ui->tableWidget->setModel(&model);
-    //dlgColine->ui->tableWidget->resizeColumnToContents();
-
-    /*
-    dlgColine->ui->tableWidget->setItem(1,0,tab);
-    */
-
-    /*
-    dlgColine->ui->tableWidget->setRowCount(0);
-    QTableWidgetItem *tab=new QTableWidgetItem("Nuevo323");
-    dlgColine->ui->tableWidget->setItem(1,0,tab);
-    dlgColine->ui->tableWidget->setRowCount(2);
-*/
-
     //enviando la tabla de simbolos
     dlgColine->ui->tableWidget->setRowCount(0);
     entor->cargarTablaColine(dlgColine->ui->tableWidget, 0);
 
-
-
     //Enviando la salida
     dlgColine->ui->txtSalida->setText(editorSalida->toPlainText());
     dlgColine->exec();
+}
+
+
+
+
+#include "ui_debug3d.h"
+void tablaSimbolos::debuger3D(Entorno3D *entorno, TablaTemporales *temporales, int linea){
+
+
+    if(modoDebuger){
+        if(lineaDebuger!=linea){
+
+
+            dlg3D->ui->txtHeap->setText(QString::number(entorno->H));
+            dlg3D->ui->txtPool->setText(QString::number(entorno->S));
+            dlg3D->ui->txtStack->setText(QString::number(entorno->P));
+
+            entorno->Heap->llenarTabla(dlg3D->ui->tablaHeap);
+            entorno->Pool->llenarTabla(dlg3D->ui->tablaPool);
+            entorno->Stack->llenarTabla(dlg3D->ui->tablaStack);
+            temporales->llenarTabla(dlg3D->ui->tablaTemporales);
+
+
+            //enviando el contenido a la consola
+            dlg3D->ui->txtConsolaSalida2->clear();
+            dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
+            dlg3D->ui->txtConsolaSalida2->insertPlainText (txtSalidaConsola->toPlainText());
+            dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
+
+
+
+
+            //dlg3D->ui->txtConsolaSalida2->ap
+
+            editorSalida->pintarLinea(linea);
+            dlg3D->exec();
+
+            lineaDebuger=linea;
+        }
+
+
+    }
+
+
 
 }
 

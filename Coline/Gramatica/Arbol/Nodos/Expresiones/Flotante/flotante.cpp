@@ -1,6 +1,6 @@
 #include "flotante.h"
 
-flotante::flotante(int linea, int columna, std::string archivo, double valor):NodoAST (linea, columna, archivo)
+flotante::flotante(int linea, int columna, std::string archivo, tablaSimbolos *tabla, double valor):NodoAST (linea, columna, archivo, tabla)
 {
     this->valor = valor;
     this->type = "FLOTANTE";

@@ -10,7 +10,7 @@ class Asignacion : public NodoAST
 public:
     std::string id;
     NodoAST *Expresion;
-    Asignacion(int linea , int columna, std::string archivo, std::string id, NodoAST *Expresion);
+    Asignacion(int linea , int columna, std::string archivo,tablaSimbolos*tabla, std::string id, NodoAST *Expresion);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

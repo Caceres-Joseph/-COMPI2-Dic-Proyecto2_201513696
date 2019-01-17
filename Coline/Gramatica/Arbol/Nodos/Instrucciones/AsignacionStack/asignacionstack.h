@@ -9,7 +9,7 @@ class AsignacionStack : public NodoAST
 public:
     NodoAST *valor;
     NodoAST *valorAsignado;
-    AsignacionStack(int linea, int columna, std::string archivo, NodoAST *valor, NodoAST *valorAsignado);
+    AsignacionStack(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor, NodoAST *valorAsignado);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

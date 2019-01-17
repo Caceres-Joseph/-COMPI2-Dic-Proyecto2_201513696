@@ -9,7 +9,7 @@ class GetBool:public NodoAST
 {
 public:
     NodoAST *puntero;
-    GetBool(int linea, int columna, std::string archivo, NodoAST *puntero);
+    GetBool(int linea, int columna, std::string archivo, tablaSimbolos*tabla, NodoAST *puntero);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

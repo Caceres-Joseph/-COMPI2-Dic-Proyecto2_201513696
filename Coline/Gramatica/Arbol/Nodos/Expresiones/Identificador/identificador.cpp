@@ -1,6 +1,6 @@
 #include "identificador.h"
 
-identificador::identificador(int linea, int columna, std::string archivo, std::string id):NodoAST (linea, columna, archivo)
+identificador::identificador(int linea, int columna, std::string archivo, tablaSimbolos *tabla, std::string id):NodoAST (linea, columna, archivo, tabla)
 {
     this->id = id;
     this->type = "IDENTIFICADOR";

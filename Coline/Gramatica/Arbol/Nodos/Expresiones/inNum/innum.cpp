@@ -1,6 +1,6 @@
 #include "innum.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-InNum::InNum(int linea, int columna, std::string archivo, NodoAST *puntero):NodoAST (linea, columna, archivo)
+InNum::InNum(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *puntero):NodoAST (linea, columna, archivo, tabla)
 {
     this->puntero = puntero;
     this->type = "INNUM";

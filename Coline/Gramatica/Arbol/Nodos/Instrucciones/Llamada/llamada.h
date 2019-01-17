@@ -10,7 +10,7 @@ class Llamada:public NodoAST
 {
 public:
     std::string id;
-    Llamada(int linea, int columna, std::string archivo, std::string id);
+    Llamada(int linea, int columna, std::string archivo,tablaSimbolos *tabla, std::string id);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
     void CasteaYEjecuta(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas, NodoAST *i);
     void LlenarEtiquetas(TablaEtiquetas *t, NodoAST *i, int index);

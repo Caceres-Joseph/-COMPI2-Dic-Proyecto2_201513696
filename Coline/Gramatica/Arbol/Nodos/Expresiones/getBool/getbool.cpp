@@ -1,7 +1,7 @@
 #include "getbool.h"
 #include <QInputDialog>
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-GetBool::GetBool(int linea, int columna, std::string archivo, NodoAST *puntero):NodoAST (linea, columna, archivo)
+GetBool::GetBool(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *puntero):NodoAST (linea, columna, archivo, tabla)
 {
     this->type = "GETBOOL";
     this->puntero = puntero;

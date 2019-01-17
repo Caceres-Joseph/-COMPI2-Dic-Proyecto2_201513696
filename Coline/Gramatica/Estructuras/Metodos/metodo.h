@@ -6,6 +6,7 @@
 #include "Gramatica/Entorno/entorno3d.h"
 #include "Gramatica/Estructuras/TablaSimbolos/tablatemporales.h"
 #include "Gramatica/Estructuras/Etiquetas/tablaetiquetas.h"
+#include "Coline/Elementos/Tablas/tablasimbolos.h"
 class metodo : public NodoAST
 {
 public:
@@ -14,8 +15,8 @@ public:
     int ejecutar;
     std::string id;
     std::vector<NodoAST*> instrucciones;
-    metodo(int linea, int columna, std::string archivo, std::string id, std::vector<NodoAST*>instrucciones);
-    metodo(int linea, int columna, std::string archivo, std::string id);
+    metodo(int linea, int columna, std::string archivo,tablaSimbolos*tabla, std::string id, std::vector<NodoAST*>instrucciones);
+    metodo(int linea, int columna, std::string archivo, tablaSimbolos*tabla,std::string id);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 
     int esEtiqueta(NodoAST *n);

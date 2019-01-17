@@ -1,6 +1,6 @@
 #include "asignacionstack.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-AsignacionStack::AsignacionStack(int linea, int columna, std::string archivo, NodoAST *valor, NodoAST *valorAsignado):NodoAST(linea, columna, archivo)
+AsignacionStack::AsignacionStack(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor, NodoAST *valorAsignado):NodoAST(linea, columna, archivo, tabla)
 {
     this->valor = valor;
     this->valorAsignado = valorAsignado;
@@ -10,6 +10,7 @@ AsignacionStack::AsignacionStack(int linea, int columna, std::string archivo, No
 void AsignacionStack::Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
     try {
+        tabla->debuger3D(entorno,temporales,linea);
         double indice = getVal(this->valor, entorno, etiquetas, temporales);
         double valor = getVal(this->valorAsignado, entorno, etiquetas, temporales);
         entorno->Stack->insertar((int)indice, valor);

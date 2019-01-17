@@ -1,6 +1,6 @@
 #include "condicional.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-Condicional::Condicional(int linea, int columna, std::string archivo, NodoAST *Expresion, std::string etiquetaVerdadera):NodoAST (linea, columna, archivo)
+Condicional::Condicional(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *Expresion, std::string etiquetaVerdadera):NodoAST (linea, columna, archivo, tabla)
 {
     this->Expresion = Expresion;
     this->etiquetaVerdadera = etiquetaVerdadera;
@@ -10,6 +10,7 @@ Condicional::Condicional(int linea, int columna, std::string archivo, NodoAST *E
 void Condicional::Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
     try {
+        tabla->debuger3D(entorno,temporales,linea);
         double val = getVal(this->Expresion, entorno, etiquetas, temporales);
         if(etiquetas->existeEtiqueta(this->etiquetaVerdadera))
         {

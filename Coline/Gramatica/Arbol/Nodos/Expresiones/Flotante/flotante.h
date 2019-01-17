@@ -8,7 +8,7 @@ class flotante : public NodoAST
 {
 public:
     double valor;
-    flotante(int linea, int columna, std::string archivo, double valor);
+    flotante(int linea, int columna, std::string archivo,tablaSimbolos *tabla, double valor);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

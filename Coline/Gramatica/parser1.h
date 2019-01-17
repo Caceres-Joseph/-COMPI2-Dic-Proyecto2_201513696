@@ -109,7 +109,7 @@ extern int zzdebug;
 
 union ZZSTYPE
 {
-#line 30 "sintactico.y" /* yacc.c:1909  */
+#line 41 "sintactico1.y" /* yacc.c:1909  */
 
 //se especifican los tipo de valores para los no terminales y lo terminales
 ASTList *Listado;

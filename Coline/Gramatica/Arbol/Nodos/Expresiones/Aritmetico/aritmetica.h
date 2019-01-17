@@ -10,7 +10,7 @@ public:
     NodoAST *val1;
     NodoAST *val2;
     int operando;
-    Aritmetica(int linea, int columna, std::string archivo, NodoAST *val1, NodoAST *val2, int operando);
+    Aritmetica(int linea, int columna, std::string archivo, tablaSimbolos*tabla, NodoAST *val1, NodoAST *val2, int operando);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

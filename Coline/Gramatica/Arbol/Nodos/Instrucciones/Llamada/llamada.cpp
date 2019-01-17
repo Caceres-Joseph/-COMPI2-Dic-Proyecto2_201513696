@@ -1,6 +1,6 @@
 #include "llamada.h"
 #include "Gramatica/inclusionnodos.h"
-Llamada::Llamada(int linea, int columna, std::string archivo, std::string id):NodoAST (linea, columna, archivo)
+Llamada::Llamada(int linea, int columna, std::string archivo, tablaSimbolos *tabla, std::string id):NodoAST (linea, columna, archivo, tabla)
 {
     this->id = id;
     this->type = "LLAMADA";
@@ -10,6 +10,7 @@ Llamada::Llamada(int linea, int columna, std::string archivo, std::string id):No
 void Llamada::Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
     try {
+        tabla->debuger3D(entorno,temporales,linea);
 
         if(entorno->metodos.count(this->id)==1)
         {

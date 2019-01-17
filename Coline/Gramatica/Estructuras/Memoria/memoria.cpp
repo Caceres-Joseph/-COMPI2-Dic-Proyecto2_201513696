@@ -65,3 +65,30 @@ double memoria::getValueAt(int indice)
         throw 101; //ERROR DE EL DATO NO SE ENCONTRO
     }
 }
+
+void memoria::llenarTabla(QTableWidget *tablaSimb){
+
+    //limpiando la tabla
+    tablaSimb->setRowCount(0);
+    // show content:
+    int indice=0;
+    // Create a map iterator and point to beginning of map
+    std::map<int, double>::iterator it = mapa.begin();
+    while (it != mapa.end())
+    {
+        int clave = it->first;
+        double  valor= it->second;
+
+        tablaSimb->setRowCount(indice+1);
+
+        QTableWidgetItem *tab1=new QTableWidgetItem(QString::number(clave));
+        tablaSimb->setItem(indice,0,tab1);
+
+        QTableWidgetItem *tab2=new QTableWidgetItem(QString::number(valor));
+        tablaSimb->setItem(indice,1,tab2);
+
+        it++;
+        indice++;
+    }
+
+}

@@ -8,7 +8,7 @@ class AccesoStack:public NodoAST
 {
 public:
     NodoAST *valor;
-    AccesoStack(int linea, int columna, std::string archivo, NodoAST *valor);
+    AccesoStack(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

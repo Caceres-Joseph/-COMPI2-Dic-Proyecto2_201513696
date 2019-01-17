@@ -1,6 +1,6 @@
 #include "accesoheap.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-AccesoHeap::AccesoHeap(int linea, int columna, std::string archivo, NodoAST *valor):NodoAST (linea, columna, archivo)
+AccesoHeap::AccesoHeap(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor):NodoAST (linea, columna, archivo, tabla)
 {
     this->valor = valor;
     this->type = "ACCESO_HEAP";

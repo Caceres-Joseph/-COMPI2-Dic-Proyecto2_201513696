@@ -8,7 +8,7 @@ class identificador:public NodoAST
 {
 public:
     std::string id;
-    identificador(int linea, int columna, std::string archivo, std::string id);
+    identificador(int linea, int columna, std::string archivo,tablaSimbolos *tabla,  std::string id);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

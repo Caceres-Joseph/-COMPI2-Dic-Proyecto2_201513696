@@ -1,7 +1,7 @@
 #include "getnum.h"
 #include <QInputDialog>
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-GetNum::GetNum(int linea, int columna, std::string archivo, NodoAST *puntero):NodoAST (linea, columna, archivo)
+GetNum::GetNum(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *puntero):NodoAST (linea, columna, archivo, tabla)
 {
     // NO NECESITO NADA EN EL CONSTRUCTOR
     this->type = "GETNUM";

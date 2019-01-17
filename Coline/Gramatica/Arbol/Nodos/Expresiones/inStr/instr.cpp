@@ -2,7 +2,7 @@
 #include <QInputDialog>
 #include <QString>
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-InStr::InStr(int linea, int columna, std::string archivo, NodoAST *puntero):NodoAST (linea, columna, archivo)
+InStr::InStr(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *puntero):NodoAST (linea, columna, archivo, tabla)
 {
     this->type = "INSTR";
     this->puntero = puntero;

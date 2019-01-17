@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ui_debug3d.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->txtEntrada->setLineWrapMode(QTextEdit::NoWrap);
-    ui->txtSalida->setLineWrapMode(QTextEdit::NoWrap);
+    //ui->txtEntrada->setLineWrapMode(QTextEdit::NoWrap);
+    //ui->txtSalida->setLineWrapMode(QTextEdit::NoWrap);
 
 
     //creando una tabla de simbolo
@@ -36,8 +37,22 @@ MainWindow::MainWindow(QWidget *parent) :
     dlgColine=new DebugColine();
     dlgColine->tabla=tabla;
     tabla->dlgColine=dlgColine;
+    tabla->txtSalidaConsola=ui->txtConsolaSalida2;
 
 
+    //debuger 3D
+    dlg3D =new debug3d();
+    tabla->dlg3D=dlg3D;
+    dlg3D->tabla=tabla;
+
+
+    //scroles horizontales
+    txtEditor->setLineWrapMode(QPlainTextEdit::NoWrap);
+    dlg3D->ui->txtConsolaSalida2->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+
+    //tabla->editorEntrada->setLineWrapMode(QPlainTextEdit::NoWrap);
+    //tabla->editorSalida->setLineWrapMode(QPlainTextEdit::NoWrap);
 
 }
 
@@ -53,9 +68,10 @@ void MainWindow::on_btnAceptar_clicked()
 
 void MainWindow::on_btnAnalizar_clicked()
 {
-    arbol_coline *anlz=new arbol_coline(tabla);
-    anlz->iniciarAnalisis(ui->txtEntrada->toPlainText(),"principal");
-    ui->txtSalida->setText(anlz->getSalida());
+    tabla->txtSalidaConsola->clear();
+    arbol_3d *c3d=new arbol_3d(tabla);
+    c3d->ejecutar();
+
 
 }
 
@@ -108,4 +124,22 @@ void MainWindow::on_btnContinuar_clicked()
 void MainWindow::on_btnSiguiente_clicked()
 {
     tabla->dbg_instruccion();
+}
+
+void MainWindow::on_btnSaltar_clicked()
+{
+
+
+}
+
+
+void MainWindow::prueba(char val1[15]){
+
+    std::cout<<"imprmir"<<val1[0]<<std::endl;
+}
+
+void MainWindow::on_btnAux2_clicked()
+{
+
+    prueba("hola");
 }

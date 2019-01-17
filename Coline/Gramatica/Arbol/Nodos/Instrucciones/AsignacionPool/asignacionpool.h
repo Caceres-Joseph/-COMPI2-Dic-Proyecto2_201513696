@@ -9,7 +9,7 @@ class AsignacionPool:public NodoAST
 public:
     NodoAST *valor;
     NodoAST *asignado;
-    AsignacionPool(int linea, int columna, std::string archivo, NodoAST *valor, NodoAST *asignado);
+    AsignacionPool(int linea, int columna, std::string archivo,tablaSimbolos *tabla, NodoAST *valor, NodoAST *asignado);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

@@ -1,6 +1,6 @@
 #include "entero.h"
 
-Entero::Entero(int linea, int columna, std::string archivo, int valor):NodoAST (linea,columna, archivo)
+Entero::Entero(int linea, int columna, std::string archivo, tablaSimbolos *tabla, int valor):NodoAST (linea,columna, archivo, tabla)
 {
     this->valor = valor;
     this->type = "ENTERO";

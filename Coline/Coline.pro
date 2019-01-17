@@ -43,7 +43,8 @@ HEADERS += pch.hpp \
     debugcoline.h \
     Gramatica/parser1.h \
     Gramatica/scanner1.h \
-    Gramatica/arbol_3d.h
+    Gramatica/arbol_3d.h \
+    debug3d.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -196,7 +197,8 @@ SOURCES += \
     debugcoline.cpp \
     Gramatica/parser1.cpp \
     Gramatica/scanner1.cpp \
-    Gramatica/arbol_3d.cpp
+    Gramatica/arbol_3d.cpp \
+    debug3d.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \
@@ -336,4 +338,5 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
-    debugcoline.ui
+    debugcoline.ui \
+    debug3d.ui

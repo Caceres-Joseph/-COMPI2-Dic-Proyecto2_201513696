@@ -1,6 +1,6 @@
 #include "accesopool.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-AccesoPool::AccesoPool(int linea, int columna, std::string archivo, NodoAST *valor):NodoAST (linea, columna, archivo)
+AccesoPool::AccesoPool(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *valor):NodoAST (linea, columna, archivo, tabla)
 {
     this->valor = valor;
     this->type = "ACCESSO_POOL";

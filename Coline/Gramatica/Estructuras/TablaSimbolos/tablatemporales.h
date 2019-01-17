@@ -2,6 +2,7 @@
 #define TABLATEMPORALES_H
 #include <map>
 
+#include <qtablewidget.h>
 class TablaTemporales
 {
 public:
@@ -10,6 +11,7 @@ public:
     bool existeTemporal(std::string id); // VERIFICA SI EXISTE
     double getRealValueFron(std::string id); // OBTIENE EL VALOR DEL TEMPORAL ESPECIFICADO
     void actualizaTemporal(std::string id, double valor); //ACTUALIZA EL VALOR DEL TEMPORAL CON EL NUEVO VALOR
+    void llenarTabla(QTableWidget *tabla);
 private:
     std::map<std::string, double> tabla;
 };

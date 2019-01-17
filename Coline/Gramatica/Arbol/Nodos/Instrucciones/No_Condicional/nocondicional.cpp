@@ -1,6 +1,6 @@
 #include "nocondicional.h"
 
-NoCondicional::NoCondicional(int linea, int columna, std::string archivo, std::string etiqueta):NodoAST (linea, columna, archivo)
+NoCondicional::NoCondicional(int linea, int columna, std::string archivo, tablaSimbolos *tabla, std::string etiqueta):NodoAST (linea, columna, archivo, tabla)
 {
     this->etiqueta = etiqueta;
     this->type = "NO_CONDICIONAL";
@@ -10,6 +10,7 @@ NoCondicional::NoCondicional(int linea, int columna, std::string archivo, std::s
 void NoCondicional::Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
     try {
+        tabla->debuger3D(entorno,temporales,linea);
         if(etiquetas->existeEtiqueta(this->etiqueta))
         {
             entorno->IP = etiquetas->getNumeroInstruccion(this->etiqueta);//CAMBIO EL VALOR DE IP

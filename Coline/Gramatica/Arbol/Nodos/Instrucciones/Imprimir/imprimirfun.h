@@ -10,7 +10,7 @@ class ImprimirFun:public NodoAST
 public:
     NodoAST *valor;
     int tipo;
-    ImprimirFun(int linea, int columna, std::string archivo, int tipo, NodoAST *valor);
+    ImprimirFun(int linea, int columna, std::string archivo, tablaSimbolos *tabla, int tipo, NodoAST *valor);
     void Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

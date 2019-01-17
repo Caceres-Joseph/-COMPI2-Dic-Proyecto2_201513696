@@ -8,13 +8,18 @@
 #include "Gramatica/inclusionnodos.h"
 #include "Gramatica/Entorno/entorno3d.h"
 #include "Gramatica/Estructuras/TablaSimbolos/tablatemporales.h"
-#include "Gramatica/Estructuras/Etiquetas/tablaetiquetas.h"
-//#include "Gramatica/Arbol/Abstraccion/nodoast.h"
-//#include "Arbol/Abstraccion/astlist.h"
+#include "Gramatica/Estructuras/Etiquetas/tablaetiquetas.h" 
+#include "Coline/Elementos/Tablas/tablasimbolos.h"
+//class tablaSimbolos;
+/*
+#include "Gramatica/Arbol/Abstraccion/nodoast.h"
+#include "Arbol/Abstraccion/astlist.h"
+*/
 extern int zzlineno; //linea actual donde se encuentra el parser (analisis lexico) lo maneja BISON
 extern int columna; //columna actual donde se encuentra el parser (analisis lexico) lo maneja BISON
 extern char *zztext; //lexema actual donde esta el parser (analisis lexico) lo maneja BISON
 extern int nLine;
+tablaSimbolos *tabla3;
 
 int zzerror(const char* mens){
 //metodo que se llama al haber un error sintactico
@@ -22,6 +27,12 @@ int zzerror(const char* mens){
 std::cout <<mens<<" "<<zztext<< std::endl;
 return 0;
 }
+void setSalida3(tablaSimbolos *tabla2) { 
+ tabla3=tabla2; 
+ nLine=1;
+}
+
+
 static Entorno3D *entorno;
 %}
 //error-verbose si se especifica la opcion los errores sintacticos son especificados por BISON
@@ -117,9 +128,9 @@ INICIO :{ entorno = new Entorno3D(); } INSTRUCCIONES
             
             ASTList *l = $2;
             entorno->metodos["inicio"] = l;
-            Llamada *m = new Llamada(0,0, "entrada", "inicio");
+            Llamada *m = new Llamada(nLine,0, "entrada", tabla3 , "inicio");
             m->Ejecutar(entorno, new TablaTemporales(), new TablaEtiquetas());
-            $$ = new NodoAST(0,0, "");
+            $$ = new NodoAST(0,0, "", tabla3);
         }
         ;
 
@@ -235,13 +246,13 @@ INSTRUCCIONES : INSTRUCCIONES ETQ
 /*METODOS QUE SE LLAMAN EN LAS INSTRUCCIONES 3D*/
 METODO : vacio identi oparent cparent okey ckey
        {
-           metodo *m = new metodo(@1.first_line, 0, "entrada", $2);
+           metodo *m = new metodo(@1.first_line, 0, "entrada", tabla3,  $2);
            entorno->metodos[$2] = new ASTList();
        }
        | vacio identi oparent cparent okey SENTENCIAS ckey
        {
            ASTList *l = $6;
-           metodo *m = new metodo(@1.first_line, 0, "entrada", $2, l->instrucciones);
+           metodo *m = new metodo(@1.first_line, 0, "entrada", tabla3, $2, l->instrucciones);
            entorno->metodos[$2] = $6;
        }
        ;
@@ -347,7 +358,7 @@ SENTENCIAS : SENTENCIAS  ETQ
 /*INSTRUCCIONES DE ETIQUETA QUE SIRVEN PARA LOS SALTOS*/
 ETQ : etiqueta dpts
     {
-        Etiqueta *e = new Etiqueta(@1.first_line, 0, "entrada", $1);
+        Etiqueta *e = new Etiqueta(nLine, 0, "entrada",tabla3, $1);
         //e->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
         $$ = e;
     }
@@ -356,7 +367,7 @@ ETQ : etiqueta dpts
 /*LLAMADA A METODOS*/
 LLAMADA : identi oparent cparent ptcoma
         {
-            Llamada *l = new Llamada(@1.first_line, 0, "entrada", $1);
+            Llamada *l = new Llamada(nLine, 0, "entrada",tabla3, $1);
             //l->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = l;
         }
@@ -365,7 +376,7 @@ LLAMADA : identi oparent cparent ptcoma
 /*SALTO INCONDICIONAL*/
 SALTO_NO_COND : gto etiqueta ptcoma
         {
-            NoCondicional *n = new NoCondicional(@1.first_line, 0, "entrada", $2);
+            NoCondicional *n = new NoCondicional(nLine, 0, "entrada",tabla3, $2);
             //n->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = n;
         }
@@ -376,26 +387,28 @@ FUN_CLEAN : cleanFunc oparent VALOR coma VALOR cparent ptcoma
         {
             // AUN SIN IMPLEMENTAR
             printf("FUNCION DE LIMPIRA MEMORIA AUN NO IMPLEMENTADA");
-            $$ = new NodoAST(0,0,"");
+            $$ = new NodoAST(0,0,"", tabla3);
         }
         ;
 
 /*FUNCION PARA IMPRIMIR */
 PRINT_FUN : imprimir oparent charvalue coma VALOR cparent ptcoma
          {
-             ImprimirFun *i = new ImprimirFun(@1.first_line, 0, "entrada",0, $5);
+             
+             ImprimirFun *i = new ImprimirFun(nLine, 0, "entrada", tabla3, 0, $5);
              //i->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
              $$ = i;
          }
          | imprimir oparent intvalue coma VALOR cparent ptcoma
-         {
-             ImprimirFun *i = new ImprimirFun(@1.first_line, 1, "entrada",1, $5);
+         { 
+             ImprimirFun *i = new ImprimirFun(nLine, 1, "entrada",tabla3,1, $5);
              //i->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
              $$ = i;
          }
          | imprimir oparent floatvalue coma VALOR cparent ptcoma
          {
-             ImprimirFun *i = new ImprimirFun(@1.first_line, 2, "entrada",2, $5);
+             
+             ImprimirFun *i = new ImprimirFun(nLine, 2, "entrada",tabla3,2, $5);
              //i->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
              $$ = i;
          }
@@ -406,7 +419,7 @@ ASIGNA : identi asignacion EXPRESION ptcoma
         {
             NodoAST *valor = $3;
             std::string id($1);
-            Asignacion *a = new Asignacion(@1.first_line, 0, "entrada", id, valor);
+            Asignacion *a = new Asignacion(nLine, 0, "entrada", tabla3, id, valor);
             //a->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = a;
         }
@@ -414,7 +427,7 @@ ASIGNA : identi asignacion EXPRESION ptcoma
         {
             NodoAST *valor = $3;
             NodoAST *asignado = $6;
-            AsignacionStack *a = new AsignacionStack(@1.first_line, 0, "entrada", valor, asignado);
+            AsignacionStack *a = new AsignacionStack(nLine, 0, "entrada", tabla3, valor, asignado);
             //a->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = a;
         }
@@ -422,7 +435,7 @@ ASIGNA : identi asignacion EXPRESION ptcoma
         {
             NodoAST *valor = $3;
             NodoAST *asignado = $6;
-            AsignacionHeap *a = new AsignacionHeap(@1.first_line, 0, "entrada", valor, asignado);
+            AsignacionHeap *a = new AsignacionHeap(nLine, 0, "entrada", tabla3, valor, asignado);
             //a->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = a;
         }
@@ -430,7 +443,7 @@ ASIGNA : identi asignacion EXPRESION ptcoma
         {
             NodoAST *valor = $3;
             NodoAST *asignado = $6;
-            AsignacionPool *a = new AsignacionPool(@1.first_line, 0, "entrada", valor, asignado);
+            AsignacionPool *a = new AsignacionPool(nLine, 0, "entrada", tabla3, valor, asignado);
             //a->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = a;
         }
@@ -440,7 +453,7 @@ ASIGNA : identi asignacion EXPRESION ptcoma
 SALTO_COND : si oparent EXP_REL cparent gto etiqueta ptcoma
         {
             NodoAST *exp = $3;
-            Condicional *c = new Condicional(@1.first_line, 0, "entrada", exp, $6);
+            Condicional *c = new Condicional(nLine, 0, "entrada",tabla3 , exp, $6);
             //c->Ejecutar(new Entorno3D(), new TablaTemporales(), new TablaEtiquetas());
             $$ = c;
         }
@@ -449,7 +462,7 @@ SALTO_COND : si oparent EXP_REL cparent gto etiqueta ptcoma
 /* IMPRIMIR UNA CADENA DE SALIDA */
 PRINT_STR : outstr oparent VALOR cparent ptcoma
         {
-            OutStr *o = new OutStr(@1.first_line, 0, "entrada", $3);
+            OutStr *o = new OutStr(nLine, 0, "entrada",tabla3, $3);
             $$ = o;
         }
         ;
@@ -460,7 +473,7 @@ EXPRESION : VALOR ARITMETICO VALOR
                 NodoAST *val1 = $1;
                 NodoAST *val2 = $3;
                 int oper = $2;
-                Aritmetica *a = new Aritmetica(@1.first_line, 0, "entrada", val1, val2, oper);
+                Aritmetica *a = new Aritmetica(@1.first_line, 0, "entrada", tabla3, val1, val2, oper);
                 $$ = a;
           }
           | VALOR
@@ -471,54 +484,54 @@ EXPRESION : VALOR ARITMETICO VALOR
 
 VALOR : identi
       {
-          identificador *ide = new identificador(@1.first_line, 0, "entrada", $1);
+          identificador *ide = new identificador(@1.first_line, 0, "entrada", tabla3, $1);
           $$ = ide;
       }
       | ente
       {
             int val = std::stoi($1);
-            Entero *ent = new Entero(@1.first_line, 0, "entrada", val);
+            Entero *ent = new Entero(@1.first_line, 0, "entrada", tabla3, val);
             $$ = ent;
       }
       | flota
       {
             double val = atof($1);
-            flotante *f = new flotante(@1.first_line, 0, "entrada", val);
+            flotante *f = new flotante(@1.first_line, 0, "entrada", tabla3, val);
             $$ = f;
       }
       | pila obracket VALOR cbracket
       {
-          AccesoStack *v = new AccesoStack(@1.first_line, 0, "entrada", $3);
+          AccesoStack *v = new AccesoStack(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = v;
       }
       | monticulo obracket VALOR cbracket
       {
-          AccesoHeap *v = new AccesoHeap(@1.first_line, 0, "entrada", $3);
+          AccesoHeap *v = new AccesoHeap(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = v;
       }
       | pool obracket VALOR cbracket
       {
-          AccesoPool *v = new AccesoPool(@1.first_line, 0, "entrada", $3);
+          AccesoPool *v = new AccesoPool(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = v;
       }
       | getbool oparent VALOR cparent
       {
-          GetBool *b = new GetBool(@1.first_line, 0, "entrada", $3);
+          GetBool *b = new GetBool(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = b;
       }
       | getnum oparent VALOR cparent
       {
-          GetNum *g = new GetNum(@1.first_line, 0, "entrada", $3);
+          GetNum *g = new GetNum(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = g;
       }
       | instr oparent VALOR cparent
       {
-          InStr *in = new InStr(@1.first_line, 0, "entrada", $3);
+          InStr *in = new InStr(@1.first_line, 0, "entrada",tabla3, $3);
           $$ = in;
       }
       | innum oparent VALOR cparent
       {
-          InNum *in = new InNum(@1.first_line, 0, "entrada", $3);
+          InNum *in = new InNum(@1.first_line, 0, "entrada", tabla3, $3);
           $$ = in;
       }
       ;
@@ -551,7 +564,7 @@ EXP_REL : VALOR RELACIONAL VALOR
             NodoAST *val1 = $1;
             NodoAST *val2 = $3;
             int oper = $2;
-            Relacional *r = new Relacional(@1.first_line, 0, "entrada", val1, val2, oper);
+            Relacional *r = new Relacional(@1.first_line, 0, "entrada", tabla3, val1, val2, oper);
             $$ = r;
         }
         ;

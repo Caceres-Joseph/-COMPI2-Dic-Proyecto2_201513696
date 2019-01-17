@@ -1,6 +1,6 @@
 #include "asignacion.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-Asignacion::Asignacion(int linea, int columna, std::string archivo, std::string id, NodoAST *Expresion):NodoAST (linea, columna, archivo)
+Asignacion::Asignacion(int linea, int columna, std::string archivo, tablaSimbolos *tabla, std::string id, NodoAST *Expresion):NodoAST (linea, columna, archivo, tabla)
 {
     this->id = id;
     this->Expresion = Expresion;
@@ -10,6 +10,7 @@ Asignacion::Asignacion(int linea, int columna, std::string archivo, std::string 
 void Asignacion::Ejecutar(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
     try {
+        tabla->debuger3D(entorno,temporales,linea);
         double val = getVal(this->Expresion, entorno, etiquetas, temporales);
         if(this->id.compare("P")==0)
         {

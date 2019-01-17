@@ -8,7 +8,7 @@ class AccesoPool:public NodoAST
 {
 public:
     NodoAST  *valor;
-    AccesoPool(int linea, int columna, std::string archivo, NodoAST *valor);
+    AccesoPool(int linea, int columna, std::string archivo, tablaSimbolos*tabla,NodoAST *valor);
     double getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas);
 };
 

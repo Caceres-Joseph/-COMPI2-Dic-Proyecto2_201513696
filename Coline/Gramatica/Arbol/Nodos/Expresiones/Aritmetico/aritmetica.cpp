@@ -1,6 +1,6 @@
 #include "aritmetica.h"
 #include "Gramatica/Arbol/Nodos/Expresiones/expexecutor.h"
-Aritmetica::Aritmetica(int linea, int columna, std::string archivo, NodoAST *val1, NodoAST *val2, int operando):NodoAST(linea, columna, archivo)
+Aritmetica::Aritmetica(int linea, int columna, std::string archivo, tablaSimbolos *tabla, NodoAST *val1, NodoAST *val2, int operando):NodoAST(linea, columna, archivo, tabla)
 {
     this->val1 = val1;
     this->val2 = val2;
