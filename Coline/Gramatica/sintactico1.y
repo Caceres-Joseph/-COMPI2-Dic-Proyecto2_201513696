@@ -51,6 +51,7 @@ char TEXT[256];//NO PUEDO METER UN STRING AQUI!!!!
 %token<TEXT> mas
 %token<TEXT> menos
 %token<TEXT> mult
+%token<TEXT> pot
 %token<TEXT> divi
 %token<TEXT> mod
 %token<TEXT> coma
@@ -555,6 +556,10 @@ ARITMETICO : mas
            | mod
            {
                $$ = 6;
+           }
+           | pot
+           {
+               $$ = 7;
            }
            ;
 

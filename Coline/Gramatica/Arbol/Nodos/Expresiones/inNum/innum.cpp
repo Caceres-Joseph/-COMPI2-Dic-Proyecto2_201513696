@@ -11,7 +11,9 @@ double InNum::getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEti
 {
     try {
         double val = getVal(this->puntero, entorno, etiquetas, temporales);
-        std::string cadena = std::to_string(val);
+
+        QString cadena2=QString::number(val);
+        std::string cadena = cadena2.toStdString();
         const char *salida = cadena.c_str();
         double inicio = entorno->S;
         for(int x = 0; x < cadena.size(); x++)

@@ -44,7 +44,8 @@ HEADERS += pch.hpp \
     Gramatica/parser1.h \
     Gramatica/scanner1.h \
     Gramatica/arbol_3d.h \
-    debug3d.h
+    debug3d.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -198,7 +199,8 @@ SOURCES += \
     Gramatica/parser1.cpp \
     Gramatica/scanner1.cpp \
     Gramatica/arbol_3d.cpp \
-    debug3d.cpp
+    debug3d.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

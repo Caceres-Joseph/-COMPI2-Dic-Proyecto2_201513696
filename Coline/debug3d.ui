@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
+    <width>392</width>
     <height>584</height>
    </rect>
   </property>
@@ -142,14 +142,20 @@
      </item>
      <item>
       <widget class="QTableWidget" name="tablaTemporales">
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>60</number>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
        <column>
         <property name="text">
-         <string>Temp</string>
+         <string>No.</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>Valor</string>
+         <string>Temp</string>
         </property>
        </column>
       </widget>
@@ -623,14 +629,20 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tablaStack">
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>50</number>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
              <column>
               <property name="text">
-               <string>Indice</string>
+               <string>No.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Valor</string>
+               <string>Stack</string>
               </property>
              </column>
             </widget>
@@ -648,14 +660,20 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tablaHeap">
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>50</number>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
              <column>
               <property name="text">
-               <string>Indice</string>
+               <string>No.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Valor</string>
+               <string>Heap</string>
               </property>
              </column>
             </widget>
@@ -673,19 +691,20 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tablaPool">
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>50</number>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
              <column>
               <property name="text">
-               <string>New Column</string>
+               <string>No.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Valor</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Ascii</string>
+               <string>Pool</string>
               </property>
              </column>
             </widget>

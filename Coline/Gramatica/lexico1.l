@@ -24,6 +24,7 @@ identificador {letra}({letra}|{digito}|"_")*
              BEGIN(comment);
              }
 "+"                             {/*printf("+\n");*/ strcpy(zzlval.TEXT, zztext); return mas;}
+"^"                             {/*printf("+\n");*/ strcpy(zzlval.TEXT, zztext); return pot;}
 "-"                             {/*printf("-\n");*/ strcpy(zzlval.TEXT, zztext); return menos;}
 "*"                             {/*printf("*\n");*/ strcpy(zzlval.TEXT, zztext); return mult;}
 "/"                             {/*printf("/\n");*/ strcpy(zzlval.TEXT, zztext); return divi;}

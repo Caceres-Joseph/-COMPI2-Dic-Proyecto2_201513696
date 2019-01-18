@@ -141,5 +141,8 @@ void MainWindow::prueba(char val1[15]){
 void MainWindow::on_btnAux2_clicked()
 {
 
-    prueba("hola");
+    int val1=1;
+    val1-=10;
+    std::cout<<"vale:"<<val1<<std::endl;
+
 }

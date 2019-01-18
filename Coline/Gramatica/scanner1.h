@@ -320,7 +320,7 @@ extern int zzlex (void);
 #undef YY_DECL
 #endif
 
-#line 98 "lexico.l"
+#line 99 "lexico1.l"
 
 
 #line 327 "scanner1.h"

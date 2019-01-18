@@ -87,6 +87,11 @@ struct Nod *VAL;
 %token<TEXT>  sMod
 %token<TEXT>  sPot
 
+%token<TEXT>  sMasIgual
+%token<TEXT>  sMenosIgual
+%token<TEXT>  sPorIgual
+%token<TEXT>  sDivIgual
+
 %token<TEXT>  sAbreParent
 %token<TEXT>  sCierraParent
 %token<TEXT>  sAbreLlave
@@ -129,6 +134,7 @@ struct Nod *VAL;
 %token<TEXT>  tSubCad
 %token<TEXT>  tPosCad
 %token<TEXT>  tRandom
+%token<TEXT>  tTamanio
 //%token<TEXT>  tTam
 %token<TEXT>  tSuper
 %token<TEXT>  tNada
@@ -227,8 +233,7 @@ struct Nod *VAL;
 %type<VAL> AHORA 
 %type<VAL> TO_FECHA 
 %type<VAL> TO_HORA 
-%type<VAL> TO_FECHAHORA 
-%type<VAL> TAM 
+%type<VAL> TO_FECHAHORA  
 %type<VAL> RANDOM 
 %type<VAL> MIN 
 %type<VAL> MAX 
@@ -266,6 +271,7 @@ struct Nod *VAL;
 %type<VAL> LST_CUERPO_PREGUNTA 
 %type<VAL> PREGUNTA 
 %type<VAL> GRUPO 
+%type<VAL> TAMANIO 
 
 
 
@@ -1467,6 +1473,62 @@ ASIG_VALOR:
 
                         $$->Padre=padre;
                 }
+        | ID_VAR_FUNC  sMasIgual  E
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        padre->nivel=4;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+        | ID_VAR_FUNC  sMenosIgual  E
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        padre->nivel=5;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+        | ID_VAR_FUNC  sPorIgual  E
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        padre->nivel=6;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
+        | ID_VAR_FUNC  sDivIgual  E
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _ASIG_VALOR *padre=new _ASIG_VALOR("ASIG_VALOR",tabla); 
+                        padre->nivel=7;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($3->Padre); 
+
+                        $$->Padre=padre;
+                }
         ;
 
 LST_CUERPO:  
@@ -2152,6 +2214,21 @@ VALOR:
         ;
 
 
+TAMANIO:
+        ID_VAR_FUNC sPunto tTamanio
+        {
+                //creando el padre
+                $$=new Nod(); 
+                _TAMANIO *padre=new _TAMANIO("TAMANIO",tabla); 
+                padre->nivel=1;
+                padre->nLinea=nLinea;
+
+                        //hijos
+                        padre->hijos.append($1->Padre); 
+
+                $$->Padre=padre;
+        }
+        ;
 
 E: 
         sMenos  E
@@ -2603,7 +2680,20 @@ E:
 
                         $$->Padre=padre;
                 }  
+        | TAMANIO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        padre->nivel=27;
+                        padre->nLinea=nLinea;
 
+                                //hijos
+                                padre->hijos.append($1->Padre);  
+
+                        $$->Padre=padre;
+                }
+                
         //| SI_SIMPLIFICADO
         //| OPE_ARITME
         //| OPE_TIPO

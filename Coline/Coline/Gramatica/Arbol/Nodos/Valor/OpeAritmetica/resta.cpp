@@ -11,6 +11,25 @@ itemValor *resta::opResta(elementoEntorno *entorno){
     itemValor *val2=hijo2->getValor(entorno);
 
     /*
+    |------------------
+    | Si es caracter sacarlo de pool
+    |------------------
+    */
+    if(val1->isTypeChar()){
+        //tengo que sacarlo de pool
+        QString etqChar=tabla->getEtiqueta();
+        tabla->linea(etqChar+" = Pool["+val1->c3d+"]", entorno->nivel,"Valor de pool");
+        val1->c3d=etqChar;
+
+    }
+    if(val2->isTypeChar()){
+        QString etqChar=tabla->getEtiqueta();
+        tabla->linea(etqChar+" = Pool["+val2->c3d+"]", entorno->nivel,"Valor de pool");
+        val2->c3d=etqChar;
+
+    }
+
+    /*
     |--------------------------------------------------------------------------
     | Booleano
     |--------------------------------------------------------------------------

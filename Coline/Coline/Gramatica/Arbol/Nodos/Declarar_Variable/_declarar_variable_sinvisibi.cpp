@@ -101,6 +101,25 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     token *tokTipo=nodoTipo->getTipo();
 
 
+    QString t1=tabla->getEtiqueta();
+    QString direc="";
+    QString asign="";
+
+    int posAbsoluta=entor->tamEntornoAbsoluto();
+    if(entor->nombre=="global1"){
+
+        direc = t1 + " = H";
+        asign="Heap["+t1+"] = ";
+
+        tabla->linea(direc,entor->nivel, "Direc");
+        tabla->incrementarHeap(entor);
+    }else{
+        direc = t1 + " = P + " + QString::number(posAbsoluta);
+        asign="Stack["+t1+"] = ";
+        tabla->linea(direc,entor->nivel, "Direc");
+    }
+
+
     if(nivel == 1){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
@@ -137,23 +156,6 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     // --Los tengo que almacenar en string poool *uto
 
 
-    QString t1=tabla->getEtiqueta();
-    QString direc="";
-    QString asign="";
-
-    int posAbsoluta=entor->tamEntornoAbsoluto();
-    if(entor->nombre=="global1"){
-
-        direc = t1 + " = H";
-        asign="Heap["+t1+"] = ";
-
-        tabla->linea(direc,entor->nivel, "Direc");
-        tabla->incrementarHeap(entor);
-    }else{
-        direc = t1 + " = P + " + QString::number(posAbsoluta);
-        asign="Stack["+t1+"] = ";
-        tabla->linea(direc,entor->nivel, "Direc");
-    }
 
 
 

@@ -7,7 +7,7 @@ Aritmetica::Aritmetica(int linea, int columna, std::string archivo, tablaSimbolo
     this->operando = operando;
     this->type = "ARITMETICA";
 }
-
+#include <QtMath>>
 
 double Aritmetica::getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEtiquetas *etiquetas)
 {
@@ -24,7 +24,8 @@ double Aritmetica::getValor(Entorno3D *entorno, TablaTemporales *temporales, Tab
         }
         else if(this->operando == 4)// /
         {
-            return  v1 / v2;
+            double retorno= v1/v2;
+            return  retorno;
         }
         else if(this->operando == 5)// *
         {
@@ -33,6 +34,10 @@ double Aritmetica::getValor(Entorno3D *entorno, TablaTemporales *temporales, Tab
         else if(this->operando == 6)// %
         {
             return (int)v1 % (int)v2;
+        }
+        else if(this->operando == 7)// ^
+        {
+            return qPow(v1, v2);
         }
     } catch (int error) {
         printf("Error el devolver valor de una operacion Aritmetica, Linea: %i |  codigo: %i \n", this->linea, error);

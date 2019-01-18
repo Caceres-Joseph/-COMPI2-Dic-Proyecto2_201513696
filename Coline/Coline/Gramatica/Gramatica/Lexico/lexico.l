@@ -62,6 +62,12 @@ Char '[^']*'
 "!"         { strcpy(yylval.TEXT, yytext); return sNot; }
 
 
+"+="         { strcpy(yylval.TEXT, yytext); return sMasIgual; }
+"-="         { strcpy(yylval.TEXT, yytext); return sMenosIgual; }
+"*="         { strcpy(yylval.TEXT, yytext); return sPorIgual; }
+"/="         { strcpy(yylval.TEXT, yytext); return sDivIgual; }
+
+
 "("         { strcpy(yylval.TEXT, yytext); return sAbreParent; }
 ")"         { strcpy(yylval.TEXT, yytext); return sCierraParent; }
 
@@ -113,6 +119,7 @@ Char '[^']*'
 "subcad"            { strcpy(yylval.TEXT, yytext); return tSubCad; }
 "poscad"            { strcpy(yylval.TEXT, yytext); return tPosCad; }
 "random"            { strcpy(yylval.TEXT, yytext); return tRandom; }
+"tamanio"            { strcpy(yylval.TEXT, yytext); return tTamanio; }
 
  /* "tam"               { strcpy(yylval.TEXT, yytext); return tTam; }*/
 "super"             { strcpy(yylval.TEXT, yytext); return tSuper; }

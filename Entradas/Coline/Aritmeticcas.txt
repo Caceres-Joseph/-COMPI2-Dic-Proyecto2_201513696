@@ -1,0 +1,303 @@
+
+clase main{
+
+
+    principal(){
+
+        decimal val1=5+4.5;
+        decimal val2=7.8+3;
+        decimal val3=15.3 + 'a';
+        decimal val4='b'+2.7;
+        decimal val5=verdadero +1.2;
+        decimal val6=4.5+falso;
+        decimal val7=3.56+2.23;
+
+        entero val8=7+'c';
+        entero val9='C'+7;
+        entero val10=4+verdadero;
+        entero val11=4 + falso;
+        entero val12=4+5;
+        entero val13=verdadero + verdadero;
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3);
+        imprimir(val4);
+        imprimir(val5);
+        imprimir(val6);
+        imprimir(val7);
+        imprimir(val8);
+        imprimir(val9);
+        imprimir(val10);
+        imprimir(val11);
+        imprimir(val12);
+        imprimir(val13);
+
+    }
+
+}
+
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase main{
+
+
+    principal(){
+
+        decimal val1=5-4.5;
+        decimal val2=7.8-3;
+        decimal val3=15.3 - 'a';
+        decimal val4='b'-2.7;
+        decimal val5=verdadero -1.2;
+        decimal val6=4.5-falso;
+        decimal val7=3.56-2.23;
+
+        entero val8=7-'c';
+        entero val9='C'-7;
+        entero val10=4-verdadero;
+        entero val11=4 - falso;
+        entero val12=4-5; 
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3);
+        imprimir(val4);
+        imprimir(val5);
+        imprimir(val6);
+        imprimir(val7);
+        imprimir(val8);
+        imprimir(val9);
+        imprimir(val10);
+        imprimir(val11);
+        imprimir(val12);
+        imprimir(val13);
+
+    }
+
+}
+
+
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase main{
+
+
+    principal(){
+
+        decimal val1=5*4.5;
+        decimal val2=7.8*3;
+        decimal val3=15.3 * 'a';
+        decimal val4='b'*2.7;
+        decimal val5=verdadero *1.2;
+        decimal val6=4.5*falso;
+        decimal val7=3.56*2.23;
+
+        entero val8=7*'c';
+        entero val9='C'*7;
+        entero val10=4*verdadero;
+        entero val11=4 * falso;
+        entero val12=4*5; 
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3);
+        imprimir(val4);
+        imprimir(val5);
+        imprimir(val6);
+        imprimir(val7);
+        imprimir(val8);
+        imprimir(val9);
+        imprimir(val10);
+        imprimir(val11);
+        imprimir(val12); 
+
+    }
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase main{
+
+
+    principal(){
+
+        decimal val1=5/4.5;
+        decimal val2=7.8/3;
+        decimal val3=15.3 / 'a';
+        decimal val4='b'/2.7;
+        decimal val5=verdadero /1.2;
+        decimal val6=4.5/falso;
+        decimal val7=3.56/2.23;
+
+        decimal val8=7/'c';
+        decimal val9='C'/7;
+        decimal val10=4/verdadero;
+        decimal val11=4 / falso;
+        decimal val12=4/5; 
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3);
+        imprimir(val4);
+        imprimir(val5);
+        imprimir(val6);
+        imprimir(val7);
+        imprimir(val8);
+        imprimir(val9);
+        imprimir(val10);
+        imprimir(val11);
+        imprimir(val12); 
+
+    }
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase main{
+
+
+    principal(){
+
+
+        decimal val1=5^4.5;
+        decimal val2=7.8^3;
+        decimal val3=15.3 ^ 'a';
+        decimal val4='b'^2.7;
+        decimal val5=verdadero ^1.2;
+        decimal val6=4.5^falso;
+        decimal val7=3.56^2.23;
+
+        entero val8=7^'c';
+        entero val9='C'^7;
+        entero val10=4^verdadero;
+        entero val11=4 ^ falso;
+        entero val12=4^5; 
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3);
+        imprimir(val4);
+        imprimir(val5);
+        imprimir(val6);
+        imprimir(val7);
+        imprimir(val8);
+        imprimir(val9);
+        imprimir(val10);
+        imprimir(val11);
+        imprimir(val12); 
+
+    }
+
+}
+
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase main{
+
+
+    principal(){
+
+
+        decimal val1=1.1;
+        entero val2= 1;
+        caracter val3='a';
+        
+
+        val1++;
+        val2++;
+        val3++;
+        
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3); 
+        val1--;
+        val2--;
+        val3--;
+        
+
+
+        imprimir(val1);
+        imprimir(val2);
+        imprimir(val3); 
+
+    }
+
+}
+
+
+
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+clase nodo{
+
+    entero arr1[5]={1,2,3,4,5};
+    nodo(){
+        entero val1=0;
+
+    }
+
+    entero [] getArr(){
+        retornar arr1;
+    }
+
+
+}
+clase main{
+
+
+    principal(){
+
+            caracter cadena[10];
+            caracter cadena2[5];
+            cadena = "hola";
+            cadena2=" mundo";
+            Concatenar(cadena,cadena2); //cadena = “hola mundo”.
+ 
+            imprimir(cadena);
+            
+
+
+    }
+
+}

@@ -28,6 +28,40 @@ itemValor *MayorQue::opMayorQue(elementoEntorno *entorno, QString simbolo){
          ))
     {
 
+
+        if(val1->dimen==0&&val1->dimensiones.count()>0&&val1->isTypeChar()){
+            int resultadoFinal=0;
+            for (int i = 0; i < val1->dimensiones.count(); ++i) {
+                if(val1->dimensiones[i]->isTypeChar()){
+
+                    p_caracter *valChar=(p_caracter*)val1->dimensiones[i]->valor;
+                    int valCaracter=(int)valChar->valor;
+                    resultadoFinal+=valCaracter;
+                }
+            }
+            itemValor *val3=new itemValor(resultadoFinal,QString::number(resultadoFinal));
+            val1->c3d=val3->c3d;
+            val1->valor=val3->valor;
+        }
+
+
+        if(val2->dimen==0&&val2->dimensiones.count()>0&&val2->isTypeChar()){
+            int resultadoFinal=0;
+            for (int i = 0; i < val2->dimensiones.count(); ++i) {
+                if(val2->dimensiones[i]->isTypeChar()){
+
+                    p_caracter *valChar=(p_caracter*)val2->dimensiones[i]->valor;
+                    int valCaracter=(int)valChar->valor;
+                    resultadoFinal+=valCaracter;
+                }
+            }
+           itemValor *val3=new itemValor(resultadoFinal,QString::number(resultadoFinal));
+           val2->c3d=val3->c3d;
+           val2->valor=val3->valor;
+        }
+
+
+
         if(val1->isTypeChar()){
             //tengo que sacarlo de pool
             QString etqChar=tabla->getEtiqueta();
