@@ -12,6 +12,8 @@ public:
 
     _CONCATENAR(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
     itemRetorno *ejecutar (elementoEntorno *entor)override;
+
+    void concatenarHashtag(elementoEntorno *entor,QList<itemValor*> lstValores);
 };
 
 #endif // _CONCATENAR_H

@@ -11,7 +11,7 @@ itemRetorno* _CONVERTIR_CADENA::ejecutar(elementoEntorno *entor){
 }
 
 
-itemValor *_CONVERTIR_CADENA::getValor(elementoEntorno *entor){    
+itemValor *_CONVERTIR_CADENA::getValor(elementoEntorno *entor){
     QString etqInicioCad=tabla->getEtiqueta();
     itemValor* retorno=new itemValor('a',etqInicioCad);
 

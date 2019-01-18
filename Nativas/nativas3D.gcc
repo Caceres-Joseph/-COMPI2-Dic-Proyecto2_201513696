@@ -1,6 +1,135 @@
  
 /*
     +---------------------------------
+    | "El valor es #D"
+    +---------------------------------
+    | param1 = puntero donde inicia el String Pool Cadena
+    | param2 = puntero donde inicia el String Pool Exp
+    
+*/
+
+void func_concatenarHash(){
+		//-- Declarando variable --
+	t0 = P + 4;	//Direc
+	Stack[t0] = 0;	//s
+		//-- Asignando valor --
+	t1 = P + 4;
+	Stack[t1] = S;
+		//-- Declarando variable --
+	t2 = P + 5;	//Direc
+	Stack[t2] = 0;	//i
+		//-- Mientras --
+	L2:
+	t3 = P + 2;
+	t4 = Stack[t3];	//Obteniendo el valor
+	t5 = P + 5;
+	t6 = Stack[t5];	//Obteniendo el valor
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t7 = t4 + t6;
+	//t8 = t7 + t6;
+	t9 = Pool[t7];
+	if(t9 != 0) goto L3;
+	goto L4;
+		L4:
+		goto L5;
+		L3:
+			//-- si --
+		t10 = P + 2;
+		t11 = Stack[t10];	//Obteniendo el valor
+		t12 = P + 5;
+		t13 = Stack[t12];	//Obteniendo el valor
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t14 = t11 + t13;
+		//t15 = t14 + t13;
+		t16 = Pool[t14];
+		if(t16 == 35) goto L6; //#D
+		goto L7;
+			L7:
+			//-- sino --
+
+				//-- Asignando en pool  -- 
+            t48 = P + 2;
+            t49 = Stack[t48];	//Obteniendo el valor
+            t50 = P + 5;
+            t51 = Stack[t50];	//Obteniendo el valor
+            t52 = t49 + t51;
+            t53 = Pool[t52]; 
+            Pool[S] = t53;
+            S = S + 1;
+
+
+			goto L8;
+			L6:
+				//-- Declarando variable --
+			t17 = P + 6;	//Direc
+			Stack[t17] = 0;	//j
+				//-- Mientras --
+			L9:
+			t18 = P + 3;
+			t19 = Stack[t18];	//Obteniendo el valor
+			t20 = P + 6;
+			t21 = Stack[t20];	//Obteniendo el valor
+				//-- Mapeando indice --
+				//-- Get item from index --
+			t22 = t19 + t21;
+			//t23 = t22 + t21;
+			t24 = Pool[t22];
+			if(t24 != 0) goto L10;
+			goto L11;
+				L11:
+				goto L12;
+				L10:
+                
+                    //-- Asignando en pool  -- 
+                t55 = P + 3;
+                t56 = Stack[t55];	//Obteniendo el valor
+                t57 = P + 6;
+                t58 = Stack[t57];	//Obteniendo el valor
+                t59 = t56 + t58;
+                t60 = Pool[t59]; 
+                Pool[S] = t60;
+                S = S + 1;
+
+
+					//-- Asignando valor --
+				t25 = P + 6;
+				t26 = P + 6;
+				t27 = Stack[t26];	//Obteniendo el valor
+				t28 = t27 + 1;
+				Stack[t25] = t28;
+				goto L9;
+				L12:
+				//-- Asignando valor --
+			t29 = P + 5;
+			t30 = P + 5;
+			t31 = Stack[t30];	//Obteniendo el valor
+			t32 = t31 + 2;
+			Stack[t29] = t32;
+			L8:
+			//-- Asignando valor --
+		t33 = P + 5;
+		t34 = P + 5;
+		t35 = Stack[t34];	//Obteniendo el valor
+		t36 = t35 + 1;
+		Stack[t33] = t36;
+		goto L2;
+		L5:
+		//-- Retorno --
+
+    Pool[S] = 0; //caracter nulo
+    S = S + 1;
+
+	t37 = P + 4;
+	t38 = Stack[t37];	//Obteniendo el valor
+	Stack[P] = t38;
+	goto L1;
+L1:
+}
+
+/*
+    +---------------------------------
     | IMPRIMIR
     +---------------------------------
     | param1 = puntero donde inicia el arreglo de char destino
