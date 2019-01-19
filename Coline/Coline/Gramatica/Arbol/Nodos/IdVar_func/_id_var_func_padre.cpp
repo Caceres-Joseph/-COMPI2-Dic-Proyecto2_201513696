@@ -287,6 +287,45 @@ itemValor *_ID_VAR_FUNC_PADRE::ejecutarMetodoRetorno(elementoEntorno *entor){
     QString tamAmbito=QString::number(entor->tamEntornoAbsoluto());
     tabla->linea("P = P - "+tamAmbito,entor->nivel);
 
+    //hay que buscar de que tipo es la funcion
+    itemValor *it1=new itemValor();
+    itemValor *it2=it1->convertirATipo(new token(valor->valor->tipo));
+    if(it2->isTypeObjeto()){
+        //tengo que cargar en valor la clase con el objeto
+
+        //buscando el objeto si existe
+        elementoClase *tempClase=tabla->getClase(new token(valor->valor->tipo));
+        if(tempClase==NULL){
+            tabla->tablaError->insertErrorSemantic("El objeto :"+valor->valor->tipo+" no existe", lst_Atributos->getToken(0));
+            return valor;
+        }
+
+        //creamos el nuevo metodo
+        objetoClase *objClase=new objetoClase(tempClase,tabla);
+        itemValor *vale=new itemValor(objClase,"t");
+        valor->valor=vale->valor;
+
+    }else if(it2->isTypeBooleano()){
+        itemValor *t3=new itemValor(true,"1");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeChar()){
+        itemValor *t3=new itemValor('a',"1");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeEntero()){
+        itemValor*t3=new itemValor(2,"a");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeDecimal()){
+        itemValor*t3=new itemValor(12.43,"a");
+        valor->valor=t3->valor;
+    }
+
+
+    if(valor->dimen>0){
+        itemValor *ite=new itemValor(12,"12");
+        valor->dimensiones.append(ite);
+    }
+
+
     return valor;
 }
 

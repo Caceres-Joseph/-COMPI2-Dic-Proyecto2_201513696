@@ -33,6 +33,7 @@ public:
         this->tabla->linea("Pool[0]  = 0",0, "Caracter nulo");
         this->tabla->linea("Heap[0]  = 0",0);
         this->tabla->linea("Heap[1]  = 0",0);
+        this->tabla->linea("Stack[0] = 1",0,"This");
         this->tabla->linea("Stack[1] = 1",0,"This");
 
         this->raizArbol=new nodoModelo("raiz",this->tabla);
@@ -65,6 +66,8 @@ public:
         //raizArbol->imprimirNodos();
         raizArbol->ejecutar();
 
+        //cargando los hereados
+        cargarHeredados();
         //buscando el main y ejecutando
         ejecutarPrincipal();
 
@@ -91,6 +94,9 @@ public:
     void ejecutarPrincipal();
 
     void ejecutarDemasMetodos();
+
+    void cargarHeredados();
+    void println(QString mensaje);
 };
 
 #endif // ARBOL_COLINE_H

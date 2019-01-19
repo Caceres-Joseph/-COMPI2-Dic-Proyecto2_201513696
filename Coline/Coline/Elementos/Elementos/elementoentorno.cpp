@@ -54,6 +54,17 @@ itemEntorno *elementoEntorno::getValId(token *idVal){
     return retorno;
 }
 
+int elementoEntorno::numVariablesGlobales(){
+
+    if(nombre=="global"){
+        return lstEntorno.count();
+    }else{
+        if(anterior!=NULL){
+            return anterior->numVariablesGlobales();
+        }
+    }
+    return 0;
+}
 
 itemEntorno *elementoEntorno::getValIdGlobal(token *idVal){
     QList<itemValor*> list;

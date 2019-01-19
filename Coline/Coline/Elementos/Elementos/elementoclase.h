@@ -47,6 +47,11 @@ public:
 
     }
 
+    void heredar(elementoClase *padre);
+
+
+    void getClase(token *idClase);
+    void println(QString mensaje);
 
 };
 

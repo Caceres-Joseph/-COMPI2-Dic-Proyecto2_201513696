@@ -14,9 +14,11 @@ public:
     lstPolimorfismo(tablaSimbolos *tabla,QString nombre);
 
     void ejecutar(elementoEntorno *entorno);
-    void ejecutarMetodo(elementoEntorno *entorno);
+    void ejecutarMetodo(elementoEntorno *entorno, QString clase);
     itemValor *getMetodo(token *nombre, QList<itemValor*> params);
     QString cadParams(QList<itemValor*> params);
+
+   void concatenarHeredados(QList <elementoPolimorfo*> lstHeredado);
 
 };
 

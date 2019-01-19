@@ -107,12 +107,25 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
 
     int posAbsoluta=entor->tamEntornoAbsoluto();
     if(entor->nombre=="global1"){
+        /*
+        //tengo que traer el this
 
         direc = t1 + " = H";
         asign="Heap["+t1+"] = ";
 
         tabla->linea(direc,entor->nivel, "Direc");
-        tabla->incrementarHeap(entor);
+        tabla->incrementarHeap(entor);*/
+        //QString et1=tabla->getEtiqueta();
+        QString et2=tabla->getEtiqueta();
+        //QString et3=tabla->getEtiqueta();
+
+       itemEntorno *entT= entor->esteAux->este->getValIdGlobal(tokId);
+
+        //tabla->linea(et1 +" = P + 1", entor->nivel, "Pos this");
+        tabla->linea(et2+" = Stack[0]", entor->nivel,"this");
+        tabla->linea(t1+" = "+et2+ " + "+QString::number(entT->pos),entor->nivel);//direccion final
+
+        asign="Heap["+t1+"] = ";
     }else{
         direc = t1 + " = P + " + QString::number(posAbsoluta);
         asign="Stack["+t1+"] = ";

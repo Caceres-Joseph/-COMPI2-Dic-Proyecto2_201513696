@@ -54,6 +54,7 @@ itemValor * _VALOR::getObjeto(elementoEntorno *entor){
     QString este=tabla->getEtiqueta();
     tabla->comentarioLinea("Cargando los atributos del objeto", entor->nivel);
     tabla->linea(etqRetorno+" = H", entor->nivel, "Pos inicial del objeto");
+    tabla->linea("Stack[0] = H",entor->nivel,"This para globales");
     tabla->linea(este+ " = H", entor->nivel, "This");
     objClase->ejecutarGlobales(entor);
 

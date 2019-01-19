@@ -17,12 +17,12 @@ void lstPolimorfismo::ejecutar(elementoEntorno *entorno){
     }
 }
 
-void lstPolimorfismo::ejecutarMetodo(elementoEntorno *entorno){
+void lstPolimorfismo::ejecutarMetodo(elementoEntorno *entorno, QString clase){
 
 
     for (int i = 0; i < listaPolimorfa.count(); ++i) {
         elementoPolimorfo *temp=listaPolimorfa[i];
-        temp->ejecutar(entorno);
+        temp->ejecutar(entorno, clase);
     }
 }
 
@@ -39,6 +39,7 @@ itemValor *lstPolimorfismo::getMetodo(token* nombre, QList<itemValor *> params){
                     return vale;
                 }else{
                     itemValor *ret=new itemValor(1,"1");
+                    ret->dimen=elemen->dimension;
                     ret->valor->tipo=elemen->tipo->valLower;
                     return ret;
                 }
@@ -79,4 +80,17 @@ QString lstPolimorfismo::cadParams(QList<itemValor *> params){
         retorno+="_"+tipo+QString::number(elem->dimen);
     }
     return retorno;
+}
+
+
+
+
+
+void lstPolimorfismo::concatenarHeredados(QList<elementoPolimorfo *> lstHeredado){
+
+    for (int i = 0; i < lstHeredado.count(); ++i) {
+        elementoPolimorfo *temp=lstHeredado[i];
+        //listaPolimorfa.append(temp);
+        listaPolimorfa.insert(0,temp);
+    }
 }

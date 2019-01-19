@@ -26,6 +26,7 @@ public:
     tablaSimbolos *tabla;
     QString nombre;
     objetoClase *este;
+    objetoClase *esteAux;
 
 
     QList<itemEntorno*> lstEntorno;
@@ -39,6 +40,7 @@ public:
     int posVar2(int num);
 
     int cargarTablaColine(QTableWidget *tablaSimb, int indice);
+    int numVariablesGlobales();
 };
 
 #endif // ELEMENTOENTORNO_H

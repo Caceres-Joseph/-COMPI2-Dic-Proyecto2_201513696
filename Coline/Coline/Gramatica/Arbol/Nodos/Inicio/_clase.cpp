@@ -13,3 +13,5 @@ void _CLASE::ejecutar(){
     ejecutarHijos2(nuevaClase);
     tabla->lstClases.append(nuevaClase);
 }
+
+

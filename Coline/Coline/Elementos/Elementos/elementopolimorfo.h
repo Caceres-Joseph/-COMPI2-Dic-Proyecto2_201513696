@@ -30,7 +30,7 @@ public:
     elementoPolimorfo(token *visibilidad, tablaSimbolos *tabla, token *tipo,token *nombre, nodoModelo *LST_CUERPO, int dimension, QString nombreClase);
 
     void insertarParametro(token *idParametro,token *tipoParametro, int dimension);
-    void ejecutar(elementoEntorno *entor);
+    void ejecutar(elementoEntorno *entor, QString nameClass);
     void cargarParametros(elementoEntorno *entor);
 
     QString cadParams();

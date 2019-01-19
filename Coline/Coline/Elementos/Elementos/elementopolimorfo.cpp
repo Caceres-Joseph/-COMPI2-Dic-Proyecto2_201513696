@@ -31,7 +31,7 @@ void elementoPolimorfo::insertarParametro(token *idParametro, token *tipoParamet
 
 }
 
-void elementoPolimorfo::ejecutar(elementoEntorno *entor){
+void elementoPolimorfo::ejecutar(elementoEntorno *entor, QString nameClass){
 
 
     elementoEntorno *metodo=new elementoEntorno(entor,tabla,nombre->valLower,entor->este);
@@ -47,7 +47,7 @@ void elementoPolimorfo::ejecutar(elementoEntorno *entor){
 
 
     tabla->linea2("",entor->nivel);
-    tabla->linea2("void "+nombreClase+"_"+nombre->valLower+cadParams()+"(){",entor->nivel);
+    tabla->linea2("void "+nameClass+"_"+nombre->valLower+cadParams()+"(){",entor->nivel);
     LST_CUERPO->ejecutarHijos(metodo);
     //imprimirNodos();
     tabla->linea2(tabla->Salida3d+":",entor->nivel);

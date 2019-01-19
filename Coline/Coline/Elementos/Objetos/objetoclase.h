@@ -19,8 +19,8 @@ public:
 
     void ejecutarGlobales(elementoEntorno *entor);
     void ejecutarPrincipal();
-    void ejecutarMetodos();
-    void ejecutarConstructores();
+    void ejecutarMetodos(QString nombreClase);
+    void ejecutarConstructores(QString nombreClase);
 
     itemValor *getMetodo(token *nombre, QList<itemValor*> params);
     itemValor *getConstructor(token *nombre, QList<itemValor*> params);

@@ -21,19 +21,17 @@ objetoClase::objetoClase(elementoClase *cuerpoClase, tablaSimbolos *tabla)
 
 void objetoClase::ejecutarGlobales(elementoEntorno *entor){
 
-    //elementoEntorno *primerEntorno=new elementoEntorno
 
-    //this->cuerpoClase->lstVariablesGlobales->ejecutar();
-    /*
-    this->este->nivel=nivel+1;
-    objetoClase *obj=this->este->este;
-    elementoEntorno *anterior= este;
-    nuevoEntorno->nivel=nivel;
-    */
-
+    tabla->comentarioLinea("Ejecutando las variables globales",entor->nivel);
+    //hay que incrementar la H la cantidad de variables que haya
+    for (int j = 0; j < this->este->lstEntorno.count(); ++j) {
+        tabla->linea("Heap[H] = 0", entor->nivel);
+        tabla->incrementarHeap(entor);
+    }
 
     //Creo un nuevo entorno para que no haya conflicto con las locales desde donde lo estoy llamando
     elementoEntorno *nuevoEntorno=new elementoEntorno(entor,tabla,"global1",entor->este);
+    nuevoEntorno->esteAux=this;
     nuevoEntorno->nivel=entor->nivel+1;
     this->cuerpoClase->lstVariablesGlobales->ejecutar(nuevoEntorno);
 }
@@ -45,12 +43,12 @@ void objetoClase::ejecutarPrincipal(){
     this->cuerpoClase->lstPrincipal->ejecutar(this->este);
 }
 
-void objetoClase::ejecutarMetodos(){
-    this->cuerpoClase->lstMetodo_funcion->ejecutarMetodo(this->este);
+void objetoClase::ejecutarMetodos(QString nombreClase){
+    this->cuerpoClase->lstMetodo_funcion->ejecutarMetodo(this->este, nombreClase);
 }
 
-void objetoClase::ejecutarConstructores(){
-    this->cuerpoClase->lstConstructores->ejecutarMetodo(this->este);
+void objetoClase::ejecutarConstructores(QString nombreClase){
+    this->cuerpoClase->lstConstructores->ejecutarMetodo(this->este, nombreClase);
 }
 
 itemValor * objetoClase::getMetodo(token* nombre, QList<itemValor *> params){

@@ -94,7 +94,7 @@ Char '[^']*'
 "importar"          { strcpy(yylval.TEXT, yytext); return tImport; }
 "clase"             { strcpy(yylval.TEXT, yytext); return tClase; }
 "extender"          { strcpy(yylval.TEXT, yytext); return tExtender; }
-"padre"             { strcpy(yylval.TEXT, yytext); return tPadre; }
+"hereda_de"             { strcpy(yylval.TEXT, yytext); return tPadre; }
 "principal"         { strcpy(yylval.TEXT, yytext); return tPrincipal; }
 "sobrescribir"      { strcpy(yylval.TEXT, yytext); return tOverride; }
 "nuevo"             { strcpy(yylval.TEXT, yytext); return tNuevo; }
