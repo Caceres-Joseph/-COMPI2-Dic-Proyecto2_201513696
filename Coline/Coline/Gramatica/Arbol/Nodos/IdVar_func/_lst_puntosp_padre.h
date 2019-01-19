@@ -26,6 +26,7 @@ public:
     void ejecutarMetodo1(elementoEntorno *entor, objetoClase *objeto, itemValor *origen);
     itemValor *ejecutarMetodoRetorno1(elementoEntorno *entor, objetoClase *objeto, itemValor *origen);
 
+    QString getIndiceMapeado(QList<itemValor*>lstValores,QString direcArreglo, elementoEntorno *entor);
 };
 
 #endif // _LST_PUNTOSP_PADRE_H

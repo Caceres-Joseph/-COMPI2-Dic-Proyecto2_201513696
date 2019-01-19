@@ -33,7 +33,8 @@ double Aritmetica::getValor(Entorno3D *entorno, TablaTemporales *temporales, Tab
         }
         else if(this->operando == 6)// %
         {
-            return (int)v1 % (int)v2;
+            return std::fmod(v1,v2);
+            //return v1 % v2;
         }
         else if(this->operando == 7)// ^
         {

@@ -565,6 +565,9 @@
            <property name="plainText">
             <string>&gt;&gt;</string>
            </property>
+           <property name="tabStopWidth">
+            <number>30</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -575,7 +578,36 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QTableView" name="tableView"/>
+          <widget class="QTableWidget" name="tablaErrors">
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Linea</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>New Column</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Columna</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Ambito</string>
+            </property>
+           </column>
+          </widget>
          </item>
         </layout>
        </widget>

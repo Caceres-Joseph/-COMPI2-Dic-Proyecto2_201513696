@@ -120,9 +120,18 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
     }
 
 
+    QList<itemValor*> dimen=nodoVar->getDimensiones(entor);
     if(nivel == 1){
         _VAL *nodoVal=(_VAL*)hijos[2];
         valor=nodoVal->getValor(entor,nodoTipo->getTipo());
+
+        //parseando a entero
+        if(tokTipo->valLower=="entero"&&dimen.count()==0){
+            _CONVERTIR_NUMERO *nodoConv=new _CONVERTIR_NUMERO(nombre,tabla);
+            itemValor *valorTemp;
+            valorTemp=nodoConv->getConvertirAnumero(entor,valor);
+            valor=valorTemp;
+        }
     }
 
 
@@ -147,10 +156,21 @@ itemRetorno* _DECLARAR_VARIABLE_SINVISIBI::ejecutar(elementoEntorno *entor){
         itemValor *vale=new itemValor(objClase,"t");
         valor->valor=vale->valor;
 
+    }else if(it2->isTypeBooleano()){
+        itemValor *t3=new itemValor(true,"1");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeChar()){
+        itemValor *t3=new itemValor('a',"1");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeEntero()){
+        itemValor*t3=new itemValor(2,"a");
+        valor->valor=t3->valor;
+    }else if(it2->isTypeDecimal()){
+        itemValor*t3=new itemValor(12.43,"a");
+        valor->valor=t3->valor;
     }
 
 
-    QList<itemValor*> dimen=nodoVar->getDimensiones(entor);
 
 
     // --Los tengo que almacenar en string poool *uto

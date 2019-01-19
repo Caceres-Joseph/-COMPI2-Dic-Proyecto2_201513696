@@ -102,6 +102,7 @@ Char '[^']*'
 "imprimir"          { strcpy(yylval.TEXT, yytext); return tImprimir; }
 "concatenar"        { strcpy(yylval.TEXT, yytext); return tConcatenar; }  
 "convertiracadena"  { strcpy(yylval.TEXT, yytext); return tConvertirCadena; }  
+"convertiraentero"  { strcpy(yylval.TEXT, yytext); return tConvertirNumero; }  
 "retornar"          { strcpy(yylval.TEXT, yytext); return tRetorno; }
 "si"                { strcpy(yylval.TEXT, yytext); return tSi; }
 "sino"              { strcpy(yylval.TEXT, yytext); return tSino; }

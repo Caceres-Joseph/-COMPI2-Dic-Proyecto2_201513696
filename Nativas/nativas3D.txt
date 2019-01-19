@@ -84,13 +84,18 @@ clase main{
             i++;
         }
 
-        
+        entero p=0;
+        mientras(valor[p] != '\0' ){
+            p++;
+        }
 
         entero j=0;
-        mientras(valor[j] != '\0'){
+        mientras(j < p && valor[j] != '\0' ){
             destino[i+j]=valor[j];
-            j++;
-        } 
+            j++; 
+        }
+
+        destino[i+j]=nulo;
     }
   
     void println(caracter cad[200]){
@@ -103,6 +108,7 @@ clase main{
 
     }
 
+ 
 
 
     entero func_concatenarHash(entero arr1, entero arr2){ 
@@ -132,5 +138,49 @@ clase main{
     }
 
   
+    entero convertirAEntero(caracter valor){
+        retornar valor + 0;
+    }
+
+    entero convertirAEntero1(caracter cad[5]){
+        entero ret=0;
+
+        entero i=0;
+        booleano esEntero=falso;
+        mientras(cad[i] != '\0' ){ 
+
+            entero t1=cad[i]-48;
+            si(i==0){
+                si(t1 >= 0 && t1 <= 9){
+                    esEntero=verdadero;      
+                    ret = t1;              
+                }sino{ 
+                    ret=cad[i];
+                }
+            }sino{
+                si(esEntero){
+                    ret=ret*10+t1;
+                }sino{
+                    ret+=cad[i];
+                } 
+            } 
+            i++;
+        }
+
+        retornar ret;
+    }
+
+
+    entero convertirAEntero(decimal value){
+         
+            decimal fract=value%1;
+            decimal ent=value-fract;
+ 
+            retornar ent;
+    }
+
+    entero convertirAEntero(booleano valor){
+        retornar valor;
+    }
 
 }

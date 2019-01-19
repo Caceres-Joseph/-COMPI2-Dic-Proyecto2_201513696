@@ -1,6 +1,184 @@
  
 /*
     +---------------------------------
+    | PARSERA A NUMERO DE ARREGLO DE CHARS
+    +---------------------------------
+    | param1 = donde inicia el arreglo
+    
+*/
+ 
+void func_convertirANumero_ArrCaracter(){
+		//-- Declarando variable --
+	t0 = P + 3;	//Direc
+	Stack[t0] = 0;	//ret
+		//-- Declarando variable --
+	t1 = P + 4;	//Direc
+	Stack[t1] = 0;	//i
+		//-- Declarando variable --
+	t2 = P + 5;	//Direc
+	Stack[t2] = 0;	//esEntero
+		//-- Mientras --
+	L1:
+	t3 = P + 2;
+	t4 = Stack[t3];	//Obteniendo el valor
+	t5 = P + 4;
+	t6 = Stack[t5];	//Obteniendo el valor
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t7 = t4 + 1;
+	t8 = t7 + t6;
+	t9 = Heap[t8];
+	Pool[S] = 0;
+	t10 = S;
+	S = S + 1;
+	t11 = Pool[t9];	//Valor de pool
+	t12 = Pool[t10];	//Valor de pool
+	if(t11 != t12) goto L2;
+	goto L3;
+		L3:
+		goto L4;
+		L2:
+			//-- Declarando variable --
+		t13 = P + 6;	//Direc
+		t14 = P + 2;
+		t15 = Stack[t14];	//Obteniendo el valor
+		t16 = P + 4;
+		t17 = Stack[t16];	//Obteniendo el valor
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t18 = t15 + 1;
+		t19 = t18 + t17;
+		t20 = Heap[t19];
+		t21 = Pool[t20];	//Valor de pool
+		t22 = t21-48;
+		Stack[t13] = t22;	//t1
+			//-- si --
+		t23 = P + 4;
+		t24 = Stack[t23];	//Obteniendo el valor
+		if(t24 == 0) goto L5;
+		goto L6;
+			L6:
+			//-- sino --
+				//-- si --
+			t25 = P + 5;
+			t26 = Stack[t25];	//Obteniendo el valor
+			if(t26 == 1) goto L8;
+			goto L9;
+				L9:
+				//-- sino --
+					//-- Asignando valor --
+				t27 = P + 3;
+				t28 = P + 2;
+				t29 = Stack[t28];	//Obteniendo el valor
+				t30 = P + 4;
+				t31 = Stack[t30];	//Obteniendo el valor
+					//-- Mapeando indice --
+					//-- Get item from index --
+				t32 = t29 + 1;
+				t33 = t32 + t31;
+				t34 = Heap[t33];
+				t35 = P + 3;
+				t36 = Stack[t35];	//Obteniendo el valor
+				t37 = t36 + t34;
+				Stack[t27] = t37;
+				goto L10;
+				L8:
+					//-- Asignando valor --
+				t38 = P + 3;
+				t39 = P + 3;
+				t40 = Stack[t39];	//Obteniendo el valor
+				t41 = t40 * 10;
+				t42 = P + 6;
+				t43 = Stack[t42];	//Obteniendo el valor
+				t44 = t41 + t43;
+				Stack[t38] = t44;
+				L10:
+			goto L7;
+			L5:
+				//-- si --
+			t45 = P + 6;
+			t46 = Stack[t45];	//Obteniendo el valor
+			if(t46 >= 0) goto L11;
+			goto L12;
+			L11:
+			t47 = P + 6;
+			t48 = Stack[t47];	//Obteniendo el valor
+			if(t48 <= 9) goto L14;
+			goto L12;
+				L12:
+				//-- sino --
+					//-- Asignando valor --
+				t49 = P + 3;
+				t50 = P + 2;
+				t51 = Stack[t50];	//Obteniendo el valor
+				t52 = P + 4;
+				t53 = Stack[t52];	//Obteniendo el valor
+					//-- Mapeando indice --
+					//-- Get item from index --
+				t54 = t51 + 1;
+				t55 = t54 + t53;
+				t56 = Heap[t55];
+				Stack[t49] = t56;
+				goto L13;
+				L14:
+					//-- Asignando valor --
+				t57 = P + 5;
+				Stack[t57] = 1;
+					//-- Asignando valor --
+				t58 = P + 3;
+				t59 = P + 6;
+				t60 = Stack[t59];	//Obteniendo el valor
+				Stack[t58] = t60;
+				L13:
+			L7:
+			//-- Asignando valor --
+		t61 = P + 4;
+		t62 = P + 4;
+		t63 = Stack[t62];	//Obteniendo el valor
+		t64 = t63 + 1;
+		Stack[t61] = t64;
+		goto L1;
+		L4:
+		//-- Retorno --
+	t65 = P + 3;
+	t66 = Stack[t65];	//Obteniendo el valor
+	Stack[P] = t66;
+	goto L0;
+L0:
+}
+
+/*
+    +---------------------------------
+    | PARSERA A NUMERO DE DECIMAL
+    +---------------------------------
+    | param1 = valor del decimal 
+    
+*/
+
+void func_convertirANumeroDecimal(){
+		//-- Declarando variable --
+	t191 = P + 3;	//Direc
+	t192 = P + 2;
+	t193 = Stack[t192];	//Obteniendo el valor
+	t194 = t193 % 1;
+	Stack[t191] = t194;	//fract
+		//-- Declarando variable --
+	t195 = P + 4;	//Direc
+	t196 = P + 2;
+	t197 = Stack[t196];	//Obteniendo el valor
+	t198 = P + 3;
+	t199 = Stack[t198];	//Obteniendo el valor
+	t200 = t197-t199;
+	Stack[t195] = t200;	//ent
+		//-- Retorno --
+	t201 = P + 4;
+	t202 = Stack[t201];	//Obteniendo el valor
+	Stack[P] = t202;
+	goto L17;
+L17:
+}
+/*
+    +---------------------------------
     | "El valor es #D"
     +---------------------------------
     | param1 = puntero donde inicia el String Pool Cadena
@@ -105,7 +283,7 @@ void func_concatenarHash(){
 			t29 = P + 5;
 			t30 = P + 5;
 			t31 = Stack[t30];	//Obteniendo el valor
-			t32 = t31 + 2;
+			t32 = t31 + 1;
 			Stack[t29] = t32;
 			L8:
 			//-- Asignando valor --
@@ -284,6 +462,24 @@ void func_concatenarArrayString(){
 		Stack[t89] = t92;
 		goto L11;
 		L14:
+
+
+	t1 = P + 1;
+	t2 = Stack[t1]; //el inico del arreglo
+
+	t3 = P + 3;
+	t4 = Stack[t3]; // valor de i
+		//-- Mapeando indice --
+
+	t8 = P + 4;
+	t9 = Stack[t8];	//j
+
+	t6 =  t2 + t4;
+	t7 =  t6 + 1; 
+	t10 = t7 + t9;
+	Heap[t10]=0; //Colocando caracter nulo al final
+
+
 L6:
 }
 
@@ -296,95 +492,147 @@ L6:
     | param2 = puntero donde inicia el arreglo de char contenido
     
 */
-
+  
 void func_concatenarArrayArray(){
 		//-- Declarando variable --
-	t55 = P + 3;
-	Stack[t55] = 0;	//i
+	t43 = P + 4;	//Direc
+	Stack[t43] = 0;	//i
 		//-- Mientras --
-	L7:
-	t56 = P + 1;
-	t57 = Stack[t56];
-	t58 = P + 3;
-	t59 = Stack[t58];
+	L2:
+	t45 = P + 2;
+	t46 = Stack[t45];	//Obteniendo el valor
+	t47 = P + 4;
+	t48 = Stack[t47];	//Obteniendo el valor
 		//-- Mapeando indice --
 		//-- Get item from index --
-	t60 = t57 + 1;
-	t61 = t60 + t59;
-	t62 = Heap[t61];
+	t49 = t46 + 1;
+	t50 = t49 + t48;
+	t51 = Heap[t50];
 	Pool[S] = 0;
-	t63 = S;
+	t52 = S;
 	S = S + 1;
-	t64 = Pool[t62];	//Valor de pool
-	t65 = Pool[t63];	//Valor de pool
-	if(t64 != t65) goto L8;
-	goto L9;
-		L9:
-		goto L10;
-		L8:
+	t54 = Pool[t51];	//Valor de pool
+	t56 = Pool[t52];	//Valor de pool
+	if(t54 != t56) goto L3;
+	goto L4;
+		L4:
+		goto L5;
+		L3:
 			//-- Asignando valor --
-		t66 = P + 3;
-		t67 = P + 3;
-		t68 = Stack[t67];
-		t69 = t68 + 1;
-		Stack[t66] = t69;
-		goto L7;
-		L10:
+		t57 = P + 4;
+		t58 = P + 4;
+		t59 = Stack[t58];	//Obteniendo el valor
+		t60 = t59 + 1;
+		Stack[t57] = t60;
+		goto L2;
+		L5:
 		//-- Declarando variable --
-	t70 = P + 4;
-	Stack[t70] = 0;	//j
+	t61 = P + 5;	//Direc
+	Stack[t61] = 0;	//p
 		//-- Mientras --
-	L11:
-	t71 = P + 2;
-	t72 = Stack[t71];
-	t73 = P + 4;
-	t74 = Stack[t73];
+	L6:
+	t63 = P + 3;
+	t64 = Stack[t63];	//Obteniendo el valor
+	t65 = P + 5;
+	t66 = Stack[t65];	//Obteniendo el valor
 		//-- Mapeando indice --
 		//-- Get item from index --
-	t75 = t72 + 1;
-	t76 = t75 + t74;
-	t77 = Heap[t76];
+	t67 = t64 + 1;
+	t68 = t67 + t66;
+	t69 = Heap[t68];
 	Pool[S] = 0;
-	t78 = S;
+	t70 = S;
 	S = S + 1;
-	t79 = Pool[t77];	//Valor de pool
-	t80 = Pool[t78];	//Valor de pool
-	if(t79 != t80) goto L12;
-	goto L13;
-		L13:
-		goto L14;
+	t72 = Pool[t69];	//Valor de pool
+	t74 = Pool[t70];	//Valor de pool
+	if(t72 != t74) goto L7;
+	goto L8;
+		L8:
+		goto L9;
+		L7:
+			//-- Asignando valor --
+		t75 = P + 5;
+		t76 = P + 5;
+		t77 = Stack[t76];	//Obteniendo el valor
+		t78 = t77 + 1;
+		Stack[t75] = t78;
+		goto L6;
+		L9:
+		//-- Declarando variable --
+	t79 = P + 6;	//Direc
+	Stack[t79] = 0;	//j
+		//-- Mientras --
+	L10:
+	t81 = P + 6;
+	t82 = Stack[t81];	//Obteniendo el valor
+	t83 = P + 5;
+	t84 = Stack[t83];	//Obteniendo el valor
+	if(t82 < t84) goto L11;
+	goto L12;
+	L11:
+	t85 = P + 3;
+	t86 = Stack[t85];	//Obteniendo el valor
+	t87 = P + 6;
+	t88 = Stack[t87];	//Obteniendo el valor
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t89 = t86 + 1;
+	t90 = t89 + t88;
+	t91 = Heap[t90];
+	Pool[S] = 0;
+	t92 = S;
+	S = S + 1;
+	t94 = Pool[t91];	//Valor de pool
+	t96 = Pool[t92];	//Valor de pool
+	if(t94 != t96) goto L14;
+	goto L12;
 		L12:
-			//-- Asignando valor --
-		t81 = P + 1;
-		t82 = Stack[t81];
-		t83 = P + 3;
-		t84 = Stack[t83];
-		t85 = P + 4;
-		t86 = Stack[t85];
-		t87 = t84 + t86;
-			//-- Mapeando indice --
-			//-- Get item from index --
-		t88 = t82 + 1;
-		t89 = t88 + t87;
-		t90 = P + 2;
-		t91 = Stack[t90];
-		t92 = P + 4;
-		t93 = Stack[t92];
-			//-- Mapeando indice --
-			//-- Get item from index --
-		t94 = t91 + 1;
-		t95 = t94 + t93;
-		t96 = Heap[t95];
-		Heap[t89] = t96;
-			//-- Asignando valor --
-		t97 = P + 4;
-		t98 = P + 4;
-		t99 = Stack[t98];
-		t100 = t99 + 1;
-		Stack[t97] = t100;
-		goto L11;
+		goto L13;
 		L14:
-L6:
+			//-- Asignando valor --
+		t97 = P + 2;
+		t98 = Stack[t97];
+		t99 = P + 4;
+		t100 = Stack[t99];	//Obteniendo el valor
+		t101 = P + 6;
+		t102 = Stack[t101];	//Obteniendo el valor
+		t103 = t100 + t102;
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t104 = t98 + 1;
+		t105 = t104 + t103;
+		t106 = P + 3;
+		t107 = Stack[t106];	//Obteniendo el valor
+		t108 = P + 6;
+		t109 = Stack[t108];	//Obteniendo el valor
+			//-- Mapeando indice --
+			//-- Get item from index --
+		t110 = t107 + 1;
+		t111 = t110 + t109;
+		t112 = Heap[t111];
+		Heap[t105] = t112;
+			//-- Asignando valor --
+		t113 = P + 6;
+		t114 = P + 6;
+		t115 = Stack[t114];	//Obteniendo el valor
+		t116 = t115 + 1;
+		Stack[t113] = t116;
+		goto L10;
+		L13:
+		//-- Asignando valor --
+	t117 = P + 2;
+	t118 = Stack[t117];
+	t119 = P + 4;
+	t120 = Stack[t119];	//Obteniendo el valor
+	t121 = P + 6;
+	t122 = Stack[t121];	//Obteniendo el valor
+	t123 = t120 + t122;
+		//-- Mapeando indice --
+		//-- Get item from index --
+	t124 = t118 + 1;
+	t125 = t124 + t123;
+	Heap[t125] = 0;
+L1:
 }
 
 
@@ -451,6 +699,21 @@ void func_cargarCadena(){
 		Stack[t24] = t27;
 		goto L2;
 		L5:
+
+
+	t51 = P + 1;
+	t52 = Stack[t51]; //el inico del arreglo
+
+	t53 = P + 3;
+	t54 = Stack[t53]; // valor de i
+		//-- Mapeando indice --
+
+
+	t56 = t52 + t54;
+	t57 = t56 + 1; 
+	Heap[t57]=0; //Colocando caracter nulo al final
+
+
 L1:
 }
 

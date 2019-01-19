@@ -2,6 +2,9 @@
 
 #include "Coline/Elementos/Objetos/objetoclase.h"
 
+#include "Coline/Gramatica/Arbol/Nodos/Parametros/_lst_val.h"
+#include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_corchetes_val.h"
+
 itemValor *_LST_PUNTOSP::getDestino1(elementoEntorno *entor, itemValor *item){
 
     itemValor *retorno=new itemValor();
@@ -36,6 +39,42 @@ itemValor *_LST_PUNTOSP::getDestino1(elementoEntorno *entor, itemValor *item){
     return vale;
 }
 
+//sPunto  valId  LST_CORCHETES_VAL
+itemValor*_LST_PUNTOSP::getDestino3(elementoEntorno *entor, itemValor *item){
+
+
+    //---------------------------------------------------------------------------------------
+    //itemValor *valor=getDireccionVar(lst_Atributos->getToken(0),entorno);
+    itemValor *valor =getValor1(entor,item);
+    _LST_CORCHETES_VAL *nodoVal=(_LST_CORCHETES_VAL*)hijos[0];
+    QList<itemValor*>lstValores=  nodoVal->getLstValores(entor);
+    QString direcArreglo = valor->c3d;
+
+    //calculando indice real
+    QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entor);
+    tabla->comentarioLinea("Get item from index", entor->nivel);
+
+
+    QString etqDir2=tabla->getEtiqueta();
+    QString etqInd=tabla->getEtiqueta();
+
+    //buscando la dimension
+    tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(lstValores.count()),entor->nivel);
+    tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entor->nivel);
+
+
+    itemValor *valT=new itemValor();
+    valT->c3d="Heap["+etqInd+"]";
+    valT->c3dF="";
+    valT->c3dS="";
+    valT->c3dV="";
+    valT->valor=valor->valor;
+    valT->dimen=0;
+
+
+    return valT;
+}
+
 itemValor* _LST_PUNTOSP::getDestino(elementoEntorno *entor, itemValor *item)
 {
     itemValor *retorno=new itemValor();
@@ -52,10 +91,12 @@ itemValor* _LST_PUNTOSP::getDestino(elementoEntorno *entor, itemValor *item)
     }else if(nivel == 3)
     //sPunto  valId  LST_CORCHETES_VAL
     {
-
+        return getDestino3(entor,item);
     }else if(nivel == 4)
     //sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL
     {
+        tabla->tablaError->insertErrorSemantic("No se puede asginar un valor a metodo()",lst_Atributos->getToken(0));
+        return retorno;
     }
 
     return retorno;

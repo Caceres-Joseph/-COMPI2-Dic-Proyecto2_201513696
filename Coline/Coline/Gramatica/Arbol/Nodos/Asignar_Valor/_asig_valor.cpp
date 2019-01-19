@@ -18,12 +18,9 @@ itemRetorno* _ASIG_VALOR::ejecutar(elementoEntorno *entor){
         valor=nodoVal->getValorT(entor,new token());
 
 
-        /*-------------------------
-         * Validando si se esta igualando a una cadena entre comillas
-        */
-        if(destino->isTypeChar())
-        {
-            if(destino->dimen>0 && (valor->dimensiones.count()>0&&valor->dimen==0)){
+        if(valor->dimensiones.count()>0&&valor->dimen==0){
+            //println("dimensione");
+            if(destino->isTypeChar()){
 
                 /*
                 itemValor *ite=new itemValor('a',"a");
@@ -49,8 +46,54 @@ itemRetorno* _ASIG_VALOR::ejecutar(elementoEntorno *entor){
                 */
 
                 return ret;
+            }else{
+
+                /*-------------------------
+                 * Inicialiar Arreglo
+                */
+                tabla->comentarioLinea("Asignano valores a los arreglos", entor->nivel);
+                for (int i = 0; i < valor->dimensiones.count(); ++i) {
+                    itemValor *item=valor->dimensiones[i];
+                    QString etqT1=tabla->getEtiqueta();
+                    tabla->linea(etqT1+" = "+destino->c3d,entor->nivel);
+                    QString etqT3=tabla->getEtiqueta();
+                    tabla->linea(etqT3+" = "+etqT1 + " + "+QString::number(destino->dimen),entor->nivel);
+                    QString etqT2=tabla->getEtiqueta();
+                    tabla->linea(etqT2+" = "+etqT3+" + "+QString::number(i), entor->nivel);
+                    tabla->linea("Heap["+etqT2+"] = "+item->c3d,entor->nivel);
+                }
+                return ret;
             }
+
+
         }
+
+
+        /*-------------------------
+         * Validando si se esta igualando a una cadena entre comillas
+
+        if(destino->isTypeChar())
+        {
+            if(destino->dimen>0 && (valor->dimensiones.count()>0&&valor->dimen==0)){
+
+
+                tabla->comentarioLinea("Asignando valores a los arreglos", entor->nivel);
+                QString etqT1=tabla->getEtiqueta();
+                //QString etqT2=tabla->getEtiqueta();
+
+                tabla->linea(etqT1+" = "+destino->c3d, entor->nivel);
+                //tabla->linea(etqT2+" = "+etqT1+" + "+QString::number(destino->dimen),entor->nivel, "Pos donde inicia el arreglo");
+
+                tabla->func_colocarParam(etqT1,1, entor);
+                tabla->func_colocarParam(valor->c3d,2,entor);
+                tabla->func_llamarFunc("func_cargarCadena",entor);
+
+
+                return ret;
+            }
+        }*/
+
+
 
     }else if(nivel==2) {
         itemValor*val2=nodoFunc->getValor(entor);

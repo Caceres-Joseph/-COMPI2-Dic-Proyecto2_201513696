@@ -231,6 +231,13 @@ itemValor * _E::getValor(elementoEntorno *elemento){
 
         _TAMANIO *nodoTam=(_TAMANIO*)hijos[0];
         retorno=  nodoTam->getValor(elemento);
+
+    }else if(nivel==28){
+
+
+        _CONVERTIR_NUMERO *nodoConver=(_CONVERTIR_NUMERO*)hijos[0];
+        itemValor *itemVal=nodoConver->getValor(elemento);
+        retorno= itemVal;
     }
 
 

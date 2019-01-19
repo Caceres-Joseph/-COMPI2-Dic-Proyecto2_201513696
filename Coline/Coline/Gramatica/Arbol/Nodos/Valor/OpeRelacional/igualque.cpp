@@ -4,6 +4,16 @@
 IgualQue::IgualQue(nodoModelo *hijo1, nodoModelo *hijo2, tablaSimbolos *tabla, token *signo):opModelo(hijo1,hijo2,tabla,signo){
 }
 
+itemValor *IgualQue::parsear(elementoEntorno *entor, itemValor *valor){
+
+
+    _CONVERTIR_NUMERO *nodoConv=new _CONVERTIR_NUMERO(signo->valLower,tabla);
+    itemValor *valorTemp;
+    valorTemp=nodoConv->getConvertirAnumero(entor,valor);
+
+    return valorTemp;
+}
+
 itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
 
     itemValor *retorno=new itemValor();
@@ -17,8 +27,6 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
     */
     itemValor *it1=new itemValor();
     itemValor *it2=it1->convertirATipo(new token(val1->valor->tipo));
-
-
     itemValor *it4=it1->convertirATipo(new token(val2->valor->tipo));
 
 
@@ -39,6 +47,23 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
          ))
     {
 
+        if(val1->isTypeBooleano()||val1->isTypeChar()){
+            val1=parsear(entorno,val1);
+        }
+
+        if(val2->isTypeBooleano()||val2->isTypeChar()){
+            val2=parsear(entorno,val2);
+            //40
+
+        }
+/*
+ *
+            _CONVERTIR_NUMERO *nodoConv=new _CONVERTIR_NUMERO(nombre,tabla);
+            itemValor *valorTemp;
+            valorTemp=nodoConv->getConvertirAnumero(entor,valor);
+            valor=valorTemp;
+*/
+/*
         if(val1->dimen==0&&val1->dimensiones.count()>0&&val1->isTypeChar()){
             int resultadoFinal=0;
             for (int i = 0; i < val1->dimensiones.count(); ++i) {
@@ -85,7 +110,7 @@ itemValor *IgualQue::opIgualacion(elementoEntorno *entorno, QString simbolo){
             val2->c3d=etqChar;
 
         }
-
+*/
 
         QString etqVerdad;
         QString etqFalso;

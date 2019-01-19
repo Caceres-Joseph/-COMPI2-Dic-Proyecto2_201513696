@@ -54,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //tabla->editorEntrada->setLineWrapMode(QPlainTextEdit::NoWrap);
     //tabla->editorSalida->setLineWrapMode(QPlainTextEdit::NoWrap);
 
+    ui->txtConsolaSalida2->setLineWrapMode(QPlainTextEdit::NoWrap);
+    tabla->tblErrors=ui->tablaErrors;
 }
 
 MainWindow::~MainWindow()

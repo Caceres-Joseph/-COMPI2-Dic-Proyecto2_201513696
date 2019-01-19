@@ -1,0 +1,60 @@
+
+Clase prueba {
+    Principal (){
+
+            entero val1="348";
+            entero val2='a';
+            entero val3=verdadero;
+            caracter arr1[5]="348";
+            entero val4=arr1;
+
+            imprimir(val1+1);
+            imprimir(val2+1);
+            imprimir(val3+1);
+            imprimir(val4+1);
+
+            imprimir("---");
+ 
+
+            imprimir(convertirAentero(arr1));
+            imprimir(convertirAentero(verdadero));
+            imprimir(convertirAentero(3.33333));
+            imprimir(convertirAentero("100")+1);
+            imprimir(convertirAentero('a'+1));
+            
+            imprimir("---");
+
+            si(arr1=="348"){
+                imprimir("si");
+            }sino{
+                imprimir("no");
+            }
+
+            si('a'==97){
+                imprimir("si");
+            }sino{
+                imprimir("no");
+            }
+
+
+            si(12==97){
+                imprimir("si");
+            }sino{
+                imprimir("no");
+            }
+
+            Entero var = -1*(58/6+9+9-1*8/2*17);
+            Entero var2 = 48/4*79-2+8;
+            Caracter salida[10] = convertirAcadena(var);
+            concatenar(salida, "#E",var2);
+            si(salida == "40954")
+            {
+                    imprimir("Resultado: 40954");
+            }sino{
+                imprimir("Salida incorrecta!!");
+            }
+
+    } 
+
+ 
+}

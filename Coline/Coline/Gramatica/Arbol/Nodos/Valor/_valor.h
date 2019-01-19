@@ -7,6 +7,7 @@
 #include "Coline/Gramatica/Arbol/Nodos/Valor/_e.h"
 #include "Coline/Gramatica/Arbol/Nodos/Llaves_Arreglos/_lst_llaves_val.h"
 #include "Coline/Gramatica/Arbol/Nodos/Parametros/_lst_val.h"
+#include "Coline/Gramatica/Arbol/Nodos/Sentencias/Si_simplificado/_si_simplificado.h"
 class _VALOR: public nodoModelo
 {
 public:

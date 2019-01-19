@@ -33,8 +33,16 @@ itemRetorno* _CONCATENAR::ejecutar(elementoEntorno *entor){
     /*-------------------------
      * Cargando parametros
     */
-    tabla->func_colocarParam(destino->c3d,1,entor);
-    tabla->func_colocarParam(valor->c3d,2,entor);
+
+    if(destino->dimen>0&&valor->dimen>0){
+
+        tabla->func_colocarParam(destino->c3d,2,entor);
+        tabla->func_colocarParam(valor->c3d,3,entor);
+    }else{
+
+        tabla->func_colocarParam(destino->c3d,1,entor);
+        tabla->func_colocarParam(valor->c3d,2,entor);
+    }
 
 
     /*-------------------------

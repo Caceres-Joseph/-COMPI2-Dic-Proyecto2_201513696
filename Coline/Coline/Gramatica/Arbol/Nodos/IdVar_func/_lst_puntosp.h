@@ -14,9 +14,7 @@ public:
     itemValor * getDestino(elementoEntorno* entor, itemValor *item);
 
     itemValor *getDestino1(elementoEntorno* entor, itemValor *item);
-    itemValor *getDestino2(elementoEntorno* entor, itemValor *item);
     itemValor *getDestino3(elementoEntorno* entor, itemValor *item);
-    itemValor *getDestino4(elementoEntorno* entor, itemValor *item);
 
 };
 

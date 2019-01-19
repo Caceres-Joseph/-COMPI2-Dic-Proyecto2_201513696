@@ -60,7 +60,47 @@ itemValor *_LST_PUNTOSP_PADRE::getValor1(elementoEntorno *entor, itemValor *item
 
     return vale;
 }
+//
 
+//sPunto  valId  LST_CORCHETES_VAL
+itemValor *_LST_PUNTOSP_PADRE::getValor3(elementoEntorno *entor, itemValor *item){
+
+
+
+    //---------------------------------------------------------------------------------------
+    //itemValor *valor=getDireccionVar(lst_Atributos->getToken(0),entorno);
+    itemValor *valor =getValor1(entor,item);
+    _LST_CORCHETES_VAL *nodoVal=(_LST_CORCHETES_VAL*)hijos[0];
+    QList<itemValor*>lstValores=  nodoVal->getLstValores(entor);
+    QString direcArreglo = valor->c3d;
+
+    //calculando indice real
+    QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entor);
+    tabla->comentarioLinea("Get item from index", entor->nivel);
+
+
+    QString etqDir2=tabla->getEtiqueta();
+    QString etqInd=tabla->getEtiqueta();
+
+    //buscando la dimension
+    tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(lstValores.count()),entor->nivel);
+    tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entor->nivel);
+    QString etqValor=tabla->getEtiqueta();
+    tabla->linea(etqValor+" = Heap["+etqInd+"]",entor->nivel);
+
+
+    itemValor *valT=new itemValor();
+    valT->c3d=etqValor;
+    valT->c3dF="";
+    valT->c3dS="";
+    valT->c3dV="";
+    valT->valor=valor->valor;
+    valT->dimen=0;
+
+
+    return valT;
+
+}
 itemValor* _LST_PUNTOSP_PADRE::getValor(elementoEntorno *entor, itemValor *item)
 {
     if(nivel == 1)
@@ -75,6 +115,7 @@ itemValor* _LST_PUNTOSP_PADRE::getValor(elementoEntorno *entor, itemValor *item)
     }else if(nivel == 3)
     //sPunto  valId  LST_CORCHETES_VAL
     {
+        return getValor3(entor, item);
 
     }else if(nivel == 4)
     //sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL
@@ -200,5 +241,41 @@ void _LST_PUNTOSP_PADRE::ejecutarSent(elementoEntorno *entor, itemValor *item)
     }
 
 
+}
+
+
+
+
+QString _LST_PUNTOSP_PADRE::getIndiceMapeado(QList<itemValor *> lstValores, QString direcArreglo, elementoEntorno *entorno){
+
+    tabla->comentarioLinea("Mapeando indice",entorno->nivel);
+
+    QString etqAnterior = "1";
+    for (int i = 0; i < lstValores.count(); ++i) {
+        itemValor *elem=lstValores[i];
+
+        if(i==0){
+
+            etqAnterior=elem->c3d;
+
+        }else{
+
+            QString etqDir2=tabla->getEtiqueta();
+            QString etqSize=tabla->getEtiqueta();
+
+            //buscando la dimension
+            tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(i),entorno->nivel);
+            tabla->linea(etqSize+" = Heap["+etqDir2+"]", entorno->nivel);
+
+            //operando
+            QString etqT1=tabla->getEtiqueta();
+            QString etqT2=tabla->getEtiqueta();
+            tabla->linea(etqT1+" = "+etqAnterior+" * "+etqSize,entorno->nivel);
+            tabla->linea(etqT2+" = "+etqT1+" + "+elem->c3d,entorno->nivel);
+
+            etqAnterior=etqT2;
+        }
+    }
+    return etqAnterior;
 }
 

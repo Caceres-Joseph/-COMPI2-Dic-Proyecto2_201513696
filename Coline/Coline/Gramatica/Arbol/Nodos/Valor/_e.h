@@ -22,6 +22,7 @@
 
 #include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func.h"
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_cadena.h"
+#include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.h"
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.h"
 class _E: public nodoModelo
 {

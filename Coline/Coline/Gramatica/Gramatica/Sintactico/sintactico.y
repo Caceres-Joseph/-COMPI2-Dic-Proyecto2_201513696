@@ -86,6 +86,7 @@ struct Nod *VAL;
 %token<TEXT>  sDiv
 %token<TEXT>  sMod
 %token<TEXT>  sPot
+%token<TEXT>  sCierraInterrogante
 
 %token<TEXT>  sMasIgual
 %token<TEXT>  sMenosIgual
@@ -103,7 +104,6 @@ struct Nod *VAL;
 %token<TEXT>  sPuntoComa
 %token<TEXT>  sArroba
 %token<TEXT>  sIgual
-%token<TEXT>  sCierraInterrogante
 %token<TEXT>  sDosPuntos
 
 %token<TEXT>  tImport
@@ -116,7 +116,8 @@ struct Nod *VAL;
 %token<TEXT>  tEste
 %token<TEXT>  tImprimir
 %token<TEXT>  tConcatenar  
-%token<TEXT>  tConvertirCadena  
+%token<TEXT>  tConvertirCadena 
+%token<TEXT>  tConvertirNumero  
 %token<TEXT>  tRetorno
 %token<TEXT>  tSi
 %token<TEXT>  tSino
@@ -220,6 +221,7 @@ struct Nod *VAL;
 %type<VAL> IMPRIMIR 
 %type<VAL> CONCATENAR 
 %type<VAL> CONVERTIR_CADENA 
+%type<VAL> CONVERTIR_NUMERO 
 %type<VAL> MENSAJE 
 %type<VAL> OPE_TIPO 
 
@@ -285,8 +287,7 @@ struct Nod *VAL;
 
 %left sMas sMenos
 %left sPor sDiv  sMod 
-%left sPot  
- 
+%left sPot   
 
 
 %start S
@@ -1715,25 +1716,29 @@ FUNCIONES_NATIVAS:
                                 padre->hijos.append($1->Padre); 
 
                         $$->Padre=padre;
-                }  
+                }   
+        ;
 
-                /*
-        | CONVERTIR_CADENA
+CONVERTIR_NUMERO:
+        tConvertirNumero sAbreParent E sCierraParent 
                 {   
                         //creando el padre
                         $$=new Nod(); 
-                        _FUNCIONES_NATIVAS *padre=new _FUNCIONES_NATIVAS("FUNCIONES_NATIVAS",tabla); 
+                        _CONVERTIR_NUMERO *padre=new _CONVERTIR_NUMERO("CONVERTIR_NUMERO",tabla); 
                         padre->nivel=1;
                         padre->nLinea=nLinea;
 
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tConvertirNumero",tok1);
+
                                 //hijos
-                                padre->hijos.append($1->Padre); 
+                                padre->hijos.append($3->Padre); 
 
                         $$->Padre=padre;
-                } 
-                */
-        ;
+                }
 
+        ;
 
 CONVERTIR_CADENA:
         tConvertirCadena sAbreParent E sCierraParent 
@@ -2211,6 +2216,19 @@ VALOR:
 
                         $$->Padre=padre;
                 }
+        | SI_SIMPLIFICADO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _VALOR *padre=new _VALOR("VALOR",tabla); 
+                        padre->nivel=5;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
         ;
 
 
@@ -2228,6 +2246,49 @@ TAMANIO:
 
                 $$->Padre=padre;
         }
+        ;
+
+SI_SIMPLIFICADO:
+        E sCierraInterrogante VALOR sDosPuntos VALOR
+        {
+                //creando el padre
+                $$=new Nod(); 
+                _SI_SIMPLIFICADO *padre=new _SI_SIMPLIFICADO("SI_SIMPLIFICADO",tabla); 
+                padre->nivel=1;
+                padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sCierraInterrogante",tok2);
+
+
+                        //hijos
+                        padre->hijos.append($1->Padre); 
+                        padre->hijos.append($3->Padre); 
+                        padre->hijos.append($5->Padre); 
+
+                $$->Padre=padre;
+        } 
+        | sAbreParent E sCierraInterrogante VALOR sDosPuntos VALOR sCierraParent
+        {
+                //creando el padre
+                $$=new Nod(); 
+                _SI_SIMPLIFICADO *padre=new _SI_SIMPLIFICADO("SI_SIMPLIFICADO",tabla); 
+                padre->nivel=1;
+                padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok2=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sCierraInterrogante",tok2);
+
+
+                        //hijos
+                        padre->hijos.append($2->Padre); 
+                        padre->hijos.append($4->Padre); 
+                        padre->hijos.append($6->Padre); 
+
+                $$->Padre=padre;
+        } 
         ;
 
 E: 
@@ -2693,8 +2754,48 @@ E:
 
                         $$->Padre=padre;
                 }
-                
-        //| SI_SIMPLIFICADO
+        | CONVERTIR_NUMERO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        padre->nivel=28;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre);  
+
+                        $$->Padre=padre;
+                }
+                /*
+        | SI_SIMPLIFICADO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        padre->nivel=29;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre);  
+
+                        $$->Padre=padre;
+                }
+        |E sCierraInterrogante E sDosPuntos E
+                {
+                        //creando el padre
+                        $$=new Nod(); 
+                        _E *padre=new _E("E",tabla); 
+                        padre->nivel=30;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre);  
+
+                        $$->Padre=padre;
+                        
+                }
+                */
         //| OPE_ARITME
         //| OPE_TIPO
         //| LEN

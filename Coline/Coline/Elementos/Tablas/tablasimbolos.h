@@ -14,6 +14,8 @@
 //#include "debugcoline.h"
 class DebugColine;
 #include "debug3d.h";
+#include <QTableWidget>
+
 class Entorno3D;
 class TablaTemporales;
 class elementoClase;
@@ -34,6 +36,8 @@ public:
     CodeEditor* editorSalida;
     CodeEditor* editorEntrada;
     QPlainTextEdit *txtSalidaConsola;
+
+    QTableWidget *tblErrors;
     //QString salida="";
     int numEtiqueta=0;
     int numSalto=0;

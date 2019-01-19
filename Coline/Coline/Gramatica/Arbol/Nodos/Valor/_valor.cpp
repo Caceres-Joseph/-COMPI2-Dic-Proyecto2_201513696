@@ -83,6 +83,9 @@ itemValor * _VALOR::getValor(elementoEntorno *elemento, token *tipo){
     }else if(nivel==4){
         _E *nodoE=(_E*)hijos[0];
         return nodoE->getValor(elemento);
+    }else if(nivel==5){
+        _SI_SIMPLIFICADO *nodoSimp=(_SI_SIMPLIFICADO*)hijos[0];
+        return nodoSimp->getValor(elemento);
     }
 
     return retorno;

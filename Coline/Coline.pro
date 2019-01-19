@@ -45,7 +45,11 @@ HEADERS += pch.hpp \
     Gramatica/scanner1.h \
     Gramatica/arbol_3d.h \
     debug3d.h \
-    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.h
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.h \
+    crearleccion.h \
+    nuevaleccion.h \
+    participarleccion.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -200,7 +204,11 @@ SOURCES += \
     Gramatica/scanner1.cpp \
     Gramatica/arbol_3d.cpp \
     debug3d.cpp \
-    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.cpp
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.cpp \
+    crearleccion.cpp \
+    nuevaleccion.cpp \
+    participarleccion.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \
@@ -341,4 +349,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     debugcoline.ui \
-    debug3d.ui
+    debug3d.ui \
+    crearleccion.ui \
+    nuevaleccion.ui \
+    participarleccion.ui
