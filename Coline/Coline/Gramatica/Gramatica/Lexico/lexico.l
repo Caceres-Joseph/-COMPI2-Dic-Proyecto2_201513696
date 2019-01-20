@@ -107,9 +107,10 @@ Char '[^']*'
 "si"                { strcpy(yylval.TEXT, yytext); return tSi; }
 "sino"              { strcpy(yylval.TEXT, yytext); return tSino; }
 "caso"              { strcpy(yylval.TEXT, yytext); return tCaso; }
+"selecciona"        { strcpy(yylval.TEXT, yytext); return tSelecciona; }
 "de"                { strcpy(yylval.TEXT, yytext); return tDe; }
 "defecto"           { strcpy(yylval.TEXT, yytext); return tDefecto; }
-"romper"            { strcpy(yylval.TEXT, yytext); return tRomper; }
+"detener"           { strcpy(yylval.TEXT, yytext); return tRomper; }
 "mientras"          { strcpy(yylval.TEXT, yytext); return tMientras; }
 "continuar"         { strcpy(yylval.TEXT, yytext); return tContinuar; }
 "para"              { strcpy(yylval.TEXT, yytext); return tPara; }
@@ -120,7 +121,8 @@ Char '[^']*'
 "subcad"            { strcpy(yylval.TEXT, yytext); return tSubCad; }
 "poscad"            { strcpy(yylval.TEXT, yytext); return tPosCad; }
 "random"            { strcpy(yylval.TEXT, yytext); return tRandom; }
-"tamanio"            { strcpy(yylval.TEXT, yytext); return tTamanio; }
+"tamanio"           { strcpy(yylval.TEXT, yytext); return tTamanio; }
+"leer_teclado"      { strcpy(yylval.TEXT, yytext); return tLeerTeclado; }
 
  /* "tam"               { strcpy(yylval.TEXT, yytext); return tTam; }*/
 "super"             { strcpy(yylval.TEXT, yytext); return tSuper; }

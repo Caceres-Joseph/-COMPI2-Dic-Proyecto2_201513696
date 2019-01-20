@@ -28,7 +28,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QTextEdit" name="textEdit"/>
+           <widget class="QTextEdit" name="txtTitulo"/>
           </item>
          </layout>
         </widget>
@@ -40,7 +40,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QTextEdit" name="textEdit_6"/>
+           <widget class="QTextEdit" name="txtDescripcion"/>
           </item>
          </layout>
         </widget>
@@ -52,15 +52,22 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QTextEdit" name="textEdit_8"/>
+           <widget class="QTextEdit" name="txtEnunciado"/>
           </item>
          </layout>
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>ACoach</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>Crear</string>
+          <string>GCoach</string>
          </property>
         </widget>
        </item>
@@ -78,7 +85,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QTextEdit" name="textEdit_9"/>
+           <widget class="QTextEdit" name="txtPruebas"/>
           </item>
          </layout>
         </widget>
@@ -91,7 +98,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTextEdit" name="textEdit_7"/>
+        <widget class="QTextEdit" name="txtEjemplo"/>
        </item>
       </layout>
      </widget>

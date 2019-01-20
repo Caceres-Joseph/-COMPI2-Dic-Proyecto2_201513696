@@ -2,11 +2,18 @@
 
 void _VALOR::ejecutarConstructor(elementoEntorno *entor, QString este, objetoClase *clase){
 
+    //validando si tiene constructor
+    if(clase->cuerpoClase->lstConstructores->listaPolimorfa.count()==0)
+    {
+        //no tiene constructor
+        return;
+    }
+
 
     tabla->comentarioLinea("Llamado al constructor",entor->nivel);
 
     _LST_VAL *nodoVals=(_LST_VAL*)hijos[0];
-    QList<itemValor*> lstValores= nodoVals->getLstValores(entor);
+    QList<itemValor*> lstValores= nodoVals->getLstValoresConCad(entor);
 
 
     token *nombre=lst_Atributos->getToken(0);

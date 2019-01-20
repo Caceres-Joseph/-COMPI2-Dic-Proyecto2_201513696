@@ -12,10 +12,11 @@
 //#include "Coline/Elementos/Elementos/elementoclase.h"
 #include "Gui/codeeditor.h"
 //#include "debugcoline.h"
+#include "Coline/Elementos/Listas/lstlecciones.h"
 class DebugColine;
 #include "debug3d.h";
 #include <QTableWidget>
-
+class MainWindow;
 class Entorno3D;
 class TablaTemporales;
 class elementoClase;
@@ -30,6 +31,13 @@ class tablaSimbolos
 {
 public:
 
+    /**/
+    QString saltoFalso;
+    QString saltoInicio;
+    lstLecciones *lecciones=new lstLecciones(this);
+    /*
+     * Chapu
+    */
     DebugColine *dlgColine;
     debug3d *dlg3D;
 
@@ -38,10 +46,12 @@ public:
     QPlainTextEdit *txtSalidaConsola;
 
     QTableWidget *tblErrors;
+
+    QTableWidget *tblLecciones;
     //QString salida="";
     int numEtiqueta=0;
     int numSalto=0;
-    tablaErrores *tablaError=new tablaErrores();
+    tablaErrores *tablaError=new tablaErrores(this);
 
     QList<elementoClase*> lstClases;
 

@@ -206,7 +206,7 @@ itemValor *_LST_PUNTOSP_PADRE::cargarMetodo1(elementoEntorno *entor, objetoClase
      * Recuperando valores
     */
     _LST_VAL *nodoVal=(_LST_VAL*)hijos[0];
-    QList<itemValor*> lstValores=nodoVal->getLstValores(entor);
+    QList<itemValor*> lstValores=nodoVal->getLstValoresConCad(entor);
     token *nombre=lst_Atributos->getToken(0);
     itemValor *val=objeto->este->este->getMetodo(nombre,lstValores);
     QString cadParams=objeto->este->este->cuerpoClase->lstMetodo_funcion->cadParams(lstValores);

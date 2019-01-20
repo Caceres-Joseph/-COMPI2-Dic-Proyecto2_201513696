@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+#include "ui_participarleccion.h"
 namespace Ui {
 class participarLeccion;
 }
@@ -15,13 +16,13 @@ public:
     explicit participarLeccion(QWidget *parent = 0);
     ~participarLeccion();
 
-private slots:
     void on_btnCalificar_clicked();
 
     void on_btnEvaluar_clicked();
 
-private:
     Ui::participarLeccion *ui;
+private slots:
+    void on_pushButton_clicked();
 };
 
 #endif // PARTICIPARLECCION_H

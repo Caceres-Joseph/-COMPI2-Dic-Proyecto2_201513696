@@ -579,17 +579,15 @@
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QTableWidget" name="tablaErrors">
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>200</number>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
            <column>
             <property name="text">
              <string>Linea</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>New Column</string>
             </property>
            </column>
            <column>
@@ -604,7 +602,7 @@
            </column>
            <column>
             <property name="text">
-             <string>Ambito</string>
+             <string>Descripcion</string>
             </property>
            </column>
           </widget>

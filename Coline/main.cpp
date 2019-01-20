@@ -7,12 +7,12 @@ int main(int argc, char *argv[])
 
 
 
-    MainWindow w;
-    w.show();
+    //MainWindow w;
+    //w.show();
 
 
-    //CrearLeccion lec;
-    //lec.show();
+    CrearLeccion lec;
+    lec.show();
 
     return a.exec();
 }

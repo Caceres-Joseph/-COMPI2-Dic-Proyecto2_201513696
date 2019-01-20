@@ -12,6 +12,7 @@ class _LST_VAL: public nodoModelo
 public:
     _LST_VAL(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
     QList<itemValor*> getLstValores(elementoEntorno *entor);
+    QList<itemValor*> getLstValoresConCad(elementoEntorno *entor);
 
 };
 

@@ -8,6 +8,7 @@ class _CUERPO_CLASE: public nodoModelo
 {
 public:
     _CUERPO_CLASE(QString nombre, tablaSimbolos *tabla): nodoModelo(nombre,tabla) {}
+
 };
 
 #endif // _CUERPO_CLASE_H

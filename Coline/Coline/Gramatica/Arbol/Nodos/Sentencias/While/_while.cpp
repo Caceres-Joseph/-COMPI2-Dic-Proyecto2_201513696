@@ -7,6 +7,7 @@ itemRetorno* _WHILE::ejecutar(elementoEntorno *entor){
     tabla->comentarioLinea("Mientras", entor->nivel);
 
     QString etqInicio=tabla->getSalto();
+    tabla->saltoInicio=etqInicio;
     tabla->linea2(etqInicio+":",entor->nivel);
 
     itemRetorno* ret=new itemRetorno(0);
@@ -29,6 +30,7 @@ itemRetorno* _WHILE::ejecutar(elementoEntorno *entor){
 
 
    itemValor* valor=operarCondicion(valor2,entor);
+   tabla->saltoFalso=valor->c3dS;
     /*
      * CREANDO UN NUEVO ENTORNO
     */

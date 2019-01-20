@@ -1,5 +1,4 @@
 #include "participarleccion.h"
-#include "ui_participarleccion.h"
 #include <QMessageBox>
 
 
@@ -18,15 +17,29 @@ participarLeccion::~participarLeccion()
 void participarLeccion::on_btnCalificar_clicked()
 {
 
-    QMessageBox msgBox;
-    msgBox.setText("Resultado  \nCorrecto!");
-    msgBox.exec();
 }
-
 void participarLeccion::on_btnEvaluar_clicked()
 {
 
-    QMessageBox msgBox;
-    msgBox.setText("Lo sentimos   \nIncorrecto!");
-    msgBox.exec();
 }
+
+void participarLeccion::on_pushButton_clicked()
+{
+    int iSecret;
+    iSecret = rand() % 10 + 1;
+
+    if(iSecret<5){
+
+        QMessageBox msgBox;
+        msgBox.setText("Resultado  \nCorrecto!");
+        msgBox.exec();
+
+    }else{
+
+        QMessageBox msgBox;
+        msgBox.setText("Lo sentimos   \nIncorrecto!");
+        msgBox.exec();
+    }
+
+}
+

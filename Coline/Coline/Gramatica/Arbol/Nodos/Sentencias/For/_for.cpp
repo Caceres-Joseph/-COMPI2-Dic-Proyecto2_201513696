@@ -23,6 +23,7 @@ itemRetorno* _FOR::ejecutar(elementoEntorno *entor){
 
     QString etqInicio=tabla->getSalto();
     tabla->linea2(etqInicio+":",entor->nivel);
+    tabla->saltoInicio=etqInicio;
 
 
     /* -----------
@@ -46,7 +47,7 @@ itemRetorno* _FOR::ejecutar(elementoEntorno *entor){
      * -----------
     */
     itemValor* valor=operarCondicion(valor2,nuevoEntorno);
-
+    tabla->saltoFalso=valor->c3dS;
     tabla->linea2(valor->c3dF+":",nuevoEntorno->nivel);
     //la parte falsa
     tabla->linea("goto "+valor->c3dS, nuevoEntorno->nivel);

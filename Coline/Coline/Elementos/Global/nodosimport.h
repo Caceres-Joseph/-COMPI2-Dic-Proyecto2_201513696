@@ -34,6 +34,7 @@
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.h"
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_funciones_nativas.h"
 #include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_tamanio.h"
+#include "Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_coseno.h"
 
 #include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func_padre.h"
 #include "Coline/Gramatica/Arbol/Nodos/IdVar_func/_id_var_func.h"

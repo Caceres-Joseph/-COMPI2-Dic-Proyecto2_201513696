@@ -49,7 +49,10 @@ HEADERS += pch.hpp \
     Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.h \
     crearleccion.h \
     nuevaleccion.h \
-    participarleccion.h
+    participarleccion.h \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_coseno.h \
+    Coline/Elementos/Elementos/elementoleccion.h \
+    Coline/Elementos/Listas/lstlecciones.h
 
 SOURCES += \
     Coline/Elementos/Global/importar.cpp \
@@ -208,7 +211,10 @@ SOURCES += \
     Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_convertir_numero.cpp \
     crearleccion.cpp \
     nuevaleccion.cpp \
-    participarleccion.cpp
+    participarleccion.cpp \
+    Coline/Gramatica/Arbol/Nodos/FuncionesNativas/_coseno.cpp \
+    Coline/Elementos/Elementos/elementoleccion.cpp \
+    Coline/Elementos/Listas/lstlecciones.cpp
 
 HEADERS += \
     Coline/Elementos/Global/importar.h \

@@ -105,7 +105,7 @@ struct Nod *VAL;
 %token<TEXT>  sArroba
 %token<TEXT>  sIgual
 %token<TEXT>  sDosPuntos
-
+%token<TEXT>  tLeerTeclado
 %token<TEXT>  tImport
 %token<TEXT>  tClase
 %token<TEXT>  tExtender
@@ -121,7 +121,8 @@ struct Nod *VAL;
 %token<TEXT>  tRetorno
 %token<TEXT>  tSi
 %token<TEXT>  tSino
-%token<TEXT>  tCaso
+%token<TEXT>  tCaso 
+%token<TEXT>  tSelecciona 
 %token<TEXT>  tDe
 %token<TEXT>  tDefecto
 %token<TEXT>  tRomper
@@ -437,7 +438,7 @@ CLASE:
                         $$->Padre=padre;
 
                 }
-        |tClase  valId  VISIBILIDAD  EXTENDER  sAbreLlave  CP_CLASE  sCierraLlave
+        |VISIBILIDAD tClase  valId    EXTENDER  sAbreLlave  CP_CLASE  sCierraLlave
                 {   
                         //creando el padre
                         $$=new Nod(); 
@@ -447,12 +448,12 @@ CLASE:
 
                                 //asignando atributos  
 
-                                token *tok2=new token(QString::fromStdString($2),@2.first_line,3,archivo);
+                                token *tok2=new token(QString::fromStdString($3),@3.first_line,3,archivo);
                                 padre->lst_Atributos->insertar("valId",tok2);
 
 
                                 //hijos
-                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($1->Padre);
                                 padre->hijos.append($4->Padre);
                                 padre->hijos.append($6->Padre);
 
@@ -756,6 +757,18 @@ CP_CLASE:
 
                         $$->Padre=padre;
                 }
+        | VISIBILIDAD CONSTRUCTOR
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        padre->nivel=6;
+                        padre->nLinea=nLinea;
+                                //hijos
+                                padre->hijos.append($2->Padre);
+
+                        $$->Padre=padre;
+                }
         | DECLARAR_VARIABLE_GLOBAL  sPuntoComa
                 {   
                         //creando el padre
@@ -779,6 +792,19 @@ CP_CLASE:
 
                                 //hijos
                                 padre->hijos.append($1->Padre);
+
+                        $$->Padre=padre;
+                }
+        | sArroba  tOverride METODO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO_CLASE *padre=new _CUERPO_CLASE("CUERPO_CLASE",tabla); 
+                        padre->nivel=5;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($3->Padre);
 
                         $$->Padre=padre;
                 }
@@ -1563,7 +1589,7 @@ LST_CUERPO:
                                 padre->hijos.append($1->Padre); 
 
                         $$->Padre=padre;
-                }
+                } 
                 
         ;
  
@@ -1688,6 +1714,42 @@ CUERPO:
 
                         $$->Padre=padre;
                 }
+        | COSENO
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO *padre=new _CUERPO("CUERPO",tabla); 
+                        padre->nivel=9;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                } 
+        ;
+
+COSENO:
+        tLeerTeclado sAbreParent E sComa ID_VAR_FUNC sCierraParent sPuntoComa
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _COSENO *padre=new _COSENO("LEER_TECLADO",tabla); 
+                        padre->nivel=1;
+                        padre->nLinea=nLinea;
+
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tLeerTeclado",tok1);
+
+                                //hijos
+                                padre->hijos.append($3->Padre);
+                                padre->hijos.append($5->Padre); 
+
+                        $$->Padre=padre;
+                } 
+
         ;
 
 FUNCIONES_NATIVAS: 
@@ -1944,10 +2006,140 @@ SENTENCIAS:
 
                         $$->Padre=padre;
                 }
-        //| CASO
-        //| DOWHILE
+        | DOWHILE
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
+                        padre->nivel=4;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
+        | CASO 
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _SENTENCIAS *padre=new _SENTENCIAS("SENTENCIAS",tabla); 
+                        padre->nivel=4;
+                        padre->nLinea=nLinea;
+
+                                //hijos
+                                padre->hijos.append($1->Padre); 
+
+                        $$->Padre=padre;
+                }
         //| REPETIR
         ;
+
+CASO:
+        tSelecciona sAbreParent E sCierraParent sAbreLlave  CUERPO_CASE  sCierraLlave
+        {
+        
+                //creando el padre
+                $$=new Nod(); 
+                _CASO *padre=new _CASO("CASO",tabla); 
+                padre->nivel=1;
+                padre->nLinea=nLinea;
+
+                        //asignando atributos 
+                        token *tok1=new token(QString::fromStdString($2),@2.first_line,3,archivo);
+                        padre->lst_Atributos->insertar("sAbreParent",tok1);
+
+                        //hijos
+                        padre->hijos.append($3->Padre); 
+                        padre->hijos.append($6->Padre);  
+
+                $$->Padre=padre;
+        
+
+        }
+        ;
+
+CUERPO_CASE:
+        tCaso E sDosPuntos sAbreLlave LST_CUERPO sCierraLlave CUERPO_CASE
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO_CASE *padre=new _CUERPO_CASE("CUERPO_CASE",tabla); 
+                        padre->nivel=1;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tCaso",tok1);
+
+                                //hijos
+                                padre->hijos.append($2->Padre);
+                                padre->hijos.append($5->Padre);
+                                padre->hijos.append($7->Padre);  
+
+                        $$->Padre=padre;
+                }
+
+        |tCaso E sDosPuntos sAbreLlave LST_CUERPO sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO_CASE *padre=new _CUERPO_CASE("CUERPO_CASE",tabla); 
+                        padre->nivel=2;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tCaso",tok1);
+
+                                //hijos 
+                                padre->hijos.append($2->Padre);  
+                                padre->hijos.append($5->Padre);  
+
+                        $$->Padre=padre;
+                }
+        |tDefecto sDosPuntos sAbreLlave LST_CUERPO sCierraLlave
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _CUERPO_CASE *padre=new _CUERPO_CASE("CUERPO_CASE",tabla); 
+                        padre->nivel=3;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($2),@2.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("sDosPuntos",tok1);
+
+                                //hijos 
+                                padre->hijos.append($4->Padre); 
+
+                        $$->Padre=padre;
+                }
+        ;
+
+
+DOWHILE:
+        tHacer sAbreLlave LST_CUERPO  sCierraLlave tMientras  sAbreParent  E  sCierraParent sPuntoComa
+                {   
+                        //creando el padre
+                        $$=new Nod(); 
+                        _DOWHILE *padre=new _DOWHILE("WHILE",tabla); 
+                        padre->nivel=1;
+                        padre->nLinea=nLinea;
+
+                                //asignando atributos 
+                                token *tok1=new token(QString::fromStdString($1),@1.first_line,3,archivo);
+                                padre->lst_Atributos->insertar("tHacer",tok1);
+
+                                //hijos
+                                padre->hijos.append($7->Padre);
+                                padre->hijos.append($3->Padre);  
+
+                        $$->Padre=padre;
+                }
+        ;
+
+
 
 FOR: 
         tPara  sAbreParent DECLARAR_VARIABLE_SINVISIBI sPuntoComa E sPuntoComa ASIG_VALOR sCierraParent sAbreLlave  LST_CUERPO  sCierraLlave

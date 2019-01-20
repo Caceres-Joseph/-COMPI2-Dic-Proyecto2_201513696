@@ -17,11 +17,13 @@ class CrearLeccion : public QDialog
 
 public:
 
-    participarLeccion *Leccion;
+    tablaSimbolos *tabla;
+    participarLeccion *participar;
+    nuevaLeccion *nuevaLec;
+    MainWindow *ide;
     explicit CrearLeccion(QWidget *parent = 0);
     ~CrearLeccion();
 
-private slots:
     void on_btnACoach_clicked();
 
     void on_btnGCoach_clicked();
@@ -30,8 +32,12 @@ private slots:
 
     void on_btnParticipar_clicked();
 
-private:
     Ui::CrearLeccion *ui;
+private slots:
+    void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
+    void on_pushButton_4_clicked();
 };
 
 #endif // CREARLECCION_H

@@ -267,7 +267,8 @@ void tablaSimbolos::resetearValores()
 {
     numEtiqueta=0;
     numSalto=0;
-    tablaError=new tablaErrores();
+    tablaError=new tablaErrores(this);
+    this->tblErrors->setRowCount(0);
     lstClases.clear();
     Salida3d="";
 

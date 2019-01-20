@@ -30,7 +30,6 @@ itemValor *Or::opOr(elementoEntorno *entorno, QString simbolo){
     }
     if(val1->c3dS == ""){
         tabla->tablaError->insertErrorSemantic("Sólo se puede aplicar OR de esta forma -> opRelacional [OR] opRelacional",signo);
-
     }
 
     tabla->linea2(val1->c3dF+":", entorno->nivel);

@@ -40,7 +40,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTextEdit" name="textEdit_4"/>
+     <widget class="QTextEdit" name="txtTituo"/>
     </item>
    </layout>
   </widget>
@@ -58,7 +58,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QTextEdit" name="textEdit"/>
+     <widget class="QTextEdit" name="txtExplicacion"/>
     </item>
    </layout>
   </widget>
@@ -76,16 +76,16 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <widget class="QTextEdit" name="textEdit_2"/>
+     <widget class="QTextEdit" name="txtEnunciado"/>
     </item>
    </layout>
   </widget>
   <widget class="QPushButton" name="btnCalificar">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>490</y>
-     <width>83</width>
+     <x>412</x>
+     <y>480</y>
+     <width>21</width>
      <height>25</height>
     </rect>
    </property>
@@ -96,9 +96,9 @@
   <widget class="QPushButton" name="btnEvaluar">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>490</y>
-     <width>83</width>
+     <x>50</x>
+     <y>480</y>
+     <width>21</width>
      <height>25</height>
     </rect>
    </property>
@@ -112,7 +112,7 @@
      <x>460</x>
      <y>80</y>
      <width>511</width>
-     <height>431</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="title">
@@ -120,9 +120,40 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <widget class="QTextEdit" name="textEdit_3"/>
+     <widget class="QTextEdit" name="txtSolucion"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>380</y>
+     <width>411</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Ejemplo</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <widget class="QTextEdit" name="txtEjemplo"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>490</y>
+     <width>83</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Evaluar</string>
+   </property>
   </widget>
  </widget>
  <resources/>

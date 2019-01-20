@@ -194,6 +194,30 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
         valT->dimen=0;
 
 
+        /*-------------------------
+         * Parche para cargar el objeto
+
+        */
+
+        itemValor *it1=new itemValor();
+        itemValor *it2=it1->convertirATipo(new token(valor->valor->tipo));
+        if(it2->isTypeObjeto()){
+            //tengo que cargar en valor la clase con el objeto
+
+            //buscando el objeto si existe
+            elementoClase *tempClase=tabla->getClase(new token(valor->valor->tipo));
+            if(tempClase==NULL){
+                tabla->tablaError->insertErrorSemantic("El objeto :"+valor->valor->tipo+" no existe", lst_Atributos->getToken(0));
+                return retorno;
+            }
+
+            //creamos el nuevo metodo
+            objetoClase *objClase=new objetoClase(tempClase,tabla);
+            itemValor *vale=new itemValor(objClase,"t");
+            valT->valor=vale->valor;
+
+        }
+
         return valT;
     }else if(nivel == 8)
     // tEste  sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL
@@ -340,7 +364,7 @@ itemValor *_ID_VAR_FUNC_PADRE::cargarMetodo(elementoEntorno *entor){
     tabla->comentarioLinea("Llamado a funcion",entor->nivel);
 
     _LST_VAL *nodoVal=(_LST_VAL*)hijos[0];
-    QList<itemValor*> lstValores=nodoVal->getLstValores(entor);
+    QList<itemValor*> lstValores=nodoVal->getLstValoresConCad(entor);
     token *nombre=lst_Atributos->getToken(0);
     itemValor *val=entor->este->getMetodo(nombre,lstValores);
     QString cadParams=entor->este->cuerpoClase->lstMetodo_funcion->cadParams(lstValores);

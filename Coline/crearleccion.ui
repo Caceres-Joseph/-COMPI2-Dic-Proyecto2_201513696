@@ -26,8 +26,8 @@
       <widget class="QGroupBox" name="groupBox_3">
        <property name="geometry">
         <rect>
-         <x>12</x>
-         <y>396</y>
+         <x>10</x>
+         <y>470</y>
          <width>148</width>
          <height>92</height>
         </rect>
@@ -88,29 +88,15 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>240</y>
+         <y>260</y>
          <width>127</width>
-         <height>131</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="title">
         <string>Modos</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QPushButton" name="btnACoach">
-          <property name="text">
-           <string>Crear A-Coach</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnGCoach">
-          <property name="text">
-           <string>Crear G-Coach</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QPushButton" name="btnLibre">
           <property name="text">
@@ -126,7 +112,7 @@
          <x>20</x>
          <y>140</y>
          <width>141</width>
-         <height>71</height>
+         <height>81</height>
         </rect>
        </property>
        <property name="title">
@@ -134,13 +120,61 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QPushButton" name="btnParticipar">
-          <property name="text">
-           <string>Participar</string>
-          </property>
-         </widget>
+         <widget class="QSpinBox" name="cbParticiipar"/>
         </item>
        </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>440</y>
+         <width>83</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ide</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>410</y>
+         <width>83</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A-Goach</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>370</y>
+         <width>83</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>G-Coach</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>230</y>
+         <width>83</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Participar</string>
+       </property>
       </widget>
      </widget>
      <widget class="QTabWidget" name="tabWidget">
@@ -153,7 +187,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="tblLecciones">
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>true</bool>
           </attribute>
@@ -177,7 +211,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Tipo</string>
+            <string>Es A-Goach</string>
            </property>
           </column>
           <item row="0" column="0">
