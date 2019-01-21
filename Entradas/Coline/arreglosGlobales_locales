@@ -1,0 +1,101 @@
+clase persona{
+    entero edad=22;
+
+    vacio enviarEdad(entero edad){
+        este.edad=edad;
+
+    }
+
+
+    entero getEdad(){
+        retornar edad;
+
+    }
+    booleano esMayorDeEdad(){
+        retornar edad>18?verdadero:falso;
+    }
+}
+
+
+clase main{
+
+    
+    persona pers1[2];
+
+    principal(){
+
+
+        persona pers[2];
+        pers[0]=nuevo persona();
+
+
+        imprimir("--objetos --");
+
+        persona p1=nuevo persona();
+        imprimir(p1.getEdad());  
+
+
+        imprimir("-- arr obj locales--");
+        imprimir(pers[0].getEdad());
+
+
+        imprimir("-- arr obj globales--");
+        pers1[0]=nuevo persona();
+        imprimir(pers1[0].getEdad());
+
+
+    }
+}
+
+ 
+/*
+|-------------------------------------------------------------------------------------------------------------------
+| EJECUTAR
+|-------------------------------------------------------------------------------------------------------------------
+|
+*/
+
+clase persona{
+    entero edad=22;
+
+    vacio enviarEdad(entero edad){
+        este.edad=edad;
+
+    }
+
+
+    entero getEdad(){
+        retornar edad;
+
+    }
+    booleano esMayorDeEdad(){
+        retornar edad>18?verdadero:falso;
+    }
+}
+
+
+clase main{
+    persona arr1[2];
+
+    principal(){
+
+        
+        inicializar();
+
+        imprimir(getPersona(0).edad);
+    }
+
+    vacio inicializar(){
+        arr1[0]=nuevo persona();
+        arr1[0].edad=100;
+        arr1[1]=nuevo persona();
+        arr1[1].edad=87;
+
+    }
+
+    persona getPersona(entero i){
+        retornar arr1[i];
+    }
+
+
+}

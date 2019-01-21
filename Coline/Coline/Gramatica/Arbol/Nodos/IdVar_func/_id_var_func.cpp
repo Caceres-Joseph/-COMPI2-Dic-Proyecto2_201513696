@@ -97,48 +97,35 @@ itemValor *_ID_VAR_FUNC::getDestino(elementoEntorno *entorno){
     // valId  LST_CORCHETES_VAL
     {
 
-        //tengo que buscar la variable en el entorno *
-        itemEntorno *val=entorno->getValId(lst_Atributos->getToken(0));
-        itemValor *valor=val->valor;
-        QString pos=tabla->getEtiqueta();
-        QString puntero="P";
 
-
-        QString stack="Stack";
-        if(val->esGlobal){
-            stack="Heap";
-            puntero="H";
-        }
-
-
-        tabla->linea(pos+" = "+puntero+" + "+QString::number(val->pos), entorno->nivel);
-        QString direcArreglo=tabla->getEtiqueta();
-        stack+="["+pos+"]";
-        tabla->linea(direcArreglo + " = "+stack, entorno->nivel);
-
-        //posicion donde inicia el arreglo etqDir2
-        //ahora hay que mapear
+        itemValor *valor=getDireccionVar(lst_Atributos->getToken(0),entorno);
         _LST_CORCHETES_VAL *nodoVal=(_LST_CORCHETES_VAL*)hijos[0];
         QList<itemValor*>lstValores=  nodoVal->getLstValores(entorno);
+        QString direcArreglo = valor->c3d;
 
         //calculando indice real
         QString indiceReal=getIndiceMapeado(lstValores,direcArreglo,entorno);
-
-
-
         tabla->comentarioLinea("Get item from index", entorno->nivel);
+
+
         QString etqDir2=tabla->getEtiqueta();
         QString etqInd=tabla->getEtiqueta();
 
         //buscando la dimension
         tabla->linea(etqDir2+" = "+direcArreglo+ " + "+QString::number(lstValores.count()),entorno->nivel);
         tabla->linea(etqInd+" = "+etqDir2+" + "+indiceReal, entorno->nivel);
+        //QString etqValor=tabla->getEtiqueta();
+        //tabla->linea(etqValor+" = Heap["+etqInd+"]",entorno->nivel);
 
 
-        itemValor *vale=new itemValor();
-        vale->c3d="Heap["+etqInd+"]";
-        vale->valor=valor->valor;
-        return vale;
+        itemValor *valT=new itemValor();
+        valT->c3d="Heap["+etqInd+"]";
+        valT->c3dF="";
+        valT->c3dS="";
+        valT->c3dV="";
+        valT->valor=valor->valor;
+        valT->dimen=0;
+        return valT;
 
     }else if(nivel == 8)
     // tEste  sPunto  valId  sAbreParent  LST_VAL  sCierraParent  LST_CORCHETES_VAL

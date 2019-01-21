@@ -87,7 +87,20 @@ itemValor * _E::getValor(elementoEntorno *elemento){
         QString cadena=lst_Atributos->getToken(0)->val.replace("\"","");
 
         QString etqInicioCad=tabla->getEtiqueta();
-        itemValor* retorno1=new itemValor('a',etqInicioCad);
+        itemValor* retorno1;
+        if(cadena.length()==0){
+            retorno1=new itemValor('a',etqInicioCad);
+
+            //caracter nulo
+            tabla->linea("Pool[S] = 46", elemento->nivel, "Caracter nulo");
+            tabla->incrementarPool(elemento);
+
+            itemValor *itemTemp=new itemValor(32,"0");
+            retorno1->dimensiones.append(itemTemp);
+
+        }else{
+            retorno1=new itemValor('a',etqInicioCad);
+        }
 
         tabla->linea(etqInicioCad + " = S", elemento->nivel, "Inicio de la cadena");
 

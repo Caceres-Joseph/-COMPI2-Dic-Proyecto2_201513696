@@ -16,7 +16,7 @@ debug3d::~debug3d()
 
 void debug3d::on_btnSiguientePaso_clicked()
 {
-
+    tabla->dbg_pasoPaso();
     this->close();
 }
 
@@ -24,5 +24,11 @@ void debug3d::on_btnCancelar_clicked()
 {
 
     tabla->modoDebuger=false;
+    this->close();
+}
+
+void debug3d::on_btnSiguienteInstruct_clicked()
+{
+    tabla->dbg_instruccion();
     this->close();
 }

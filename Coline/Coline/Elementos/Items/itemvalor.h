@@ -33,6 +33,10 @@ class itemValor
 {
 public:
 
+    QString tipoAux="";
+
+    /**/
+
     QList<itemValor*> dimensiones;
     int dimen=0;
     /*

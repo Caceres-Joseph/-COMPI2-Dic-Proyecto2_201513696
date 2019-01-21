@@ -12,7 +12,24 @@ double InNum::getValor(Entorno3D *entorno, TablaTemporales *temporales, TablaEti
     try {
         double val = getVal(this->puntero, entorno, etiquetas, temporales);
 
-        QString cadena2=QString::number(val);
+        QString cadena2;
+        double fract =std::fmod(val,1);
+        double ent=val-fract;
+
+        QString pel=QString::number(fract);
+        cadena2=QString::number(ent,'f', 0);
+        if(pel.length()>1){
+            pel.remove(0, 1);
+            cadena2+=pel;
+        }
+
+
+
+        //QString cadena2;
+        //=QString::number(val);
+        //cadena2=QString("%1").arg(val);
+
+
         std::string cadena = cadena2.toStdString();
         const char *salida = cadena.c_str();
         double inicio = entorno->S;

@@ -66,6 +66,22 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnAceptar_clicked()
 {
     lstTabs->traducir();
+
+    //colocando el 3D al final
+    QFile inputFile("/home/joseph/QtProjects/[COMPI2]Proyecto2/Nativas/nativas3D.gcc");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+
+       //concatenando al final
+       while (!in.atEnd())
+       {
+          QString line = in.readLine();
+          tabla->linea2(line,0);
+       }
+       inputFile.close();
+    }
+
 }
 
 void MainWindow::on_btnAnalizar_clicked()
@@ -73,8 +89,6 @@ void MainWindow::on_btnAnalizar_clicked()
     tabla->txtSalidaConsola->clear();
     arbol_3d *c3d=new arbol_3d(tabla);
     c3d->ejecutar();
-
-
 }
 
 
@@ -142,9 +156,18 @@ void MainWindow::prueba(char val1[15]){
 
 void MainWindow::on_btnAux2_clicked()
 {
+    QStringList puntos=ui->txtPuntos->text().split(",");
 
-    int val1=1;
-    val1-=10;
-    std::cout<<"vale:"<<val1<<std::endl;
+    tabla->lstPuntosInterrup.clear();
+    for ( QStringList::iterator it = puntos.begin();
+          it != puntos.end(); ++it  )
+    {
+        QString current = *it;
+        std::cout<<current.toStdString()<<std::endl;
+        tabla->lstPuntosInterrup.append(current.toInt());
+    }
+
+    tabla->dbg_instruccion();
+
 
 }

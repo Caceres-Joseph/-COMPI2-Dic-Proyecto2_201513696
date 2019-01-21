@@ -35,6 +35,8 @@ public:
     QString saltoFalso;
     QString saltoInicio;
     lstLecciones *lecciones=new lstLecciones(this);
+
+    QList<int> lstPuntosInterrup;
     /*
      * Chapu
     */
@@ -101,9 +103,10 @@ public:
     /*
      * Debuger
     */
-
+    bool estaLinea(int linea);
     void debugerColine(elementoEntorno *entor);
     void debuger3D(Entorno3D *entorno, TablaTemporales *temporales, int linea);
+    void debuger3DLlenar(Entorno3D *entorno, TablaTemporales *temporales, int linea);
     bool modoDebuger=false;
     int lineaDebuger=0;
 

@@ -67,9 +67,10 @@
       </widget>
       <widget class="QPushButton" name="btnAux2">
        <property name="text">
-        <string>--</string>
+        <string>Punto Interrupcion</string>
        </property>
       </widget>
+      <widget class="QLineEdit" name="txtPuntos"/>
      </widget>
     </item>
     <item>

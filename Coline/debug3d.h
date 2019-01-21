@@ -20,6 +20,7 @@ public:
 private slots:
     void on_btnSiguientePaso_clicked();
     void on_btnCancelar_clicked();
+    void on_btnSiguienteInstruct_clicked();
 };
 
 #endif // DEBUG3D_H

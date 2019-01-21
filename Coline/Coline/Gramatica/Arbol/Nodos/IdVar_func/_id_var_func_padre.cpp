@@ -39,6 +39,8 @@ itemValor *_ID_VAR_FUNC_PADRE::getDireccionVar(token *idVar, elementoEntorno *en
 
     itemValor *vale=new itemValor();
     vale->valor=val1->valor;
+    vale->tipoAux=val->tipo->valLower;
+    //vale->valor->tipo=val->tipo->valLower;
     vale->dimen=val1->dimen;
     vale->dimensiones=val1->dimensiones;
     vale->c3d=temp;
@@ -200,14 +202,27 @@ itemValor * _ID_VAR_FUNC_PADRE::getValor(elementoEntorno *entorno){
         */
 
         itemValor *it1=new itemValor();
-        itemValor *it2=it1->convertirATipo(new token(valor->valor->tipo));
+
+        QString tipo;
+
+        if(valor->dimen>0&&valor->isTypeObjeto()){
+            tipo=valor->tipoAux;
+        }else{
+            tipo=valor->valor->tipo;
+        }
+
+
+        itemValor *it2=it1->convertirATipo(new token(tipo));
+
+
+
         if(it2->isTypeObjeto()){
             //tengo que cargar en valor la clase con el objeto
 
             //buscando el objeto si existe
-            elementoClase *tempClase=tabla->getClase(new token(valor->valor->tipo));
+            elementoClase *tempClase=tabla->getClase(new token(tipo));
             if(tempClase==NULL){
-                tabla->tablaError->insertErrorSemantic("El objeto :"+valor->valor->tipo+" no existe", lst_Atributos->getToken(0));
+                tabla->tablaError->insertErrorSemantic("El objeto :"+tipo+" no existe", lst_Atributos->getToken(0));
                 return retorno;
             }
 

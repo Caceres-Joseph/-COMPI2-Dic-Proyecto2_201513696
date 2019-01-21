@@ -15,7 +15,7 @@ void tablaSimbolos::sgb(QString inicio, QString tam, int nivel){
 }
 
 void tablaSimbolos::limpiarAmbito(elementoEntorno *entor){
-/*
+    /*
     comentarioLinea("Limpiando ambito",entor->nivel);
     QString tempInicio=getEtiqueta();
     linea(tempInicio+" = P + " + QString::number(entor->tamEntornoAbsoluto()-entor->lstEntorno.count()),entor->nivel);
@@ -221,36 +221,70 @@ void tablaSimbolos::debugerColine(elementoEntorno *entor){
 
 
 #include "ui_debug3d.h"
+
+
+
+void tablaSimbolos::debuger3DLlenar(Entorno3D *entorno, TablaTemporales *temporales, int linea){
+
+    dlg3D->ui->txtHeap->setText(QString::number(entorno->H));
+    dlg3D->ui->txtPool->setText(QString::number(entorno->S));
+    dlg3D->ui->txtStack->setText(QString::number(entorno->P));
+
+    entorno->Heap->llenarTabla(dlg3D->ui->tablaHeap);
+    entorno->Pool->llenarTabla(dlg3D->ui->tablaPool);
+    entorno->Stack->llenarTabla(dlg3D->ui->tablaStack);
+    temporales->llenarTabla(dlg3D->ui->tablaTemporales);
+
+
+    //enviando el contenido a la consola
+    dlg3D->ui->txtConsolaSalida2->clear();
+    dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
+    dlg3D->ui->txtConsolaSalida2->insertPlainText (txtSalidaConsola->toPlainText());
+    dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
+
+
+
+
+    //dlg3D->ui->txtConsolaSalida2->ap
+
+    editorSalida->pintarLinea(linea);
+    dlg3D->exec();
+
+
+}
+
+bool tablaSimbolos::estaLinea(int linea){
+
+    for (int i = 0; i < lstPuntosInterrup.count(); ++i) {
+        if(linea==lstPuntosInterrup[i]){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 void tablaSimbolos::debuger3D(Entorno3D *entorno, TablaTemporales *temporales, int linea){
 
 
     if(modoDebuger){
         if(lineaDebuger!=linea){
 
+            if(numModo==0)
+                //paso  a paso
+            {
 
-            dlg3D->ui->txtHeap->setText(QString::number(entorno->H));
-            dlg3D->ui->txtPool->setText(QString::number(entorno->S));
-            dlg3D->ui->txtStack->setText(QString::number(entorno->P));
+                debuger3DLlenar(entorno,temporales,linea);
+            }else if(numModo==2)
+                //punto a punto
+            {
 
-            entorno->Heap->llenarTabla(dlg3D->ui->tablaHeap);
-            entorno->Pool->llenarTabla(dlg3D->ui->tablaPool);
-            entorno->Stack->llenarTabla(dlg3D->ui->tablaStack);
-            temporales->llenarTabla(dlg3D->ui->tablaTemporales);
+                if(lstPuntosInterrup.contains(linea)){
 
-
-            //enviando el contenido a la consola
-            dlg3D->ui->txtConsolaSalida2->clear();
-            dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
-            dlg3D->ui->txtConsolaSalida2->insertPlainText (txtSalidaConsola->toPlainText());
-            dlg3D->ui->txtConsolaSalida2->moveCursor (QTextCursor::End);
-
-
-
-
-            //dlg3D->ui->txtConsolaSalida2->ap
-
-            editorSalida->pintarLinea(linea);
-            dlg3D->exec();
+                    debuger3DLlenar(entorno,temporales,linea);
+                }
+            }
 
             lineaDebuger=linea;
         }
@@ -275,6 +309,7 @@ void tablaSimbolos::resetearValores()
     //modoDebuger=false;
     lineaDebuger=0;
     editorSalida->clear();
+    lstPuntosInterrup.clear();
 
 }
 
