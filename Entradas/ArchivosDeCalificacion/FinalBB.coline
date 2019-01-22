@@ -1,0 +1,239 @@
+clase NodoBinario {
+    /**
+     * Variable que almacena el valor específico del nodo. 
+     */    
+    entero valor;
+    /**
+     * Variable que apunta hacia el nodo izquierdo de este nodo. 
+     */    
+    NodoBinario izquierdo;
+    /**
+     * Variable que apunta hacia el nodo derecho de este nodo. 
+     */
+    NodoBinario derecho;
+    /**
+     * Variable privada con la que lleva el control de un correlativo  que se le 
+     * asignará a cada nodo que es creado, este será único para cada nodo y 
+     * servirá para hacer la gráfica del árbol con graphviz.
+     */
+    privado  entero correlativo=1;
+    /**
+     * Constante privada que posee cada nodo y es única, funciona como 
+     * identificador y será útil para hacer la gráfica del árbol con graphviz.
+     */
+    privado  entero id;    
+    /**
+     * Constructor de la clase NodoBinario. 
+     * @param valor Valor específico que el nodo almacenará.
+     */
+    publico NodoBinario(entero valor, entero indice) {
+        este.valor = valor;
+        este.izquierdo = nada;
+        este.derecho = nada;
+        este.id=indice;
+        correlativo++;        
+    }
+    /**
+     * Método que inserta un Nodo en el árbol binario de búsqueda.
+     * @param val Valor que se desea insertar.
+     */
+    vacio insertarValor(entero val, entero indice) {
+        //Si el valor a insertarValor es menor que el nodo actual, entonces debería
+        //insertarse a la izquierda de este. 
+        si (val < valor) {
+            //Si la izquierda del nodo actual esta desocupada entonces se inserta.
+            si (izquierdo == nada) {
+                izquierdo = nuevo NodoBinario(val, indice);
+            }
+            //De lo contrario nos desplazamos al nodo izquierdo, en busca de un
+            //lugar para insertar el nuevo nodo.
+            sino {
+                izquierdo.insertarValor(val, indice);
+            }
+
+        }
+        //Si el valor a insertar es mayor que el nodo actual, entonces debería
+        //insertarse a la derecha de este de este.         
+        sino si (val > valor){
+            //Si la derecha del nodo actual esta desocupada entonces se inserta.
+            si (derecho == nada) {
+                derecho = nuevo NodoBinario(val, indice);
+            }
+            //De lo contrario nos desplazamos al nodo derecho, en busca de un
+            //lugar para insertar el nuevo nodo.            
+            sino{
+                derecho.insertarValor(val, indice);
+            }
+        }sino{
+            //Si no es mayor ni menor, significa que es igual, entonces se despliega
+            //un mensaje de error de que no se aceptan duplicados en el árbol.
+            imprimir("No se permiten los valores duplicados");
+            }
+    }
+    
+    /**
+     * Método que genera el gráfico del árbol binario de búsqueda con graphviz,
+     * considerando como la raíz de dicho árbol el actual Nodo.
+     * @param path Ruta de la imagen que se generará.
+     */
+    publico caracter[] graficar() {
+        retornar getCodigoGraphviz();        
+    }
+    /**
+     * Método que retorna el código que grapviz usará para generar la imagen 
+     * del árbol binario de búsqueda.
+     * @retornar 
+     */
+    privado caracter[] getCodigoGraphviz() {
+        caracter dot [500]= "digraph grafica{\n";
+        concatenar(dot,"rankdir=TB;\n");
+        concatenar(dot,"node [shape = record, style=filled, fillcolor=seashell2];\n");
+        concatenar(dot,getCodigoInterno());
+        concatenar(dot,"}\n");
+        retornar dot;
+    }
+    /**
+     * Genera el código interior de graphviz, este método tiene la particularidad 
+     * de ser recursivo, esto porque recorrer un árbol de forma recursiva es bastante 
+     * sencillo y reduce el código considerablemente. 
+     * @retornar 
+     */
+    privado caracter[] getCodigoInterno() {
+        caracter etiqueta[500];
+        si(izquierdo==nada && derecho==nada){
+            concatenar(etiqueta,"nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta," [ label =");
+            concatenar(etiqueta,convertiracadena(valor));
+            concatenar(etiqueta,"];\n");
+        }sino{
+            concatenar(etiqueta,"nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta," [ label =<C0>|");
+            concatenar(etiqueta,convertiracadena(valor));
+            concatenar(etiqueta,"|<C1>];\n");
+        }
+        si(izquierdo!=nada){
+            concatenar(etiqueta, izquierdo.getCodigoInterno());
+            concatenar(etiqueta, "nodo");
+            concatenar(etiqueta, convertiracadena(id));
+            concatenar(etiqueta,":C0->nodo");
+            concatenar(etiqueta,convertiracadena(izquierdo.id));
+            concatenar(etiqueta,"\n");
+        }
+        si(derecho!=nada){
+            concatenar(etiqueta, derecho.getCodigoInterno());
+            concatenar(etiqueta, "nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta,":C1->nodo");
+            concatenar(etiqueta,convertiracadena(derecho.id));
+            concatenar(etiqueta,"\n");                    
+        }
+        retornar etiqueta;
+    }        
+}
+
+
+publico clase ArbolBinarioBusqueda {
+
+    /**
+     * Nodo raíz del árbol.
+     */
+    privado NodoBinario raiz;
+    entero contador = 1;
+
+    /**
+     * Constructor de la clase, incialmente la raíz es nula porque el árbol está
+     * vacío.
+     */
+    publico ArbolBinarioBusqueda() {
+        raiz = nada;
+    }
+
+    /**
+     * Método que se encarga de insertar un valor en el árbol binario de
+     * búsqueda.
+     *
+     * @param val Valor específico que se desea insertar.
+     */
+    publico vacio insertarVAlor(entero val) {
+        si (raiz == nada) {
+            raiz = nuevo NodoBinario(val, contador);
+        } sino {
+            raiz.insertarVAlor(val, contador);
+        }
+
+        contador++;
+    }
+
+    /**
+     * Método que genera una imagen del árbol binario de búsqueda en la ruta que
+     * se le indica.
+     *
+     * @param path Ruta específica en la que se guardará la imagen generada.
+     */
+    publico caracter[] graficar() {
+        retornar raiz.graficar();
+    }
+
+    /**
+     * Método que imprime el recorrido inorden del árbol binario de búsqueda.
+     */
+    publico vacio inorden() {
+        imprimir("Recorrido inorden del árbol binario de búsqueda:");
+        inorden(raiz);
+        imprimir("");
+    }
+
+    /**
+     * Método privado que ejecuta la tarea de hacer un recorrido inorden del
+     * árbol binario de búsqueda.
+     *
+     * @param a Nodo específico que se recorrerá conforme el método se llama
+     * recursivamente.
+     */
+    privado vacio inorden(NodoBinario a) {
+        si (a == nada) {
+            retornar;
+        }
+        inorden(a.izquierdo);
+        caracter aux[10] = convertirAcadena(a.valor);
+        concatenar(aux,", ");
+        imprimir(aux);
+        inorden(a.derecho);
+    }
+}
+
+
+clase Inicio {
+
+
+
+    principal(){
+    
+        /*
+         * Arbol ABB
+        */
+        //Creamos un árbol cuyos nodos contendrán solamente numeros
+        ArbolBinarioBusqueda arbol_numeros = nuevo ArbolBinarioBusqueda();
+        //Llenamos con información el árbol
+        arbol_numeros.insertarVAlor(12);
+        arbol_numeros.insertarVAlor(5);
+        arbol_numeros.insertarVAlor(26);
+        arbol_numeros.insertarVAlor(33);
+        arbol_numeros.insertarVAlor(59);
+        arbol_numeros.insertarVAlor(27);
+        arbol_numeros.insertarVAlor(15);      
+        //Graficamos el árbol generando la imagen arbol_numeros.jpg
+        caracter dot[500];
+
+        dot = arbol_numeros.graficar();
+        //Imprimimos el contenido del árbol ordenado        
+        arbol_numeros.inorden();
+
+        imprimir(dot);
+
+
+
+    }
+}

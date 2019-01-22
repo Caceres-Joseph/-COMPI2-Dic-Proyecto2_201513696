@@ -1,0 +1,362 @@
+publico clase NodoAVL {
+
+    /**
+     * Variable que almacena el valor específico del nodo.
+     */
+     entero valor;
+    /**
+     * Variable que apunta hacia el nodo izquierdo de este nodo.
+     */
+    NodoAVL izquierdo;
+    /**
+     * Variable que apunta hacia el nodo derecho de este nodo.
+     */
+    NodoAVL derecho;
+    /**
+     * Variable que se utiliza como bandera para poder balancear el árbol cuando
+     * sea necesario.
+     */
+    entero altura;
+    /**
+     * Variable privada con la que lleva el control de un correlativo que se le
+     * asignará a cada nodo que es creado, este será único para cada nodo y
+     * servirá para hacer la gráfica del árbol con graphviz.
+     */
+    privado  entero correlativo = 1;
+    /**
+     * Constante privada que posee cada nodo y es única, funciona como
+     * identificador y será útil para hacer la gráfica del árbol con graphviz.
+     */
+    privado  entero id;
+
+    /**
+     * Constructor de la clase NodoBinario.
+     *
+     * @param valor Valor específico que el nodo almacenará.
+     */
+    publico NodoAVL(entero valor, entero indice) {
+        este.valor = valor;
+        este.izquierdo = nada;
+        este.derecho = nada;
+        este.id=indice; 
+    }
+
+    /**
+     * Método que genera el gráfico del árbol binario de búsqueda con graphviz,
+     * considerando como la raíz de dicho árbol el actual Nodo.
+     * @param path Ruta de la imagen que se generará.
+     */
+    publico caracter[] graficar() {
+        retornar getCodigoGraphviz();        
+    }
+    /**
+     * Método que retorna el código que grapviz usará para generar la imagen 
+     * del árbol binario de búsqueda.
+     * @retornar 
+     */
+    privado caracter[] getCodigoGraphviz() {
+        caracter dot [500]= "digraph grafica{\n";
+        concatenar(dot,"rankdir=TB;\n");
+        concatenar(dot,"node [shape = record, style=filled, fillcolor=seashell2];\n");
+        concatenar(dot,getCodigoInterno());
+        concatenar(dot,"}\n");
+        retornar dot;
+    }
+    /**
+     * Genera el código interior de graphviz, este método tiene la particularidad 
+     * de ser recursivo, esto porque recorrer un árbol de forma recursiva es bastante 
+     * sencillo y reduce el código considerablemente. 
+     * @retornar 
+     */
+    privado caracter[] getCodigoInterno() {
+        caracter etiqueta[500] ;
+        si(izquierdo==nada && derecho==nada){
+            concatenar(etiqueta,"nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta," [ label =");
+            concatenar(etiqueta,convertiracadena(valor));
+            concatenar(etiqueta,"];\n");
+        }sino{
+            concatenar(etiqueta,"nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta," [ label =<C0>|");
+            concatenar(etiqueta,convertiracadena(valor));
+            concatenar(etiqueta,"|<C1>];\n");
+        }
+        si(izquierdo!=nada){
+            concatenar(etiqueta,  izquierdo.getCodigoInterno() );
+            concatenar(etiqueta,"nodo" );
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta,":C0->nodo");
+            concatenar(etiqueta,convertiracadena(izquierdo.id));
+            concatenar(etiqueta,"\n");
+        }
+        si(derecho!=nada){
+            concatenar(etiqueta,  derecho.getCodigoInterno());
+            concatenar(etiqueta, "nodo");
+            concatenar(etiqueta,convertiracadena(id));
+            concatenar(etiqueta,":C1->nodo" );
+            concatenar(etiqueta,convertiracadena(derecho.id) );
+            concatenar(etiqueta,"\n" );         
+        }
+        retornar etiqueta;
+    }        
+}
+
+publico clase ArbolAVL {
+
+    /**
+     * Nodo raíz del árbol.
+     */
+    privado NodoAVL raiz;
+    entero contador =1;
+
+    /**
+     * Constructor de la clase, incialmente la raíz es nula porque el árbol está
+     * vacío.
+     */
+    publico ArbolAVL() {
+        raiz = nada;
+    }
+
+    /**
+     * Método que se encarga de insertar1 un valor en el árbol AVL.
+     *
+     * @param valor Valor específico que se desea insertar1.
+     */
+    publico vacio insertar1(entero valor) {
+        raiz = insertar1(valor, raiz);
+    }
+
+    /**
+     * Método que genera una imagen del árbol binario de búsqueda en la ruta que
+     * se le indica.
+     *
+     * @param path Ruta específica en la que se guardará la imagen generada.
+     */
+    publico caracter[] graficar() {
+       retornar raiz.graficar();
+    }
+
+    /**
+     * Método que imprime el recorrido inorden del árbol binario de búsqueda.
+     */
+    publico vacio inorden() {
+       imprimir("Recorrido inorden del árbol binario de búsqueda:");
+        inorden(raiz);
+      imprimir("");
+    }
+
+    /**
+     * Método privado que ejecuta la tarea de hacer un recorrido inorden del
+     * árbol binario de búsqueda.
+     *
+     * @param a Nodo específico que se recorrerá conforme el método se llama
+     * recursivamente.
+     */
+    privado vacio inorden(NodoAVL a) {
+        si (a == nada) {
+            retornar;
+        }
+        inorden(a.izquierdo);
+        imprimir(convertiracadena(a.valor));
+        imprimir(",");
+        //System.out.prentero(a.valor + ",");
+        inorden(a.derecho);
+    }
+
+    /*
+     * Método que inserta un nuevo nodo en el árbol.
+     *
+     * @param valor
+     * @param raiz
+     * @retornar
+     */
+    privado NodoAVL insertar1(entero valor, NodoAVL raiz) {
+        //Si en nodo recibido fuera nulo entonces el nuevo nodo se puede insertar1 
+        //en esa posición y se terminan las llamadas recursivas a este método.
+        si (raiz == nada) {
+            raiz = nuevo NodoAVL(valor, contador);
+            //Si el nuevo valor fuera menor que el nodo de actual entonces
+        } sino si (valor<(raiz.valor)) {
+            //Se llama recursivamente al método para explorar el subarbol izquierdo
+            //porque el valor a insertar1 es menor que el del nodo actual.
+            raiz.izquierdo = insertar1(valor, raiz.izquierdo);
+            si (altura(raiz.derecho) - altura(raiz.izquierdo) == -2) //Si el factor de equilibrio esta desbalanceado, hay que hacer 
+            //rotación de nodos, como el fe=-2 hay dos posibilidades de 
+            //rotación dependiendo de:
+            {
+                si (valor<(raiz.izquierdo.valor) ) //Si el nuevo valor fuera menor que la izquierda del nodo des-
+                //balanceado, se sabe que el nuevo nodo será insertado a la 
+                //izquierda de la actual izquierda, entonces tenemos una rotación 
+                //simple por la izquierda o sea una IzquierdaIzquierda.
+                {
+                    raiz = IzquierdaIzquierda(raiz);
+                } sino //de lo contrario, se sabe que el nuevo nodo será insertado 
+                //a la derecha del la actual izquierda, por lo que se tiene 
+                //un caso de rotación doble por la izquierda 
+                //o sea una IzquierdaDerecha.
+                {
+                    raiz = IzquierdaDerecha(raiz);
+                }
+            }
+        } sino si (valor>(raiz.valor)) //Si el nuevo valor fuera mayor que el nodo de la actual entonces:
+        {
+            //Se llama recursivamente al método para explorar el subarbol derecho
+            //porque el valor a insertar1 es mayor que el del nodo actual.            
+            raiz.derecho = insertar1(valor, raiz.derecho);
+            si (altura(raiz.derecho) - altura(raiz.izquierdo) == 2) //Si el factor de equilibrio esta desbalanceado, hay que hacer 
+            //rotación de nodos, como el fe=2 hay dos posibilidades de 
+            //rotación dependiendo de:                
+            {
+                si (valor>(raiz.derecho.valor)) //Si el nuevo valor fuera mayor que la derecha del nodo des-
+                //balanceado, se sabe que el nuevo nodo será insertado a la 
+                //derecha de la actual derecha, entonces tenemos una rotación 
+                //simple por la derecha o sea una DerechaDerecha.                    
+                {
+                    raiz = DerechaDerecha(raiz);
+                } sino //de lo contrario, se sabe que el nuevo nodo será insertado 
+                //a la izquierda del la actual derecha, por lo que se tiene 
+                //un caso de rotación doble por la derecha
+                //o sea una DerechaIzquierda.
+                {
+                    raiz = DerechaIzquierda(raiz);
+                }
+            }
+        } sino // De lo contrario signsica que el valor que se quiere insertar1 ya existe, 
+        //como no se permite la duplicidad de este dato no se hace nada.
+        {
+            caracter arreglo[100];
+            concatenar(arreglo,"No se permiten los valores duplicados: ");
+            concatenar(arreglo,convertiracadena(valor));
+            concatenar(arreglo,".");
+            imprimir(arreglo);
+        }
+
+        contador++;
+        //finalmente, por cada llamada recursiva debe hacerse una reasignacion 
+        //de la altura esta se hará hasta para los nodos que no cambiaron de nivel 
+        //en el transcurso porque no hay forma de saber cuales cambiaron de nivel 
+        //y cuales no. La altura,será la altura del hijo que tiene
+        //la altura más grande, es decir, la rama mas profunda, más 1.
+        raiz.altura = mayor(altura(raiz.izquierdo), altura(raiz.derecho)) + 1;
+        retornar raiz;
+
+    }
+
+    /**
+     * Método que devuelve la altura de un nodo.
+     *
+     * @param nodo
+     * @retornar
+     */
+    privado entero altura(NodoAVL nodo) {
+        si (nodo == nada) {
+            retornar -1;
+        } sino {
+            retornar nodo.altura;
+        }
+    }
+
+    /**
+     * Método que recibe como parámetro dos numeros y devuelve el mayor.
+     *
+     * @param n1
+     * @param n2
+     * @retornar
+     */
+    privado entero mayor(entero n1, entero n2) {
+        retornar n1 > n2 ? n1 : n2;
+    }
+
+    /**
+     * Rotación simple izquierda izquierda para el proceso de balanceo.
+     *
+     * @param n1
+     * @retornar
+     */
+    privado NodoAVL IzquierdaIzquierda(NodoAVL n1) {
+        NodoAVL n2 = n1.izquierdo;
+        n1.izquierdo = n2.derecho;
+        n2.derecho = n1;
+        n1.altura = mayor(altura(n1.izquierdo), altura(n1.derecho)) + 1;
+        n2.altura = mayor(altura(n2.izquierdo), n1.altura) + 1;
+        retornar n2;
+    }
+
+    /**
+     * Rotación simple derecha derecha para el proceso de balanceo.
+     *
+     * @param n1
+     * @retornar
+     */
+    privado NodoAVL DerechaDerecha(NodoAVL n1) {
+        NodoAVL n2 = n1.derecho;
+        n1.derecho = n2.izquierdo;
+        n2.izquierdo = n1;
+        n1.altura = mayor(altura(n1.izquierdo), altura(n1.derecho)) + 1;
+        n2.altura = mayor(altura(n2.derecho), n1.altura) + 1;
+        retornar n2;
+    }
+
+    /**
+     * Rotación doble izuquierda derecha para el proceso de balanceo.
+     *
+     * @param n1
+     * @retornar
+     */
+    privado NodoAVL IzquierdaDerecha(NodoAVL n1) {
+        n1.izquierdo = DerechaDerecha(n1.izquierdo);
+        retornar IzquierdaIzquierda(n1);
+    }
+
+    /**
+     * Rotación doble derecha izquierda para el proceso de balanceo.
+     *
+     * @param n1
+     * @retornar
+     */
+    privado NodoAVL DerechaIzquierda(NodoAVL n1) {
+        n1.derecho = IzquierdaIzquierda(n1.derecho);
+        retornar DerechaDerecha(n1);
+    }
+}
+
+
+clase Inicio {
+
+
+
+    principal(){
+    
+        /*
+         * Arbol AVL
+        */
+        ArbolAVL arbol_texto=nuevo ArbolAVL();
+        //Llenamos con información el árbol
+        arbol_texto.insertar1(12);
+        arbol_texto.insertar1(5);
+        arbol_texto.insertar1(26);
+        arbol_texto.insertar1(33);
+        arbol_texto.insertar1(59);
+        arbol_texto.insertar1(27);
+        arbol_texto.insertar1(15);
+        arbol_texto.insertar1(47);
+        arbol_texto.insertar1(74);
+        arbol_texto.insertar1(84);
+        arbol_texto.insertar1(88);
+        arbol_texto.insertar1(90);
+        arbol_texto.insertar1(124);
+        arbol_texto.insertar1(612);
+        arbol_texto.insertar1(1);
+        arbol_texto.insertar1(2);
+  
+        caracter dot2[500];
+        dot2 = arbol_texto.graficar();
+        //Imprimimos el contenido del árbol ordenado
+        arbol_texto.inorden();
+
+        imprimir(dot2);
+
+    }
+}

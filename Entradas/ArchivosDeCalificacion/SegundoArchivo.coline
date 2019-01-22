@@ -1,0 +1,772 @@
+
+clase Estudiante {
+    caracter nombre[100];
+    caracter  apellido[100];
+}
+
+clase Recursion{
+	caracter aux[100];
+	/**
+     * *************************************************************************
+     * SECCION TIPOS DE RECURSION.
+     * **************************************************************************
+     */
+    /**
+     * RECURSION SIMPLE.
+     */
+     entero factorial(entero n) {
+        retornar n == 0 ? 1 : n * factorial(n - 1);
+    }
+
+     entero potencia(entero base, entero exp) {
+        retornar exp == 0 ? 1 : (base * potencia(base, exp - 1));
+    }
+
+    /**
+     * RECURSION MULTIPLE.
+     */
+     vacio Hanoi(entero discos, entero origen, entero auxiliar, entero destino) {
+        si (discos == 1) {
+	        aux = "\t\t\tmover disco de ";
+	        concatenar(aux,convertirAcadena(origen  ));
+	        concatenar(aux, " a " );
+	        concatenar(aux,convertirAcadena(destino));
+	        imprimir(aux);
+        } sino {
+            Hanoi(discos - 1, origen, destino, auxiliar);
+            aux = "\t\t\tmover disco de ";
+	        concatenar(aux,convertirAcadena(origen));
+	        concatenar(aux, " a " );
+	        concatenar(aux,convertirAcadena(destino));
+	        imprimir(aux);
+            Hanoi(discos - 1, auxiliar, origen, destino);
+        }
+    }
+
+     entero particion(entero arreglo[5], entero bajo, entero alto) {
+        entero pivote = arreglo[alto];
+        entero i = (bajo - 1);
+        para (entero j = bajo; j < alto; j++) {
+            si (arreglo[j] <= pivote) {
+                i++;
+                entero temp = arreglo[i];
+                arreglo[i] = arreglo[j];
+                arreglo[j] = temp;
+            }
+        }
+        entero temp = arreglo[i + 1];
+        arreglo[i + 1] = arreglo[alto];
+        arreglo[alto] = temp;
+        retornar i + 1;
+    }
+
+    vacio quickSort(entero arreglo[5] , entero bajo, entero alto) {
+        si (bajo < alto) {
+            entero pi = particion(arreglo, bajo, alto);
+            quickSort(arreglo, bajo, pi - 1);
+            quickSort(arreglo, pi + 1, alto);
+        }
+    }
+
+    /**
+     * Funcion que imprime un arreglo dada su longitud.
+     */
+     vacio imprimirArreglo( entero arreglo[5], entero length) {
+        para (entero i = 0; i < length; i++) {
+            aux = convertirAcadena(arreglo[i]);
+            concatenar(aux, " ");
+            imprimir(aux);
+        }
+        imprimir("");
+    }
+
+    /**
+     * RECURSION CRUZADA.
+     */
+     entero hofstaderFemenina(entero n) {
+        si (n < 0) {
+            retornar 0;
+        } sino {
+            retornar (n == 0) ? 1 : n - hofstaderFemenina(n - 1);
+        }
+    }
+
+     entero hofstaderMasculino(entero n) {
+        si (n < 0) {
+            retornar 0;
+        } sino {
+            retornar n == 0 ? 0 : n - hofstaderMasculino(n - 1);
+        }
+    }
+
+     entero par(entero nump) {
+        si (nump == 0) {
+            retornar 1;
+        }
+        retornar impar(nump - 1);
+    }
+
+     entero impar(entero numi) {
+        si (numi == 0) {
+            retornar 0;
+        }
+        retornar par(numi - 1);
+    }
+
+    /**
+     * RECURSION ANIDADA.
+     */
+     entero ackermann(entero m, entero n) {
+        si (m == 0) {
+            retornar (n + 1);
+        } sino si (m > 0 && n == 0) {
+            retornar ackermann(m - 1, 1);
+        } sino {
+            retornar ackermann(m - 1, ackermann(m, n - 1));
+        }
+    }
+
+     Estudiante graduo(Estudiante e) {
+     	aux = "Ing. ";
+     	concatenar(aux, e.nombre);
+        e.nombre = aux;
+        retornar e;
+    }
+}
+
+
+
+clase NodoTablaHash
+{
+    privado caracter nombre[100];
+    privado booleano usada;
+
+    publico NodoTablaHash(booleano usada)
+    {
+        este.usada = usada;
+    }
+
+    publico caracter [] getNombre()
+    {
+        retornar nombre;
+    }
+
+    publico vacio setNombre(caracter nombre[100])
+    {
+        este.nombre = nombre;
+    }
+
+    publico booleano isUsada()
+    {
+        retornar usada;
+    }
+
+    publico vacio setUsada(booleano usada)
+    {
+        este.usada = usada;
+    }
+
+    publico vacio nuevo1(caracter nombre[100])
+    {
+        setNombre(nombre);
+    }
+}
+
+
+clase TablaHash
+{
+    
+    NodoTablaHash vector[17];
+    entero cuenta;
+    caracter dot [1000];
+
+
+    publico TablaHash()
+    {
+        
+        inicializaTabla();
+    }
+
+    publico booleano existeNombre(caracter nombre [100])
+    {
+        retornar buscaNodo(nombre) != nada;
+    }
+
+    publico NodoTablaHash buscaNodo(caracter nombre[100])
+    {
+        entero indice = hash(nombre);
+        si (vector[indice].getNombre() != nada)
+        {
+            si (vector[indice].getNombre() != nombre)
+            {
+                retornar manejaColisionBusqueda(indice, nombre);
+            }
+        }
+        sino{
+            retornar manejaColisionBusqueda(indice, nombre);
+        }
+        retornar vector[indice];
+    }
+
+    privado NodoTablaHash manejaColisionBusqueda(entero indice, caracter buscado[100])
+    {
+        entero index = indice;
+        entero guia = 1;
+        entero cuadrado;
+        entero conteo = 0;
+        mientras (conteo <= vector.tamanio)
+        {
+            conteo++;
+            cuadrado = guia;
+            cuadrado *= cuadrado;
+            index += cuadrado;
+            guia += 1;
+            mientras (index >= vector.tamanio)
+            {
+                index = index - vector.tamanio;
+            }
+            si (vector[index].getNombre() != nada){
+                si (vector[index].getNombre() == buscado){
+                    retornar vector[index];
+                }
+            }
+        }
+        retornar nada;
+    }
+
+    publico vacio insertarNodo(caracter nombre[100])
+    {
+        entero indice = hash(nombre);
+        cuenta++;
+
+        si (vector[indice].isUsada())
+        {
+            indice = manejaColision(indice);
+        }
+        vector[indice].nuevo1(nombre);
+        vector[indice].setUsada(verdadero);
+        
+        decimal limite = 0.5;
+        decimal fc = cuenta / vector.tamanio;
+        si (fc > limite)
+        {
+            imprimir("rehash");
+        }
+    }
+
+    
+
+
+
+    privado entero manejaColision(entero indice)
+    {
+        entero index = indice;
+        entero guia = 1;
+        entero cuadrado;
+        mientras (verdadero)
+        {
+
+            cuadrado = guia;
+            cuadrado *= cuadrado;
+            index += cuadrado;
+            guia += 1;
+            mientras (index >= vector.tamanio)
+            {
+                index = index - vector.tamanio;
+            }
+            si (!vector[index].isUsada())
+            {
+                retornar index;
+            }
+        }
+    }
+
+
+
+
+
+    privado entero hash(caracter nombre[100])
+    {
+        entero k = convertirAentero(convertirAentero(nombre[0])) + convertirAentero(nombre[1]) + convertirAentero(nombre[2]);
+        entero indice = k % vector.tamanio;
+        retornar indice;
+    }
+
+    privado vacio inicializaTabla()
+    {
+        cuenta = 0;
+        dot = "";
+        para (entero i = 0; i < vector.tamanio; i++)
+            {vector[i] = nuevo NodoTablaHash(falso);}
+    }
+
+       privado booleano esPrimo(entero numero)
+    {
+        para (entero i = 2; i < numero; i++)
+        {
+            si (numero % i == 0)
+                {
+                    retornar falso;
+                }
+        }
+        retornar verdadero;
+    }
+
+    publico caracter[] grafica()
+    {
+        dot = "digraph lista{ \n";
+        concatenar (dot," nodesep=.05;\n");
+        concatenar (dot,"rankdir = LR; \n");
+        concatenar (dot,"node [shape=record,width=.1,height=.1];\n");
+        concatenar (dot,"nodeArreglo [label = <f0> 0 ");
+        para (entero i = 1; i < vector.tamanio; i++)
+        {
+            concatenar (dot," |<f");
+            concatenar(dot, convertirAcadena(i));
+            concatenar (dot,"> ");
+            concatenar(dot, convertirAcadena(i));
+        }
+        concatenar (dot,",height=2.5];\n");
+        concatenar (dot," node [width = 1.5];\n");
+
+        para (entero j = 0; j < vector.tamanio; j++)
+        {
+
+            si (vector[j].isUsada())
+            {
+                concatenar (dot,"node");
+                concatenar (dot,convertirACadena(j));
+                concatenar (dot,"[label =  {<n> ");
+                concatenar (dot,vector[j].getNombre());
+                concatenar (dot,"}  ];\n");
+                concatenar (dot,"nodeArreglo:f");
+                concatenar (dot,convertirAcadena(j));
+                concatenar (dot,"-> node");
+                concatenar (dot,convertirAcadena(j));
+                concatenar (dot,":n;\n");
+            }
+        }
+        concatenar (dot,"}");
+        retornar dot;        
+    }
+
+
+
+
+    publico vacio eliminarNodo(caracter nombre[100])
+    {
+       buscaNodo(nombre).setUsada(falso);  
+    }
+}
+
+clase NodoMatrizBidimensional
+{
+    NodoMatrizBidimensional anterior;
+    NodoMatrizBidimensional siguiente;
+    NodoMatrizBidimensional arriba;
+    NodoMatrizBidimensional abajo;
+    entero valor;
+
+    publico NodoMatrizBidimensional(entero valor)
+    {
+        anterior = nada;
+        siguiente = nada;
+        arriba = nada;
+        abajo = nada;
+        este.valor = valor;
+    }
+
+    publico NodoMatrizBidimensional getAbajo()
+    {
+        retornar abajo;
+    }
+
+    publico vacio setAbajo(NodoMatrizBidimensional abajo)
+    {
+        este.abajo = abajo;
+    }
+
+    publico NodoMatrizBidimensional getAnterior()
+    {
+        retornar anterior;
+    }
+
+    publico vacio setAnterior(NodoMatrizBidimensional anterior)
+    {
+        este.anterior = anterior;
+    }
+
+    publico NodoMatrizBidimensional getArriba()
+    {
+        retornar arriba;
+    }
+
+    publico vacio setArriba(NodoMatrizBidimensional arriba)
+    {
+        este.arriba = arriba;
+    }
+
+    publico NodoMatrizBidimensional getSiguiente()
+    {
+        retornar siguiente;
+    }
+
+    publico vacio setSiguiente(NodoMatrizBidimensional siguiente)
+    {
+        este.siguiente = siguiente;
+    }
+
+    publico entero getValor()
+    {
+        retornar valor;
+    }
+
+    publico vacio setValor(entero valor)
+    {
+        este.valor = valor;
+    }
+
+}
+
+clase ListaMatrizBidimensional
+{
+    privado NodoMatrizBidimensional primero;
+
+    publico NodoMatrizBidimensional getPrimero()
+    {
+        retornar primero;
+    }
+
+    publico ListaMatrizBidimensional(entero anchura)
+    {
+        primero = nada;
+        para (entero i = 0; i < anchura; i++)
+        {
+            push();
+        }
+    }
+
+    privado booleano estaVacia()
+    {
+        retornar primero == nada;
+    }
+
+    publico vacio push()
+    {
+        si (estaVacia())
+        {
+            primero = nuevo NodoMatrizBidimensional(0);
+        }
+        sino    
+        {
+            NodoMatrizBidimensional nuevo1 = nuevo NodoMatrizBidimensional(0);
+            nuevo1.setSiguiente(primero);
+            primero = nuevo1;
+        }
+    }
+}
+
+
+clase MatrizBidimensional
+{
+    entero altura;
+    entero anchura;
+    caracter dot[500];
+    ListaMatrizBidimensional ultima;
+
+    publico entero getAltura()
+    {
+        retornar altura;
+    }
+
+    publico entero getAnchura()
+    {
+        retornar anchura;
+    }
+
+    publico MatrizBidimensional(entero altura, entero anchura)
+    {
+        dot = "";
+        este.altura = altura;
+        este.anchura = anchura;
+        si (anchura > 0 && altura > 0)
+        {
+            ultima = nuevo ListaMatrizBidimensional(anchura);
+            para (entero i = 1; i < altura; i++)
+            {
+                ListaMatrizBidimensional aux = nuevo ListaMatrizBidimensional(anchura);
+                NodoMatrizBidimensional recorredorAux = aux.getPrimero();
+                NodoMatrizBidimensional recorredorUltima = ultima.getPrimero();
+                mientras (recorredorAux != nada && recorredorUltima != nada)
+                {
+                    recorredorAux.setArriba(recorredorUltima);
+                    recorredorUltima.setAbajo(recorredorAux);
+                    recorredorUltima = recorredorUltima.getSiguiente();
+                    recorredorAux = recorredorAux.getSiguiente();
+                }
+                ultima = aux;
+            }
+        }
+    }
+
+    publico vacio setValor(entero valor, entero fila, entero columna)
+    {
+        si (fila < altura && columna < anchura)
+        {
+            NodoMatrizBidimensional cabeza = ultima.getPrimero();
+            mientras (cabeza.getArriba() != nada){
+                cabeza = cabeza.getArriba();
+            }
+
+            para (entero i = 0; i < fila; i++)
+            {
+                cabeza = cabeza.getAbajo();
+            }
+
+            para (entero i = 0; i < columna; i++)
+            {
+                cabeza = cabeza.getSiguiente();
+            }
+            cabeza.setValor(valor);
+        }
+    }
+
+    publico entero getValor(entero fila, entero columna)
+    {
+        NodoMatrizBidimensional cabeza = ultima.getPrimero();
+        mientras (cabeza.getArriba() != nada)
+        {
+            cabeza = cabeza.getArriba();
+        }
+        para (entero i = 0; i < fila; i++)
+        {
+            cabeza = cabeza.getAbajo();
+        }
+
+        para (entero i = 0; i < columna; i++)
+        {
+            cabeza = cabeza.getSiguiente();
+        }
+        retornar cabeza.getValor();
+    }
+
+    
+
+    publico caracter [] grafica()
+    {
+        dot = "digraph lista{ \n";
+        concatenar(dot,"rankdir = TB; \n");
+        concatenar(dot,"node [shape = record];\n");
+        concatenar(dot,"Matriz[shape = record,label={");
+        para (entero i = 0; i < altura - 1; i++)
+        {
+            concatenar(dot,"{");
+            para (entero j = 0; j < anchura - 1; j++)
+            {
+                concatenar(dot,"{");
+                concatenar(dot,convertirAcadena(getValor(i, j)));
+                concatenar(dot,"}|");
+            }
+            concatenar(dot,"{");
+            concatenar(dot,convertirAcadena(getValor(i, anchura -1)));
+            concatenar(dot,"}");
+            concatenar(dot,"}|");
+        }
+        concatenar(dot,"{");
+       // dot += "{";
+        para (entero j = 0; j < anchura - 1; j++)
+        {
+            concatenar(dot,"{");
+            concatenar(dot,convertirAcadena(getValor(altura - 1, j)));
+            concatenar(dot,"}|");
+        }
+        concatenar(dot,"{");
+        concatenar(dot,convertirAcadena(getValor(altura - 1, anchura - 1)));
+        concatenar(dot,"}");
+        concatenar(dot,"}]; \n");      
+        concatenar(dot,"}");
+        retornar dot;
+        
+    }
+}
+
+
+
+clase Inicio {
+
+    caracter aux[500];
+
+    principal(){
+
+        /**
+         * OBJETOS.
+         */
+        Recursion r = nuevo Recursion();
+        imprimir("OBJETOS");
+        imprimir("\tMANEJO ADECUADO DE REFERENCIAS");
+        Estudiante e1 = nuevo Estudiante();
+        Estudiante e2 = nuevo Estudiante();
+        e1.nombre = "Javier";
+        e2.nombre = "Erick";
+        e1.apellido = "Aycinena";
+        e2.apellido = "Botran";
+        e2.apellido = e1.apellido;
+        e1.apellido = "Navarro";
+        aux = "\t\t\t";
+        concatenar(aux,e1.nombre);
+        concatenar(aux," ");
+        concatenar(aux,e1.apellido);
+        imprimir("\t\tHermanos Navarro (No Navarro y Aycinena):");
+        imprimir(aux);
+        aux = "\t\t\t";
+        concatenar(aux,e2.nombre);
+        concatenar(aux," ");
+        concatenar(aux,e2.apellido);
+        imprimir(aux);
+         imprimir("\tFUNCIONALIDAD AVANZADA UTILIZANDO ESTRUCTURAS");
+        si (e1.apellido == e2.apellido) {
+       Estudiante g1 = r.graduo(e2);
+            aux = "\t\t";
+            concatenar(aux,g1.nombre);
+            concatenar(aux," ");
+            concatenar(aux,g1.apellido);
+            imprimir(aux);
+            imprimir("TIPOS DE RECURSION");
+            imprimir("\tRECURSIVIDAD SIMPLE");
+
+                 /**
+             * Funcion potencia: Entrada: base = 2, exponente = 5.
+             */
+            entero base = 2;
+            entero exponente = 5;
+            aux = "\t\tEl numero ";
+            concatenar(aux,convertirACadena(base));
+            concatenar(aux," elevado a la ");
+            concatenar(aux,convertirACadena(exponente));
+            concatenar(aux," potencia es: ");
+            concatenar(aux,convertirACadena(r.potencia(base, exponente)));
+            imprimir(aux);
+            imprimir("\tRECURSIVIDAD MULTIPLE");
+               /**
+             * Funcion Hanoi, resuelve el problema de La Torres de Hanoi.
+             */
+            entero discos = 3;
+            entero origen = 1;
+            entero auxiliar = 2;
+            entero destino = 3;
+            imprimir("\t\tSolucion al problema de torres de Hanoi para n = 3");
+            r.Hanoi(discos, origen, auxiliar, destino);
+
+            /**
+             * Funcion QuickSort, ordena un arreglo.
+             */
+            entero arreglo[5];
+            imprimir("\t\tOrdenar un arreglo con el algoritmo QuickSort");
+            arreglo[0] = 2;
+            arreglo[1] = 1;
+            arreglo[2] = 3;
+            arreglo[3] = 5;
+            arreglo[4] = 4;
+            imprimir("\t\t\tArreglo desordenado: ");
+            r.imprimirArreglo(arreglo, 5);
+            r.quickSort(arreglo, 0, 4);
+            imprimir("\t\t\tArreglo ordenado: ");
+            r.imprimirArreglo(arreglo, 5);
+
+
+
+               /**
+             * Funcion Hoftadter.
+             */
+            imprimir("\tRECURSIVIDAD CRUZADA");
+            imprimir("\t\tGenerar funciones Hoftadter");
+
+            entero i;
+            imprimir("\t\t\tFemenina: ");
+            para (i = 0; i < 10; i++) {
+                aux= convertirACadena(r.hofstaderFemenina(i));
+                concatenar(aux," ");
+                imprimir(aux);
+            }
+            imprimir("");
+            imprimir("\t\t\tMasculina: ");
+            para (i = 0; i < 10; i++) {
+                aux= convertirACadena(r.hofstaderMasculino(i));
+                concatenar(aux," ");
+                imprimir(aux);
+            }
+            imprimir("");
+            /**
+             * Funciones Par e Impar.
+             */
+            imprimir("\t\tDeterminar la paridad de dos numeros");
+            entero a = 17;
+            entero b = 68;
+            imprimir(r.par(a) == 1 ? "Par" : "Impar");
+            imprimir(r.impar(b) == 0 ? "Par" : "Impar");
+            imprimir("\tRECURSIVIDAD ANIDADA");
+            entero m = 3;
+            entero n = 4;
+            aux = "\t\tFuncion de Ackermann (3,12) [32765] = ";
+            concatenar(aux,convertirAcadena(r.ackermann(m, n)));
+            imprimir( aux);
+
+
+        } sino {
+            imprimir("No se manejo correctamente las referencias");
+            imprimir("Pero si valido los errores, si tendra acceso a esos puntos.");
+        }
+        imprimir("Es permitido descomentar uno a uno los siguientes errores:");
+        
+
+        /**
+         * TABLA HASH.
+         */
+
+         TablaHash th = nuevo TablaHash();
+         th.insertarNodo("Javier");
+         th.insertarNodo("Sofia");
+         th.insertarNodo("Fredy");
+         th.insertarNodo("Nicole");
+         th.insertarNodo("Jenifer");
+         caracter dot[500]; 
+         dot = th.grafica();
+         imprimir(dot);
+         th.eliminarNodo("Nicole");
+         th.eliminarNodo("Fredy");
+         th.eliminarNodo("Jenifer");
+         dot = th.grafica();
+         imprimir(dot);
+         imprimir(convertiracadena(th.existeNombre("Javier")));
+
+       
+        /*
+         * Matriz ortogonal
+         */
+
+        MatrizBidimensional matriz = nuevo MatrizBidimensional(5,5);
+        entero valor = 1;
+        para (entero i = 0; i < 5; i++)
+        {
+            para (entero j = 0; j < 5; j++)
+            {
+                matriz.setValor(valor, i, j);
+                valor++;
+            }
+        }
+        aux = matriz.grafica();
+        imprimir(aux);
+        imprimir(matriz.getValor(3,3));
+          
+    }
+
+    
+
+}
+
+
+
+
+
+
+
